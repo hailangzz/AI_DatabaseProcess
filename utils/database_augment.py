@@ -17,11 +17,15 @@ import cv2
 import numpy as np
 import random
 import math
-from typing import List, Tuple, Optional
+import os
 import utils.util as util
+from glob import glob
+from typing import List, Tuple, Optional
 
 class YOLOAugmentor:
     def __init__(self,
+                 img_dir,
+                 label_dir,
                  img_size: Tuple[int,int] = (640, 640),
                  hsv_prob: float = 1.0,
                  hsv_gain: Tuple[float,float,float] = (0.015, 0.7, 0.4),
@@ -45,6 +49,35 @@ class YOLOAugmentor:
         self.translate = translate
         self.scale = scale
         self.shear = shear
+
+        self.load_image_paths(img_dir, label_dir)
+
+    def load_image_paths(self, img_dir, label_dir):
+        """获取所有图片路径和标签路径"""
+        self.img_files = sorted(glob(os.path.join(img_dir, "*.jpg")))
+        self.label_files = [
+            os.path.join(label_dir, os.path.basename(x).replace(".jpg", ".txt"))
+            for x in self.img_files
+        ]
+
+    def load_image(self, index):
+        """通过索引加载图片和标签"""
+        img_path = self.img_files[index]
+        print(img_path)
+        label_path = self.label_files[index]
+
+        img = cv2.imread(img_path)
+        assert img is not None, f"Image not found: {img_path}"
+
+        labels = []
+        if os.path.exists(label_path):
+            with open(label_path, "r") as f:
+                for line in f.readlines():
+                    cls, x, y, w, h = map(float, line.strip().split())
+                    labels.append([cls, x, y, w, h])
+        labels = np.array(labels, dtype=np.float32)
+        return img, labels
+
 
     # ----------------------------- Utilities -----------------------------
     def to_numpy(self, img):
@@ -234,56 +267,99 @@ class YOLOAugmentor:
         return img, bboxes
 
     # ----------------------------- Mosaic -----------------------------
-    def mosaic(self, images: List[np.ndarray], labels: List[np.ndarray]):
-        s = max(self.img_h, self.img_w)
-        yc, xc = [int(random.uniform(int(0.25*s), int(0.75*s))) for _ in range(2)]
-        mosaic_img = np.full((s, s, 3), 114, dtype=np.uint8)
-        out_labels = []
-        for i, (img, label) in enumerate(zip(images, labels)):
-            h, w = img.shape[:2]
-            scale = random.uniform(0.4, 1.0)
-            img = cv2.resize(img, (int(w*scale), int(h*scale)))
-            h, w = img.shape[:2]
+    def mosaic_augment_fixed(self, index):
+        s = self.img_w
+        mosaic_img = np.full((s * 2, s * 2, 3), 114, dtype=np.uint8)
+        yc, xc = [int(random.uniform(s * 0.5, s * 1.5)) for _ in range(2)]
 
-            if i == 0:  # top-left
-                x1a, y1a, x2a, y2a = max(xc - w, 0), max(yc - h, 0), xc, yc
-                x1b, y1b, x2b, y2b = w - (x2a - x1a), h - (y2a - y1a), w, h
-            elif i == 1:  # top-right
-                x1a, y1a, x2a, y2a = xc, max(yc - h, 0), min(xc + w, s), yc
-                x1b, y1b, x2b, y2b = 0, h - (y2a - y1a), min(w, x2a - x1a), h
-            elif i == 2:  # bottom-left
-                x1a, y1a, x2a, y2a = max(xc - w, 0), yc, xc, min(s, yc + h)
-                x1b, y1b, x2b, y2b = w - (x2a - x1a), 0, w, min(y2a - y1a, h)
-            else:  # bottom-right
-                x1a, y1a, x2a, y2a = xc, yc, min(xc + w, s), min(s, yc + h)
-                x1b, y1b, x2b, y2b = 0, 0, min(w, x2a - x1a), min(y2a - y1a, h)
+        indices = [index] + random.choices(range(len(self.img_files)), k=3)
+        mosaic_labels = []
+
+        for i, idx in enumerate(indices):
+            img, labels = self.load_image(idx)
+            h, w = img.shape[:2]
+            scale = s / max(h, w)
+            if random.random() < 0.5:
+                scale *= random.uniform(0.5, 1.5)
+            nh, nw = int(h * scale), int(w * scale)
+            img = cv2.resize(img, (nw, nh))
+
+            # 放入 mosaic 画布中的位置
+            if i == 0:
+                x1a, y1a, x2a, y2a = max(xc - nw, 0), max(yc - nh, 0), xc, yc
+                x1b, y1b, x2b, y2b = nw - (x2a - x1a), nh - (y2a - y1a), nw, nh
+            elif i == 1:
+                x1a, y1a, x2a, y2a = xc, max(yc - nh, 0), min(xc + nw, s * 2), yc
+                x1b, y1b, x2b, y2b = 0, nh - (y2a - y1a), min(nw, x2a - x1a), nh
+            elif i == 2:
+                x1a, y1a, x2a, y2a = max(xc - nw, 0), yc, xc, min(s * 2, yc + nh)
+                x1b, y1b, x2b, y2b = nw - (x2a - x1a), 0, nw, min(y2a - y1a, nh)
+            else:
+                x1a, y1a, x2a, y2a = xc, yc, min(xc + nw, s * 2), min(s * 2, yc + nh)
+                x1b, y1b, x2b, y2b = 0, 0, min(nw, x2a - x1a), min(nh, y2a - y1a)
 
             mosaic_img[y1a:y2a, x1a:x2a] = img[y1b:y2b, x1b:x2b]
 
-            pad_x = x1a - x1b
-            pad_y = y1a - y1b
+            # --- 修正标注 ---
+            if labels is not None and len(labels):
+                labels = labels.copy()
+                # YOLO -> 绝对坐标
+                labels[:, 1] = labels[:, 1] * w * scale
+                labels[:, 2] = labels[:, 2] * h * scale
+                labels[:, 3] = labels[:, 3] * w * scale
+                labels[:, 4] = labels[:, 4] * h * scale
 
-            if label.size:
-                new = label.copy()
-                new[:,0] = new[:,0] + pad_x
-                new[:,1] = new[:,1] + pad_y
-                new[:,2] = new[:,2] + pad_x
-                new[:,3] = new[:,3] + pad_y
-                out_labels.append(new)
-        if len(out_labels):
-            out_labels = np.concatenate(out_labels, axis=0)
-            out_labels[:, [0,2]] = out_labels[:, [0,2]].clip(0, s)
-            out_labels[:, [1,3]] = out_labels[:, [1,3]].clip(0, s)
-            keep = (out_labels[:,2] - out_labels[:,0] > 4) & (out_labels[:,3] - out_labels[:,1] > 4)
-            out_labels = out_labels[keep]
+                # 加平移
+                labels[:, 1] = labels[:, 1] - x1b + x1a
+                labels[:, 2] = labels[:, 2] - y1b + y1a
+
+                mosaic_labels.append(labels)
+
+        # === 合并所有标签 ===
+        if len(mosaic_labels):
+            mosaic_labels = np.concatenate(mosaic_labels, axis=0)
+
+            # 将中心点、宽高 → xyxy
+            xyxy = np.zeros_like(mosaic_labels)
+            xyxy[:, 0] = mosaic_labels[:, 0]  # class
+            xyxy[:, 1] = mosaic_labels[:, 1] - mosaic_labels[:, 3] / 2
+            xyxy[:, 2] = mosaic_labels[:, 2] - mosaic_labels[:, 4] / 2
+            xyxy[:, 3] = mosaic_labels[:, 1] + mosaic_labels[:, 3] / 2
+            xyxy[:, 4] = mosaic_labels[:, 2] + mosaic_labels[:, 4] / 2
+
+            # === 裁剪到最终区域 ===
+            x1 = max(xc - s // 2, 0)
+            y1 = max(yc - s // 2, 0)
+            x2 = x1 + s
+            y2 = y1 + s
+            mosaic_img = mosaic_img[y1:y2, x1:x2]
+
+            # 将框裁剪到边界（保留部分可见目标）
+            xyxy[:, 1] = np.clip(xyxy[:, 1] - x1, 0, s)
+            xyxy[:, 2] = np.clip(xyxy[:, 2] - y1, 0, s)
+            xyxy[:, 3] = np.clip(xyxy[:, 3] - x1, 0, s)
+            xyxy[:, 4] = np.clip(xyxy[:, 4] - y1, 0, s)
+
+            # 过滤过小或无效框
+            w_box = xyxy[:, 3] - xyxy[:, 1]
+            h_box = xyxy[:, 4] - xyxy[:, 2]
+            keep = (w_box > 2) & (h_box > 2)
+            xyxy = xyxy[keep]
+
+            # === 回 YOLO 格式 ===
+            if len(xyxy):
+                labels_new = np.zeros_like(xyxy)
+                labels_new[:, 0] = xyxy[:, 0]
+                labels_new[:, 1] = (xyxy[:, 1] + xyxy[:, 3]) / 2 / s
+                labels_new[:, 2] = (xyxy[:, 2] + xyxy[:, 4]) / 2 / s
+                labels_new[:, 3] = w_box[keep] / s
+                labels_new[:, 4] = h_box[keep] / s
+            else:
+                labels_new = np.zeros((0, 5))
         else:
-            out_labels = np.zeros((0,5))
-        mosaic_img, ratio, (dw, dh) = self.letterbox(mosaic_img, new_size=(self.img_h, self.img_w))
+            labels_new = np.zeros((0, 5))
 
-        if len(out_labels):
-            out_labels = self.xyxy_to_yolo(out_labels, mosaic_img.shape)
-
-        return mosaic_img, out_labels
+        return mosaic_img, labels_new
 
     # ----------------------------- MixUp -----------------------------
     def mixup(self, img1, labels1, img2, labels2, alpha=0.5):
@@ -319,11 +395,30 @@ class YOLOAugmentor:
         print(labels)
         return img, labels
 
+    def apply_pipeline(self, index):
+        """完整增强流程"""
+        if random.random() < self.mosaic_prob:
+            image, label = self.mosaic_augment_fixed(index)
+        else:
+            image, label = self.load_image(index)
+        image, label = self.random_affine(image, label)
+        image, label = self.random_flip(image, label)
+        image = self.random_hsv(image)
+        image, label = self.cutout(image, label)
+        return image, label
 
 # ----------------------------- Example Usage -----------------------------
 if __name__ == '__main__':
+
+    augmentor = YOLOAugmentor(img_dir="/home/chenkejing/database/ElectricWiresDataset/test/imgs",
+                              label_dir="/home/chenkejing/database/ElectricWiresDataset/test/labels")
+
+    # 随机选择一张图片，执行完整 pipeline
+    image, label = augmentor.apply_pipeline(index=0)
+    mosaic_img = util.draw_yolo_boxes(image, label, color=(0, 255, 0))
+    cv2.imwrite('mosaic_pro.jpg', mosaic_img)
     # quick test
-    aug = YOLOAugmentor(img_size=(640,640), mosaic_prob=0.0, cutout_prob=0.3)
+    # aug = YOLOAugmentor(img_size=(640,640), mosaic_prob=0.0, cutout_prob=0.3)
     # img = cv2.imread('test.jpg')  # replace with your path
     # # sample label: x1,y1,x2,y2,class
     # labels = np.array([[0, 0.478750, 0.654359, 0.462500, 0.691281],[0, 0.355750, 0.581628, 0.290000, 0.836744]])
@@ -334,11 +429,11 @@ if __name__ == '__main__':
     # oringin_image = util.draw_yolo_boxes(img, labels, color=(0, 255, 0))
     # cv2.imwrite('oringin_image.jpg', oringin_image)
 
-    # mosaic usage (requires 4 images and labels)
-    imgs = [cv2.imread(p) for p in ['c1_0.jpg','c1_1.jpg','c1_2.jpg','c1_3.jpg']]
-    labs = [np.array([[0,0.368750,0.500000,0.737500,1.000000]]),
-            np.array([[0,0.500000,0.842749,1.000000,0.178381],[0,0.500000,0.708407,1.000000,0.090302],[0,0.500000,0.506005,1.000000,0.154359],[0,0.500000,0.228648,1.000000,0.097865],[0,0.500000,0.140125,1.000000,0.170819]]),
-            np.array([[0,0.500000,0.577847,1.000000,0.844306]]),
-            np.array([[0,0.460000,0.596530,0.380000,0.806940]])]
-    mosaic_img, mosaic_labels = aug.mosaic(imgs, labs)
-    cv2.imwrite('mosaic.jpg', mosaic_img)
+    # # mosaic usage (requires 4 images and labels)
+    # imgs = [cv2.imread(p) for p in ['c1_0.jpg','c1_1.jpg','c1_2.jpg','c1_3.jpg']]
+    # labs = [np.array([[0,0.368750,0.500000,0.737500,1.000000]]),
+    #         np.array([[0,0.500000,0.842749,1.000000,0.178381],[0,0.500000,0.708407,1.000000,0.090302],[0,0.500000,0.506005,1.000000,0.154359],[0,0.500000,0.228648,1.000000,0.097865],[0,0.500000,0.140125,1.000000,0.170819]]),
+    #         np.array([[0,0.500000,0.577847,1.000000,0.844306]]),
+    #         np.array([[0,0.460000,0.596530,0.380000,0.806940]])]
+    # mosaic_img, mosaic_labels = aug.mosaic(imgs, labs)
+    # cv2.imwrite('mosaic.jpg', mosaic_img)

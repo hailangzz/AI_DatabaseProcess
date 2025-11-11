@@ -8,7 +8,7 @@ import utils.util as util
 os.environ["QT_QPA_PLATFORM"] = "offscreen"
 
 class DataAugmentor:
-    def __init__(self, img_dir, label_dir, img_size=1024):
+    def __init__(self, img_dir, label_dir, img_size=640):
         self.img_dir = img_dir
         self.label_dir = label_dir
         self.img_size = img_size
