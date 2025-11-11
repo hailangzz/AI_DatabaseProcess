@@ -1,21 +1,16 @@
 """
-YOLO-style Data Augmentation Module
+YOLO-style Data Augmentation Module (YOLO TXT format)
 Author: zz
 
 Features:
-- Random HSV augmentation (hue, saturation, value)
+- Random HSV augmentation
 - Random horizontal flip
-- Random affine transform (rotation, translation, scale, shear)
-- Random resize / letterbox to target size
+- Random affine transform
+- Random resize / letterbox
 - Mosaic augmentation (4-image)
 - MixUp augmentation
-- Cutout (random erasing)
-- Utilities to transform bounding boxes accordingly
-
-Dependencies: numpy, cv2, random, math
-Optional: torch (for tensors) — functions accept and return numpy arrays; easy to wrap for torch tensors.
-
-Usage example at bottom.
+- Cutout
+- All bounding boxes in YOLO TXT format [class, x_center, y_center, w, h], normalized [0,1]
 """
 
 import cv2
@@ -23,17 +18,7 @@ import numpy as np
 import random
 import math
 from typing import List, Tuple, Optional
-
-
-def _clip_bbox(bbox, w, h):
-    # bbox: [x_center, y_center, w, h] normalized or absolute depending on caller
-    x, y, bw, bh = bbox
-    x = max(0, min(x, w))
-    y = max(0, min(y, h))
-    bw = max(0, min(bw, w))
-    bh = max(0, min(bh, h))
-    return [x, y, bw, bh]
-
+import utils.util as util
 
 class YOLOAugmentor:
     def __init__(self,
@@ -43,8 +28,8 @@ class YOLOAugmentor:
                  flip_prob: float = 0.5,
                  mosaic_prob: float = 0.5,
                  mixup_prob: float = 0.0,
-                 cutout_prob: float = 0.0,
-                 degrees: float = 10.0,
+                 cutout_prob: float = 0.8,
+                 degrees: float = 6.0,
                  translate: float = 0.1,
                  scale: float = 0.1,
                  shear: float = 2.0,
@@ -63,7 +48,6 @@ class YOLOAugmentor:
 
     # ----------------------------- Utilities -----------------------------
     def to_numpy(self, img):
-        # Accept PIL, torch tensor, or numpy
         if isinstance(img, np.ndarray):
             return img
         try:
@@ -77,27 +61,34 @@ class YOLOAugmentor:
         raise TypeError('Unsupported image type; provide numpy array or torch tensor')
 
     @staticmethod
-    def bbox_xyxy_to_xywh(bboxes: np.ndarray):
-        # bboxes shape (N,4) in xyxy -> xywh
-        x1, y1, x2, y2 = bboxes[:,0], bboxes[:,1], bboxes[:,2], bboxes[:,3]
-        cx = (x1 + x2) / 2
-        cy = (y1 + y2) / 2
-        w = x2 - x1
-        h = y2 - y1
-        return np.stack([cx, cy, w, h], axis=1)
+    def xyxy_to_yolo(bboxes: np.ndarray, img_shape: Tuple[int,int]):
+        """Convert xyxy absolute to YOLO normalized format [class, x_c, y_c, w, h]"""
+        h, w = img_shape[:2]
+        if len(bboxes) == 0:
+            return np.zeros((0,5))
+        x1, y1, x2, y2, cls = bboxes[:,0], bboxes[:,1], bboxes[:,2], bboxes[:,3], bboxes[:,4]
+        x_c = (x1 + x2) / 2 / w
+        y_c = (y1 + y2) / 2 / h
+        bw = (x2 - x1) / w
+        bh = (y2 - y1) / h
+        return np.stack([cls, x_c, y_c, bw, bh], axis=1)
 
     @staticmethod
-    def bbox_xywh_to_xyxy(bboxes: np.ndarray):
-        # bboxes shape (N,4) in xywh -> xyxy
-        cx, cy, w, h = bboxes[:,0], bboxes[:,1], bboxes[:,2], bboxes[:,3]
-        x1 = cx - w / 2
-        y1 = cy - h / 2
-        x2 = cx + w / 2
-        y2 = cy + h / 2
-        return np.stack([x1,y1,x2,y2], axis=1)
+    def yolo_to_xyxy(bboxes: np.ndarray, img_shape: Tuple[int,int]):
+        """Convert YOLO normalized format to xyxy absolute"""
+        h, w = img_shape[:2]
+        if len(bboxes) == 0:
+            return np.zeros((0,5))
+        cls, x_c, y_c, bw, bh = bboxes[:,0], bboxes[:,1], bboxes[:,2], bboxes[:,3], bboxes[:,4]
+        x1 = (x_c - bw/2) * w
+        y1 = (y_c - bh/2) * h
+        x2 = (x_c + bw/2) * w
+        y2 = (y_c + bh/2) * h
+        return np.stack([x1, y1, x2, y2, cls], axis=1)
 
     # ----------------------------- Augmentations -----------------------------
     def random_hsv(self, img: np.ndarray):
+        # 调节图像亮度对比度
         if random.random() > self.hsv_prob:
             return img
         r = np.random.uniform(-1, 1, 3) * np.array([self.h_gain, self.s_gain, self.v_gain])
@@ -111,88 +102,123 @@ class YOLOAugmentor:
         return img
 
     def random_flip(self, img: np.ndarray, bboxes: Optional[np.ndarray]=None):
+        # 图像水平旋转功能
         if random.random() < self.flip_prob:
             img = np.fliplr(img).copy()
             if bboxes is not None and len(bboxes):
-                # bboxes: [class, x_center, y_center, w, h] or [x1,y1,x2,y2]
-                if bboxes.shape[1] == 5:
-                    bboxes[:,1] = img.shape[1] - bboxes[:,1]
-                else:
-                    x1 = bboxes[:,0].copy()
-                    x2 = bboxes[:,2].copy()
-                    bboxes[:,0] = img.shape[1] - x2
-                    bboxes[:,2] = img.shape[1] - x1
+                # YOLO format [class, x_c, y_c, w, h]
+                bboxes[:,1] = 1.0 - bboxes[:,1]
         return img, bboxes
 
-    def random_affine(self, img: np.ndarray, bboxes: Optional[np.ndarray]=None):
-        # Based on YOLOv5 random affine implementation
-        height = img.shape[0]
-        width = img.shape[1]
+    def random_affine(self, img: np.ndarray, bboxes: np.ndarray = None):
+        height, width = img.shape[:2]
 
-        # Rotation and Scale
+        # 若无标注框，直接返回
+        if bboxes is None or len(bboxes) == 0:
+            return img, bboxes
+
+        # --- 1️⃣ 将 YOLO 坐标转为像素 xyxy ---
+        xyxy = self.yolo_to_xyxy(bboxes, img.shape)
+
+        # --- 2️⃣ 构建仿射变换矩阵 ---
+        a = random.uniform(-self.degrees, self.degrees)  # 旋转角度
+        s = random.uniform(1 - self.scale, 1 + self.scale)  # 缩放
         R = np.eye(3)
-        a = random.uniform(-self.degrees, self.degrees)
-        s = random.uniform(1 - self.scale, 1 + self.scale)
-        R[:2] = cv2.getRotationMatrix2D(angle=a, center=(width/2, height/2), scale=s)
+        R[:2] = cv2.getRotationMatrix2D(center=(width / 2, height / 2), angle=a, scale=s)
 
-        # Shear
+        # 剪切
         S = np.eye(3)
         sx = math.tan(math.radians(random.uniform(-self.shear, self.shear)))
         sy = math.tan(math.radians(random.uniform(-self.shear, self.shear)))
-        S[0,1] = sx
-        S[1,0] = sy
+        S[0, 1] = sx
+        S[1, 0] = sy
 
-        # Translation
+        # 平移
         T = np.eye(3)
         tx = random.uniform(-self.translate, self.translate) * width
         ty = random.uniform(-self.translate, self.translate) * height
-        T[0,2] = tx
-        T[1,2] = ty
+        T[0, 2] = tx
+        T[1, 2] = ty
 
+        # 合成变换矩阵（顺序：旋转缩放 → 剪切 → 平移）
         M = T @ S @ R
-        imw = cv2.warpPerspective(img, M, dsize=(width, height), borderValue=(114,114,114))
 
-        if bboxes is None or len(bboxes) == 0:
-            return imw, bboxes
+        # --- 3️⃣ 对图像进行仿射变换 ---
+        imw = cv2.warpAffine(img, M[:2], dsize=(width, height), borderValue=(114, 114, 114))
 
-        # transform bboxes (xyxy format)
-        n = bboxes.shape[0]
-        xy = np.ones((n*4,3))
-        # x1,y1, x2,y1, x2,y2, x1,y2
-        xy[:, :2] = bboxes[:, [0,1,2,1,2,3,0,3]].reshape(n*4,2)
-        xy = xy @ M.T
-        xy = xy[:, :2].reshape(n,8)
-        x = xy[:, [0,2,4,6]]
-        y = xy[:, [1,3,5,7]]
-        x1 = x.min(1)
-        y1 = y.min(1)
-        x2 = x.max(1)
-        y2 = y.max(1)
-        new = np.stack([x1,y1,x2,y2], axis=1)
+        # --- 4️⃣ 变换每个框的四个角点 ---
+        n = xyxy.shape[0]
+        xy = np.ones((n * 4, 3))
+        xy[:, :2] = xyxy[:, [0, 1, 2, 1, 2, 3, 0, 3]].reshape(n * 4, 2)
+        xy = xy @ M.T  # 仿射变换
+        xy = xy[:, :2].reshape(n, 8)
 
-        # clip
-        new[:, [0,2]] = new[:, [0,2]].clip(0, width)
-        new[:, [1,3]] = new[:, [1,3]].clip(0, height)
-        # filter
-        i = (new[:,2] - new[:,0] > 4) & (new[:,3] - new[:,1] > 4)
-        bboxes[:, :4] = new
-        return imw, bboxes[i]
+        # --- 5️⃣ 用 cv2.minAreaRect 拟合旋转后最小外接矩形 ---
+        new_boxes = []
+        for i in range(n):
+            pts = xy[i].reshape(4, 2).astype(np.float32)
+            rect = cv2.minAreaRect(pts)
+            box = cv2.boxPoints(rect)  # 得到矩形的4个点
+            x1, y1 = box[:, 0].min(), box[:, 1].min()
+            x2, y2 = box[:, 0].max(), box[:, 1].max()
+            new_boxes.append([x1, y1, x2, y2, xyxy[i, 4]])  # 保留类别标签
 
-    def letterbox(self, img: np.ndarray, new_size: Tuple[int,int]=None, color=(114,114,114)):
+        new_boxes = np.array(new_boxes)
+
+        # --- 6️⃣ 限制在图像范围内 ---
+        new_boxes[:, [0, 2]] = new_boxes[:, [0, 2]].clip(0, width)
+        new_boxes[:, [1, 3]] = new_boxes[:, [1, 3]].clip(0, height)
+
+        # --- 7️⃣ 过滤过小框 ---
+        keep = (new_boxes[:, 2] - new_boxes[:, 0] > 4) & (new_boxes[:, 3] - new_boxes[:, 1] > 4)
+        new_boxes = new_boxes[keep]
+
+        # --- 8️⃣ 转回 YOLO 格式 ---
+        bboxes_new = self.xyxy_to_yolo(new_boxes, img.shape)
+
+        return imw, bboxes_new
+
+    def letterbox(self, img: np.ndarray, bboxes: Optional[np.ndarray] = None,
+                              new_size: Tuple[int, int] = None, color=(114, 114, 114)):
         if new_size is None:
             new_size = (self.img_h, self.img_w)
-        shape = img.shape[:2]  # current shape [h, w]
-        ratio = min(new_size[0] / shape[0], new_size[1] / shape[1])
-        new_unpad = (int(round(shape[1] * ratio)), int(round(shape[0] * ratio)))
+        h, w = img.shape[:2]
+        ratio = min(new_size[0] / h, new_size[1] / w)
+        new_unpad = (int(round(w * ratio)), int(round(h * ratio)))
         dw = new_size[1] - new_unpad[0]
         dh = new_size[0] - new_unpad[1]
-        dw //= 2
-        dh //= 2
+        dw /= 2
+        dh /= 2
+
+        # 1️⃣ 缩放图像并填充
         img = cv2.resize(img, new_unpad, interpolation=cv2.INTER_LINEAR)
-        top, bottom = dh, new_size[0] - new_unpad[1] - dh
-        left, right = dw, new_size[1] - new_unpad[0] - dw
-        img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)
-        return img, ratio, (dw, dh)
+        img = cv2.copyMakeBorder(img, int(dh), int(new_size[0] - new_unpad[1] - dh),
+                                 int(dw), int(new_size[1] - new_unpad[0] - dw),
+                                 cv2.BORDER_CONSTANT, value=color)
+
+        # 2️⃣ 调整YOLO标注
+        if bboxes is not None and len(bboxes):
+            bboxes = bboxes.copy()
+
+            # 将YOLO归一化坐标转为像素坐标
+            bboxes[:, 1] *= w  # x_center
+            bboxes[:, 2] *= h  # y_center
+            bboxes[:, 3] *= w  # width
+            bboxes[:, 4] *= h  # height
+
+            # 应用缩放和偏移
+            bboxes[:, 1] = bboxes[:, 1] * ratio + dw
+            bboxes[:, 2] = bboxes[:, 2] * ratio + dh
+            bboxes[:, 3] = bboxes[:, 3] * ratio
+            bboxes[:, 4] = bboxes[:, 4] * ratio
+
+            # 再归一化到新图尺寸
+            bboxes[:, 1] /= new_size[1]
+            bboxes[:, 2] /= new_size[0]
+            bboxes[:, 3] /= new_size[1]
+            bboxes[:, 4] /= new_size[0]
+
+        return img, bboxes
 
     def cutout(self, img: np.ndarray, bboxes: Optional[np.ndarray]=None):
         if random.random() > self.cutout_prob:
@@ -205,22 +231,20 @@ class YOLOAugmentor:
             x = random.randint(0, max(0, w - cw))
             y = random.randint(0, max(0, h - ch))
             img[y:y+ch, x:x+cw] = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
-            # optionally remove boxes heavily overlapped - for simplicity not implemented
         return img, bboxes
 
+    # ----------------------------- Mosaic -----------------------------
     def mosaic(self, images: List[np.ndarray], labels: List[np.ndarray]):
-        # images: list of 4 images (numpy arrays)
-        # labels: list of label arrays in xyxy format [[x1,y1,x2,y2,class], ...]
         s = max(self.img_h, self.img_w)
         yc, xc = [int(random.uniform(int(0.25*s), int(0.75*s))) for _ in range(2)]
         mosaic_img = np.full((s, s, 3), 114, dtype=np.uint8)
         out_labels = []
         for i, (img, label) in enumerate(zip(images, labels)):
             h, w = img.shape[:2]
-            # resize
             scale = random.uniform(0.4, 1.0)
             img = cv2.resize(img, (int(w*scale), int(h*scale)))
             h, w = img.shape[:2]
+
             if i == 0:  # top-left
                 x1a, y1a, x2a, y2a = max(xc - w, 0), max(yc - h, 0), xc, yc
                 x1b, y1b, x2b, y2b = w - (x2a - x1a), h - (y2a - y1a), w, h
@@ -232,14 +256,14 @@ class YOLOAugmentor:
                 x1b, y1b, x2b, y2b = w - (x2a - x1a), 0, w, min(y2a - y1a, h)
             else:  # bottom-right
                 x1a, y1a, x2a, y2a = xc, yc, min(xc + w, s), min(s, yc + h)
-                x1b, y1b, x2b, y2b = 0, 0, min(w, x2a - x1a), min(h, y2a - y1a)
+                x1b, y1b, x2b, y2b = 0, 0, min(w, x2a - x1a), min(y2a - y1a, h)
 
             mosaic_img[y1a:y2a, x1a:x2a] = img[y1b:y2b, x1b:x2b]
 
             pad_x = x1a - x1b
             pad_y = y1a - y1b
+
             if label.size:
-                # label: (N,5) x1,y1,x2,y2,class
                 new = label.copy()
                 new[:,0] = new[:,0] + pad_x
                 new[:,1] = new[:,1] + pad_y
@@ -248,22 +272,20 @@ class YOLOAugmentor:
                 out_labels.append(new)
         if len(out_labels):
             out_labels = np.concatenate(out_labels, axis=0)
-            # clip
             out_labels[:, [0,2]] = out_labels[:, [0,2]].clip(0, s)
             out_labels[:, [1,3]] = out_labels[:, [1,3]].clip(0, s)
-            # filter small
             keep = (out_labels[:,2] - out_labels[:,0] > 4) & (out_labels[:,3] - out_labels[:,1] > 4)
             out_labels = out_labels[keep]
         else:
             out_labels = np.zeros((0,5))
-        # resize mosaic to target
         mosaic_img, ratio, (dw, dh) = self.letterbox(mosaic_img, new_size=(self.img_h, self.img_w))
-        # adjust labels
+
         if len(out_labels):
-            out_labels[:, [0,2]] = out_labels[:, [0,2]] * ratio + dw
-            out_labels[:, [1,3]] = out_labels[:, [1,3]] * ratio + dh
+            out_labels = self.xyxy_to_yolo(out_labels, mosaic_img.shape)
+
         return mosaic_img, out_labels
 
+    # ----------------------------- MixUp -----------------------------
     def mixup(self, img1, labels1, img2, labels2, alpha=0.5):
         r = np.random.beta(alpha, alpha) if alpha > 0 else 1
         img = (img1.astype(np.float32) * r + img2.astype(np.float32) * (1 - r)).astype(np.uint8)
@@ -279,37 +301,22 @@ class YOLOAugmentor:
 
     # ----------------------------- Pipeline -----------------------------
     def augment(self, img: np.ndarray, labels: Optional[np.ndarray]=None):
-        """
-        img: numpy BGR image
-        labels: numpy array shape (N,5) -> x1,y1,x2,y2,class_id (absolute coordinates)
-        """
         img = self.to_numpy(img)
         labels = np.array(labels, copy=True) if labels is not None else np.zeros((0,5))
-
-        # Mosaic
-        if random.random() < self.mosaic_prob:
-            # For simplicity, user must provide 3 additional images via a callback or dataset sampler.
-            # Here we just skip mosaic if not enough images.
-            return img, labels
-
-        # Random affine
-        img, labels = self.random_affine(img, labels)
-
-        # Random flip
-        img, labels = self.random_flip(img, labels)
-
         # HSV
         img = self.random_hsv(img)
-
+        # Flip
+        img, labels = self.random_flip(img, labels)
         # Cutout
         img, labels = self.cutout(img, labels)
+        # Letterbox (keep labels normalized)
+        img, labels = self.letterbox(img, labels, new_size=(self.img_h, self.img_w))
+        # Convert input xyxy absolute -> YOLO normalized
+        # labels = self.xyxy_to_yolo(labels, img.shape)
+        # Affine
+        img, labels = self.random_affine(img, labels)
 
-        # Letterbox to size
-        img, ratio, (dw, dh) = self.letterbox(img, new_size=(self.img_h, self.img_w))
-        if len(labels):
-            labels[:, [0,2]] = labels[:, [0,2]] * ratio + dw
-            labels[:, [1,3]] = labels[:, [1,3]] * ratio + dh
-
+        print(labels)
         return img, labels
 
 
@@ -317,19 +324,21 @@ class YOLOAugmentor:
 if __name__ == '__main__':
     # quick test
     aug = YOLOAugmentor(img_size=(640,640), mosaic_prob=0.0, cutout_prob=0.3)
-    img = cv2.imread('test.jpg')  # replace with your path
-    # sample label: x1,y1,x2,y2,class
-    labels = np.array([[50, 50, 200, 200, 0], [300, 100, 400, 250, 1]])
-    out_img, out_labels = aug.augment(img, labels)
-    print('Out labels:', out_labels)
-    cv2.imwrite('aug_out.jpg', out_img)
+    # img = cv2.imread('test.jpg')  # replace with your path
+    # # sample label: x1,y1,x2,y2,class
+    # labels = np.array([[0, 0.478750, 0.654359, 0.462500, 0.691281],[0, 0.355750, 0.581628, 0.290000, 0.836744]])
+    # out_img, out_labels = aug.augment(img, labels)
+    #
+    # random_affine = util.draw_yolo_boxes(out_img, out_labels, color=(0, 255, 0))
+    # cv2.imwrite('random_hsv.jpg', random_affine)
+    # oringin_image = util.draw_yolo_boxes(img, labels, color=(0, 255, 0))
+    # cv2.imwrite('oringin_image.jpg', oringin_image)
 
     # mosaic usage (requires 4 images and labels)
-    # imgs = [cv2.imread(p) for p in ['a.jpg','b.jpg','c.jpg','d.jpg']]
-    # labs = [np.array(...), ...]
-    # mosaic_img, mosaic_labels = aug.mosaic(imgs, labs)
-    # cv2.imwrite('mosaic.jpg', mosaic_img)
-
-
-
-
+    imgs = [cv2.imread(p) for p in ['c1_0.jpg','c1_1.jpg','c1_2.jpg','c1_3.jpg']]
+    labs = [np.array([[0,0.368750,0.500000,0.737500,1.000000]]),
+            np.array([[0,0.500000,0.842749,1.000000,0.178381],[0,0.500000,0.708407,1.000000,0.090302],[0,0.500000,0.506005,1.000000,0.154359],[0,0.500000,0.228648,1.000000,0.097865],[0,0.500000,0.140125,1.000000,0.170819]]),
+            np.array([[0,0.500000,0.577847,1.000000,0.844306]]),
+            np.array([[0,0.460000,0.596530,0.380000,0.806940]])]
+    mosaic_img, mosaic_labels = aug.mosaic(imgs, labs)
+    cv2.imwrite('mosaic.jpg', mosaic_img)

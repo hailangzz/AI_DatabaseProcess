@@ -123,3 +123,43 @@ def use_yolo_label_plot_box(image_path):
 
     print("🎯 全部图像可视化完成！")
     pass
+
+
+def draw_yolo_boxes(img, boxes, color=(0, 255, 0), thickness=2):
+    """
+    在图像上根据 YOLO 格式目标框绘制矩形框
+
+    参数：
+        img: numpy.ndarray, 原始图像矩阵 (H, W, C)
+        boxes: list[np.ndarray] 或 list[list[float]]
+               YOLO 格式的目标框数组，每个元素为 [cls_id, x_center, y_center, width, height]
+        color: tuple(int), 框的颜色 (B, G, R)
+        thickness: int, 框线条粗细
+    返回：
+        绘制了框的图像
+    """
+    h, w = img.shape[:2]
+    img_copy = img.copy()
+
+    for box in boxes:
+        cls_id, x_center, y_center, bw, bh = box
+
+        # 转换为像素坐标
+        x_center *= w
+        y_center *= h
+        bw *= w
+        bh *= h
+
+        # 计算左上角和右下角坐标
+        x1 = int(x_center - bw / 2)
+        y1 = int(y_center - bh / 2)
+        x2 = int(x_center + bw / 2)
+        y2 = int(y_center + bh / 2)
+        # 绘制矩形框
+        cv2.rectangle(img_copy, (x1, y1), (x2, y2), color, thickness)
+        # 绘制类别文本
+        cv2.putText(img_copy, f"ID:{int(cls_id)}", (x1, y1 - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 4)
+
+    return img_copy
+
