@@ -1,3 +1,11 @@
+"""
+@File    : mosaic_augment.py
+@Author  : zhangzhuo
+@Time    : 2025/11/13
+@Description : 文件功能简述，例如：
+              mosaic样本增强案例
+@Version : 1.0
+"""
 import os
 import cv2
 import random
@@ -148,7 +156,7 @@ if __name__ == "__main__":
     augmentor = DataAugmentor(
         img_dir="/home/chenkejing/database/ElectricWiresDataset/test/imgs",
         label_dir="/home/chenkejing/database/ElectricWiresDataset/test/labels",
-        img_size=640
+        img_size=1024
     )
 
     # 随机取一张做 mosaic 增强

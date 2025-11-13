@@ -6,7 +6,7 @@ def read_name_list(save_image_direct_path):
     files_name_list = [os.path.basename(f) for f in glob.glob(save_image_direct_path + "/*")]
     return files_name_list
 
-def mark_to_detect(mask_dir):
+def mark_to_detect(mask_dir): # 根据mask的信息，创建mask目标对应的最小外接矩形（目标检测框）
     # min_area 太小的话，未来标注的标签会特别多，误差很大
     min_area = 100  # 小于该像素面积的目标将被忽略 (测试结果显示，最小像素为100时，检测框标注文件，标注效果很好)
     save_dir = os.path.join(mask_dir[:mask_dir.rfind("/")], "labels")
@@ -125,13 +125,14 @@ def use_yolo_label_plot_box(image_path):
     pass
 
 
-def draw_yolo_boxes(img, boxes, color=(0, 255, 0), thickness=2):
+def draw_yolo_boxes(img, boxes,save_path="mosaic_pro.jpg", color=(0, 255, 0), thickness=2):
     """
     在图像上根据 YOLO 格式目标框绘制矩形框
 
     参数：
         img: numpy.ndarray, 原始图像矩阵 (H, W, C)
         boxes: list[np.ndarray] 或 list[list[float]]
+        save_path: 图像保存路径
                YOLO 格式的目标框数组，每个元素为 [cls_id, x_center, y_center, width, height]
         color: tuple(int), 框的颜色 (B, G, R)
         thickness: int, 框线条粗细
@@ -161,5 +162,26 @@ def draw_yolo_boxes(img, boxes, color=(0, 255, 0), thickness=2):
         cv2.putText(img_copy, f"ID:{int(cls_id)}", (x1, y1 - 5),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 4)
 
+    cv2.imwrite(save_path, img_copy)
+
     return img_copy
 
+def resize_long_edge_image(image, target_long=1280):
+    """
+    按长边缩放图像，并同步调整YOLO标注
+
+    Args:
+        image (np.ndarray): 输入图像 (H, W, 3)
+        target_long (int): 缩放后的长边尺寸 640、960、1024、1280 （32的倍数）
+
+    Returns:
+        resized_img: 缩放后的图像
+    """
+    h, w = image.shape[:2]
+    scale = target_long / max(h, w)
+    new_w, new_h = int(w * scale), int(h * scale)
+
+    # 1️⃣ 图像缩放
+    resized = cv2.resize(image, (new_w, new_h), interpolation=cv2.INTER_AREA)
+
+    return resized

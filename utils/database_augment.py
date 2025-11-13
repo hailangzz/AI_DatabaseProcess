@@ -1,16 +1,10 @@
 """
-YOLO-style Data Augmentation Module (YOLO TXT format)
-Author: zz
-
-Features:
-- Random HSV augmentation
-- Random horizontal flip
-- Random affine transform
-- Random resize / letterbox
-- Mosaic augmentation (4-image)
-- MixUp augmentation
-- Cutout
-- All bounding boxes in YOLO TXT format [class, x_center, y_center, w, h], normalized [0,1]
+@File    : database_augment.py
+@Author  : zhangzhuo
+@Time    : 2025/11/13
+@Description : 文件功能简述，例如：
+              主要的目标检测数据增项程序，mask数据，直接选取最小外接矩形，生成目标检测样本。其中包含各种数据增强操作
+@Version : 1.0
 """
 
 import cv2
@@ -26,9 +20,12 @@ class YOLOAugmentor:
     def __init__(self,
                  img_dir,
                  label_dir,
-                 img_size: Tuple[int,int] = (640, 640),
+                 img_size: Tuple[int,int] = (1280, 1280),
+                 img_longe_eage_size = 1280,
                  hsv_prob: float = 1.0,
                  hsv_gain: Tuple[float,float,float] = (0.015, 0.7, 0.4),
+                 exposure_prob=0.6, exposure_range=(0.5, 1.5),
+                 noise_prob=0.6, noise_type="both",
                  flip_prob: float = 0.5,
                  mosaic_prob: float = 0.5,
                  mixup_prob: float = 0.0,
@@ -39,7 +36,12 @@ class YOLOAugmentor:
                  shear: float = 2.0,
                  ):
         self.img_h, self.img_w = img_size
+        self.img_longe_eage_size = img_longe_eage_size
         self.hsv_prob = hsv_prob
+        self.exposure_prob = exposure_prob
+        self.exposure_range = exposure_range
+        self.noise_prob = noise_prob
+        self.noise_type = noise_type
         self.h_gain, self.s_gain, self.v_gain = hsv_gain
         self.flip_prob = flip_prob
         self.mosaic_prob = mosaic_prob
@@ -63,10 +65,11 @@ class YOLOAugmentor:
     def load_image(self, index):
         """通过索引加载图片和标签"""
         img_path = self.img_files[index]
-        print(img_path)
         label_path = self.label_files[index]
 
         img = cv2.imread(img_path)
+        # 此处就应该做一个图像resize操作，可以大量减少之后的计算算量：
+        img = util.resize_long_edge_image(img, target_long=self.img_longe_eage_size)
         assert img is not None, f"Image not found: {img_path}"
 
         labels = []
@@ -133,6 +136,58 @@ class YOLOAugmentor:
         img[...,1:3] = np.clip(img[...,1:3], 0, 255)
         img = cv2.cvtColor(img.astype(np.uint8), cv2.COLOR_HSV2BGR)
         return img
+
+    def random_exposure(self, img: np.ndarray):
+        """随机调整图像曝光"""
+        if random.random() > self.exposure_prob:
+            return img
+
+        alpha = random.uniform(*self.exposure_range)  # 线性增益
+        gamma = random.uniform(0.8, 1.2)  # γ矫正
+
+        img = np.clip((img / 255.0) ** gamma * alpha * 255.0, 0, 255).astype(np.uint8)
+        return img
+
+        # -----------------------------
+        # Random Noise
+        # -----------------------------
+    def random_noise(self, img: np.ndarray):
+        """随机添加噪声（高斯 or 椒盐）"""
+        if random.random() > self.noise_prob:
+            return img
+
+        h, w, c = img.shape
+        noisy = img.copy()
+
+        noise_type = self.noise_type
+        if noise_type == "both":
+            noise_type = random.choice(["gaussian", "saltpepper"])
+
+        # Gaussian noise
+        if noise_type == "gaussian":
+            mean = 0
+            var = random.uniform(10, 30)  # 控制噪声强度
+            sigma = var ** 0.5
+            gauss = np.random.normal(mean, sigma, (h, w, c)).reshape(h, w, c)
+            noisy = img + gauss
+            noisy = np.clip(noisy, 0, 255).astype(np.uint8)
+
+        # Salt & Pepper noise
+        elif noise_type == "saltpepper":
+            s_vs_p = 0.5
+            amount = random.uniform(0.002, 0.01)
+            num_salt = np.ceil(amount * img.size * s_vs_p)
+            num_pepper = np.ceil(amount * img.size * (1.0 - s_vs_p))
+
+            # Salt (white)
+            coords = [np.random.randint(0, i - 1, int(num_salt)) for i in img.shape[:2]]
+            noisy[coords[0], coords[1], :] = 255
+
+            # Pepper (black)
+            coords = [np.random.randint(0, i - 1, int(num_pepper)) for i in img.shape[:2]]
+            noisy[coords[0], coords[1], :] = 0
+
+        return noisy
 
     def random_flip(self, img: np.ndarray, bboxes: Optional[np.ndarray]=None):
         # 图像水平旋转功能
@@ -211,6 +266,7 @@ class YOLOAugmentor:
 
         return imw, bboxes_new
 
+    # 缩放图像并填充
     def letterbox(self, img: np.ndarray, bboxes: Optional[np.ndarray] = None,
                               new_size: Tuple[int, int] = None, color=(114, 114, 114)):
         if new_size is None:
@@ -268,11 +324,12 @@ class YOLOAugmentor:
 
     # ----------------------------- Mosaic -----------------------------
     def mosaic_augment_fixed(self, index):
-        s = self.img_w
+        # s = self.img_w
+        s = self.img_longe_eage_size
         mosaic_img = np.full((s * 2, s * 2, 3), 114, dtype=np.uint8)
         yc, xc = [int(random.uniform(s * 0.5, s * 1.5)) for _ in range(2)]
 
-        indices = [index] + random.choices(range(len(self.img_files)), k=3)
+        indices = [index] + random.choices(range(len(self.img_files)), k=3)  # 随机在img_files样本集中，抽取3张样本，来进行mosaic数据增强；
         mosaic_labels = []
 
         for i, idx in enumerate(indices):
@@ -404,7 +461,10 @@ class YOLOAugmentor:
         image, label = self.random_affine(image, label)
         image, label = self.random_flip(image, label)
         image = self.random_hsv(image)
+        image = self.random_exposure(image)
+        image = self.random_noise(image)
         image, label = self.cutout(image, label)
+
         return image, label
 
 # ----------------------------- Example Usage -----------------------------
