@@ -116,10 +116,18 @@ class LabelChecker(QWidget):
 
             # 异常框画红色，正常框画绿色
             color = (0, 0, 255) if invalid else (0, 255, 0)
-            thickness = 30
+            thickness = 20  # 框线粗细
             cv2.rectangle(img, (x1, y1), (x2, y2), color, thickness)
-            cv2.putText(img, str(int(cls)), (x1, max(12, y1 - 3)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
+
+            # 文字大小
+            fontScale = max(0.6, (w + h) / 1000)  # 根据图片大小自适应
+            fontThickness = 20  # 文字笔画粗细
+            text = str(int(cls))
+
+            # 文本位置稍微偏上
+            text_y = max(12, y1 - 5)
+            cv2.putText(img, text, (x1, text_y), cv2.FONT_HERSHEY_SIMPLEX, fontScale, color, fontThickness)
+
         return img
 
     def show_page(self):
