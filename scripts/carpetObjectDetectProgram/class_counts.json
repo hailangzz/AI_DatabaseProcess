@@ -1,0 +1,296 @@
+{
+    "SUTD_NEW.v3-sutd.coco": {
+        "total_images": 2640,
+        "classes": {
+            "2": {
+                "count": 2940,
+                "image_count": 2640
+            }
+        }
+    },
+    "carpet.v1i.coco": {
+        "total_images": 164,
+        "classes": {
+            "1": {
+                "count": 202,
+                "image_count": 164
+            }
+        }
+    },
+    "Carpet Segmentation.v1i.coco": {
+        "total_images": 222,
+        "classes": {
+            "1": {
+                "count": 2,
+                "image_count": 2
+            },
+            "2": {
+                "count": 220,
+                "image_count": 220
+            }
+        }
+    },
+    "Custom Workflow Object Detection.v2i.coco": {
+        "total_images": 121,
+        "classes": {
+            "1": {
+                "count": 201,
+                "image_count": 121
+            }
+        }
+    },
+    "PrayerRugs.v3i.coco": {
+        "total_images": 260,
+        "classes": {
+            "1": {
+                "count": 507,
+                "image_count": 260
+            }
+        }
+    },
+    "rug-pattern-detection.v5-final-version.coco": {
+        "total_images": 2499,
+        "classes": {
+            "1": {
+                "count": 86,
+                "image_count": 86
+            },
+            "2": {
+                "count": 304,
+                "image_count": 304
+            },
+            "3": {
+                "count": 511,
+                "image_count": 511
+            },
+            "4": {
+                "count": 129,
+                "image_count": 129
+            },
+            "5": {
+                "count": 147,
+                "image_count": 147
+            },
+            "6": {
+                "count": 147,
+                "image_count": 147
+            },
+            "7": {
+                "count": 105,
+                "image_count": 105
+            },
+            "8": {
+                "count": 262,
+                "image_count": 259
+            },
+            "9": {
+                "count": 811,
+                "image_count": 811
+            }
+        }
+    },
+    "The Rugs CV.v3i.coco": {
+        "total_images": 3701,
+        "classes": {
+            "1": {
+                "count": 348,
+                "image_count": 338
+            },
+            "2": {
+                "count": 459,
+                "image_count": 456
+            },
+            "3": {
+                "count": 198,
+                "image_count": 198
+            },
+            "4": {
+                "count": 279,
+                "image_count": 276
+            },
+            "5": {
+                "count": 216,
+                "image_count": 216
+            },
+            "6": {
+                "count": 187,
+                "image_count": 183
+            },
+            "7": {
+                "count": 438,
+                "image_count": 438
+            },
+            "8": {
+                "count": 207,
+                "image_count": 207
+            },
+            "9": {
+                "count": 1392,
+                "image_count": 1392
+            }
+        }
+    },
+    "the rugs.v3-final-rug-pattern-detection.coco": {
+        "total_images": 518,
+        "classes": {
+            "1": {
+                "count": 36,
+                "image_count": 33
+            },
+            "2": {
+                "count": 20,
+                "image_count": 19
+            },
+            "3": {
+                "count": 17,
+                "image_count": 14
+            },
+            "4": {
+                "count": 64,
+                "image_count": 64
+            },
+            "5": {
+                "count": 112,
+                "image_count": 112
+            },
+            "6": {
+                "count": 52,
+                "image_count": 46
+            },
+            "7": {
+                "count": 26,
+                "image_count": 26
+            },
+            "8": {
+                "count": 21,
+                "image_count": 20
+            },
+            "9": {
+                "count": 12,
+                "image_count": 8
+            },
+            "10": {
+                "count": 75,
+                "image_count": 63
+            },
+            "11": {
+                "count": 23,
+                "image_count": 20
+            },
+            "12": {
+                "count": 14,
+                "image_count": 13
+            },
+            "13": {
+                "count": 4,
+                "image_count": 4
+            },
+            "14": {
+                "count": 5,
+                "image_count": 5
+            },
+            "15": {
+                "count": 9,
+                "image_count": 9
+            },
+            "16": {
+                "count": 51,
+                "image_count": 48
+            },
+            "17": {
+                "count": 19,
+                "image_count": 16
+            }
+        }
+    },
+    "segmentation2.v19i.coco": {
+        "total_images": 694,
+        "classes": {
+            "1": {
+                "count": 844,
+                "image_count": 694
+            }
+        }
+    },
+    "Carpet.v2i.coco": {
+        "total_images": 142,
+        "classes": {
+            "1": {
+                "count": 142,
+                "image_count": 142
+            }
+        }
+    },
+    "MIT Indoor Semantic Segmentation.v2i.coco-segmentation": {
+        "total_images": 80,
+        "classes": {
+            "1320": {
+                "count": 89,
+                "image_count": 80
+            }
+        }
+    },
+    "v6_10_classes_POC1.v6i.coco": {
+        "total_images": 1014,
+        "classes": {
+            "2": {
+                "count": 2947,
+                "image_count": 1014
+            }
+        }
+    },
+    "Roomba Vision.v3i.coco": {
+        "total_images": 24,
+        "classes": {
+            "1": {
+                "count": 24,
+                "image_count": 24
+            }
+        }
+    },
+    "yes3.v1i.coco": {
+        "total_images": 135,
+        "classes": {
+            "3": {
+                "count": 202,
+                "image_count": 135
+            }
+        }
+    },
+    "old_new.v3i.coco": {
+        "total_images": 534,
+        "classes": {
+            "1": {
+                "count": 559,
+                "image_count": 534
+            }
+        }
+    },
+    "Annotation.v4i.coco": {
+        "total_images": 441,
+        "classes": {
+            "1": {
+                "count": 444,
+                "image_count": 441
+            }
+        }
+    },
+    "Research.v2i.coco": {
+        "total_images": 1083,
+        "classes": {
+            "1": {
+                "count": 1091,
+                "image_count": 1083
+            }
+        }
+    },
+    "rea-mini-project.v1i.coco": {
+        "total_images": 183,
+        "classes": {
+            "3": {
+                "count": 189,
+                "image_count": 183
+            }
+        }
+    }
+}

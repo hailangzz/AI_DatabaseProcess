@@ -1,6 +1,6 @@
 import utils.util as util
 
-
+#将项目使用的，各部分样本集，统一存放至一个训练集目录
 
 if __name__ == '__main__':
 

@@ -5,7 +5,7 @@ import cv2
 
 class ReadDatabase:
 
-    def __init__(self, database_name,data_part=None, origin_path=r"/home/chenkejing/database"):
+    def __init__(self, database_name,data_part=None, origin_path=r"/home/chenkejing/database/carpetDatabase"):
         """
 
         :param database_name: 数据库名称
@@ -45,15 +45,17 @@ class ReadDatabase:
             self.masks_name_list = util.read_name_list(self.masks_path)
 
 
+    #将mask标注，转为detect标注
     def deal_image_masks_picture_data(self, deal_type="MaskeToDetect"):
 
         if deal_type == "MaskeToDetect":
             util.mark_to_detect(self.masks_path)
 
+    #检查detect标注的有效性
     def chech_mask_to_detect_effective(self):
         util.use_yolo_label_plot_box(self.image_path)
 def test():
-    read_database = ReadDatabase("ElectricWiresDataset","test")
+    read_database = ReadDatabase("SUTD_NEW.v3-sutd.coco","test")
     read_database.get_data_file_name_info()
     read_database.deal_image_masks_picture_data()
     read_database.chech_mask_to_detect_effective()

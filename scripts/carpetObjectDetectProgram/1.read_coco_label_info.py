@@ -29,6 +29,7 @@ def read_coco_label_file(coco_label_file_path):
 def use_coco_box_info_creat_yolo_label_txt(coco_json_path,
                                            output_dir=r"/home/chenkejing/database/Cable.v1i/test/labels",
                                            target_categories=None):
+    image_numbers = 0
     # 输入 COCO 标注文件和图片目录
     global img_info
     coco_json_path = coco_json_path
@@ -93,6 +94,9 @@ def use_coco_box_info_creat_yolo_label_txt(coco_json_path,
         txt_file = os.path.join(output_dir, os.path.splitext(img_info['file_name'])[0] + ".txt")
         with open(txt_file, "w") as f:
             f.write("\n".join(yolo_lines))
+
+        image_numbers+=1
+    print("total images number: ",image_numbers)
 
 
 def use_coco_segmenta_info_create_yolo_label_txt(
@@ -189,18 +193,24 @@ def use_coco_segmenta_info_create_yolo_label_txt(
 
 
 if __name__ == '__main__':
-    source_image_path = r"/home/chenkejing/database/Wildlife Monitoring and Poaching Detection.v8-final-version/train"
-    target_save_image_path = r"/home/chenkejing/database/Wildlife Monitoring and Poaching Detection.v8-final-version/train/imgs"
+    database_source_path = r"/home/chenkejing/database/carpetDatabase/rug-pattern-detection.v5-final-version.coco/"
+    database_part_type = "test"
+
+    source_image_path = database_source_path+database_part_type
+    target_save_image_path = database_source_path+database_part_type+"/imgs"
     util.move_batch_image_to_direct(source_image_path, target_save_image_path)
 
-    coco_label_file_path = r"/home/chenkejing/database/Wildlife Monitoring and Poaching Detection.v8-final-version/train/_annotations.coco.json"
+    coco_label_file_path = database_source_path+database_part_type+"/_annotations.coco.json"
     read_coco_label_file(coco_label_file_path)
 
-    output_yolo_txt_path = r"/home/chenkejing/database/Wildlife Monitoring and Poaching Detection.v8-final-version/train/labels"
 
+
+    output_yolo_txt_path = database_source_path+database_part_type+"/labels"
     # 膨胀不膨胀都有问题，膨胀导致原本标注较好的大个大目标，目标框误差增大；不膨胀目标框较多。最终选择不膨胀
-    wire_categories_id_list = [58]
+    wire_categories_id_list = [2]
+    # wire_categories_id_list = [class_id for class_id in range(0, 10)]
+    # print("target object classify: ", wire_categories_id_list)
     # wire_categories_id_list = None
     # 分割任务转yolo检测
     use_coco_box_info_creat_yolo_label_txt(coco_label_file_path, output_yolo_txt_path, wire_categories_id_list)
-    # use_coco_segmenta_info_create_yolo_label_txt(coco_label_file_path, output_yolo_txt_path, wire_categories_id_list,0.0001, 0.0)
+    # # use_coco_segmenta_info_create_yolo_label_txt(coco_label_file_path, output_yolo_txt_path, wire_categories_id_list,0.0001, 0.0)

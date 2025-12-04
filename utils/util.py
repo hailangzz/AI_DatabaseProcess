@@ -552,3 +552,13 @@ def replace_yolo_class_id(label_dir, new_class_id):
             f.writelines(new_lines)
 
     print(f"✅ 完成！已将目录 {label_dir} 中所有标注的 class_id 修改为 {new_class_id}")
+
+def create_director_for_yolo_train_databse(database_source_path="/home/chenkejing/database/AITotal_ProjectDatabase/carpetDatabaseProgrem"):
+
+    os.makedirs(os.path.join(database_source_path,"images","train"), exist_ok=True)
+    os.makedirs(os.path.join(database_source_path, "images", "test"), exist_ok=True)
+    os.makedirs(os.path.join(database_source_path, "images", "val"), exist_ok=True)
+
+    os.makedirs(os.path.join(database_source_path, "labels", "train"), exist_ok=True)
+    os.makedirs(os.path.join(database_source_path, "labels", "test"), exist_ok=True)
+    os.makedirs(os.path.join(database_source_path, "labels", "val"), exist_ok=True)
