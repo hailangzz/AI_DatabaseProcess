@@ -1,0 +1,9 @@
+
+由 Blender 来执行：
+
+blender -b -P blender_yolo_generate_full.py -- --outdir ./synthetic_yolo --num 2 --res 640 480 --seed 42
+
+
+说明：
+-b 无界面后台运行（速度快）
+-P 指定 Python 脚本

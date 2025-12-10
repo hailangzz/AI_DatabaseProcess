@@ -3,7 +3,7 @@ import cv2
 
 #检查单张图片，标注框是否准确
 if __name__ == "__main__":
-    lable_path = r"/home/chenkejing/database/carpetDatabase/rea-mini-project.v1i.coco/train/labels/0_aug_v2_b1_jpg.rf.4772f11c1804927087a293a75c322e5a.txt"
+    lable_path = r"/home/chenkejing/database/carpetDatabase/Research.v2i.coco/train/labels/20220516_123429_011-jpg_jpg.rf.67387bd3f939c58ef7d2b258e8066419.txt"
     image_path = lable_path.replace("/train/labels/","/train/imgs/").replace(".txt",".jpg")
 
     # image_path = r"/home/chenkejing/database/carpetDatabase/Annotation.v4i.coco/train/imgs/frame_000210_jpg.rf.fa4214d3747987b7909f827bba6e6f63.jpg"

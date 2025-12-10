@@ -193,8 +193,8 @@ def use_coco_segmenta_info_create_yolo_label_txt(
 
 
 if __name__ == '__main__':
-    database_source_path = r"/home/chenkejing/database/carpetDatabase/rug-pattern-detection.v5-final-version.coco/"
-    database_part_type = "test"
+    database_source_path = r"/home/chenkejing/database/WireDatabase/cable guardian.v2i.coco/"
+    database_part_type = "train"
 
     source_image_path = database_source_path+database_part_type
     target_save_image_path = database_source_path+database_part_type+"/imgs"
@@ -207,10 +207,10 @@ if __name__ == '__main__':
 
     output_yolo_txt_path = database_source_path+database_part_type+"/labels"
     # 膨胀不膨胀都有问题，膨胀导致原本标注较好的大个大目标，目标框误差增大；不膨胀目标框较多。最终选择不膨胀
-    wire_categories_id_list = [2]
+    wire_categories_id_list = [1]
     # wire_categories_id_list = [class_id for class_id in range(0, 10)]
     # print("target object classify: ", wire_categories_id_list)
     # wire_categories_id_list = None
     # 分割任务转yolo检测
     use_coco_box_info_creat_yolo_label_txt(coco_label_file_path, output_yolo_txt_path, wire_categories_id_list)
-    # # use_coco_segmenta_info_create_yolo_label_txt(coco_label_file_path, output_yolo_txt_path, wire_categories_id_list,0.0001, 0.0)
+    # use_coco_segmenta_info_create_yolo_label_txt(coco_label_file_path, output_yolo_txt_path, wire_categories_id_list,0.0001, 0.0)

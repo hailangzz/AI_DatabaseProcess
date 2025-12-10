@@ -1,7 +1,7 @@
 import os
 import utils.util as util
 
-database_source_path = r"/home/chenkejing/database/AITotal_ProjectDatabase/carpetDatabaseProgrem"
+database_source_path = r"/home/chenkejing/database/AITotal_ProjectDatabase/WireDetectProgrem"
 util.create_director_for_yolo_train_databse(database_source_path)
 
 database_part_type = ["train", "val"]
