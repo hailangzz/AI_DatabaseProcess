@@ -190,7 +190,7 @@ class LabelChecker(QWidget):
             self.show_page()
 
     def keyPressEvent(self, event):
-        if event.key() in (Qt.Key_Delete, Qt.Key_S):  # Delete 或 S 都触发删除
+        if event.key() == Qt.Key_Delete:
             # 删除选中图片和对应label
             to_delete = [label.file_path for label in self.selected_labels.values() if label.selected]
             for path in to_delete:
@@ -206,6 +206,7 @@ class LabelChecker(QWidget):
             self.next_page()
         else:
             super().keyPressEvent(event)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

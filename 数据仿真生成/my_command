@@ -1,7 +1,15 @@
 
 由 Blender 来执行：
 
-blender -b -P blender_yolo_generate_full.py -- --outdir ./synthetic_yolo --num 2 --res 640 480 --seed 42
+blender -b -P blender_yolo_generate_full.py -- --outdir ./synthetic_yolo --num 20 --res 640 480 --seed 42
+
+blender -b -P 3.渲染扫地机器人摄像头效果.py
+
+blender -b -P Mask标注数据处理工具集/地面mask处理/3.1扣取地面区域最大内接矩形并保存.py
+
+渲染地毯目标图像
+
+blender -b -P Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py -- --outdir ./synthetic_yolo --num 20 --res 640 480 --seed 42
 
 
 说明：
