@@ -6,7 +6,7 @@ import numpy as np
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QLineEdit,
     QFileDialog, QVBoxLayout, QHBoxLayout, QGridLayout,
-    QFrame, QRadioButton, QButtonGroup
+    QFrame, QRadioButton, QButtonGroup, QProgressBar
 )
 from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen
 from PyQt5.QtCore import Qt
@@ -60,8 +60,6 @@ class LabelChecker(QWidget):
 
     # ---------------- UI ----------------
     def init_ui(self):
-        from PyQt5.QtWidgets import QProgressBar
-
         main_layout = QVBoxLayout()
 
         # ===== 路径选择 =====
@@ -82,7 +80,7 @@ class LabelChecker(QWidget):
         path_layout.addWidget(lab_btn)
         main_layout.addLayout(path_layout)
 
-        # ===== 任务选择 =====
+        # ===== 任务选择 + 进度条 =====
         task_layout = QHBoxLayout()
         task_layout.addWidget(QLabel("任务类型："))
 
@@ -98,7 +96,14 @@ class LabelChecker(QWidget):
 
         task_layout.addWidget(self.det_radio)
         task_layout.addWidget(self.seg_radio)
+
+        # ---------- 新增进度条，放在任务选择行 ----------
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setMaximumWidth(300)  # 可根据需要调整宽度
+        self.progress_bar.setValue(0)
+        task_layout.addWidget(self.progress_bar)
         task_layout.addStretch()
+
         main_layout.addLayout(task_layout)
 
         # ===== 图片区 =====
@@ -167,67 +172,26 @@ class LabelChecker(QWidget):
         return img
 
     # ---------------- Segmentation ----------------
-    # def draw_segmentation(self, img, label_file, alpha=0.4):
-    #     h, w = img.shape[:2]
-    #     if not os.path.exists(label_file):
-    #         return img
-    #
-    #     overlay = img.copy()
-    #     with open(label_file) as f:
-    #         for line in f:
-    #             p = list(map(float, line.strip().split()))
-    #             if len(p) < 7:
-    #                 continue
-    #             cls = int(p[0])
-    #             coords = p[1:]
-    #
-    #             pts = []
-    #             for i in range(0, len(coords), 2):
-    #                 pts.append([
-    #                     int(coords[i] * w),
-    #                     int(coords[i + 1] * h)
-    #                 ])
-    #             pts = np.array(pts, np.int32)
-    #
-    #             color = (0, 255, 0)
-    #             cv2.fillPoly(overlay, [pts], color)
-    #             cv2.polylines(img, [pts], True, color, 2)
-    #
-    #     cv2.addWeighted(overlay, alpha, img, 1 - alpha, 0, img)
-    #     return img
-
     def draw_segmentation(self, img, label_file, alpha=0.4):
         h, w = img.shape[:2]
         if not os.path.exists(label_file):
             return img
 
-        # 1️⃣ 先合成一个 mask
         mask = np.zeros((h, w), dtype=np.uint8)
-
         with open(label_file) as f:
             for line in f:
                 p = list(map(float, line.strip().split()))
                 if len(p) < 7:
                     continue
-
                 coords = p[1:]
-                pts = []
-                for i in range(0, len(coords), 2):
-                    pts.append([
-                        int(coords[i] * w),
-                        int(coords[i + 1] * h)
-                    ])
+                pts = [[int(coords[i]*w), int(coords[i+1]*h)] for i in range(0, len(coords), 2)]
                 pts = np.array(pts, np.int32)
-
                 cv2.fillPoly(mask, [pts], 255)
 
-        # 2️⃣ 用 mask 叠加显示（洞自然是透明的）
         overlay = img.copy()
-        overlay[mask == 255] = (0, 255, 0)
+        overlay[mask==255] = (0, 255, 0)
+        cv2.addWeighted(overlay, alpha, img, 1-alpha, 0, img)
 
-        cv2.addWeighted(overlay, alpha, img, 1 - alpha, 0, img)
-
-        # 3️⃣ 轮廓线（可选）
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         cv2.drawContours(img, contours, -1, (0, 255, 0), 2)
 
@@ -241,6 +205,7 @@ class LabelChecker(QWidget):
                 w.setParent(None)
 
         if not self.files:
+            self.progress_bar.setValue(0)
             return
 
         self.selected_labels.clear()
@@ -248,10 +213,7 @@ class LabelChecker(QWidget):
 
         for i, fname in enumerate(batch):
             img_path = os.path.join(self.image_dir, fname)
-            label_path = os.path.join(
-                self.label_dir,
-                os.path.splitext(fname)[0] + ".txt"
-            )
+            label_path = os.path.join(self.label_dir, os.path.splitext(fname)[0] + ".txt")
 
             img = cv2.imdecode(np.fromfile(img_path, np.uint8), cv2.IMREAD_COLOR)
             if img is None:
@@ -283,6 +245,13 @@ class LabelChecker(QWidget):
 
             self.grid_layout.addWidget(frame, i // 5, i % 5)
             self.selected_labels[img_path] = img_label
+
+        # ---------- 更新进度条 ----------
+        total = len(self.files)
+        processed = min(self.index + self.batch_size, total)
+        percent = int(processed / total * 100)
+        self.progress_bar.setMaximum(100)
+        self.progress_bar.setValue(percent)
 
     # ---------------- 翻页 ----------------
     def next_page(self):
