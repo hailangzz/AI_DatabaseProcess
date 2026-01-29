@@ -60,6 +60,8 @@ class LabelChecker(QWidget):
 
     # ---------------- UI ----------------
     def init_ui(self):
+        from PyQt5.QtWidgets import QProgressBar
+
         main_layout = QVBoxLayout()
 
         # ===== 路径选择 =====
@@ -260,9 +262,9 @@ class LabelChecker(QWidget):
             else:
                 img = self.draw_segmentation(img, label_path)
 
-            img = cv2.resize(img, (200, 200))
+            img = cv2.resize(img, (420, 420))
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            qimg = QImage(img.data, 200, 200, img.strides[0], QImage.Format_RGB888)
+            qimg = QImage(img.data, 420, 420, img.strides[0], QImage.Format_RGB888)
             pix = QPixmap.fromImage(qimg)
 
             img_label = ClickableLabel(img_path)
