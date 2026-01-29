@@ -5,6 +5,34 @@ from pycocotools import mask as maskUtils
 
 category_id_dict = {}
 
+def get_mask_object_classify(coco_json_path):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # 加载 COCO 注释
+    coco = COCO(coco_json_path)
+
+    # 遍历每张图片
+    for img_id in coco.imgs:
+        img_info = coco.imgs[img_id]
+        file_name = img_info['file_name']
+        img_area = img_info['height'] * img_info['width']
+
+        # 获取该图片的所有 annotation
+        ann_ids = coco.getAnnIds(imgIds=img_id)
+        anns = coco.loadAnns(ann_ids)
+
+        contours_per_image = []
+
+        for ann in anns:
+            seg = ann['segmentation']
+            if ann["category_id"] not in category_id_dict:
+                category_id_dict[ann["category_id"]] = 1
+            else:
+                category_id_dict[ann["category_id"]] += 1
+
+    print(category_id_dict)
+
 def extract_mask_contours(coco_json_path, output_dir):
     """
     coco_json_path: '_annotations.coco.json' 文件路径
@@ -42,7 +70,9 @@ def extract_mask_contours(coco_json_path, output_dir):
             area = maskUtils.area(rle)
 
             # 判断 category_id 且 mask 面积大于图片一半
-            if ann["category_id"] == 1 and area >= img_area / 5:
+            # if ann["category_id"] == 1 and area >= img_area / 5:
+            # 13: 2358, 6: 2831, 14: 2760, 8: 3154, 11: 2210, 5: 2666, 16: 2643, 3: 3319, 2: 3115, 12: 2952, 21: 2733, 7: 2910, 17: 2748, 1: 2823, 20: 1843, 4: 2911
+            if ann["category_id"] in [1]:#,11,5,16 ,14,8
                 polygons = []
                 if isinstance(seg, list):
                     for poly in seg:
@@ -62,10 +92,6 @@ def extract_mask_contours(coco_json_path, output_dir):
                     "area": int(area)
                 })
 
-                if ann["category_id"] not in category_id_dict:
-                    category_id_dict[ann["category_id"]] = 1
-                else:
-                    category_id_dict[ann["category_id"]] += 1
 
         # 只有当有满足条件的标注时才写文件
         if contours_per_image:
@@ -77,7 +103,8 @@ def extract_mask_contours(coco_json_path, output_dir):
             print(f"Skipped {file_name}: no large enough mask")
 
 if __name__ == "__main__":
-    coco_json_path = "/home/chenkejing/database/Floor/floor.v1i.coco/train/_annotations.coco.json"
+    coco_json_path = "/home/chenkejing/database/WireDatabase/test0210.v1i.coco/train/_annotations.coco.json"
     output_dir = coco_json_path.split("train/")[0] + "mask_contours"
+    get_mask_object_classify(coco_json_path)
     extract_mask_contours(coco_json_path, output_dir)
-    print(category_id_dict)
+

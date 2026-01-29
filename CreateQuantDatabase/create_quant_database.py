@@ -15,7 +15,7 @@ def save_image_paths(image_dir, output_txt):
 
 
 if __name__ == "__main__":
-    image_dir = "/home/chenkejing/PycharmProjects/EMdoorTotalDetect/rk3588-convert-to-rknn/wire_quant_data/images"      # ← 修改成你的图片目录
-    output_txt = "/home/chenkejing/PycharmProjects/EMdoorTotalDetect/rk3588-convert-to-rknn/wire_quant_data/wire_quant.txt"   # ← 输出的txt文件名
+    image_dir = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/hand_real_image"      # ← 修改成你的图片目录
+    output_txt = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/hand_real_image/hand_quant.txt"   # ← 输出的txt文件名
 
     save_image_paths(image_dir, output_txt)

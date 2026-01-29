@@ -55,11 +55,11 @@ def draw_mask_contours(images_dir, contours_dir, output_dir):
 
 
 if __name__ == "__main__":
-    images_dir = "/home/chenkejing/database/Floor/floor.v1i.coco/train"
+    images_dir = "/home/chenkejing/database/WireDatabase/test0210.v1i.coco/train/imgs"
     # contours_dir = "/home/chenkejing/database/Floor/Texture Detection.v2i.coco/mask_contours"
     #output_dir = "./overlay_images"
-    contours_dir = images_dir.split("train")[0]+"mask_contours"
-    output_dir = images_dir.split("train")[0]+"overlay_images"
+    contours_dir = images_dir.split("train/")[0]+"mask_contours"
+    output_dir = images_dir.split("train/")[0]+"overlay_images"
     draw_mask_contours(images_dir, contours_dir, output_dir)
 
 

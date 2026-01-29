@@ -1,0 +1,753 @@
+import cv2
+import numpy as np
+from ultralytics import SAM
+from pathlib import Path
+import os
+import json
+from collections import defaultdict
+import time
+
+class VideoAnnotator:
+    def __init__(self, classes, database_path, database_type, model_name='sam2_b.pt', output_dir='video_annotations',
+                 save_mode='detection'):
+        """
+        交互式视频标注工具 - 每10帧处理一次
+
+        database_path: 视频路径
+        classes: 类别字典 {0: 'person', 1: 'car', 2: 'dog', ...}
+        model_name: SAM2 模型
+        output_dir: 输出目录
+        save_mode: 保存模式 'detection'(检测框), 'segmentation'(分割), 'both'(两者)
+        """
+        self.sleep_time=1              #每标注一帧，暂停的毫秒数
+        self.database_path = database_path
+        self.database_type = database_type
+        print(self.database_type)
+        self.classes = classes
+        self.output_dir = output_dir
+        self.save_mode = save_mode
+
+        # 加载 SAM2 模型
+        print(f"加载 SAM2 模型: {model_name}")
+        self.sam_model = SAM(model_name)
+
+        # 状态变量
+        self.paused = False
+        self.current_frame_idx = 0
+        self.current_frame = None
+        self.display_frame = None
+        self.database_path_list = []
+
+        # 标注数据
+        self.tracked_objects = {}  # {obj_id: {'class_id': 0, 'boxes': [], 'active': True}}
+        self.next_obj_id = 0
+        self.current_class = 0  # 当前选择的类别
+
+        # 鼠标交互
+        self.click_point = None
+        self.selecting_object = False
+
+        # 创建输出目录
+        self.setup_directories()
+
+        # 获取样本集信息
+
+        self.cap = None
+        self.fps = None
+        self.width = None
+        self.height = None
+        self.total_frames = 0
+        self.cur_picture_id = 0
+        self.get_database_info()
+
+        print(f"\n视频信息:")
+        print(f"  分辨率: {self.width}x{self.height}")
+        print(f"  帧率: {self.fps} FPS")
+        print(f"  总帧数: {self.total_frames}")
+        print(f"  时长: {self.total_frames / self.fps:.2f} 秒")
+        print(f"  保存模式: {save_mode}")
+        print(f"\n性能设置:")
+        print(f"  处理模式: 每 10 帧显示、分割、保存一次")
+        print(f"  其他帧: 快速跳过（不显示）")
+        print(f"  预计速度提升: 10倍")
+        print(f"  预计生成帧数: ~{self.total_frames // 10} 张")
+
+        # ===== bbox 编辑状态 =====
+        self.editing_bbox = False
+        self.edit_obj_id = None
+        self.drag_start = None
+        self.drag_mode = None  # 'move' | 'resize'
+        self.resize_corner = None  # 'tl', 'tr', 'bl', 'br'
+
+        # ===== Hover & 编辑增强 =====
+        self.hover_obj_id = None
+        self.hover_mode = None  # 'move' | 'resize_corner' | 'resize_edge'
+        self.hover_part = None  # 'tl','tr','bl','br' or 'left','right','top','bottom'
+        self.last_mouse_pos = None
+
+    def point_in_bbox(self, x, y, bbox,
+                      corner_radius=20,
+                      edge_margin=8):
+        x1, y1, x2, y2 = bbox
+
+        # ===== 1. 角点（最高优先级，圆形命中）=====
+        corners = {
+            'tl': (x1, y1),
+            'tr': (x2, y1),
+            'bl': (x1, y2),
+            'br': (x2, y2),
+        }
+
+        for name, (cx, cy) in corners.items():
+            if (x - cx) ** 2 + (y - cy) ** 2 <= corner_radius ** 2:
+                return 'resize_corner', name
+
+        # ===== 2. 边（角点范围外才会进来）=====
+        if abs(x - x1) <= edge_margin and y1 + corner_radius < y < y2 - corner_radius:
+            return 'resize_edge', 'left'
+        if abs(x - x2) <= edge_margin and y1 + corner_radius < y < y2 - corner_radius:
+            return 'resize_edge', 'right'
+        if abs(y - y1) <= edge_margin and x1 + corner_radius < x < x2 - corner_radius:
+            return 'resize_edge', 'top'
+        if abs(y - y2) <= edge_margin and x1 + corner_radius < x < x2 - corner_radius:
+            return 'resize_edge', 'bottom'
+
+        # ===== 3. 内部（移动）=====
+        if x1 + edge_margin < x < x2 - edge_margin and y1 + edge_margin < y < y2 - edge_margin:
+            return 'move', None
+
+        return None, None
+
+    def get_database_info(self):
+        if self.database_type=="video":
+            # 打开视频
+            self.cap = cv2.VideoCapture(database_path)
+            if not self.cap.isOpened():
+                raise ValueError(f"无法打开视频: {database_path}")
+
+            # 视频属性
+            self.fps = int(self.cap.get(cv2.CAP_PROP_FPS))
+            self.width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+            self.height = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            self.total_frames = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        elif self.database_type=="pictures":
+            self.fps=25
+            image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp']
+
+            for picture_name in sorted(os.listdir(self.database_path)):
+                # 检查文件扩展名是否在图片扩展名列表中
+                if any(picture_name.endswith(ext) for ext in image_extensions):
+                    self.database_path_list.append(os.path.join(self.database_path,picture_name))
+                    self.total_frames+=1
+
+    def setup_directories(self):
+        """创建输出目录结构"""
+        # 主目录
+        os.makedirs(self.output_dir, exist_ok=True)
+
+        # images 和 labels 目录
+        self.images_dir = os.path.join(self.output_dir, 'images')
+        self.labels_dir = os.path.join(self.output_dir, 'labels')
+        os.makedirs(self.images_dir, exist_ok=True)
+        os.makedirs(self.labels_dir, exist_ok=True)
+
+        # 创建 data.yaml
+        self.create_data_yaml()
+
+    def create_data_yaml(self):
+        """创建 YOLO 数据集配置文件"""
+        yaml_content = f"""path: {os.path.abspath(self.output_dir)}
+train: images
+val: images
+
+names:
+"""
+        for class_id, class_name in sorted(self.classes.items()):
+            yaml_content += f"  {class_id}: {class_name}\n"
+
+        yaml_path = os.path.join(self.output_dir, 'data.yaml')
+        with open(yaml_path, 'w') as f:
+            f.write(yaml_content)
+
+        print(f"✓ 数据集配置: {yaml_path}")
+
+    def mouse_callback(self, event, x, y, flags, param):
+        if not self.paused:
+            return
+
+        # ================= Hover =================
+        if event == cv2.EVENT_MOUSEMOVE and not self.editing_bbox:
+            self.last_mouse_pos = (x, y)
+            self.hover_obj_id = None
+            self.hover_mode = None
+            self.hover_part = None
+
+            for obj_id, obj in reversed(self.tracked_objects.items()):
+                if not obj['active']:
+                    continue
+                mode, part = self.point_in_bbox(x, y, obj['bbox'])
+                if mode:
+                    self.hover_obj_id = obj_id
+                    self.hover_mode = mode
+                    self.hover_part = part
+                    break
+            return
+
+        # ================= Mouse Down =================
+        if event == cv2.EVENT_LBUTTONDOWN:
+            if self.hover_obj_id is not None:
+                self.editing_bbox = True
+                self.edit_obj_id = self.hover_obj_id
+                self.drag_mode = self.hover_mode
+                self.resize_corner = self.hover_part
+                self.drag_start = (x, y)
+                return
+
+            # 否则是新建 SAM 对象
+            self.click_point = (x, y)
+            self.selecting_object = True
+            print(f"\n点击位置: ({x}, {y})，使用 SAM2 分割")
+
+        # ================= Drag =================
+        elif event == cv2.EVENT_MOUSEMOVE and self.editing_bbox:
+            dx = x - self.drag_start[0]
+            dy = y - self.drag_start[1]
+
+            obj = self.tracked_objects[self.edit_obj_id]
+            x1, y1, x2, y2 = obj['bbox']
+
+            if self.drag_mode == 'move':
+                x1 += dx;
+                x2 += dx
+                y1 += dy;
+                y2 += dy
+
+            elif self.drag_mode == 'resize_corner':
+                if self.resize_corner == 'tl':
+                    x1 += dx;
+                    y1 += dy
+                elif self.resize_corner == 'tr':
+                    x2 += dx;
+                    y1 += dy
+                elif self.resize_corner == 'bl':
+                    x1 += dx;
+                    y2 += dy
+                elif self.resize_corner == 'br':
+                    x2 += dx;
+                    y2 += dy
+
+            elif self.drag_mode == 'resize_edge':
+                if self.resize_corner == 'left':
+                    x1 += dx
+                elif self.resize_corner == 'right':
+                    x2 += dx
+                elif self.resize_corner == 'top':
+                    y1 += dy
+                elif self.resize_corner == 'bottom':
+                    y2 += dy
+
+            # 约束
+            x1, x2 = sorted([max(0, x1), min(self.width, x2)])
+            y1, y2 = sorted([max(0, y1), min(self.height, y2)])
+
+            if x2 - x1 > 5 and y2 - y1 > 5:
+                obj['bbox'] = [x1, y1, x2, y2]
+
+            self.drag_start = (x, y)
+
+        # ================= Mouse Up =================
+        elif event == cv2.EVENT_LBUTTONUP:
+            self.editing_bbox = False
+            self.edit_obj_id = None
+            self.drag_mode = None
+            self.resize_corner = None
+
+    def segment_object(self, point):
+        """使用 SAM2 分割点击的对象"""
+        # 使用 SAM2 进行分割（关闭详细输出）
+        results = self.sam_model(
+            self.current_frame,
+            points=[point],
+            labels=[1],  # 1 表示前景点
+            verbose=False
+        )
+
+        if results[0].masks is not None and len(results[0].masks) > 0:
+            # 获取 mask
+            mask = results[0].masks.data[0].cpu().numpy()
+
+            # 获取边界框
+            mask_uint8 = (mask * 255).astype(np.uint8)
+            contours, _ = cv2.findContours(mask_uint8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+            if len(contours) > 0:
+                # 获取最大轮廓的边界框
+                largest_contour = max(contours, key=cv2.contourArea)
+                x, y, w, h = cv2.boundingRect(largest_contour)
+                bbox = [x, y, x + w, y + h]
+
+                return mask, bbox, largest_contour
+
+        return None, None, None
+
+    def add_tracked_object(self, mask, bbox, contour):
+        """添加跟踪对象"""
+        obj_id = self.next_obj_id
+        self.next_obj_id += 1
+
+        self.tracked_objects[obj_id] = {
+            'class_id': self.current_class,
+            'mask': mask,
+            'bbox': bbox,
+            'contour': contour,
+            'active': True,
+            'color': tuple(np.random.randint(0, 255, 3).tolist())
+        }
+
+        class_name = self.classes[self.current_class]
+        print(f"✓ 添加对象 ID={obj_id}, 类别={class_name}")
+        return obj_id
+
+    def track_objects(self):
+        """跟踪所有活动对象（仅在间隔帧调用）"""
+        for obj_id, obj_data in self.tracked_objects.items():
+            if not obj_data['active']:
+                continue
+
+            bbox = obj_data['bbox']
+
+            # 扩展边界框以应对移动
+            x1, y1, x2, y2 = bbox
+            padding = 30  # 增加padding以应对10帧间隔的移动
+            x1 = max(0, x1 - padding)
+            y1 = max(0, y1 - padding)
+            x2 = min(self.width, x2 + padding)
+            y2 = min(self.height, y2 + padding)
+            expanded_bbox = [x1, y1, x2, y2]
+
+            # 使用 SAM2 重新分割
+            results = self.sam_model(
+                self.current_frame,
+                bboxes=[expanded_bbox],
+                verbose=False
+            )
+
+            if results[0].masks is not None and len(results[0].masks) > 0:
+                # 更新 mask 和边界框
+                mask = results[0].masks.data[0].cpu().numpy()
+
+                mask_uint8 = (mask * 255).astype(np.uint8)
+                contours, _ = cv2.findContours(mask_uint8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+                if len(contours) > 0:
+                    largest_contour = max(contours, key=cv2.contourArea)
+                    x, y, w, h = cv2.boundingRect(largest_contour)
+                    new_bbox = [x, y, x + w, y + h]
+
+                    # 更新对象数据
+                    obj_data['mask'] = mask
+                    obj_data['bbox'] = new_bbox
+                    obj_data['contour'] = largest_contour
+                else:
+                    obj_data['active'] = False
+            else:
+                obj_data['active'] = False
+
+    def save_annotations(self, frame_idx, save_mode='both'):
+        """
+        保存当前帧的标注
+        save_mode: 'detection' (仅检测框), 'segmentation' (仅分割), 'both' (两者都保存)
+        """
+        if len(self.tracked_objects) == 0:
+            return
+
+        # 保存图像
+        img_name = f"frame_{frame_idx:06d}.jpg"
+        img_path = os.path.join(self.images_dir, img_name)
+        cv2.imwrite(img_path, self.current_frame)
+
+        # 保存标注
+        label_name = f"frame_{frame_idx:06d}.txt"
+        label_path = os.path.join(self.labels_dir, label_name)
+
+        annotations = []
+
+        for obj_id, obj_data in self.tracked_objects.items():
+            if not obj_data['active']:
+                continue
+
+            class_id = obj_data['class_id']
+            bbox = obj_data['bbox']
+
+            # YOLO 检测格式: class_id x_center y_center width height (归一化)
+            if save_mode in ['detection', 'both']:
+                x1, y1, x2, y2 = bbox
+
+                # 计算中心点和宽高
+                x_center = ((x1 + x2) / 2) / self.width
+                y_center = ((y1 + y2) / 2) / self.height
+                width = (x2 - x1) / self.width
+                height = (y2 - y1) / self.height
+
+                # YOLO 检测格式
+                annotation = f"{class_id} {x_center:.6f} {y_center:.6f} {width:.6f} {height:.6f}"
+                annotations.append(annotation)
+
+        # 如果需要分割格式，保存到单独的目录
+        if save_mode in ['segmentation', 'both']:
+            seg_labels_dir = os.path.join(self.output_dir, 'labels_seg')
+            os.makedirs(seg_labels_dir, exist_ok=True)
+            seg_label_path = os.path.join(seg_labels_dir, label_name)
+
+            seg_annotations = []
+            for obj_id, obj_data in self.tracked_objects.items():
+                if not obj_data['active']:
+                    continue
+
+                class_id = obj_data['class_id']
+                contour = obj_data['contour']
+
+                # 转换为归一化坐标
+                normalized_coords = []
+                for point in contour:
+                    x, y = point[0]
+                    normalized_coords.extend([x / self.width, y / self.height])
+
+                # YOLO 分割格式
+                annotation = f"{class_id} " + " ".join(map(lambda c: f"{c:.6f}", normalized_coords))
+                seg_annotations.append(annotation)
+
+            # 写入分割标注文件
+            with open(seg_label_path, 'w') as f:
+                f.write('\n'.join(seg_annotations))
+
+        # 写入检测标注文件
+        if save_mode in ['detection', 'both']:
+            with open(label_path, 'w') as f:
+                f.write('\n'.join(annotations))
+
+    def draw_objects(self):
+        """在画面上绘制所有跟踪对象"""
+        self.display_frame = self.current_frame.copy()
+
+        for obj_id, obj_data in self.tracked_objects.items():
+            if not obj_data['active']:
+                continue
+
+            mask = obj_data['mask']
+            color = obj_data['color']
+            class_id = obj_data['class_id']
+            bbox = obj_data['bbox']
+
+            # 绘制 mask (半透明)
+            colored_mask = np.zeros_like(self.display_frame)
+            colored_mask[mask > 0.5] = color
+            self.display_frame = cv2.addWeighted(self.display_frame, 1.0, colored_mask, 0.5, 0)
+
+            # 绘制边界框
+            x1, y1, x2, y2 = bbox
+            cv2.rectangle(self.display_frame, (x1, y1), (x2, y2), color, 2)
+
+            # ===== Hover 高亮 =====
+            if obj_id == self.hover_obj_id:
+                highlight = (0, 255, 255)
+                cv2.rectangle(self.display_frame, (x1, y1), (x2, y2), highlight, 2)
+
+                if self.hover_mode == 'resize_corner':
+                    corner_map = {
+                        'tl': (x1, y1),
+                        'tr': (x2, y1),
+                        'bl': (x1, y2),
+                        'br': (x2, y2)
+                    }
+                    cx, cy = corner_map[self.hover_part]
+                    cv2.circle(self.display_frame, (cx, cy), 8, highlight, -1)
+
+                elif self.hover_mode == 'resize_edge':
+                    edge_map = {
+                        'left': (x1, (y1 + y2) // 2),
+                        'right': (x2, (y1 + y2) // 2),
+                        'top': ((x1 + x2) // 2, y1),
+                        'bottom': ((x1 + x2) // 2, y2)
+                    }
+                    cx, cy = edge_map[self.hover_part]
+                    cv2.circle(self.display_frame, (cx, cy), 8, highlight, -1)
+
+            # 角点
+            for cx, cy in [(x1, y1), (x2, y1), (x1, y2), (x2, y2)]:
+                cv2.circle(self.display_frame, (cx, cy), 5, (255, 255, 255), -1)
+
+            # 边中点
+            edge_points = [
+                ((x1 + x2) // 2, y1),
+                ((x1 + x2) // 2, y2),
+                (x1, (y1 + y2) // 2),
+                (x2, (y1 + y2) // 2),
+            ]
+            for cx, cy in edge_points:
+                cv2.circle(self.display_frame, (cx, cy), 4, (200, 200, 200), -1)
+
+            # 绘制标签
+            label = f"ID:{obj_id} {self.classes[class_id]}"
+            (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
+            cv2.rectangle(self.display_frame, (x1, y1 - th - 10), (x1 + tw, y1), color, -1)
+            cv2.putText(self.display_frame, label, (x1, y1 - 5),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+
+    def draw_ui(self):
+        """绘制用户界面信息"""
+        # 状态信息
+        status = "暂停 (点击选择对象)" if self.paused else "播放中"
+        status_color = (0, 255, 255) if self.paused else (0, 255, 0)
+
+        # 顶部信息栏
+        info_panel = np.zeros((80, self.width, 3), dtype=np.uint8)
+
+        cv2.putText(info_panel, f"状态: {status}", (10, 25),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, status_color, 2)
+
+        cv2.putText(info_panel, f"帧: {self.current_frame_idx}/{self.total_frames}", (10, 50),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+
+        cv2.putText(info_panel, f"对象数: {len([o for o in self.tracked_objects.values() if o['active']])}",
+                    (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+
+        # 当前类别
+        current_class_name = self.classes[self.current_class]
+        cv2.putText(info_panel, f"当前类别: [{self.current_class}] {current_class_name}",
+                    (300, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
+
+        # 操作说明
+        cv2.putText(info_panel, "空格=暂停/继续 | C=切换类别 | D=删除对象 | S=保存帧 | Q=退出",
+                    (300, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
+
+        # 合并到显示帧
+        self.display_frame = np.vstack([info_panel, self.display_frame])
+
+
+    def read_images_frame(self):
+        if self.cap!=None:
+            ret, frame = self.cap.read()
+        else:
+            print("use pictures labels.")
+            print(len(self.database_path_list))
+            print(self.database_path_list[0])
+            frame = cv2.imread(self.database_path_list[self.cur_picture_id])
+
+            if frame is not None:
+                ret = True
+                # 获取图像尺寸
+                self.height, self.width, _ = frame.shape
+                self.cur_picture_id+=1
+            else:
+                ret = False
+        return ret, frame
+
+    def run(self):
+        """运行标注工具"""
+        print("\n" + "=" * 70)
+        print("SAM2 视频交互式标注工具 - 每10帧处理模式")
+        print("=" * 70)
+        print("\n操作说明:")
+        print("  空格键    - 暂停（用于标注对象）")
+        print("  鼠标左键  - 暂停时点击对象进行分割标注")
+        print("  C 键      - 切换当前类别")
+        print("  D 键      - 删除最后一个对象")
+        print("  S 键      - 手动保存当前帧")
+        print("  Q/ESC 键  - 退出并保存所有数据")
+        print("\n注意:")
+        print("  • 视频会快速播放，只显示每第10帧")
+        print("  • 在需要标注的地方按空格暂停")
+        print("  • 标注后按空格继续，对象会自动跟踪")
+        print("=" * 70)
+        print(f"\n当前类别: [{self.current_class}] {self.classes[self.current_class]}")
+        print("\n开始处理视频...\n")
+
+        cv2.namedWindow('Video Annotator')
+        cv2.setMouseCallback('Video Annotator', self.mouse_callback)
+
+        saved_frames = 0
+
+        # 先读取第一帧并显示
+        # ret, frame = self.cap.read()
+        ret, frame =self.read_images_frame()
+        print(ret,frame)
+        if ret:
+            self.current_frame = frame
+            self.current_frame_idx = 0
+            self.paused = True  # 开始时暂停，让用户先标注
+            print("视频已暂停，请点击要标注的对象，然后按空格继续...")
+
+            # 显示第一帧
+            self.draw_objects()
+            self.draw_ui()
+            cv2.imshow('Video Annotator', self.display_frame)
+
+        while True:
+            if not self.paused:
+                # 读取下一帧
+                # ret, frame = self.cap.read()
+                ret, frame = self.read_images_frame()
+                if not ret:
+                    print("\n视频播放完毕")
+                    break
+                self.current_frame_idx += 1
+
+                # 每10帧才处理和显示
+                if self.current_frame_idx % 10 == 0:
+                    self.current_frame = frame
+
+                    # 跟踪现有对象
+                    if len(self.tracked_objects) > 0:
+                        self.track_objects()
+
+                        # 保存标注
+                        self.save_annotations(self.current_frame_idx, self.save_mode)
+                        saved_frames += 1
+
+                        # 显示进度
+                        if saved_frames % 10 == 0:
+                            print(f"已处理: {saved_frames} 帧 ({self.current_frame_idx}/{self.total_frames})")
+                else:
+                    # 跳过非10倍数帧，不显示
+                    continue
+
+            # 处理点击选择（只在暂停时处理）
+            if self.paused and self.selecting_object and self.click_point is not None:
+                mask, bbox, contour = self.segment_object(self.click_point)
+
+                if mask is not None:
+                    self.add_tracked_object(mask, bbox, contour)
+                else:
+                    print("⚠ 无法分割对象，请重试")
+
+                self.selecting_object = False
+                self.click_point = None
+
+            # 只在有当前帧时才绘制和显示
+            if self.current_frame is not None:
+                # 绘制对象和UI
+                self.draw_objects()
+                self.draw_ui()
+
+                # 显示
+                cv2.imshow('Video Annotator', self.display_frame)
+
+            # ✅ 每标注一帧，sleep 30ms
+            time.sleep(self.sleep_time)   #每张标注时，暂停指定毫秒数
+
+            # 键盘控制（调整等待时间）
+            key = cv2.waitKey(1 if not self.paused else 30) & 0xFF
+
+            if key == ord(' '):  # 空格 - 暂停/继续
+                self.paused = not self.paused
+                status = "暂停" if self.paused else "继续播放"
+                print(f"\n{status}")
+
+            elif key == ord('c') or key == ord('C'):  # C - 切换类别
+                self.current_class = (self.current_class + 1) % len(self.classes)
+                print(f"\n切换到类别: [{self.current_class}] {self.classes[self.current_class]}")
+
+            elif key == ord('d') or key == ord('D'):  # D - 删除最后对象
+                if len(self.tracked_objects) > 0:
+                    last_id = max(self.tracked_objects.keys())
+                    del self.tracked_objects[last_id]
+                    print(f"\n✓ 删除对象 ID={last_id}")
+
+            elif key == ord('s') or key == ord('S'):  # S - 保存当前帧
+                self.save_annotations(self.current_frame_idx, self.save_mode)
+                saved_frames += 1
+                print(f"\n✓ 已保存帧 {self.current_frame_idx}")
+
+            elif key == ord('q') or key == ord('Q') or key == 27:  # Q/ESC - 退出
+                print("\n退出标注...")
+                break
+
+        # 清理
+        if self.cap:
+            self.cap.release()
+        cv2.destroyAllWindows()
+
+        # 统计信息
+        print("\n" + "=" * 70)
+        print("标注完成!")
+        print("=" * 70)
+        print(f"保存模式: {self.save_mode}")
+        print(f"总保存帧数: {saved_frames}")
+        print(f"输出目录: {self.output_dir}")
+        print(f"  - 图片: {self.images_dir}")
+        if self.save_mode in ['detection', 'both']:
+            print(f"  - 检测标注: {self.labels_dir}")
+        if self.save_mode in ['segmentation', 'both']:
+            print(f"  - 分割标注: {os.path.join(self.output_dir, 'labels_seg')}")
+        print(f"  - 配置: {os.path.join(self.output_dir, 'data.yaml')}")
+        print("=" * 70)
+
+        # 生成统计报告
+        self.generate_report(saved_frames)
+
+    def generate_report(self, saved_frames):
+        """生成标注报告"""
+        report = {
+            'database_path': self.database_path,
+            'total_frames': self.total_frames,
+            'annotated_frames': saved_frames,
+            'classes': self.classes,
+            'objects_annotated': self.next_obj_id,
+            'output_dir': self.output_dir
+        }
+
+        report_path = os.path.join(self.output_dir, 'annotation_report.json')
+        with open(report_path, 'w', encoding='utf-8') as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
+
+        print(f"\n✓ 标注报告已保存: {report_path}")
+
+
+# 使用示例
+if __name__ == "__main__":
+    # 定义类别
+    # classes = {
+    #     0: 'horse',
+    #     1: 'car',
+    #     2: 'bicycle',
+    #     3: 'dog',
+    #     4: 'cat',
+    #     # 添加更多类别...
+    # }
+    classes = {
+        0: 'carpet',
+    }
+
+
+    database_type = 'pictures'
+    database_path = r"/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/camera_images_batch1"
+    # 输出目录
+    output_dir = 'video_annotations'
+    model_name = 'sam2_s.pt'
+    print("\n当前预设类别:")
+    for class_id, class_name in classes.items():
+        print(f"  [{class_id}] {class_name}")
+
+    save_mode = 'detection'
+
+    print(f"\n✓ 保存模式: {save_mode}")
+    print(f"✓ 处理间隔: 每 10 帧")
+    print(f"✓ 预计速度提升: 10倍")
+
+    # 创建并运行标注器
+    try:
+        annotator = VideoAnnotator(
+            database_path=database_path,
+            database_type=database_type,
+            classes=classes,
+            model_name=model_name,
+            output_dir=output_dir,
+            save_mode=save_mode
+        )
+        annotator.run()
+    except Exception as e:
+        print(f"\n⚠ 错误: {e}")
+        import traceback
+
+        traceback.print_exc()

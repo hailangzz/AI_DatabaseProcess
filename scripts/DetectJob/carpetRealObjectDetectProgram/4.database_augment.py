@@ -21,6 +21,7 @@ class YOLOAugmentor:
                  img_dir,
                  label_dir,
                  output_dir,
+                 batch_name,
                  is_exist_label=True,
                  augment_sample_number=4000,
                  img_size: Tuple[int,int] = (1280, 1280),
@@ -39,6 +40,7 @@ class YOLOAugmentor:
                  shear: float = 2.0,
                  ):
         self.output_dir=output_dir
+        self.batch_name=batch_name
         self.is_exist_label=is_exist_label
         self.augment_sample_number=augment_sample_number
         self.img_h, self.img_w = img_size
@@ -499,13 +501,13 @@ class YOLOAugmentor:
         os.makedirs(save_sample_label_path, exist_ok=True)
         print("save augment sampel path: ",save_sample_image_path)
 
-        save_image_path=os.path.join(save_sample_image_path,"augment_sample_"+str(self.current_create_sample_index)+'.jpg')
+        save_image_path=os.path.join(save_sample_image_path,"augment_sample_"+self.batch_name+str(self.current_create_sample_index)+'.jpg')
         cv2.imwrite(save_image_path, self.augment_sample['image'])
 
         # print(self.augment_sample['label'])
 
         save_label_path = os.path.join(save_sample_label_path,
-                                       "augment_sample_" + str(self.current_create_sample_index) + '.txt')
+                                       "augment_sample_"+self.batch_name + str(self.current_create_sample_index) + '.txt')
         with open(save_label_path, "w") as f:
             for label in self.augment_sample['label']:
                 line = " ".join(map(str, label))
@@ -534,11 +536,12 @@ class YOLOAugmentor:
 # ----------------------------- Example Usage -----------------------------
 if __name__ == '__main__':
 
-    augmentor = YOLOAugmentor(img_dir="/home/chenkejing/database/HandDetect/EmdoorRealHandImages/train/images",
-                              label_dir="/home/chenkejing/database/HandDetect/EmdoorRealHandImages/train/labels",
-                              output_dir="/home/chenkejing/database/HandDetect/EmdoorRealHandImages/database_augmentor",
+    augmentor = YOLOAugmentor(img_dir="/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/origin_real_carpet_database/images/train",
+                              label_dir="/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/origin_real_carpet_database/labels/train",
+                              output_dir="/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/database_augmentor",
+                              batch_name="batch_1",
                               is_exist_label = True,
-                              augment_sample_number=40)
+                              augment_sample_number=4500)
 
     # 随机选择一张图片，执行完整 pipeline
     for number in range(augmentor.augment_sample_number):
