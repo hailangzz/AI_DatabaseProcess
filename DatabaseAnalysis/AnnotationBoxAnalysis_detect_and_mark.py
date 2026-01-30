@@ -99,7 +99,7 @@ class LabelChecker(QWidget):
 
         # ---------- 新增进度条，放在任务选择行 ----------
         self.progress_bar = QProgressBar()
-        self.progress_bar.setMaximumWidth(300)  # 可根据需要调整宽度
+        self.progress_bar.setMaximumWidth(300)
         self.progress_bar.setValue(0)
         task_layout.addWidget(self.progress_bar)
         task_layout.addStretch()
@@ -142,14 +142,19 @@ class LabelChecker(QWidget):
             self.label_path_edit.setText(path)
             self.update_file_list()
 
-    def update_file_list(self):
+    def update_file_list(self, keep_index=False):
         if not self.image_dir:
             return
         self.files = sorted([
             f for f in os.listdir(self.image_dir)
             if f.lower().endswith((".jpg", ".png", ".jpeg"))
         ])
-        self.index = 0
+        if not keep_index:
+            self.index = 0
+        else:
+            # 防止 index 超出范围
+            max_index = max(len(self.files) - self.batch_size, 0)
+            self.index = min(self.index, max_index)
         self.show_page()
 
     # ---------------- Detection ----------------
@@ -267,16 +272,21 @@ class LabelChecker(QWidget):
     # ---------------- 快捷键 ----------------
     def keyPressEvent(self, event):
         if event.key() in (Qt.Key_Delete, Qt.Key_S):
+            # 删除选中的图片和标注
             to_delete = [p for p, l in self.selected_labels.items() if l.selected]
             for p in to_delete:
-                os.remove(p)
+                if os.path.exists(p):
+                    os.remove(p)
                 lp = os.path.join(
                     self.label_dir,
                     os.path.splitext(os.path.basename(p))[0] + ".txt"
                 )
                 if os.path.exists(lp):
                     os.remove(lp)
-            self.update_file_list()
+
+            # 同步更新文件列表，保留当前页
+            self.files = [f for f in self.files if os.path.join(self.image_dir, f) not in to_delete]
+            self.update_file_list(keep_index=True)
 
         elif event.key() == Qt.Key_A:
             self.prev_page()

@@ -1,0 +1,38 @@
+{
+    "Cable.v1i": {
+        "total_images": 3466,
+        "classes": {
+            "1": {
+                "count": 36835,
+                "image_count": 3466
+            }
+        }
+    },
+    "ElectricWiresDataset": {
+        "total_images": 28584,
+        "classes": {
+            "0": {
+                "count": 35964,
+                "image_count": 28584
+            }
+        }
+    },
+    "e-waste train.v1i": {
+        "total_images": 2664,
+        "classes": {
+            "14": {
+                "count": 2674,
+                "image_count": 2664
+            }
+        }
+    },
+    "Wildlife Monitoring and Poaching Detection.v8-final-version": {
+        "total_images": 77,
+        "classes": {
+            "58": {
+                "count": 85,
+                "image_count": 77
+            }
+        }
+    }
+}

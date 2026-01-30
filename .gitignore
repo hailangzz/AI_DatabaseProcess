@@ -1,0 +1,4 @@
+数据仿真生成/output/
+Ultralytics_sam_auto_object_label/*.pt
+Ultralytics_sam_auto_object_label/sam_anota/*.pt
+Ultralytics_sam_auto_object_label/sam_anota/video_annotations/

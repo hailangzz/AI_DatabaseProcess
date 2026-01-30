@@ -1,0 +1,8 @@
+{
+  "train": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/\u6570\u636e\u4eff\u771f\u751f\u6210/synthetic_yolo/images",
+  "val": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/\u6570\u636e\u4eff\u771f\u751f\u6210/synthetic_yolo/images",
+  "nc": 1,
+  "names": [
+    "wire"
+  ]
+}
