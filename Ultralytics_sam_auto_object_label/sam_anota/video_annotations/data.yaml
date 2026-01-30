@@ -1,6 +1,0 @@
-path: /home/chenkejing/PycharmProjects/AI_DatabaseProcess/Ultralytics_sam_auto_object_label/video_annotations
-train: images
-val: images
-
-names:
-  0: hand

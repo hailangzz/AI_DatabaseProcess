@@ -1,0 +1,1081 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="添加上gitignore,信息">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam2_s.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/Video Annotator_screenshot_17.12.2025.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/sam2_b.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/sam2_l.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/sam2_s.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/annotation_report.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000010.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000020.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000030.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000040.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000050.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000060.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000070.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000080.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000090.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000100.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000110.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000120.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000130.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000140.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000150.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000160.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000170.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000180.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000190.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000200.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000210.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000220.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000230.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000240.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000250.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000260.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000270.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000280.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000290.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000300.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000310.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000320.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000330.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000340.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000350.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000360.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000370.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000380.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000390.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000400.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000410.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000420.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000430.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000440.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000450.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000460.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000470.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000480.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000490.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000500.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000510.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000520.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000530.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000540.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000550.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000560.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000570.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000580.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000590.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000600.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000610.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000620.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000630.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000640.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000650.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000660.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000670.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000680.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000690.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000700.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000710.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000720.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000730.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000740.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000750.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000760.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000770.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000780.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000790.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000800.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000810.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000820.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000830.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000840.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000850.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000860.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000870.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000880.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000890.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000900.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000910.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000920.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000930.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000940.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000950.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000960.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000970.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000980.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_000990.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001000.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001010.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001020.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001030.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001040.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001050.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001060.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001070.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001080.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001090.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001100.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001110.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001120.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001130.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001140.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001150.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001160.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001170.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001180.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001190.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001200.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001210.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001220.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001230.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001240.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001250.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001260.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001270.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001280.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001290.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001300.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001310.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001320.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001330.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001340.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001350.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001360.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001370.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001380.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001390.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001400.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001410.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001420.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001430.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001440.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001450.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001460.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001470.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001480.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001490.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001500.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001510.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001520.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001530.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001540.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001550.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001560.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001570.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001580.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001590.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001600.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001610.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001620.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001630.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001640.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001650.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001660.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001670.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001680.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001690.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001700.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001710.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001720.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001730.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001740.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001750.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001760.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001770.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001780.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001790.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001800.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001810.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001820.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001830.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001840.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001850.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001860.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001870.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001880.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001890.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001900.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001910.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001920.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001930.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001940.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001950.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001960.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001970.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001980.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_001990.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002000.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002010.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002020.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002030.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002040.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002050.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002060.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002070.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002080.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002090.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002100.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002110.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002120.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002130.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002140.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002150.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002160.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002170.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002180.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002190.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002200.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002210.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002220.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002230.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002240.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002250.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002260.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002270.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002280.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002290.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002300.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002310.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002320.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002330.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002340.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002350.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002360.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002370.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002380.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002390.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002400.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002410.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002420.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002430.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002440.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002450.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002460.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002470.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002480.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002490.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002500.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002510.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002520.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/images/frame_002530.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000010.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000020.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000030.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000040.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000050.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000060.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000070.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000080.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000090.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000100.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000110.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000120.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000130.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000140.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000150.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000160.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000170.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000180.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000190.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000200.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000210.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000220.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000230.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000240.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000250.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000260.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000270.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000280.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000290.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000300.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000310.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000320.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000330.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000340.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000350.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000360.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000370.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000380.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000390.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000400.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000410.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000420.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000430.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000440.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000450.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000460.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000470.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000480.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000490.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000500.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000510.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000520.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000530.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000540.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000550.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000560.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000570.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000580.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000590.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000600.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000610.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000620.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000630.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000640.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000650.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000660.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000670.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000680.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000690.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000700.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000710.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000720.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000730.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000740.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000750.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000760.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000770.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000780.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000790.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000800.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000810.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000820.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000830.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000840.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000850.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000860.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000870.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000880.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000890.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000900.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000910.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000920.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000930.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000940.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000950.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000960.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000970.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000980.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_000990.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001000.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001010.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001020.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001030.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001040.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001050.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001060.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001070.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001080.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001090.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001100.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001110.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001120.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001130.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001140.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001150.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001160.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001170.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001180.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001190.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001200.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001210.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001220.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001230.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001240.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001250.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001260.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001270.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001280.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001290.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001300.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001310.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001320.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001330.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001340.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001350.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001360.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001370.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001380.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001390.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001400.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001410.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001420.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001430.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001440.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001450.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001460.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001470.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001480.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001490.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001500.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001510.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001520.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001530.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001540.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001550.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001560.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001570.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001580.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001590.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001600.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001610.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001620.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001630.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001640.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001650.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001660.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001670.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001680.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001690.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001700.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001710.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001720.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001730.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001740.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001750.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001760.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001770.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001780.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001790.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001800.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001810.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001820.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001830.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001840.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001850.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001860.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001870.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001880.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001890.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001900.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001910.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001920.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001930.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001940.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001950.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001960.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001970.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001980.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_001990.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002000.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002010.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002020.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002030.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002040.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002050.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002060.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002070.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002080.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002090.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002100.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002110.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002120.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002130.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002140.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002150.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002160.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002170.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002180.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002190.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002200.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002210.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002220.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002230.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002240.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002250.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002260.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002270.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002280.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002290.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002300.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002310.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002320.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002330.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002340.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002350.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002360.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002370.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002380.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002390.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002400.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002410.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002420.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002430.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002440.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002450.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002460.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002470.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002480.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002490.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002500.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002510.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002520.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota/video_annotations/labels/frame_002530.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000010.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000020.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000030.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000040.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000050.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000060.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000070.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000080.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000090.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000100.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000110.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000120.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000130.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000140.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000150.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000160.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000170.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000180.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000190.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000200.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000210.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000220.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000230.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000240.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000250.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000260.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000270.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000280.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000290.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000300.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000310.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000320.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000330.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000340.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000350.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000360.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000370.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000380.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000390.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000400.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000410.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000420.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000430.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000440.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000450.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000460.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000470.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000480.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000490.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000500.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000510.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000520.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000530.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000540.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000550.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000560.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000570.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000580.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000590.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000600.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000610.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000620.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000630.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000640.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000650.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000660.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000670.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000680.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000690.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000700.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000710.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000720.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000730.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000740.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000750.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/images/frame_000760.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000010.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000020.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000030.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000040.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000050.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000060.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000070.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000080.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000090.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000100.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000110.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000120.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000130.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000140.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000150.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000160.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000170.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000180.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000190.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000200.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000210.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000220.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000230.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000240.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000250.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000260.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000270.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000280.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000290.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000300.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000310.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000320.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000330.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000340.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000350.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000360.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000370.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000380.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000390.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000400.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000410.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000420.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000430.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000440.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000450.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000460.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000470.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000480.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000490.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000500.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000510.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000520.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000530.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000540.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000550.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000560.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000570.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000580.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000590.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000600.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000610.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000620.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000630.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000640.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000650.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000660.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000670.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000680.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000690.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000700.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000710.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000720.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000730.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000740.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000750.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/video_annotations/labels/frame_000760.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/DetectJob/carpetObjectDetectProgram/output_with_boxes.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/mosaic_pro.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/mosaic_pro.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/output_with_boxes.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实用小命令/resized_images/hand.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/carpet.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000000.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/数据仿真生成/synthetic_yolo/images/3DWire_000009.png" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="35PleTsA665hh2QBifxeZWenMpu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Python tests.Python tests for read_database.test.executor": "Debug",
+    "Python tests.Python tests in read_database.py.executor": "Run",
+    "Python.0. deduplicate_images_by_prefix.executor": "Run",
+    "Python.1.read_coco_label_info (1).executor": "Run",
+    "Python.1.read_coco_label_info.executor": "Run",
+    "Python.1.read_coco_label_info_bk-ok.executor": "Run",
+    "Python.1.生成mask线框标注数据文件.executor": "Run",
+    "Python.1.生成地毯mask线框标注数据文件.executor": "Run",
+    "Python.2.1.copy_database_to_augmentor.executor": "Run",
+    "Python.2.check_single_image_lable.executor": "Run",
+    "Python.2.检查mask标注框效果.executor": "Run",
+    "Python.2.生成地毯mask标注框效果.executor": "Run",
+    "Python.2.生成线材mask标注框效果.executor": "Run",
+    "Python.3.1扣取地面区域最大内接矩形并保存.executor": "Run",
+    "Python.3.2.扣取线材区域并保存.executor": "Run",
+    "Python.3.2扣取地面区域并保存.executor": "Run",
+    "Python.3.3扣取地面区域并保存.executor": "Run",
+    "Python.3.copy_train_database_to_project_databse (1).executor": "Run",
+    "Python.3.copy_train_database_to_project_databse.executor": "Run",
+    "Python.3.segment_database_augment (1).executor": "Run",
+    "Python.3.segment_database_augment-ok.executor": "Run",
+    "Python.3.segment_database_augment.executor": "Run",
+    "Python.3.扣取地板区域最大内接矩形.executor": "Run",
+    "Python.3.扣取地面区域并保存.executor": "Run",
+    "Python.3.扣取线材区域并保存.executor": "Run",
+    "Python.3.渲染扫地机器人摄像头效果.executor": "Run",
+    "Python.4.blender_yolo_generate_full.executor": "Run",
+    "Python.4.copy_train_database_to_project_databse.executor": "Run",
+    "Python.4.database_augment.executor": "Run",
+    "Python.4.read_all_database_labels_classid_info.executor": "Run",
+    "Python.4.segment_database_augment.executor": "Run",
+    "Python.4.扣取地毯区域图片并保存.executor": "Run",
+    "Python.4.扣取地毯区域最小外接矩形并保存.executor": "Run",
+    "Python.5.create_yolo_train_database.executor": "Run",
+    "Python.6.deal_database_main.executor": "Run",
+    "Python.AnnotationBoxAnalysis.executor": "Run",
+    "Python.AnnotationBoxAnalysis_detect_and_mark.executor": "Run",
+    "Python.CreateCarpetNegativeSample.executor": "Run",
+    "Python.add_wire_on_mask_render_frame.executor": "Run",
+    "Python.blender_yolo_generate_full.executor": "Run",
+    "Python.check_single_image_lable.executor": "Run",
+    "Python.copy_train_database_to_project_databse.executor": "Run",
+    "Python.create_carpet_object_images.executor": "Run",
+    "Python.create_mp4_from_image.executor": "Run",
+    "Python.create_quant_database.executor": "Run",
+    "Python.database_augment.executor": "Run",
+    "Python.deal_database_main.executor": "Run",
+    "Python.extract_target_class_image_database.executor": "Run",
+    "Python.gen_hollow_yolov8_seg.executor": "Run",
+    "Python.kaggle_download_database.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.model.executor": "Run",
+    "Python.read_all_database_labels_classid_info.executor": "Run",
+    "Python.read_coco_label_info.executor": "Run",
+    "Python.render_floor.executor": "Run",
+    "Python.resize_images.executor": "Run",
+    "Python.roboflow_download_e_waste_train_database.executor": "Run",
+    "Python.sam_anota_1.executor": "Run",
+    "Python.save_resize_image.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.处理mask信息.executor": "Run",
+    "Python.大模型标注文件整理.executor": "Run",
+    "Python.检查图像增强时空洞填充的有效性 (1).executor": "Run",
+    "Python.检查图像增强时空洞填充的有效性.executor": "Run",
+    "Python.检测标注文件是否有空洞.executor": "Run",
+    "Python.获取图片数量.executor": "Run",
+    "Python.训练集清洗.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/images",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/实用小命令/images" />
+      <recent name="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram" />
+      <recent name="$PROJECT_DIR$/scripts/segmentationJob/carpetPublicObjectSegmentProgram" />
+      <recent name="$PROJECT_DIR$/scripts/segmentationJob" />
+      <recent name="$PROJECT_DIR$/DatabaseAnalysis" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/DetectJob" />
+      <recent name="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota" />
+      <recent name="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集" />
+      <recent name="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面区域mask处理" />
+      <recent name="$PROJECT_DIR$/DownLoadDatabase/线材检测数据下载" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.AnnotationBoxAnalysis_detect_and_mark">
+    <configuration name="获取图片数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/获取图片数量.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="3.segment_database_augment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/carpetPublicObjectSegmentProgram" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/carpetPublicObjectSegmentProgram/3.segment_database_augment.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CreateCarpetNegativeSample" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/CreateNegativeSample" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateCarpetNegativeSample.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="resize_images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/resize_images.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
+        <item itemvalue="Python.resize_images" />
+        <item itemvalue="Python.CreateCarpetNegativeSample" />
+        <item itemvalue="Python.获取图片数量" />
+        <item itemvalue="Python.3.segment_database_augment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="" />
+      <created>1763019682367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1763019682367</updated>
+    </task>
+    <task id="LOCAL-00001" summary="新增标注样本检查窗体应用。">
+      <option name="closed" value="true" />
+      <created>1763020144625</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763020144625</updated>
+    </task>
+    <task id="LOCAL-00002" summary="线材检测项目，数据集生成任务。已经基本完成">
+      <option name="closed" value="true" />
+      <created>1763113567835</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763113567835</updated>
+    </task>
+    <task id="LOCAL-00003" summary="地毯检测项目，数据集生成任务。已经基本完成">
+      <option name="closed" value="true" />
+      <created>1764833734053</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1764833734053</updated>
+    </task>
+    <task id="LOCAL-00004" summary="新增数据仿真，生成">
+      <option name="closed" value="true" />
+      <created>1765350680362</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765350680362</updated>
+    </task>
+    <task id="LOCAL-00005" summary="数据仿真，生成优化">
+      <option name="closed" value="true" />
+      <created>1765770273354</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1765770273354</updated>
+    </task>
+    <task id="LOCAL-00006" summary="标注数据审查、分析程序新增mark、detect功能">
+      <option name="closed" value="true" />
+      <created>1769671948817</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1769671948817</updated>
+    </task>
+    <task id="LOCAL-00007" summary="标注数据审查、分析程序：增大显示图像的200*200变为400*400">
+      <option name="closed" value="true" />
+      <created>1769673147135</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1769673147135</updated>
+    </task>
+    <task id="LOCAL-00008" summary="标注数据审查、分析程序：新增进度条显示功能">
+      <option name="closed" value="true" />
+      <created>1769674151355</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1769674151355</updated>
+    </task>
+    <task id="LOCAL-00009" summary="添加上gitignore,信息">
+      <option name="closed" value="true" />
+      <created>1769740328774</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1769740328774</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="新增标注样本检查窗体应用。" />
+    <MESSAGE value="线材检测项目，数据集生成任务。已经基本完成" />
+    <MESSAGE value="地毯检测项目，数据集生成任务。已经基本完成" />
+    <MESSAGE value="新增数据仿真，生成" />
+    <MESSAGE value="数据仿真，生成优化" />
+    <MESSAGE value="标注数据审查、分析程序新增mark、detect功能" />
+    <MESSAGE value="标注数据审查、分析程序：增大显示图像的200*200变为400*400" />
+    <MESSAGE value="标注数据审查、分析程序：新增进度条显示功能" />
+    <MESSAGE value="添加上gitignore,信息" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加上gitignore,信息" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
