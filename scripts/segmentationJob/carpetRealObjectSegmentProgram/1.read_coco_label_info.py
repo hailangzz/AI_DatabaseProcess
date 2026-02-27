@@ -133,7 +133,7 @@ def convert_coco_to_yolov8(
 
 
 if __name__ == "__main__":
-    origin_database = "/home/chenkejing/database/carpetDatabase/rug-pattern-detection.v5-final-version.coco/train/imgs"
+    origin_database = "/home/chenkejing/database/carpetDatabase/rug-pattern-detection.v5-final-version.coco/train"
     convert_coco_to_yolov8(
         # annotations_json=os.path.join(origin_database, "annotations.json"),
         annotations_json=os.path.join(origin_database, "_annotations.coco.json"),

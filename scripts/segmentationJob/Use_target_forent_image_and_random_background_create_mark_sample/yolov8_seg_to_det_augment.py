@@ -154,7 +154,7 @@ def generate_augmented_dataset(
     ensure_dir(img_out)
     ensure_dir(lbl_out)
 
-    prefix = f"aug_Negative_background_carpet_{batch_name}_"
+    prefix = f"aug_Negative_background_{batch_name}_"
     idx = get_start_index(img_out, prefix)
 
     bg_imgs = glob(os.path.join(background_dir, "*.jpg"))
@@ -221,5 +221,5 @@ if __name__ == "__main__":
         background_dir="/home/chenkejing/database/Negativew_Example_Dataset/carpet/Negative_carpet_database/images",
         out_dir="/home/chenkejing/database/Negativew_Example_Dataset/carpet/segment_Negative_carpet_database",
         batch_name="origin_real_carpet_database",
-        num_per_object=1
+        num_per_object=3
     )

@@ -8,7 +8,7 @@ if __name__ == '__main__':
     # src_img_dir = part_database_origin_path+"/images/train"
     # src_label_dir = part_database_origin_path+"/labels/train"
 
-    part_database_origin_path = r"/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/segment_database_augmentor/"
+    part_database_origin_path = r"/home/chenkejing/database/Negativew_Example_Dataset/carpet/Negative_carpet_database/"
     src_img_dir = part_database_origin_path + "/images"
     src_label_dir = part_database_origin_path + "/labels"
 

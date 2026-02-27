@@ -38,6 +38,8 @@ class ExtractMaskObjectAugment:
         self.mask_image_info_dict["mask_path"] = os.path.join(self.mask_database_origin_path, "masks", image_name)
         self.mask_image_info_dict["labels_path"] = os.path.join(self.mask_database_origin_path, "labels", image_name.split('.')[0]+".txt")
 
+        print(self.mask_image_info_dict)
+
     def apply_pipeline(self,):
         self.extract_image_foreground = gp.extract_object_by_mask_and_yolobox(self.mask_image_info_dict["image_path"],
                                                                               self.mask_image_info_dict["mask_path"],
@@ -45,7 +47,9 @@ class ExtractMaskObjectAugment:
         self.warped_image = gp.random_perspective_transform(self.extract_image_foreground)
         self.crop_warped_image = gp.crop_min_bounding_rect(self.warped_image)
         self.augment_image = gp.augment_image(self.crop_warped_image)
-        self.combin_image_yolo["image"], self.combin_image_yolo["yolo_label"][0] = gp.paste_A_on_B_with_yolo(self.augment_image,"./c1_0.jpg",0)
+
+        background_images_path=r"/home/chenkejing/PycharmProjects/AI_DatabaseProcess/utils/mosaic_pro.jpg"
+        self.combin_image_yolo["image"], self.combin_image_yolo["yolo_label"][0] = gp.paste_A_on_B_with_yolo(self.augment_image,background_images_path,0)
 
 
         gp.save_images("extracted.jpg", self.extract_image_foreground)
@@ -57,9 +61,9 @@ class ExtractMaskObjectAugment:
 if __name__ == '__main__':
     # 使用示例
 
-    mask_data_origin_path = r"/home/chenkejing/database/ElectricWiresDataset/test"
+    mask_data_origin_path = r"/home/chenkejing/database/WireDatabase/ElectricWiresDataset/test"
     extract_mask_image = ExtractMaskObjectAugment(mask_data_origin_path)
-    extract_mask_image.get_mask_image_info("c1_10.jpg")
+    extract_mask_image.get_mask_image_info("c1_0.jpg")
     extract_mask_image.apply_pipeline()
 
 

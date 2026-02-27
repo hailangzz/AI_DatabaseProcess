@@ -3,7 +3,7 @@ import argparse
 
 # 用法：python count_images.py --img_dir /path/to/images
 # 默认路径（可修改为你常用的图片目录）
-DEFAULT_IMG_DIR = "/home/chenkejing/database/Negativew_Example_Dataset/carpet/Negative_carpet_database/images"
+DEFAULT_IMG_DIR = "/home/chenkejing/database/archive/coco2017/train2017"
 
 
 def count_images(img_dir):
