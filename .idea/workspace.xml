@@ -4,22 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/实用小命令/yolov8人脸检测/yolov8_face_detect.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/实用小命令/图像上绘图/plot_mark_point_to_images.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法/ChechTrainingSampleIsValid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="提交一次代码">
+      <change afterPath="$PROJECT_DIR$/scripts/Yolov8-seg-labels_to_yolov8-det-labels/hand_seglabel_to_detectlabel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/Use_target_forent_image_and_random_background_create_mark_sample/yolov8_seg_to_det_augment_hand.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/0. deduplicate_images_by_prefix.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/1.read_coco_label_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/1.read_coco_label_info_bk-ok.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/2.1.copy_database_to_augmentor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/2.check_single_image_lable.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.0.get_database_target_classify_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.1.replace_yolo_class_id.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/class_counts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/mosaic_pro.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/检查图像增强时空洞填充的有效性.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/1.read_coco_label_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/2.1.copy_database_to_augmentor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/2.check_single_image_lable.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/class_counts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/mosaic_pro.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/检查图像增强时空洞填充的有效性.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_images_to_des_folder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/delete_unuseful_images.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/3.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/3.copy_train_database_to_project_databse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/Use_target_forent_image_and_random_background_create_mark_sample/yolov8_seg_to_det_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/Use_target_forent_image_and_random_background_create_mark_sample/yolov8_seg_to_det_augment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/carpetPublicObjectSegmentProgram/4.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/carpetPublicObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/1.read_coco_label_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/1.read_coco_label_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/extract_mask_object_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/extract_mask_object_augment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/mosaic_pro.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mosaic_pro.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/carpetObjectDetectProgram/6.deal_database_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/carpetObjectDetectProgram/6.deal_database_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/util.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/获取图片数量.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/获取图片数量.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/身体健康小程序/health_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/身体健康小程序/health_timer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +100,8 @@
     "Python.4.扣取地毯区域图片并保存.executor": "Run",
     "Python.4.扣取地毯区域最小外接矩形并保存.executor": "Run",
     "Python.5.create_yolo_train_database.executor": "Run",
+    "Python.6.0.get_database_target_classify_info.executor": "Run",
+    "Python.6.1.replace_yolo_class_id.executor": "Run",
     "Python.6.deal_database_main.executor": "Run",
     "Python.AnnotationBoxAnalysis.executor": "Run",
     "Python.AnnotationBoxAnalysis_detect_and_mark.executor": "Run",
@@ -97,6 +112,9 @@
     "Python.blender_yolo_generate_full.executor": "Run",
     "Python.check_single_image_lable.executor": "Run",
     "Python.combin_more_images.executor": "Run",
+    "Python.copy_images_to_des_filte.executor": "Run",
+    "Python.copy_images_to_des_folder (1).executor": "Run",
+    "Python.copy_images_to_des_folder.executor": "Run",
     "Python.copy_train_database_to_project_databse.executor": "Run",
     "Python.create_carpet_object_images.executor": "Run",
     "Python.create_mp4_from_image.executor": "Run",
@@ -106,6 +124,7 @@
     "Python.cut_videos_part.executor": "Run",
     "Python.database_augment.executor": "Run",
     "Python.deal_database_main.executor": "Run",
+    "Python.delete_unuseful_images.executor": "Run",
     "Python.extract_mask_object_augment.executor": "Run",
     "Python.extract_target_class_image_database.executor": "Run",
     "Python.gen_hollow_yolov8_seg.executor": "Run",
@@ -113,6 +132,7 @@
     "Python.health_timer.executor": "Run",
     "Python.kaggle_download_database.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.mark_to_yolo_seg_labels.executor": "Run",
     "Python.model.executor": "Run",
     "Python.plot_mark_point_to_images.executor": "Run",
     "Python.python_convex_hull.executor": "Run",
@@ -138,17 +158,17 @@
     "Python.训练集清洗.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/scripts/segmentationJob",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/scripts/segmentationJob/WireObjectSegmentProgram",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
       <recent name="$PROJECT_DIR$/scripts/segmentationJob" />
       <recent name="$PROJECT_DIR$/scripts/segmentationJob/Use_target_forent_image_and_random_background_create_mark_sample" />
       <recent name="$PROJECT_DIR$/实用小命令/绘制闭包图像区域" />
       <recent name="$PROJECT_DIR$/实用小命令/yolov8手部检测" />
-      <recent name="$PROJECT_DIR$/实用小命令" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/scripts/DetectJob" />
@@ -158,8 +178,8 @@
       <recent name="$PROJECT_DIR$/DownLoadDatabase/线材检测数据下载" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.create_quant_database">
-    <configuration name="create_mp4_vidoe_from_images (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.6.0.get_database_target_classify_info">
+    <configuration name="2.1.copy_database_to_augmentor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -168,11 +188,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/将连续图像合并为一段视频" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/将连续图像合并为一段视频/create_mp4_vidoe_from_images.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/2.1.copy_database_to_augmentor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -181,7 +201,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="create_mp4_vidoe_from_images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="4.copy_train_database_to_project_databse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -190,11 +210,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/将连续图像，合并为一段视频" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/将连续图像，合并为一段视频/create_mp4_vidoe_from_images.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -203,7 +223,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="create_quant_database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="6.0.get_database_target_classify_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -212,11 +232,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CreateQuantDatabase" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateQuantDatabase/create_quant_database.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.0.get_database_target_classify_info.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -225,7 +245,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="cut_videos_part" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="6.1.replace_yolo_class_id" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -234,11 +254,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/将连续图像合并为一段视频" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/将连续图像合并为一段视频/cut_videos_part.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.1.replace_yolo_class_id.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -247,7 +267,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="health_timer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -256,11 +276,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/身体健康小程序" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/身体健康小程序/health_timer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -271,11 +291,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.create_quant_database" />
-        <item itemvalue="Python.create_mp4_vidoe_from_images (1)" />
-        <item itemvalue="Python.cut_videos_part" />
-        <item itemvalue="Python.create_mp4_vidoe_from_images" />
-        <item itemvalue="Python.health_timer" />
+        <item itemvalue="Python.6.0.get_database_target_classify_info" />
+        <item itemvalue="Python.6.1.replace_yolo_class_id" />
+        <item itemvalue="Python.4.copy_train_database_to_project_databse" />
+        <item itemvalue="Python.2.1.copy_database_to_augmentor" />
+        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
       </list>
     </recent_temporary>
   </component>
@@ -399,7 +419,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770259885516</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="提交一次代码">
+      <option name="closed" value="true" />
+      <created>1772174097285</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1772174097285</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,7 +456,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -454,7 +482,8 @@
     <MESSAGE value="创建针对混杂样本集的，误检负样本集。" />
     <MESSAGE value="扣取分割标注正样本集，贴合至误检负样本图像，生成新的标注文件" />
     <MESSAGE value="身体健康小程序，提醒活动、喝水" />
-    <option name="LAST_COMMIT_MESSAGE" value="身体健康小程序，提醒活动、喝水" />
+    <MESSAGE value="提交一次代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="提交一次代码" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

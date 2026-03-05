@@ -1,0 +1,315 @@
+{
+    "500 GLOVES.v1i.coco": {
+        "total_images": 453,
+        "classes": {
+            "1": {
+                "count": 347,
+                "image_count": 230
+            },
+            "2": {
+                "count": 356,
+                "image_count": 331
+            }
+        }
+    },
+    "ASL.v1i.coco": {
+        "total_images": 4498,
+        "classes": {
+            "1": {
+                "count": 153,
+                "image_count": 153
+            },
+            "2": {
+                "count": 144,
+                "image_count": 144
+            },
+            "3": {
+                "count": 180,
+                "image_count": 180
+            },
+            "4": {
+                "count": 189,
+                "image_count": 189
+            },
+            "5": {
+                "count": 153,
+                "image_count": 153
+            },
+            "6": {
+                "count": 144,
+                "image_count": 144
+            },
+            "7": {
+                "count": 207,
+                "image_count": 207
+            },
+            "8": {
+                "count": 180,
+                "image_count": 180
+            },
+            "9": {
+                "count": 162,
+                "image_count": 162
+            },
+            "10": {
+                "count": 234,
+                "image_count": 234
+            },
+            "11": {
+                "count": 189,
+                "image_count": 189
+            },
+            "12": {
+                "count": 180,
+                "image_count": 180
+            },
+            "13": {
+                "count": 189,
+                "image_count": 189
+            },
+            "14": {
+                "count": 153,
+                "image_count": 153
+            },
+            "15": {
+                "count": 189,
+                "image_count": 189
+            },
+            "16": {
+                "count": 180,
+                "image_count": 180
+            },
+            "17": {
+                "count": 144,
+                "image_count": 144
+            },
+            "18": {
+                "count": 171,
+                "image_count": 171
+            },
+            "19": {
+                "count": 207,
+                "image_count": 207
+            },
+            "20": {
+                "count": 162,
+                "image_count": 162
+            },
+            "21": {
+                "count": 117,
+                "image_count": 117
+            },
+            "22": {
+                "count": 189,
+                "image_count": 189
+            },
+            "23": {
+                "count": 180,
+                "image_count": 180
+            },
+            "24": {
+                "count": 153,
+                "image_count": 153
+            },
+            "25": {
+                "count": 179,
+                "image_count": 179
+            },
+            "26": {
+                "count": 170,
+                "image_count": 170
+            }
+        }
+    },
+    "hand_detect.v2i.coco": {
+        "total_images": 8850,
+        "classes": {
+            "1": {
+                "count": 171,
+                "image_count": 171
+            },
+            "2": {
+                "count": 8727,
+                "image_count": 8682
+            }
+        }
+    },
+    "Hand Detection.v4i.coco": {
+        "total_images": 7150,
+        "classes": {
+            "1": {
+                "count": 8112,
+                "image_count": 7150
+            }
+        }
+    },
+    "HFIPS.v2i.coco": {
+        "total_images": 250,
+        "classes": {
+            "1": {
+                "count": 417,
+                "image_count": 250
+            }
+        }
+    },
+    "Paper-Rock-Scissors.v2i.coco": {
+        "total_images": 2356,
+        "classes": {
+            "1": {
+                "count": 834,
+                "image_count": 834
+            },
+            "2": {
+                "count": 728,
+                "image_count": 726
+            },
+            "3": {
+                "count": 834,
+                "image_count": 834
+            }
+        }
+    },
+    "rock-paper-scissors.v1i.coco": {
+        "total_images": 723,
+        "classes": {
+            "1": {
+                "count": 249,
+                "image_count": 246
+            },
+            "2": {
+                "count": 441,
+                "image_count": 363
+            },
+            "3": {
+                "count": 249,
+                "image_count": 222
+            }
+        }
+    },
+    "Rock Paper Scissors.v7i.coco": {
+        "total_images": 1520,
+        "classes": {
+            "1": {
+                "count": 1110,
+                "image_count": 831
+            },
+            "2": {
+                "count": 1037,
+                "image_count": 821
+            },
+            "3": {
+                "count": 953,
+                "image_count": 818
+            }
+        }
+    },
+    "segmentation.v1i.coco": {
+        "total_images": 2450,
+        "classes": {
+            "1": {
+                "count": 81,
+                "image_count": 79
+            },
+            "2": {
+                "count": 90,
+                "image_count": 90
+            },
+            "3": {
+                "count": 107,
+                "image_count": 107
+            },
+            "4": {
+                "count": 114,
+                "image_count": 114
+            },
+            "5": {
+                "count": 80,
+                "image_count": 80
+            },
+            "6": {
+                "count": 94,
+                "image_count": 94
+            },
+            "7": {
+                "count": 105,
+                "image_count": 105
+            },
+            "8": {
+                "count": 100,
+                "image_count": 100
+            },
+            "9": {
+                "count": 89,
+                "image_count": 89
+            },
+            "10": {
+                "count": 116,
+                "image_count": 116
+            },
+            "11": {
+                "count": 92,
+                "image_count": 92
+            },
+            "12": {
+                "count": 102,
+                "image_count": 102
+            },
+            "13": {
+                "count": 114,
+                "image_count": 114
+            },
+            "14": {
+                "count": 84,
+                "image_count": 84
+            },
+            "15": {
+                "count": 91,
+                "image_count": 91
+            },
+            "16": {
+                "count": 91,
+                "image_count": 91
+            },
+            "17": {
+                "count": 83,
+                "image_count": 83
+            },
+            "18": {
+                "count": 83,
+                "image_count": 83
+            },
+            "19": {
+                "count": 117,
+                "image_count": 117
+            },
+            "20": {
+                "count": 81,
+                "image_count": 81
+            },
+            "21": {
+                "count": 60,
+                "image_count": 60
+            },
+            "22": {
+                "count": 100,
+                "image_count": 100
+            },
+            "23": {
+                "count": 99,
+                "image_count": 99
+            },
+            "24": {
+                "count": 104,
+                "image_count": 104
+            },
+            "25": {
+                "count": 87,
+                "image_count": 87
+            },
+            "26": {
+                "count": 88,
+                "image_count": 88
+            }
+        }
+    }
+}
