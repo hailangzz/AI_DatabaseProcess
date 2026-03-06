@@ -2,8 +2,8 @@ import os
 import shutil
 
 # ====== 配置路径 ======
-source_dir = r"/home/chenkejing/database/WireDatabase/Wildlife Monitoring and Poaching Detection.v8-final-version/train"      # 原始图片目录
-target_dir = r"/home/chenkejing/database/WireDatabase/TotalPublicWireDatabase/images"      # 目标目录
+source_dir = r"/home/chenkejing/database/HandDetect/EmdoorRealHandImages/unshare_images/train/crop_mark_target_image_results"      # 原始图片目录
+target_dir = r"/home/chenkejing/database/HandDetect/EmdoorRealHandImages/HandTargetObjectImages"      # 目标目录
 
 # 支持的图片格式
 image_exts = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp"}
