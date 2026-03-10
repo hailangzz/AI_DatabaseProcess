@@ -7,7 +7,7 @@ import shutil
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QLineEdit,
     QFileDialog, QVBoxLayout, QHBoxLayout, QGridLayout,
-    QFrame, QSlider, QDialog
+    QFrame, QSlider, QDialog, QProgressBar
 )
 from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen
 from PyQt5.QtCore import Qt
@@ -102,16 +102,28 @@ class LabelChecker(QWidget):
         path_layout.addWidget(browse_target_btn)
         layout.addLayout(path_layout)
 
-        # 图片尺寸滑动条
+        # 图片尺寸滑动条 + 进度条
         slider_layout = QHBoxLayout()
+
+        # ---------- 进度条 ----------
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setMinimum(0)
+        self.progress_bar.setMaximum(100)
+        self.progress_bar.setValue(0)
+        slider_layout.addWidget(self.progress_bar, 1)  # 占一半宽度
+
+        # ---------- 图片尺寸滑动条 ----------
+        slider_inner_layout = QHBoxLayout()
         slider_label = QLabel("图片尺寸")
         self.size_slider = QSlider(Qt.Horizontal)
         self.size_slider.setMinimum(100)
         self.size_slider.setMaximum(500)
         self.size_slider.setValue(self.img_size)
         self.size_slider.valueChanged.connect(self.update_image_size)
-        slider_layout.addWidget(slider_label)
-        slider_layout.addWidget(self.size_slider)
+        slider_inner_layout.addWidget(slider_label)
+        slider_inner_layout.addWidget(self.size_slider)
+        slider_layout.addLayout(slider_inner_layout, 1)  # 占另一半宽度
+
         layout.addLayout(slider_layout)
 
         # 图片网格
@@ -151,18 +163,19 @@ class LabelChecker(QWidget):
             if not keep_index:
                 self.index = 0
             else:
-                # 保证 index 不超出范围
                 max_index = max(len(self.files) - self.batch_size, 0)
                 self.index = min(self.index, max_index)
             self.show_page()
 
     # ---------------- 显示页面 ----------------
     def show_page(self):
+        # 清空grid
         for i in reversed(range(self.grid_layout.count())):
             widget = self.grid_layout.itemAt(i).widget()
             if widget:
                 widget.setParent(None)
         if not self.files:
+            self.progress_bar.setValue(0)
             return
 
         batch_files = self.files[self.index:self.index+self.batch_size]
@@ -195,6 +208,12 @@ class LabelChecker(QWidget):
             container.addWidget(name_label)
 
             self.grid_layout.addWidget(frame, i//cols, i%cols)
+
+        # ---------- 更新进度条 ----------
+        total = len(self.files)
+        processed = min(self.index + self.batch_size, total)
+        percent = int(processed / total * 100)
+        self.progress_bar.setValue(percent)
 
     # ---------------- Shift 批量选中 ----------------
     def shift_select(self, clicked_label):
@@ -237,7 +256,6 @@ class LabelChecker(QWidget):
     # ---------------- 快捷键 ----------------
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_S:
-            # 移动图片到目标文件夹（无提示框）
             if not self.target_dir:
                 return
             to_move = [label.file_path for label in self.selected_labels.values() if label.selected]
@@ -252,11 +270,9 @@ class LabelChecker(QWidget):
                 move_record.append((dst, src))
             if move_record:
                 self.move_history.append(move_record)
-            # 保留当前页
             self.update_file_list(keep_index=True)
 
         elif event.key() == Qt.Key_Z:
-            # 撤销上一步移动
             if not self.move_history:
                 return
             last_move = self.move_history.pop()
@@ -266,7 +282,6 @@ class LabelChecker(QWidget):
             self.update_file_list(keep_index=True)
 
         elif event.key() == Qt.Key_W:
-            # 打开/关闭原图窗口
             if self.viewer and self.viewer.isVisible():
                 self.viewer.close()
                 self.viewer = None
