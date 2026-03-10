@@ -4,9 +4,10 @@ import utils.util as util
 
 if __name__ == '__main__':
 
-    part_database_origin_path = r"/home/chenkejing/database/Negativew_Example_Dataset/hand/Negative_hand_database/"
+    part_database_origin_path = r"/home/chenkejing/database/HandDetect/EmdoorRealHandImages/database_augmentor/"
     src_img_dir = part_database_origin_path+"/images"
-    src_label_dir = part_database_origin_path+"/labels"
+    src_label_dir = part_database_origin_path + "/labels"
+    # src_label_dir = part_database_origin_path+"/yolov8_labels/bbox"
 
     dst_img_dir = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/images/train"
     dst_label_dir = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/labels/train"

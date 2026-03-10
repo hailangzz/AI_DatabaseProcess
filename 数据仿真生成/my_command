@@ -4,7 +4,10 @@
 blender -b -P 4.blender_yolo_generate_full.py -- --outdir ./synthetic_yolo --num 20 --res 640 480 --seed 42
 
 渲染线材样本：
-blender -b -P Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full.py  -- --outdir ./synthetic_yolo --num 20 --res 640 480 --seed 42
+blender -b -P Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py  -- --outdir ./synthetic_yolo --num 10 --res 640 480 --seed 42
+
+blender -b -P Mask标注数据处理工具集/线材mask处理/generator_sample.py
+
 渲染test：
     blender --background --python Mask标注数据处理工具集/线材mask处理/render_floor_images.py
 

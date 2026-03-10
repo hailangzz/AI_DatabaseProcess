@@ -347,11 +347,11 @@ class IndustrialYOLOAugmentor:
 # ----------------------------- Main -----------------------------
 if __name__ == "__main__":
     augmentor = IndustrialYOLOAugmentor(
-        img_dir="/home/chenkejing/database/HandDetect/EmdoorRealHandImages/unshare_images/train/images",
-        label_dir="/home/chenkejing/database/HandDetect/EmdoorRealHandImages/unshare_images/train/labels",
+        img_dir="/home/chenkejing/database/HandDetect/EmdoorRealHandImages/train/images",
+        label_dir="/home/chenkejing/database/HandDetect/EmdoorRealHandImages/train/labels",
         output_dir="/home/chenkejing/database/HandDetect/EmdoorRealHandImages/database_augmentor",
-        batch_name="batch_1",
-        augment_sample_number=3500
+        batch_name="batch_2",
+        augment_sample_number=5500
     )
 
     # 使用 tqdm 包裹循环，显示进度条

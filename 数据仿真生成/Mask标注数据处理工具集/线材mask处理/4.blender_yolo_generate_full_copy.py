@@ -4,6 +4,7 @@ import bmesh
 from mathutils import Vector, Euler
 from bpy_extras.object_utils import world_to_camera_view
 from pathlib import Path
+import numpy as np
 
 # ---------- parse args ----------
 import argparse
@@ -284,6 +285,79 @@ def object_bbox_yolo(obj, cam, scene, min_size=0.01, padding=0.01):
     return (x_c, y_c, w, h)
 
 
+def object_segmentation_yolo(obj, cam, scene, min_points=8, simplify=0.003):
+    """
+    Improved YOLOv8 segmentation generation
+    """
+    deps = bpy.context.evaluated_depsgraph_get()
+    obj_eval = obj.evaluated_get(deps)
+
+    me = obj_eval.to_mesh()
+    verts_world = [obj_eval.matrix_world @ v.co for v in me.vertices]
+    obj_eval.to_mesh_clear()
+
+    coords = []
+
+    for v in verts_world:
+        co_ndc = world_to_camera_view(scene, cam, v)
+
+        if co_ndc.z <= 0:
+            continue
+
+        x = co_ndc.x
+        y = 1.0 - co_ndc.y
+
+        if 0 <= x <= 1 and 0 <= y <= 1:
+            coords.append((x, y))
+
+    if len(coords) < min_points:
+        return None
+
+    # ---- convex hull ----
+    hull = convex_hull(coords)
+
+    # ---- simplify polygon ----
+    simplified = []
+    for p in hull:
+        if not simplified:
+            simplified.append(p)
+            continue
+
+        last = simplified[-1]
+        if math.hypot(p[0]-last[0], p[1]-last[1]) > simplify:
+            simplified.append(p)
+
+    if len(simplified) < 4:
+        simplified = hull
+
+    return simplified
+
+def convex_hull(points):
+    """
+    Andrew's monotone chain convex hull
+    points: [(x,y),...]
+    """
+    points = sorted(set(points))
+    if len(points) <= 1:
+        return points
+
+    def cross(o, a, b):
+        return (a[0]-o[0])*(b[1]-o[1]) - (a[1]-o[1])*(b[0]-o[0])
+
+    lower = []
+    for p in points:
+        while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:
+            lower.pop()
+        lower.append(p)
+
+    upper = []
+    for p in reversed(points):
+        while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0:
+            upper.pop()
+        upper.append(p)
+
+    return lower[:-1] + upper[:-1]
+
 # ---------- main render + label loop ----------
 def render_frame(i):
     clear_scene_keep(["Ground", cam.name])
@@ -314,15 +388,33 @@ def render_frame(i):
     for obj in instances:
         if obj.type != 'MESH':
             continue
-        bbox = object_bbox_yolo(obj, cam, scene)
-        if bbox is None:
+        # bbox = object_bbox_yolo(obj, cam, scene)
+        # if bbox is None:
+        #     continue
+        # cls = int(obj.get("cls", 0))
+        # x_c, y_c, w, h = bbox
+        # if w < 0.002 or h < 0.002:
+        #     continue
+        # labels.append(f"{cls} {x_c:.6f} {y_c:.6f} {w:.6f} {h:.6f}")
+        # meta_instances.append({"name": obj.name, "cls": cls, "bbox": [x_c, y_c, w, h]})
+
+        poly = object_segmentation_yolo(obj, cam, scene)
+
+        if poly is None:
             continue
+
         cls = int(obj.get("cls", 0))
-        x_c, y_c, w, h = bbox
-        if w < 0.002 or h < 0.002:
-            continue
-        labels.append(f"{cls} {x_c:.6f} {y_c:.6f} {w:.6f} {h:.6f}")
-        meta_instances.append({"name": obj.name, "cls": cls, "bbox": [x_c, y_c, w, h]})
+
+        seg_str = " ".join([f"{p[0]:.6f} {p[1]:.6f}" for p in poly])
+
+        labels.append(f"{cls} {seg_str}")
+
+        meta_instances.append({
+            "name": obj.name,
+            "cls": cls,
+            "polygon": poly
+        })
+
     with open(lbl_path, 'w') as f:
         f.write("\n".join(labels))
     meta = {
