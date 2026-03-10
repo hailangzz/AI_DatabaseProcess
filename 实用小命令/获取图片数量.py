@@ -3,7 +3,7 @@ import argparse
 
 # 用法：python count_images.py --img_dir /path/to/images
 # 默认路径（可修改为你常用的图片目录）
-DEFAULT_IMG_DIR = "/home/chenkejing/database/AITotal_ProjectDatabase/WireDetectProgrem/images/train"
+DEFAULT_IMG_DIR = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/images/train"
 
 
 def count_images(img_dir):

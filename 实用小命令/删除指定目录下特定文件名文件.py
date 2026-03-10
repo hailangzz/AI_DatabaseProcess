@@ -30,12 +30,13 @@ def delete_files(file_list):
 
 # 默认路径
 DEFAULT_DIR = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/images/train"
+# DEFAULT_DIR = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/labels/train"
 DEFAULT_KEYWORD = "augment_sample_"
 
 
 if __name__ == "__main__":
-    DEFAULT_delete = False
-    # DEFAULT_delete = True
+    # DEFAULT_delete = False
+    DEFAULT_delete = True
     parser = argparse.ArgumentParser(
         description="Count or delete files containing a specific keyword in a directory"
     )

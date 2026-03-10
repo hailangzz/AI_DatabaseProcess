@@ -30,7 +30,7 @@ def delete_files(file_list):
 
 # 默认路径
 DEFAULT_DIR = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/labels/train"
-DEFAULT_KEYWORD = "aug_Negative_background_origin_real_hand_database_"
+DEFAULT_KEYWORD = "aug_Negative_background_origin_real_hand"
 
 
 if __name__ == "__main__":
