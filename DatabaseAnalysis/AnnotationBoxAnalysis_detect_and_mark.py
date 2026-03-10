@@ -6,7 +6,7 @@ import numpy as np
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QLineEdit,
     QFileDialog, QVBoxLayout, QHBoxLayout, QGridLayout,
-    QFrame, QRadioButton, QButtonGroup, QProgressBar
+    QFrame, QRadioButton, QButtonGroup, QProgressBar, QSlider
 )
 from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen
 from PyQt5.QtCore import Qt
@@ -55,6 +55,7 @@ class LabelChecker(QWidget):
 
         # 当前任务类型
         self.task_type = "det"   # det | seg
+        self.img_size = 420  # 默认图像显示尺寸
 
         self.init_ui()
 
@@ -80,7 +81,7 @@ class LabelChecker(QWidget):
         path_layout.addWidget(lab_btn)
         main_layout.addLayout(path_layout)
 
-        # ===== 任务选择 + 进度条 =====
+        # ===== 任务选择 + 进度条 + 图像尺寸滑动条 =====
         task_layout = QHBoxLayout()
         task_layout.addWidget(QLabel("任务类型："))
 
@@ -97,13 +98,24 @@ class LabelChecker(QWidget):
         task_layout.addWidget(self.det_radio)
         task_layout.addWidget(self.seg_radio)
 
-        # ---------- 新增进度条，放在任务选择行 ----------
+        # ---------- 进度条，占左半部分 ----------
+        # ---------- 进度条，占左侧 2/3 ----------
         self.progress_bar = QProgressBar()
-        self.progress_bar.setMaximumWidth(300)
         self.progress_bar.setValue(0)
-        task_layout.addWidget(self.progress_bar)
-        task_layout.addStretch()
+        task_layout.addWidget(self.progress_bar, 2)  # stretch=2，占2/3
 
+        # ---------- 图像尺寸滑动条，占右侧 1/3 ----------
+        size_layout = QHBoxLayout()
+        size_layout.addWidget(QLabel("图像尺寸:"))
+        self.size_slider = QSlider(Qt.Horizontal)
+        self.size_slider.setMinimum(100)
+        self.size_slider.setMaximum(800)
+        self.size_slider.setValue(self.img_size)
+        self.size_slider.valueChanged.connect(self.on_size_change)
+        size_layout.addWidget(self.size_slider)
+        task_layout.addLayout(size_layout, 1)  # stretch=1，占1/3
+
+        task_layout.addStretch()
         main_layout.addLayout(task_layout)
 
         # ===== 图片区 =====
@@ -125,6 +137,11 @@ class LabelChecker(QWidget):
     # ---------------- 任务切换 ----------------
     def on_task_change(self):
         self.task_type = "det" if self.det_radio.isChecked() else "seg"
+        self.show_page()
+
+    # ---------------- 图像尺寸调节 ----------------
+    def on_size_change(self, value):
+        self.img_size = value
         self.show_page()
 
     # ---------------- 文件夹 ----------------
@@ -152,7 +169,6 @@ class LabelChecker(QWidget):
         if not keep_index:
             self.index = 0
         else:
-            # 防止 index 超出范围
             max_index = max(len(self.files) - self.batch_size, 0)
             self.index = min(self.index, max_index)
         self.show_page()
@@ -162,7 +178,6 @@ class LabelChecker(QWidget):
         h, w = img.shape[:2]
         if not os.path.exists(label_file):
             return img
-
         with open(label_file) as f:
             for line in f:
                 p = line.strip().split()
@@ -229,9 +244,9 @@ class LabelChecker(QWidget):
             else:
                 img = self.draw_segmentation(img, label_path)
 
-            img = cv2.resize(img, (420, 420))
+            img = cv2.resize(img, (self.img_size, self.img_size))
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            qimg = QImage(img.data, 420, 420, img.strides[0], QImage.Format_RGB888)
+            qimg = QImage(img.data, self.img_size, self.img_size, img.strides[0], QImage.Format_RGB888)
             pix = QPixmap.fromImage(qimg)
 
             img_label = ClickableLabel(img_path)
