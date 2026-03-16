@@ -4,15 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增：线材分割项目">
-      <change afterPath="$PROJECT_DIR$/DatabaseAnalysis/筛选mark目标图像.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/Use_target_forent_image_and_random_background_create_mark_sample/抽取目标区域保存_筛选_增强_负例背景合成/1.cut_mark_target_images_save.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/Use_target_forent_image_and_random_background_create_mark_sample/抽取目标区域保存_筛选_增强_负例背景合成/2.augment_target_images_rgba.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/segmentationJob/Use_target_forent_image_and_random_background_create_mark_sample/抽取目标区域保存_筛选_增强_负例背景合成/3.augment_random_background_sample_images.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/实用小命令/获取特定文件名文件数量.py" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="线材样本仿真生成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/1.read_coco_label_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/1.read_coco_label_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/3.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/3.copy_train_database_to_project_databse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/4.database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/4.database_augment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_images_to_des_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_images_to_des_folder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/1.read_coco_label_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/1.read_coco_label_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.1.replace_yolo_class_id.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.1.replace_yolo_class_id.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/resize_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/获取图片数量.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/获取图片数量.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/3.扣取线材区域并保存.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/3.扣取线材区域并保存.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/render_floor_images.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/my_command" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/my_command" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +81,10 @@
     "Python.3.扣取地板区域最大内接矩形.executor": "Run",
     "Python.3.扣取地面区域并保存.executor": "Run",
     "Python.3.扣取线材区域并保存.executor": "Run",
+    "Python.3.扣取线材区域并保存_填充版本.executor": "Run",
     "Python.3.渲染扫地机器人摄像头效果.executor": "Run",
     "Python.4.blender_yolo_generate_full.executor": "Run",
+    "Python.4.blender_yolo_generate_full_copy.executor": "Run",
     "Python.4.copy_train_database_to_project_databse (1).executor": "Run",
     "Python.4.copy_train_database_to_project_databse.executor": "Run",
     "Python.4.database_augment.executor": "Run",
@@ -92,6 +102,8 @@
     "Python.ChechTrainingSampleIsValid.executor": "Run",
     "Python.CreateCarpetNegativeSample.executor": "Run",
     "Python.CreateHandNegativeSample.executor": "Run",
+    "Python.MoveImageToDestFilde.executor": "Run",
+    "Python.RandomDisplayDetectAndMarkSample.executor": "Run",
     "Python.add_wire_on_mask_render_frame.executor": "Run",
     "Python.blender_yolo_generate_full.executor": "Run",
     "Python.check_single_image_lable.executor": "Run",
@@ -112,6 +124,7 @@
     "Python.extract_mask_object_augment.executor": "Run",
     "Python.extract_target_class_image_database.executor": "Run",
     "Python.gen_hollow_yolov8_seg.executor": "Run",
+    "Python.get_database_target_classify_info.executor": "Run",
     "Python.hand_seglabel_to_detectlabel.executor": "Run",
     "Python.health_timer.executor": "Run",
     "Python.kaggle_download_database.executor": "Run",
@@ -146,50 +159,28 @@
     "Python.训练集清洗.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/images",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/实用小命令/images" />
+      <recent name="$PROJECT_DIR$/实用小命令/resized_images" />
+      <recent name="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法" />
       <recent name="$PROJECT_DIR$/实用小命令" />
       <recent name="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
-      <recent name="$PROJECT_DIR$/scripts/segmentationJob" />
-      <recent name="$PROJECT_DIR$/scripts/segmentationJob/Use_target_forent_image_and_random_background_create_mark_sample" />
-      <recent name="$PROJECT_DIR$/实用小命令/绘制闭包图像区域" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/实用小命令/resized_images" />
       <recent name="$PROJECT_DIR$/scripts/DetectJob" />
       <recent name="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota" />
       <recent name="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集" />
       <recent name="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面区域mask处理" />
-      <recent name="$PROJECT_DIR$/DownLoadDatabase/线材检测数据下载" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.AnnotationBoxAnalysis_detect_and_mark">
-    <configuration name="增强" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/增强.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="删除指定目录下特定文件名文件" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.6.1.replace_yolo_class_id">
+    <configuration name="获取图片数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -202,7 +193,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/删除指定目录下特定文件名文件.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/获取图片数量.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -211,7 +202,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="获取特定文件名文件数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="3.segment_database_augment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -220,11 +211,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/获取特定文件名文件数量.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -233,7 +224,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="4.database_augment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="4.copy_train_database_to_project_databse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -242,11 +233,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/4.database_augment.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -255,7 +246,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="6.1.replace_yolo_class_id" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.1.replace_yolo_class_id.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RandomDisplayDetectAndMarkSample" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -268,7 +281,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/RandomDisplayDetectAndMarkSample.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -279,11 +292,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
-        <item itemvalue="Python.4.database_augment" />
-        <item itemvalue="Python.删除指定目录下特定文件名文件" />
-        <item itemvalue="Python.获取特定文件名文件数量" />
-        <item itemvalue="Python.增强" />
+        <item itemvalue="Python.6.1.replace_yolo_class_id" />
+        <item itemvalue="Python.获取图片数量" />
+        <item itemvalue="Python.4.copy_train_database_to_project_databse" />
+        <item itemvalue="Python.RandomDisplayDetectAndMarkSample" />
+        <item itemvalue="Python.3.segment_database_augment" />
       </list>
     </recent_temporary>
   </component>
@@ -423,7 +436,71 @@
       <option name="project" value="LOCAL" />
       <updated>1772673544517</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="优化目标检测、分割的数据增强代码。合成更有效数据，防止引入新的异常样本，影响模型效果。">
+      <option name="closed" value="true" />
+      <created>1772786718118</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1772786718118</updated>
+    </task>
+    <task id="LOCAL-00017" summary="线材检测数据仿真功能代码">
+      <option name="closed" value="true" />
+      <created>1773113386559</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1773113386559</updated>
+    </task>
+    <task id="LOCAL-00018" summary="训练集数据整理、处理代码">
+      <option name="closed" value="true" />
+      <created>1773113411700</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1773113411700</updated>
+    </task>
+    <task id="LOCAL-00019" summary="数据审核时，随机检查训练集、标注效果代码">
+      <option name="closed" value="true" />
+      <created>1773113445835</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1773113445836</updated>
+    </task>
+    <task id="LOCAL-00020" summary="模型测试返回的误检、漏检数据筛选应用">
+      <option name="closed" value="true" />
+      <created>1773113807509</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1773113807509</updated>
+    </task>
+    <task id="LOCAL-00021" summary="模型测试返回的误检、漏检数据筛选应用-增加进度条显示">
+      <option name="closed" value="true" />
+      <created>1773113868612</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1773113868612</updated>
+    </task>
+    <task id="LOCAL-00022" summary="模型测试返回的误检、漏检数据筛选应用-增加进度条显示">
+      <option name="closed" value="true" />
+      <created>1773114249124</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1773114249124</updated>
+    </task>
+    <task id="LOCAL-00023" summary="线材样本仿真生成">
+      <option name="closed" value="true" />
+      <created>1773147267439</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1773147267440</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +557,14 @@
     <MESSAGE value="身体健康小程序，提醒活动、喝水" />
     <MESSAGE value="提交一次代码" />
     <MESSAGE value="新增：线材分割项目" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增：线材分割项目" />
+    <MESSAGE value="优化目标检测、分割的数据增强代码。合成更有效数据，防止引入新的异常样本，影响模型效果。" />
+    <MESSAGE value="线材检测数据仿真功能代码" />
+    <MESSAGE value="训练集数据整理、处理代码" />
+    <MESSAGE value="数据审核时，随机检查训练集、标注效果代码" />
+    <MESSAGE value="模型测试返回的误检、漏检数据筛选应用" />
+    <MESSAGE value="模型测试返回的误检、漏检数据筛选应用-增加进度条显示" />
+    <MESSAGE value="线材样本仿真生成" />
+    <option name="LAST_COMMIT_MESSAGE" value="线材样本仿真生成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

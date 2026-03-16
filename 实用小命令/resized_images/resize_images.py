@@ -12,8 +12,8 @@ import cv2
 import argparse
 
 # 默认路径（可修改为你的实际路径）
-DEFAULT_IMG_DIR = "./images"
-DEFAULT_SAVE_DIR = "./resized_images"
+DEFAULT_IMG_DIR = "../images"
+DEFAULT_SAVE_DIR = "./resiz_images"
 
 DEFAULT_IMG_WIDTH = 640
 DEFAULT_IMG_HEIGHT = 480

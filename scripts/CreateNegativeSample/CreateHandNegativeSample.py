@@ -14,8 +14,8 @@ import os
 import argparse
 
 # 默认路径（可修改为你的实际路径）
-DEFAULT_IMG_DIR = "/home/chenkejing/database/Negativew_Example_Dataset/hand/Negative_hand_database/images"
-DEFAULT_SAVE_DIR = "/home/chenkejing/database/Negativew_Example_Dataset/hand/Negative_hand_database/labels"
+DEFAULT_IMG_DIR = "/home/chenkejing/database/Negativew_Example_Dataset/hand/Negative_hand_batch_0310_database/images"
+DEFAULT_SAVE_DIR = "/home/chenkejing/database/Negativew_Example_Dataset/hand/Negative_hand_batch_0310_database/labels"
 
 
 def generate_empty_yolo_labels(img_dir, save_dir):

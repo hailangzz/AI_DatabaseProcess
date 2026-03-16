@@ -193,12 +193,13 @@ def use_coco_segmenta_info_create_yolo_label_txt(
 
 
 if __name__ == '__main__':
-    database_source_path = r"/home/chenkejing/database/HandDetect/EmdoorRealHandImages/unshare_images/"
-    database_part_type = "train"
+    database_source_path = r"/home/chenkejing/database/Negativew_Example_Dataset/hand/Negative_hand_batch_0310_database/exist_hand/"
+    # database_part_type = "train"
+    database_part_type = ""
 
-    source_image_path = database_source_path+database_part_type
-    target_save_image_path = database_source_path+database_part_type+"/images"
-    util.move_batch_image_to_direct(source_image_path, target_save_image_path)
+    source_image_path = database_source_path+database_part_type+"images"
+    # target_save_image_path = database_source_path+database_part_type+"/images"
+    # util.move_batch_image_to_direct(source_image_path, target_save_image_path)
 
     coco_label_file_path = database_source_path+database_part_type+"/annotations.json"
     read_coco_label_file(coco_label_file_path)

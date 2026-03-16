@@ -34,11 +34,11 @@ class YOLOSegAugmentor:
         mosaic_prob=0.2,      # Mosaic 概率（当前未使用）
         cutout_prob=0.6,      # Cutout 概率（当前已注释掉）
         hsv_prob=0.1,         # HSV 颜色增强概率
-        hsv_gain=(0.015, 0.3, 0.25),  # HSV 增强幅度 (H, S, V) Saturation（饱和度）:
-                                      # Hue（色相）: H = 0.015 效果：Hue 颜色随机偏移 ±2.7 度 → 颜色轻微变化，不会影响整体色调太多
-                                      # S = 0.7 效果：饱和度随机缩放 0.3~1.7 倍；
-                                      # V = 0.4 效果：亮度整体缩放 0.6~1.4 倍 → 图像变暗或变亮
-
+        # hsv_gain=(0.015, 0.3, 0.25),  # HSV 增强幅度 (H, S, V) Saturation（饱和度）:
+        #                               # Hue（色相）: H = 0.015 效果：Hue 颜色随机偏移 ±2.7 度 → 颜色轻微变化，不会影响整体色调太多
+        #                               # S = 0.7 效果：饱和度随机缩放 0.3~1.7 倍；
+        #                               # V = 0.4 效果：亮度整体缩放 0.6~1.4 倍 → 图像变暗或变亮
+        hsv_gain=(0.015, 0.3, 0.12),  # 原来是 0.25 → 0.15，整体亮度偏暗
         degrees=90.0,         # 仿射旋转角度范围
         translate=0.1,        # 平移范围占图像比例
         scale=0.1,            # 缩放范围
@@ -67,8 +67,11 @@ class YOLOSegAugmentor:
         self.shear = shear
 
         # 获取所有图像文件
-        self.img_files = sorted(glob(os.path.join(img_dir, "*.jpg")))
-
+        # self.img_files = sorted(glob(os.path.join(img_dir, "*.jpg")))
+        self.img_files = sorted(glob(os.path.join(img_dir, "*.jpg")) +
+                                glob(os.path.join(img_dir, "*.jpeg")) +
+                                glob(os.path.join(img_dir, "*.png"))
+                                )
         # 创建输出文件夹
         os.makedirs(os.path.join(output_dir, "images"), exist_ok=True)
         os.makedirs(os.path.join(output_dir, "labels"), exist_ok=True)
@@ -112,7 +115,7 @@ class YOLOSegAugmentor:
     # ------------------------------------------------
     # 数据增强函数
     # ------------------------------------------------
-    def random_brightness_contrast(self, img, brightness=0.2, contrast=0.15): # brightness 亮度、contrast 对比度
+    def random_brightness_contrast(self, img, brightness=0.1, contrast=0.15): # brightness 亮度、contrast 对比度
         # 随机亮度/对比度调整
         if random.random() > 0.8:
             return img
@@ -271,11 +274,11 @@ class YOLOSegAugmentor:
 # ------------------------------------------------
 if __name__ == "__main__":
     augmentor = YOLOSegAugmentor(
-        img_dir="/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/origin_publish_wire_database/images",
-        label_dir="/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/origin_publish_wire_database/labels",
+        img_dir="/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_3D_database_suythetic/images",
+        label_dir="/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_3D_database_suythetic/yolov8_labels/seg",
         output_dir="/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_database_augmentor",
-        batch_name="publish_seg_batch1",
-        augment_sample_number=20000
+        batch_name="segment_3D_seg_batch1",
+        augment_sample_number=3000
     )
 
     total = augmentor.augment_sample_number

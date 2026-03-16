@@ -4,13 +4,13 @@ import utils.util as util
 
 if __name__ == '__main__':
 
-    # part_database_origin_path = r"/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/origin_real_carpet_database/"
-    # src_img_dir = part_database_origin_path+"/images/train"
-    # src_label_dir = part_database_origin_path+"/labels/train"
+    part_database_origin_path = r"/data/AITotal_SegmentDatabase/wireDatabaseSegment/"
+    src_img_dir = part_database_origin_path+"/images/train"
+    src_label_dir = part_database_origin_path+"/labels/train"
 
-    part_database_origin_path = r"/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_database_augmentor/"
-    src_img_dir = part_database_origin_path + "/images"
-    src_label_dir = part_database_origin_path + "/labels"
+    # part_database_origin_path = r"/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_3D_database_suythetic/"
+    # src_img_dir = part_database_origin_path + "/images"
+    # src_label_dir = part_database_origin_path + "/labels"
 
     dst_img_dir = "/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
     dst_label_dir = "/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
