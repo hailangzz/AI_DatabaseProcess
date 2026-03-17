@@ -16,14 +16,33 @@ os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = "/home/chenkejing/anaconda3/plugins/
 
 # ------------------ 可点击图片 ------------------
 class ClickableLabel(QLabel):
-    def __init__(self, file_path):
+    def __init__(self, file_path, index, parent):
         super().__init__()
         self.file_path = file_path
+        self.index = index
+        self.parent_widget = parent
         self.selected = False
 
     def mousePressEvent(self, event):
-        self.selected = not self.selected
-        self.update()
+
+        modifiers = QApplication.keyboardModifiers()
+
+        # SHIFT 连续选择
+        if modifiers == Qt.ShiftModifier and self.parent_widget.last_clicked_index is not None:
+
+            start = min(self.parent_widget.last_clicked_index, self.index)
+            end = max(self.parent_widget.last_clicked_index, self.index)
+
+            for i in range(start, end + 1):
+                label = self.parent_widget.current_batch[i]
+                label.selected = True
+                label.update()
+
+        else:
+            self.selected = not self.selected
+            self.update()
+
+        self.parent_widget.last_clicked_index = self.index
 
     def paintEvent(self, event):
         super().paintEvent(event)
@@ -53,9 +72,12 @@ class LabelChecker(QWidget):
         self.batch_size = 10
         self.selected_labels = {}
 
-        # 当前任务类型
-        self.task_type = "det"   # det | seg
-        self.img_size = 420  # 默认图像显示尺寸
+        self.task_type = "det"
+        self.img_size = 420
+
+        # 新增变量
+        self.last_clicked_index = None
+        self.current_batch = []
 
         self.init_ui()
 
@@ -63,7 +85,6 @@ class LabelChecker(QWidget):
     def init_ui(self):
         main_layout = QVBoxLayout()
 
-        # ===== 路径选择 =====
         path_layout = QHBoxLayout()
         self.image_path_edit = QLineEdit()
         self.image_path_edit.setPlaceholderText("图片文件夹路径")
@@ -81,7 +102,6 @@ class LabelChecker(QWidget):
         path_layout.addWidget(lab_btn)
         main_layout.addLayout(path_layout)
 
-        # ===== 任务选择 + 进度条 + 图像尺寸滑动条 =====
         task_layout = QHBoxLayout()
         task_layout.addWidget(QLabel("任务类型："))
 
@@ -98,13 +118,10 @@ class LabelChecker(QWidget):
         task_layout.addWidget(self.det_radio)
         task_layout.addWidget(self.seg_radio)
 
-        # ---------- 进度条，占左半部分 ----------
-        # ---------- 进度条，占左侧 2/3 ----------
         self.progress_bar = QProgressBar()
         self.progress_bar.setValue(0)
-        task_layout.addWidget(self.progress_bar, 2)  # stretch=2，占2/3
+        task_layout.addWidget(self.progress_bar, 2)
 
-        # ---------- 图像尺寸滑动条，占右侧 1/3 ----------
         size_layout = QHBoxLayout()
         size_layout.addWidget(QLabel("图像尺寸:"))
         self.size_slider = QSlider(Qt.Horizontal)
@@ -113,16 +130,14 @@ class LabelChecker(QWidget):
         self.size_slider.setValue(self.img_size)
         self.size_slider.valueChanged.connect(self.on_size_change)
         size_layout.addWidget(self.size_slider)
-        task_layout.addLayout(size_layout, 1)  # stretch=1，占1/3
+        task_layout.addLayout(size_layout, 1)
 
         task_layout.addStretch()
         main_layout.addLayout(task_layout)
 
-        # ===== 图片区 =====
         self.grid_layout = QGridLayout()
         main_layout.addLayout(self.grid_layout)
 
-        # ===== 翻页 =====
         btn_layout = QHBoxLayout()
         self.prev_btn = QPushButton("上一页 (A)")
         self.next_btn = QPushButton("下一页 (D)")
@@ -134,26 +149,23 @@ class LabelChecker(QWidget):
 
         self.setLayout(main_layout)
 
-    # ---------------- 任务切换 ----------------
     def on_task_change(self):
         self.task_type = "det" if self.det_radio.isChecked() else "seg"
         self.show_page()
 
-    # ---------------- 图像尺寸调节 ----------------
     def on_size_change(self, value):
         self.img_size = value
         self.show_page()
 
-    # ---------------- 文件夹 ----------------
     def browse_image_dir(self):
-        path = QFileDialog.getExistingDirectory(self, "选择图片文件夹", "/home/chenkejing/database")
+        path = QFileDialog.getExistingDirectory(self, "选择图片文件夹", "/data/database")
         if path:
             self.image_dir = path
             self.image_path_edit.setText(path)
             self.update_file_list()
 
     def browse_label_dir(self):
-        path = QFileDialog.getExistingDirectory(self, "选择标注文件夹", "/home/chenkejing/database")
+        path = QFileDialog.getExistingDirectory(self, "选择标注文件夹", "/data/database")
         if path:
             self.label_dir = path
             self.label_path_edit.setText(path)
@@ -162,15 +174,18 @@ class LabelChecker(QWidget):
     def update_file_list(self, keep_index=False):
         if not self.image_dir:
             return
+
         self.files = sorted([
             f for f in os.listdir(self.image_dir)
             if f.lower().endswith((".jpg", ".png", ".jpeg"))
         ])
+
         if not keep_index:
             self.index = 0
         else:
             max_index = max(len(self.files) - self.batch_size, 0)
             self.index = min(self.index, max_index)
+
         self.show_page()
 
     # ---------------- Detection ----------------
@@ -178,39 +193,50 @@ class LabelChecker(QWidget):
         h, w = img.shape[:2]
         if not os.path.exists(label_file):
             return img
+
         with open(label_file) as f:
             for line in f:
                 p = line.strip().split()
                 if len(p) < 5:
                     continue
+
                 _, xc, yc, bw, bh = map(float, p[:5])
+
                 x1 = int((xc - bw / 2) * w)
                 y1 = int((yc - bh / 2) * h)
                 x2 = int((xc + bw / 2) * w)
                 y2 = int((yc + bh / 2) * h)
+
                 cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
         return img
 
     # ---------------- Segmentation ----------------
     def draw_segmentation(self, img, label_file, alpha=0.4):
         h, w = img.shape[:2]
+
         if not os.path.exists(label_file):
             return img
 
         mask = np.zeros((h, w), dtype=np.uint8)
+
         with open(label_file) as f:
             for line in f:
                 p = list(map(float, line.strip().split()))
                 if len(p) < 7:
                     continue
+
                 coords = p[1:]
-                pts = [[int(coords[i]*w), int(coords[i+1]*h)] for i in range(0, len(coords), 2)]
+                pts = [[int(coords[i] * w), int(coords[i + 1] * h)]
+                       for i in range(0, len(coords), 2)]
+
                 pts = np.array(pts, np.int32)
                 cv2.fillPoly(mask, [pts], 255)
 
         overlay = img.copy()
-        overlay[mask==255] = (0, 255, 0)
-        cv2.addWeighted(overlay, alpha, img, 1-alpha, 0, img)
+        overlay[mask == 255] = (0, 255, 0)
+
+        cv2.addWeighted(overlay, alpha, img, 1 - alpha, 0, img)
 
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         cv2.drawContours(img, contours, -1, (0, 255, 0), 2)
@@ -219,6 +245,7 @@ class LabelChecker(QWidget):
 
     # ---------------- 显示页面 ----------------
     def show_page(self):
+
         for i in reversed(range(self.grid_layout.count())):
             w = self.grid_layout.itemAt(i).widget()
             if w:
@@ -229,13 +256,18 @@ class LabelChecker(QWidget):
             return
 
         self.selected_labels.clear()
+        self.current_batch = []
+        self.last_clicked_index = None
+
         batch = self.files[self.index:self.index + self.batch_size]
 
         for i, fname in enumerate(batch):
+
             img_path = os.path.join(self.image_dir, fname)
             label_path = os.path.join(self.label_dir, os.path.splitext(fname)[0] + ".txt")
 
             img = cv2.imdecode(np.fromfile(img_path, np.uint8), cv2.IMREAD_COLOR)
+
             if img is None:
                 continue
 
@@ -246,12 +278,16 @@ class LabelChecker(QWidget):
 
             img = cv2.resize(img, (self.img_size, self.img_size))
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
             qimg = QImage(img.data, self.img_size, self.img_size, img.strides[0], QImage.Format_RGB888)
             pix = QPixmap.fromImage(qimg)
 
-            img_label = ClickableLabel(img_path)
+            img_label = ClickableLabel(img_path, i, self)
+
             img_label.setPixmap(pix)
             img_label.setAlignment(Qt.AlignCenter)
+
+            self.current_batch.append(img_label)
 
             name_label = QLabel(fname)
             name_label.setAlignment(Qt.AlignCenter)
@@ -260,16 +296,19 @@ class LabelChecker(QWidget):
             box = QVBoxLayout()
             frame = QFrame()
             frame.setLayout(box)
+
             box.addWidget(img_label)
             box.addWidget(name_label)
 
             self.grid_layout.addWidget(frame, i // 5, i % 5)
+
             self.selected_labels[img_path] = img_label
 
-        # ---------- 更新进度条 ----------
         total = len(self.files)
         processed = min(self.index + self.batch_size, total)
+
         percent = int(processed / total * 100)
+
         self.progress_bar.setMaximum(100)
         self.progress_bar.setValue(percent)
 
@@ -286,34 +325,45 @@ class LabelChecker(QWidget):
 
     # ---------------- 快捷键 ----------------
     def keyPressEvent(self, event):
+
         if event.key() in (Qt.Key_Delete, Qt.Key_S):
-            # 删除选中的图片和标注
+
             to_delete = [p for p, l in self.selected_labels.items() if l.selected]
+
             for p in to_delete:
+
                 if os.path.exists(p):
                     os.remove(p)
+
                 lp = os.path.join(
                     self.label_dir,
                     os.path.splitext(os.path.basename(p))[0] + ".txt"
                 )
+
                 if os.path.exists(lp):
                     os.remove(lp)
 
-            # 同步更新文件列表，保留当前页
-            self.files = [f for f in self.files if os.path.join(self.image_dir, f) not in to_delete]
+            self.files = [f for f in self.files
+                          if os.path.join(self.image_dir, f) not in to_delete]
+
             self.update_file_list(keep_index=True)
 
         elif event.key() == Qt.Key_A:
             self.prev_page()
+
         elif event.key() == Qt.Key_D:
             self.next_page()
+
         else:
             super().keyPressEvent(event)
 
 
 # ================= main =================
 if __name__ == "__main__":
+
     app = QApplication(sys.argv)
+
     win = LabelChecker()
     win.show()
+
     sys.exit(app.exec_())
