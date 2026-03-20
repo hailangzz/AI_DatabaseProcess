@@ -46,7 +46,7 @@ def clean_yolo_dataset(image_dir, label_dir, image_exts={".jpg", ".png", ".jpeg"
 
 
 if __name__ == "__main__":
-    image_dir = "/data/database/LiquadDatabase/spills.v2i.coco/train/imgs"
-    label_dir = "/data/database/LiquadDatabase/spills.v2i.coco/train/labels"
+    image_dir = "/data/database/AITotal_ProjectDatabase/LiquadDetectProgrem/images/train"
+    label_dir = "/data/database/AITotal_ProjectDatabase/LiquadDetectProgrem/labels/train"
 
     clean_yolo_dataset(image_dir, label_dir)

@@ -4,23 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="线材样本仿真生成">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="整理代码">
+      <change afterPath="$PROJECT_DIR$/scripts/DetectJob/Liquad/LiquadPublicDetectProgram/1.read_coco_label_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/DetectJob/Liquad/LiquadPublicDetectProgram/2.check_single_image_lable.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/DetectJob/Liquad/LiquadPublicDetectProgram/3.copy_train_database_to_project_databse.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/DetectJob/Liquad/LiquadPublicDetectProgram/4.read_all_database_labels_classid_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/DetectJob/Liquad/LiquadPublicDetectProgram/5.create_yolo_train_database.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/DetectJob/Liquad/LiquadPublicDetectProgram/6.deal_database_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/1.read_coco_label_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/1.read_coco_label_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/3.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/3.copy_train_database_to_project_databse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/4.database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/handRealObjectDetectProgram/4.database_augment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseAnalysis/RandomDisplayDetectAndMarkSample.py" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseAnalysis/RandomDisplayDetectAndMarkSample.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/1.read_coco_label_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/1.read_coco_label_info.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.1.replace_yolo_class_id.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.1.replace_yolo_class_id.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/resize_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/获取图片数量.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/获取图片数量.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/3.扣取线材区域并保存.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/3.扣取线材区域并保存.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/render_floor_images.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/my_command" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/my_command" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/样本_标注数据集整理/统一图像_标注文件_删除未对齐图片或标注.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/统一图像_标注文件_删除未对齐图片或标注.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/delete_unuseful_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/delete_unuseful_images.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +152,7 @@
     "Python.检查图像增强时空洞填充的有效性.executor": "Run",
     "Python.检测标注文件是否有空洞.executor": "Run",
     "Python.筛选mark目标图像.executor": "Run",
+    "Python.统一图像_标注文件_删除未对齐图片或标注.executor": "Run",
     "Python.获取图片数量.executor": "Run",
     "Python.获取特定文件名文件数量.executor": "Run",
     "Python.训练集清洗.executor": "Run",
@@ -166,43 +165,21 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/实用小命令/images" />
+      <recent name="$PROJECT_DIR$/scripts/DetectJob/wire/WirePublicDetectProgram" />
       <recent name="$PROJECT_DIR$/实用小命令/resized_images" />
       <recent name="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法" />
       <recent name="$PROJECT_DIR$/实用小命令" />
-      <recent name="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/DetectJob/Liquad" />
+      <recent name="$PROJECT_DIR$/scripts/DetectJob/wire" />
+      <recent name="$PROJECT_DIR$/scripts/DetectJob/hand" />
+      <recent name="$PROJECT_DIR$/scripts/DetectJob/carpet" />
       <recent name="$PROJECT_DIR$/实用小命令/resized_images" />
-      <recent name="$PROJECT_DIR$/scripts/DetectJob" />
-      <recent name="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/sam_anota" />
-      <recent name="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集" />
-      <recent name="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面区域mask处理" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.6.1.replace_yolo_class_id">
-    <configuration name="获取图片数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/获取图片数量.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="3.segment_database_augment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.1.read_coco_label_info">
+    <configuration name="1.read_coco_label_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -215,7 +192,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/1.read_coco_label_info.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -224,7 +201,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="4.copy_train_database_to_project_databse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="4.read_all_database_labels_classid_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -233,33 +210,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/DetectJob/Liquad/LiquadPublicDetectProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="6.1.replace_yolo_class_id" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/6.1.replace_yolo_class_id.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/DetectJob/Liquad/LiquadPublicDetectProgram/4.read_all_database_labels_classid_info.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -290,13 +245,57 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="health_timer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/身体健康小程序" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/身体健康小程序/health_timer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="resize_images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/resized_images" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.6.1.replace_yolo_class_id" />
-        <item itemvalue="Python.获取图片数量" />
-        <item itemvalue="Python.4.copy_train_database_to_project_databse" />
+        <item itemvalue="Python.1.read_coco_label_info" />
         <item itemvalue="Python.RandomDisplayDetectAndMarkSample" />
-        <item itemvalue="Python.3.segment_database_augment" />
+        <item itemvalue="Python.resize_images" />
+        <item itemvalue="Python.health_timer" />
+        <item itemvalue="Python.4.read_all_database_labels_classid_info" />
       </list>
     </recent_temporary>
   </component>
@@ -500,8 +499,34 @@
       <option name="project" value="LOCAL" />
       <updated>1773147267440</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="整理代码">
+      <option name="closed" value="true" />
+      <created>1773651039346</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1773651039346</updated>
+    </task>
+    <task id="LOCAL-00025" summary="整理代码">
+      <option name="closed" value="true" />
+      <created>1773712706301</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1773712706301</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="RECENT_FILTERS">
@@ -564,7 +589,8 @@
     <MESSAGE value="模型测试返回的误检、漏检数据筛选应用" />
     <MESSAGE value="模型测试返回的误检、漏检数据筛选应用-增加进度条显示" />
     <MESSAGE value="线材样本仿真生成" />
-    <option name="LAST_COMMIT_MESSAGE" value="线材样本仿真生成" />
+    <MESSAGE value="整理代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="整理代码" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

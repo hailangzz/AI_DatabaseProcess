@@ -136,7 +136,7 @@ def convert_coco_to_yolov8(
 
 
 if __name__ == "__main__":
-    origin_database = "/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_3D_database_suythetic"
+    origin_database = "/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch2"
     # origin_database = "/home/chenkejing/database/WireDatabase/Cable.v1i/train"
     convert_coco_to_yolov8(
         annotations_json=os.path.join(origin_database, "annotations.json"),

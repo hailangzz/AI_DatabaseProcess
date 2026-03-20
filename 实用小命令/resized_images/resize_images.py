@@ -16,7 +16,7 @@ DEFAULT_IMG_DIR = "../images"
 DEFAULT_SAVE_DIR = "./resiz_images"
 
 DEFAULT_IMG_WIDTH = 640
-DEFAULT_IMG_HEIGHT = 480
+DEFAULT_IMG_HEIGHT = 640
 
 
 def resize_images(img_dir, save_dir, width, height):

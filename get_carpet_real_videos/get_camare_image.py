@@ -1,12 +1,19 @@
+"""
+# 检查摄像头占用
+    lsof /dev/video0
+# 关停占用进程
+    kill -9 Pid
+"""
+
 import cv2
 import time
 import os
 
 # ---------- 配置 ----------
 camera_index = 0                 # 摄像头索引，一般主摄像头为 0
-save_dir = "./camera_images"     # 保存路径
+save_dir = "./camera_images_batch3"     # 保存路径
 duration = 10 * 60                # 持续时间，2分钟，单位秒
-interval = 0.03                     # 每秒保存一张图像
+interval = 0.1                     # 每秒保存一张图像
 total_frames = duration // interval  # 总帧数，2分钟内每秒保存一帧
 
 # 创建保存目录
@@ -30,7 +37,7 @@ while True:
         break
 
     # 保存图片
-    filename = os.path.join(save_dir, f"image_batch2_{frame_count + 1}.jpg")
+    filename = os.path.join(save_dir, f"real_wire_image_batch3_{frame_count + 1}.jpg")
     cv2.imwrite(filename, frame)
     print(f"Saved image: {filename}")
 

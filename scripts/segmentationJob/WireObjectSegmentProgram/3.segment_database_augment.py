@@ -274,10 +274,10 @@ class YOLOSegAugmentor:
 # ------------------------------------------------
 if __name__ == "__main__":
     augmentor = YOLOSegAugmentor(
-        img_dir="/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_3D_database_suythetic/images",
-        label_dir="/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_3D_database_suythetic/yolov8_labels/seg",
-        output_dir="/home/chenkejing/database/WireDatabase/EMdoorWireDatabase/segment_database_augmentor",
-        batch_name="segment_3D_seg_batch1",
+        img_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch4/images",
+        label_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch4/yolov8_labels/seg",
+        output_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/segment_database_augmentor",
+        batch_name="segment_real_wire_seg_batch4",
         augment_sample_number=3000
     )
 

@@ -136,14 +136,14 @@ class LabelChecker(QWidget):
 
     # ---------------- 选择文件夹 ----------------
     def browse_image_dir(self):
-        path = QFileDialog.getExistingDirectory(self, "选择图片文件夹", "/home/chenkejing/database")
+        path = QFileDialog.getExistingDirectory(self, "选择图片文件夹", "/home/chenkejing/database/WireDatabase/TotalRealWireDatabase")
         if path:
             self.image_dir = path
             self.image_path_edit.setText(path)
             self.update_file_list()
 
     def browse_label_dir(self):
-        path = QFileDialog.getExistingDirectory(self, "选择图片文件夹", "/home/chenkejing/database")
+        path = QFileDialog.getExistingDirectory(self, "选择图片文件夹", "/home/chenkejing/database/WireDatabase/TotalRealWireDatabase")
         if path:
             self.label_dir = path
             self.label_path_edit.setText(path)

@@ -1,11 +1,11 @@
 import os
 
 # ====== 配置路径 ======
-source_dir = "/home/chenkejing/database/WireDatabase/Wildlife Monitoring and Poaching Detection.v8-final-version/train/imgs"   # 目录A：读取图片名称
-delete_images_target_dir = "/home/chenkejing/database/WireDatabase/TotalPublicWireDatabase/images"   # 目录B：删除同名图片
+source_dir = "/data/database/LiquadDatabase/Oil Leak Detection.v1i.coco/train/labels"   # 目录A：读取图片名称
+delete_images_target_dir = "/data/database/AITotal_ProjectDatabase/LiquadDetectProgrem/labels/train"   # 目录B：删除同名图片
 
 # 支持的图片格式
-IMG_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tiff"}
+IMG_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tiff", ".txt"}
 
 
 def get_image_names(directory):
