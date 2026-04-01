@@ -11,7 +11,7 @@ import os
 
 # ---------- 配置 ----------
 camera_index = 0                 # 摄像头索引，一般主摄像头为 0
-save_dir = "./camera_images_batch3"     # 保存路径
+save_dir = "./camera_images_batch1"     # 保存路径
 duration = 10 * 60                # 持续时间，2分钟，单位秒
 interval = 0.1                     # 每秒保存一张图像
 total_frames = duration // interval  # 总帧数，2分钟内每秒保存一帧
@@ -37,7 +37,7 @@ while True:
         break
 
     # 保存图片
-    filename = os.path.join(save_dir, f"real_wire_image_batch3_{frame_count + 1}.jpg")
+    filename = os.path.join(save_dir, f"real_liquid_image_batch1_{frame_count + 1}.jpg")
     cv2.imwrite(filename, frame)
     print(f"Saved image: {filename}")
 

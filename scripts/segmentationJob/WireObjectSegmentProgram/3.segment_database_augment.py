@@ -58,7 +58,7 @@ class YOLOSegAugmentor:
             cutout_prob=0.6,
             hsv_prob=0.1,
             hsv_gain=(0.015, 0.3, 0.25),
-            degrees=180.0,
+            degrees=90.0,
             translate=0.1,
             scale=0.1,
             shear=2.0,
@@ -280,7 +280,7 @@ class YOLOSegAugmentor:
         - 保持目标尽量不裁剪
         - 自动过滤越界 polygon
         """
-        if random.random() > 0.6:  # ⭐ 控制旋转概率（建议不要太高）
+        if random.random() > 0.35:  # ⭐ 控制旋转概率（建议不要太高）
             return img, objects
 
         h, w = img.shape[:2]
@@ -396,10 +396,10 @@ class YOLOSegAugmentor:
 # ------------------------------------------------
 if __name__ == "__main__":
     augmentor = YOLOSegAugmentor(
-        img_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch2/images",
-        label_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch2/yolov8_labels/seg",
-        output_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/segment_database_augmentor",
-        batch_name="segment_real_wire_seg_batch2",
+        img_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch1/images",
+        label_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch1/yolov8_labels/seg",
+        output_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/segment_database_augmentor_batch_1_3",
+        batch_name="segment_real_wire_seg_batch1",
         augment_ratio=3.0
     )
 

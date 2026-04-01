@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增液体检测，数据处理、增强脚本">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="1、新增缩放、旋转数据增强变换&#10;2、新增xanylabeling，自动追踪标注json文件，转为yolov8_seg、yolov8_det标签文件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/2.1.copy_database_to_augmentor.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/2.1.copy_database_to_augmentor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +131,7 @@
     "Python.roboflow_download_e_waste_train_database.executor": "Run",
     "Python.sam_anota_1.executor": "Run",
     "Python.save_resize_image.executor": "Run",
+    "Python.split_train_test_database.executor": "Run",
     "Python.test.executor": "Run",
     "Python.yolov8_face_detect.executor": "Run",
     "Python.yolov8_hand_detect.executor": "Run",
@@ -167,7 +172,29 @@
       <recent name="$PROJECT_DIR$/实用小命令/resized_images" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.RandomDisplayDetectAndMarkSample">
+  <component name="RunManager" selected="Python.AnnotationBoxAnalysis_detect_and_mark">
+    <configuration name="获取图片数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/获取图片数量.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="1.creat_yolo_label_from_labelme_json" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -182,50 +209,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="1.read_coco_label_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/1.read_coco_label_info.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="3.segment_database_augment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -256,7 +239,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="RandomDisplayDetectAndMarkSample" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="resize_images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -265,11 +248,33 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/resized_images" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/RandomDisplayDetectAndMarkSample.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="split_train_test_database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/样本_标注数据集整理" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/样本_标注数据集整理/split_train_test_database.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -280,11 +285,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.RandomDisplayDetectAndMarkSample" />
         <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
         <item itemvalue="Python.1.creat_yolo_label_from_labelme_json" />
-        <item itemvalue="Python.3.segment_database_augment" />
-        <item itemvalue="Python.1.read_coco_label_info" />
+        <item itemvalue="Python.resize_images" />
+        <item itemvalue="Python.split_train_test_database" />
+        <item itemvalue="Python.获取图片数量" />
       </list>
     </recent_temporary>
   </component>
@@ -512,7 +517,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773997500324</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="1、新增缩放、旋转数据增强变换&#10;2、新增xanylabeling，自动追踪标注json文件，转为yolov8_seg、yolov8_det标签文件">
+      <option name="closed" value="true" />
+      <created>1774490604588</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1774490604588</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -588,7 +601,8 @@
     <MESSAGE value="线材样本仿真生成" />
     <MESSAGE value="整理代码" />
     <MESSAGE value="新增液体检测，数据处理、增强脚本" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增液体检测，数据处理、增强脚本" />
+    <MESSAGE value="1、新增缩放、旋转数据增强变换&#10;2、新增xanylabeling，自动追踪标注json文件，转为yolov8_seg、yolov8_det标签文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、新增缩放、旋转数据增强变换&#10;2、新增xanylabeling，自动追踪标注json文件，转为yolov8_seg、yolov8_det标签文件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
