@@ -8,11 +8,11 @@ if __name__ == '__main__':
     # src_img_dir = part_database_origin_path+"/images/train"
     # src_label_dir = part_database_origin_path+"/labels/train"
 
-    part_database_origin_path = r"/home/chenkejing/database/Negativew_Example_Dataset/carpet/Negative_carpet_database/"
+    part_database_origin_path = r"/home/chenkejing/database/No_Target_Example_Dataset/No_Target_database/NO_target_camera_images_0407_batch1_output_empty_only/"
     src_img_dir = part_database_origin_path + "/images"
     src_label_dir = part_database_origin_path + "/labels"
 
-    dst_img_dir = "/home/chenkejing/database/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
-    dst_label_dir = "/home/chenkejing/database/AITotal_SegmentDatabase/carpetDatabaseSegment/labels/train"
+    dst_img_dir = "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
+    dst_label_dir = "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/labels/train"
 
     util.copy_yolo_dataset(src_img_dir, src_label_dir, dst_img_dir, dst_label_dir)

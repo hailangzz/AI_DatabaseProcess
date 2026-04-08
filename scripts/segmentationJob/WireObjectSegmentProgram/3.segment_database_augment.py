@@ -57,7 +57,8 @@ class YOLOSegAugmentor:
             mosaic_prob=0.2,
             cutout_prob=0.6,
             hsv_prob=0.1,
-            hsv_gain=(0.015, 0.3, 0.25),
+            # hsv_gain=(0.015, 0.3, 0.25),
+            hsv_gain=(0.015, 0.4, 0.6),  # 推荐的色彩明暗变化
             degrees=90.0,
             translate=0.1,
             scale=0.1,
@@ -396,10 +397,10 @@ class YOLOSegAugmentor:
 # ------------------------------------------------
 if __name__ == "__main__":
     augmentor = YOLOSegAugmentor(
-        img_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch1/images",
-        label_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_batch1/yolov8_labels/seg",
-        output_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/segment_database_augmentor_batch_1_3",
-        batch_name="segment_real_wire_seg_batch1",
+        img_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_0403_batch1/images",
+        label_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_0403_batch1/yolov8_labels/seg",
+        output_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/segment_database_augmentor_0403_batch_1",
+        batch_name="segment_real_wire_seg_0403_batch1",
         augment_ratio=3.0
     )
 

@@ -91,13 +91,13 @@ def main():
 
 
 # ====== 配置 ======
-INPUT_DIR = "/home/chenkejing/database/LiquidDatabase/TotalRealLiquidDatabase/camera_images_batch1/images"   # 你的json目录
-OUTPUT_DIR = "/home/chenkejing/database/LiquidDatabase/TotalRealLiquidDatabase/camera_images_batch1"  # 输出目录
+INPUT_DIR = "/home/chenkejing/database/No_Target_Example_Dataset/No_Target_database/NO_target_camera_images_0407_batch1/images"   # 你的json目录
+OUTPUT_DIR = "/home/chenkejing/database/No_Target_Example_Dataset/No_Target_database/NO_target_camera_images_0407_batch1"  # 输出目录
 
 # 类别映射（根据你的实际类别修改）
 CLASS_MAP = {
-    "liquid": 0
-}
+    "liquid": 0,
+    "carpet":1}
 
 if __name__ == "__main__":
     main()

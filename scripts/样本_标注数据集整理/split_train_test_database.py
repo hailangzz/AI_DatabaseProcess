@@ -78,8 +78,8 @@ def split_yolo_dataset(
 
 if __name__ == "__main__":
     split_yolo_dataset(
-        image_dir="/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment/images/train",
-        label_dir="/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train",
-        output_dir="/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment",
+        image_dir="/home/chenkejing/database/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train",
+        label_dir="/home/chenkejing/database/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train",
+        output_dir="/home/chenkejing/database/AITotal_SegmentDatabase/liquidDatabaseSegment",
         test_ratio=0.05  # 20%作为测试集
     )
