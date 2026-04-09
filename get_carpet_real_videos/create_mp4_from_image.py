@@ -1,42 +1,71 @@
 import cv2
 import os
+import re
+
+
+def extract_number(filename):
+    match = re.search(r'\d+', filename)
+    return int(match.group()) if match else -1
+
 
 # ---------- 配置 ----------
-image_folder = '/home/chenkejing/PycharmProjects/ultralytics/results/carpet'  # 图像所在文件夹
-# output_video = 'output_video.mp4'  # 输出的 MP4 视频文件名
-output_video = os.path.join(image_folder,'carpet_output_video.mp4')
-frame_rate = 5  # 帧率，单位为帧/秒
+image_folder = '/home/chenkejing/database/rosbag_info/main_carmera_images'
 
-# 获取图像文件列表并按名称排序
-image_files = [f for f in os.listdir(image_folder) if f.endswith('.jpg') or f.endswith('.png')]
-image_files.sort(key=lambda x: int(x.split('_')[1].split('.')[0]))  # 根据文件名中的数字部分排序
+# 输出 AVI（MJPG 推荐用 avi 容器）
+output_video = os.path.join(image_folder, 'MainCameraVideo.avi')
 
-# 如果没有找到图像文件，打印提示并退出
+frame_rate = 5  # 帧率
+
+
+# ---------- 获取并排序图像 ----------
+image_files = [
+    f for f in os.listdir(image_folder)
+    if f.lower().endswith(('.jpg', '.png'))
+]
+
+image_files.sort(key=extract_number)
+
 if not image_files:
     print("No images found in the folder.")
     exit()
 
-# 读取第一张图片，获取图像的尺寸（宽度和高度）
+
+# ---------- 读取第一帧 ----------
 first_image_path = os.path.join(image_folder, image_files[0])
 first_image = cv2.imread(first_image_path)
-height, width, _ = first_image.shape
 
-# 创建视频写入器
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # 使用 mp4 编码格式
+if first_image is None:
+    raise ValueError(f"Failed to read image: {first_image_path}")
+
+height, width = first_image.shape[:2]
+
+
+# ---------- 创建 VideoWriter（MJPG 高质量） ----------
+fourcc = cv2.VideoWriter_fourcc(*'MJPG')
 video_writer = cv2.VideoWriter(output_video, fourcc, frame_rate, (width, height))
 
-# 读取并写入每一张图像
+if not video_writer.isOpened():
+    raise RuntimeError("Failed to open VideoWriter. Check codec support.")
+
+
+# ---------- 写入视频 ----------
 for image_file in image_files:
     image_path = os.path.join(image_folder, image_file)
     image = cv2.imread(image_path)
 
-    # 确保图像的尺寸和第一张图片一致
-    image = cv2.resize(image, (width, height))
+    if image is None:
+        print(f"[WARNING] Skip unreadable image: {image_file}")
+        continue
 
-    # 写入视频
+    # 只有尺寸不一致才 resize（避免不必要降质）
+    if image.shape[:2] != (height, width):
+        image = cv2.resize(image, (width, height))
+
     video_writer.write(image)
     print(f"Adding image {image_file} to video.")
 
-# 释放视频写入器
+
+# ---------- 释放 ----------
 video_writer.release()
-print(f"Video saved as {output_video}")
+
+print(f"\n✅ Video saved as: {output_video}")
