@@ -16,7 +16,7 @@ class SaveDetectImages:
         self.latest_image = None
 
         # 保存路径
-        self.save_dir = "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/模型优化_实验环境采集rostopic误检样本/images"
+        self.save_dir = "/home/chenkejing/database/model_optimization_of_false_positive_samples/carpet_false_detect_images/date_0414/images"
         if not os.path.exists(self.save_dir):
             os.makedirs(self.save_dir)
 
@@ -53,7 +53,7 @@ class SaveDetectImages:
 
     def trigger_callback(self, msg):
         # 限制触发频率（1秒最多一张）
-        if time.time() - self.last_trigger_time < 1.0:
+        if time.time() - self.last_trigger_time < 0.05:
             return
         self.last_trigger_time = time.time()
 

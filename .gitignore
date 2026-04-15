@@ -6,3 +6,5 @@ Ultralytics_sam_auto_object_label/sam_anota/video_annotations/
 Ultralytics_sam_auto_object_label/video_annotations/
 实用小命令/yolov8人脸检测/yolov8n-face.pt
 实用小命令/将连续图像合并为一段视频/hand_detect.mp4
+/模型优化_实验环境采集rostopic误检样本/CarpetSegmentProject/
+/模型优化_实验环境采集rostopic误检样本/images/

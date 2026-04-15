@@ -15,8 +15,8 @@ import argparse
 DEFAULT_IMG_DIR = "../images"
 DEFAULT_SAVE_DIR = "./resiz_images"
 
-DEFAULT_IMG_WIDTH = 640
-DEFAULT_IMG_HEIGHT = 640
+DEFAULT_IMG_WIDTH = 1280
+DEFAULT_IMG_HEIGHT = 720
 
 
 def resize_images(img_dir, save_dir, width, height):
