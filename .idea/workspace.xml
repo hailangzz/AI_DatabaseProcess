@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增存取rostopic，误检样本存储代码">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常优化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CreateQuantDatabase/create_quant_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateQuantDatabase/create_quant_database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/绘制椭圆区域/ellipse_demo.png" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/绘制椭圆区域/ellipse_demo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/绘制椭圆区域/plot_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/绘制椭圆区域/plot_images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本/save_Rostopics_detect_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本/save_Rostopics_detect_images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/2.1.copy_database_to_augmentor.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/2.1.copy_database_to_augmentor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/3.segment_database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +70,7 @@
     "Python.3.segment_database_augment (1).executor": "Run",
     "Python.3.segment_database_augment-ok.executor": "Run",
     "Python.3.segment_database_augment.executor": "Run",
+    "Python.3.segment_hard_sample_database_augment.executor": "Run",
     "Python.3.扣取地板区域最大内接矩形.executor": "Run",
     "Python.3.扣取地面区域并保存.executor": "Run",
     "Python.3.扣取线材区域并保存.executor": "Run",
@@ -93,6 +93,7 @@
     "Python.AnnotationBoxAnalysis_detect_and_mark.executor": "Run",
     "Python.AnnotationBoxAnalysis_only_detect.executor": "Run",
     "Python.ChechTrainingSampleIsValid.executor": "Run",
+    "Python.CopyImageToDestFilde.executor": "Run",
     "Python.CreateCarpetNegativeSample.executor": "Run",
     "Python.CreateHandNegativeSample.executor": "Run",
     "Python.MoveImageToDestFilde.executor": "Run",
@@ -160,17 +161,17 @@
     "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/绘制椭圆区域/origin_hand_images_test",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/scripts/segmentationJob/carpetRealObjectSegmentProgram",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram" />
+      <recent name="$PROJECT_DIR$/DatabaseAnalysis" />
       <recent name="$PROJECT_DIR$/实用小命令/绘制椭圆区域/origin_hand_images_test" />
       <recent name="$PROJECT_DIR$/实用小命令" />
       <recent name="$PROJECT_DIR$/scripts/segmentationJob" />
-      <recent name="$PROJECT_DIR$/实用小命令/images" />
-      <recent name="$PROJECT_DIR$/scripts/DetectJob/wire/WirePublicDetectProgram" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本" />
@@ -180,8 +181,8 @@
       <recent name="$PROJECT_DIR$/scripts/DetectJob/carpet" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.随机拷贝指定数量的图像到指定目录">
-    <configuration name="随机拷贝指定数量的图像到指定目录" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.2.1.copy_database_to_augmentor">
+    <configuration name="2.1.copy_database_to_augmentor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -190,11 +191,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/2.1.copy_database_to_augmentor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -203,7 +204,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="create_mp4_vidoe_from_images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="3.segment_hard_sample_database_augment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -212,11 +213,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/将连续图像合并为一段视频" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/将连续图像合并为一段视频/create_mp4_vidoe_from_images.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/3.segment_hard_sample_database_augment.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -225,7 +226,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="create_quant_database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="4.copy_train_database_to_project_databse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -234,11 +235,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CreateQuantDatabase" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CreateQuantDatabase/create_quant_database.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -247,7 +248,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="plot_images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="CopyImageToDestFilde" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -256,11 +257,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/绘制椭圆区域" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/绘制椭圆区域/plot_images.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/CopyImageToDestFilde.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -269,7 +270,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="save_Rostopics_detect_images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="MoveImageToDestFilde" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -278,11 +279,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本/save_Rostopics_detect_images.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/MoveImageToDestFilde.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -293,11 +294,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.随机拷贝指定数量的图像到指定目录" />
-        <item itemvalue="Python.save_Rostopics_detect_images" />
-        <item itemvalue="Python.plot_images" />
-        <item itemvalue="Python.create_mp4_vidoe_from_images" />
-        <item itemvalue="Python.create_quant_database" />
+        <item itemvalue="Python.2.1.copy_database_to_augmentor" />
+        <item itemvalue="Python.3.segment_hard_sample_database_augment" />
+        <item itemvalue="Python.CopyImageToDestFilde" />
+        <item itemvalue="Python.MoveImageToDestFilde" />
+        <item itemvalue="Python.4.copy_train_database_to_project_databse" />
       </list>
     </recent_temporary>
   </component>
@@ -605,7 +606,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776071093179</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="日常优化">
+      <option name="closed" value="true" />
+      <created>1776238606708</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1776238606708</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -662,7 +671,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="git rm -r --cached 移除不必要的大文件跟踪" />
     <MESSAGE value="创建针对混杂样本集的，误检负样本集。" />
     <MESSAGE value="扣取分割标注正样本集，贴合至误检负样本图像，生成新的标注文件" />
     <MESSAGE value="身体健康小程序，提醒活动、喝水" />
@@ -687,7 +695,8 @@
     <MESSAGE value="高质量存储图片" />
     <MESSAGE value="# 说明：随机拷贝指定数量的图像到指定目录。&#10;# 作用：在生成量化数据集时，一般用1000张样本。随机从真实数据集中提取样本生成量化数据集" />
     <MESSAGE value="新增存取rostopic，误检样本存储代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增存取rostopic，误检样本存储代码" />
+    <MESSAGE value="日常优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="日常优化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

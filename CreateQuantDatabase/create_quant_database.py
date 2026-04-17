@@ -15,7 +15,7 @@ def save_image_paths(image_dir, output_txt):
 
 
 if __name__ == "__main__":
-    image_dir = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/carpet_real_image"      # ← 修改成你的图片目录
-    output_txt = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/carpet_real_image/carpet_quant.txt"   # ← 输出的txt文件名
+    image_dir = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/liquad_real_image"      # ← 修改成你的图片目录
+    output_txt = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/liquad_real_image/liquid_quant.txt"   # ← 输出的txt文件名
 
     save_image_paths(image_dir, output_txt)

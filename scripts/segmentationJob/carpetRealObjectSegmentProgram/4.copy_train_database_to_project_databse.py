@@ -8,9 +8,13 @@ if __name__ == '__main__':
     # src_img_dir = part_database_origin_path+"/images/train"
     # src_label_dir = part_database_origin_path+"/labels/train"
 
-    part_database_origin_path = r"/home/chenkejing/database/No_Target_Example_Dataset/No_Target_database/NO_target_camera_images_0407_batch1_output_empty_only/"
+    # part_database_origin_path = r"/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416/segment_database_augmentor_0416_batch_1/"
+    # src_img_dir = part_database_origin_path + "/images"
+    # src_label_dir = part_database_origin_path + "/labels"
+
+    part_database_origin_path = r"/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416/"
     src_img_dir = part_database_origin_path + "/images"
-    src_label_dir = part_database_origin_path + "/labels"
+    src_label_dir = part_database_origin_path + "/yolov8_labels/seg"
 
     dst_img_dir = "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
     dst_label_dir = "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/labels/train"

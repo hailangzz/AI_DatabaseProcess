@@ -7,6 +7,14 @@
     - 完全兼容 YOLOv8 官方 segmentation label
     - polygon 级别增强（非 bbox）
     - Cutout 安全版本 (raster mask)
+
+hard sample 难例增强操作
+控制难例比例（关键指标），比“增强多少倍”更重要的是👇
+
+    难例占训练集比例
+
+    推荐：
+        10% ~ 30%（最佳区间）
 """
 from tqdm import tqdm
 import cv2
@@ -397,11 +405,11 @@ class YOLOSegAugmentor:
 # ------------------------------------------------
 if __name__ == "__main__":
     augmentor = YOLOSegAugmentor(
-        img_dir="/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416/images",
-        label_dir="/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416/yolov8_labels/seg",
-        output_dir="/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416/segment_database_augmentor_0416_batch_1",
-        batch_name="segment_real_carpet_seg_0416_batch1",
-        augment_ratio=3.0
+        img_dir="/home/chenkejing/database/hard_labels_sample_database/carpet_hard_sample/date0416/images",
+        label_dir="/home/chenkejing/database/hard_labels_sample_database/carpet_hard_sample/date0416/labels",
+        output_dir="/home/chenkejing/database/hard_labels_sample_database/carpet_hard_sample/date0416/segment_database_augmentor_hand_sample_0416_batch_1",
+        batch_name="segment_real_carpet_seg_hard_sample_0416_batch1",
+        augment_ratio=7.0
     )
 
     total = augmentor.augment_sample_number

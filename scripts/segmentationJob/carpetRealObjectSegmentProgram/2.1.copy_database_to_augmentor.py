@@ -4,13 +4,14 @@ import utils.util as util
 
 if __name__ == '__main__':
 
-    part_database_origin_path = r"/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/camera_images_batch3/"
+    part_database_origin_path = r"/home/chenkejing/database/hard_labels_sample_database/carpet_hard_sample/date0416/segment_database_augmentor_hand_sample_0416_batch_1/"
     src_img_dir = part_database_origin_path+"/images"
 
 
-    src_label_dir = part_database_origin_path+"/yolov8_labels/seg"
+    # src_label_dir = part_database_origin_path+"/yolov8_labels/seg"
+    src_label_dir = part_database_origin_path + "/labels"
 
-    dst_img_dir = "/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/origin_real_carpet_database/images"
-    dst_label_dir = "/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/origin_real_carpet_database/labels"
+    dst_img_dir = "/data/database/AITotal_SegmentDatabase/finetune_random_sample_datebase/random_carpet_database/images/train"
+    dst_label_dir = "/data/database/AITotal_SegmentDatabase/finetune_random_sample_datebase/random_carpet_database/labels/train"
 
     util.copy_yolo_dataset(src_img_dir, src_label_dir, dst_img_dir, dst_label_dir)
