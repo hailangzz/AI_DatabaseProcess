@@ -2,12 +2,12 @@ import os
 import shutil
 
 # ====== 配置路径 ======
-source_images_dir = r"/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment_old/images/train"
-target_images_dir = r"/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+source_images_dir = r"/home/chenkejing/database/object_camera_coordinates_image/hand_detect/date0420/images"
+target_images_dir = r"/data/database/AITotal_ProjectDatabase/finetune_random_sample_datebase/random_hand_database/images/train"
 
-# ====== 配置路径 ======
-source_labels_dir = r"/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment_old/labels/train"
-target_labels_dir = r"/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
+# # ====== 配置路径 ======
+source_labels_dir = r"/home/chenkejing/database/object_camera_coordinates_image/hand_detect/date0420/yolov8_labels/bbox"
+target_labels_dir = r"/data/database/AITotal_ProjectDatabase/finetune_random_sample_datebase/random_hand_database/labels/train"
 
 # 支持的图片格式
 image_exts = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp", ".txt"}
@@ -44,6 +44,6 @@ def copy_images(src, dst):
 
 
 if __name__ == "__main__":
-    # copy_images(source_images_dir, target_images_dir)
+    copy_images(source_images_dir, target_images_dir)
     copy_images(source_labels_dir, target_labels_dir)
     print("✅ 图片复制完成！")

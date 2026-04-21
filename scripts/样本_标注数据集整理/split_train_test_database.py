@@ -77,9 +77,13 @@ def split_yolo_dataset(
 
 
 if __name__ == "__main__":
+    origin_dir = "/data/database/AITotal_ProjectDatabase/finetune_random_sample_datebase/random_hand_database"
+    image_dir = os.path.join(origin_dir, "images/train")
+    label_dir = os.path.join(origin_dir, "labels/train")
+
     split_yolo_dataset(
-        image_dir="/home/chenkejing/database/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train",
-        label_dir="/home/chenkejing/database/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train",
-        output_dir="/home/chenkejing/database/AITotal_SegmentDatabase/liquidDatabaseSegment",
-        test_ratio=0.05  # 20%作为测试集
+        image_dir=image_dir,
+        label_dir=label_dir,
+        output_dir=origin_dir,
+        test_ratio=0.1 # 10%作为测试集
     )

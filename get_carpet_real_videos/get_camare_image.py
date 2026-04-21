@@ -11,9 +11,9 @@ import os
 
 # ---------- 配置 ----------
 camera_index = 0                 # 摄像头索引，一般主摄像头为 0
-save_dir = "./camera_images_0403_batch1"     # 保存路径
-duration = 10 * 60                # 持续时间，2分钟，单位秒
-interval = 0.1                     # 每秒保存一张图像
+save_dir = "./public_real_camera_images_0417_batch1"     # 保存路径
+duration = 15 * 60                # 持续时间，2分钟，单位秒
+interval = 0.1                     # 每秒保存10张图像，100毫秒一张
 total_frames = duration // interval  # 总帧数，2分钟内每秒保存一帧
 
 # 创建保存目录

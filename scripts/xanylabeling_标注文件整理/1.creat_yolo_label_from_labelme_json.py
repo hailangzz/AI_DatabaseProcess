@@ -91,13 +91,13 @@ def main():
 
 
 # ====== 配置 ======
-INPUT_DIR = "/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416/images"   # 你的json目录
-OUTPUT_DIR = "/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416"  # 输出目录
+INPUT_DIR = "/home/chenkejing/database/object_camera_coordinates_image/hand_detect/date0420/images"   # 你的json目录
+OUTPUT_DIR = "/home/chenkejing/database/object_camera_coordinates_image/hand_detect/date0420"  # 输出目录
 
 # 类别映射（根据你的实际类别修改）
 CLASS_MAP = {
     # "liquid": 0,
-    "carpet":0}
+    "hand":0}
 
 if __name__ == "__main__":
     main()
