@@ -4,16 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增hard sample样本增强功能">
-      <change afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/2.delete_unuseful_samples_images.py" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常更新">
+      <change afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/批量修改数据集名称.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/deduplicate_images_by_prefix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CreateQuantDatabase/create_quant_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/CreateQuantDatabase/create_quant_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseAnalysis/MoveImageToDestFilde.py" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseAnalysis/MoveImageToDestFilde.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/2.1.copy_database_to_augmentor.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/2.1.copy_database_to_augmentor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/样本_标注数据集整理/split_train_test_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/split_train_test_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/2.delete_unuseful_samples_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/2.delete_unuseful_samples_images.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_file_to_des_direct_skip_repeat_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_file_to_des_direct_skip_repeat_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/delete_unuseful_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/delete_unuseful_images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/获取图片数量.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/获取图片数量.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_images_to_des_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_images_to_des_folder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +122,7 @@
     "Python.cut_videos_part.executor": "Run",
     "Python.database_augment.executor": "Run",
     "Python.deal_database_main.executor": "Run",
+    "Python.deduplicate_images_by_prefix.executor": "Run",
     "Python.delete_unuseful_images.executor": "Run",
     "Python.extract_mask_object_augment.executor": "Run",
     "Python.extract_target_class_image_database.executor": "Run",
@@ -152,6 +157,7 @@
     "Python.增强.executor": "Run",
     "Python.处理mask信息.executor": "Run",
     "Python.大模型标注文件整理.executor": "Run",
+    "Python.批量修改数据集名称.executor": "Run",
     "Python.抽取指定类别样本集_生成训练集.executor": "Run",
     "Python.检查图像增强时空洞填充的有效性 (1).executor": "Run",
     "Python.检查图像增强时空洞填充的有效性.executor": "Run",
@@ -164,17 +170,17 @@
     "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/scripts/segmentationJob/carpetRealObjectSegmentProgram",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/NPU_stress_test/lib",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/实用小命令/NPU_stress_test/lib" />
+      <recent name="$PROJECT_DIR$/实用小命令/NPU压力测试/test_models" />
+      <recent name="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹" />
       <recent name="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram" />
       <recent name="$PROJECT_DIR$/DatabaseAnalysis" />
-      <recent name="$PROJECT_DIR$/实用小命令/绘制椭圆区域/origin_hand_images_test" />
-      <recent name="$PROJECT_DIR$/实用小命令" />
-      <recent name="$PROJECT_DIR$/scripts/segmentationJob" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本" />
@@ -184,7 +190,51 @@
       <recent name="$PROJECT_DIR$/scripts/DetectJob/carpet" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.split_train_test_database">
+  <component name="RunManager" selected="Python.2.1.copy_database_to_augmentor">
+    <configuration name="1.creat_yolo_label_from_labelme_json" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="2.1.copy_database_to_augmentor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/LiquidObjectSegmentProgram" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/LiquidObjectSegmentProgram/2.1.copy_database_to_augmentor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="2.delete_unuseful_samples_images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -229,7 +279,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="copy_file_to_des_direct_skip_repeat_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="deduplicate_images_by_prefix" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -242,51 +292,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_file_to_des_direct_skip_repeat_file.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="从训练集中随机抽取指定数量样本集供finetune使用" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/样本_标注数据集整理" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="split_train_test_database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/样本_标注数据集整理" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/样本_标注数据集整理/split_train_test_database.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/deduplicate_images_by_prefix.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -297,11 +303,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.split_train_test_database" />
-        <item itemvalue="Python.2.delete_unuseful_samples_images" />
-        <item itemvalue="Python.从训练集中随机抽取指定数量样本集供finetune使用" />
-        <item itemvalue="Python.copy_file_to_des_direct_skip_repeat_file" />
+        <item itemvalue="Python.2.1.copy_database_to_augmentor" />
         <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
+        <item itemvalue="Python.2.delete_unuseful_samples_images" />
+        <item itemvalue="Python.1.creat_yolo_label_from_labelme_json" />
+        <item itemvalue="Python.deduplicate_images_by_prefix" />
       </list>
     </recent_temporary>
   </component>
@@ -625,7 +631,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776397235409</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="日常更新">
+      <option name="closed" value="true" />
+      <created>1776760605530</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1776760605530</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -682,7 +696,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="扣取分割标注正样本集，贴合至误检负样本图像，生成新的标注文件" />
     <MESSAGE value="身体健康小程序，提醒活动、喝水" />
     <MESSAGE value="提交一次代码" />
     <MESSAGE value="新增：线材分割项目" />
@@ -707,7 +720,8 @@
     <MESSAGE value="新增存取rostopic，误检样本存储代码" />
     <MESSAGE value="日常优化" />
     <MESSAGE value="新增hard sample样本增强功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增hard sample样本增强功能" />
+    <MESSAGE value="日常更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="日常更新" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

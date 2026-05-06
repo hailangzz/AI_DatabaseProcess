@@ -3,6 +3,7 @@ import os
 import cv2
 import numpy as np
 import shutil
+import re  # ✅ 新增
 
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QLineEdit,
@@ -14,6 +15,11 @@ from PyQt5.QtCore import Qt
 
 os.environ.pop("QT_QPA_PLATFORM_PLUGIN_PATH", None)
 os.environ.pop("QT_QPA_FONTDIR", None)
+
+# ---------------- 自然排序函数 ----------------
+def natural_key(s):
+    return [int(text) if text.isdigit() else text.lower()
+            for text in re.split('([0-9]+)', s)]
 
 # ---------------- 原图查看窗口 ----------------
 class ImageViewer(QDialog):
@@ -86,7 +92,6 @@ class LabelChecker(QWidget):
     def init_ui(self):
         layout = QVBoxLayout()
 
-        # 路径选择
         path_layout = QHBoxLayout()
         self.image_path_edit = QLineEdit()
         self.image_path_edit.setPlaceholderText("图片文件夹路径")
@@ -102,17 +107,14 @@ class LabelChecker(QWidget):
         path_layout.addWidget(browse_target_btn)
         layout.addLayout(path_layout)
 
-        # 图片尺寸滑动条 + 进度条
         slider_layout = QHBoxLayout()
 
-        # ---------- 进度条 ----------
         self.progress_bar = QProgressBar()
         self.progress_bar.setMinimum(0)
         self.progress_bar.setMaximum(100)
         self.progress_bar.setValue(0)
-        slider_layout.addWidget(self.progress_bar, 1)  # 占一半宽度
+        slider_layout.addWidget(self.progress_bar, 1)
 
-        # ---------- 图片尺寸滑动条 ----------
         slider_inner_layout = QHBoxLayout()
         slider_label = QLabel("图片尺寸")
         self.size_slider = QSlider(Qt.Horizontal)
@@ -122,15 +124,13 @@ class LabelChecker(QWidget):
         self.size_slider.valueChanged.connect(self.update_image_size)
         slider_inner_layout.addWidget(slider_label)
         slider_inner_layout.addWidget(self.size_slider)
-        slider_layout.addLayout(slider_inner_layout, 1)  # 占另一半宽度
+        slider_layout.addLayout(slider_inner_layout, 1)
 
         layout.addLayout(slider_layout)
 
-        # 图片网格
         self.grid_layout = QGridLayout()
         layout.addLayout(self.grid_layout)
 
-        # 翻页按钮
         btn_layout = QHBoxLayout()
         self.prev_btn = QPushButton("上一页 (A)")
         self.prev_btn.clicked.connect(self.prev_page)
@@ -142,7 +142,6 @@ class LabelChecker(QWidget):
 
         self.setLayout(layout)
 
-    # ---------------- 文件夹选择 ----------------
     def browse_image_dir(self):
         path = QFileDialog.getExistingDirectory(self, "选择图片文件夹", "/home/chenkejing/database")
         if path:
@@ -156,10 +155,13 @@ class LabelChecker(QWidget):
             self.target_dir = path
             self.target_path_edit.setText(path)
 
-    # ---------------- 更新文件列表 ----------------
+    # ---------------- 修改点在这里 ----------------
     def update_file_list(self, keep_index=True):
         if self.image_dir:
-            self.files = [f for f in os.listdir(self.image_dir) if f.lower().endswith(('.jpg', '.png', '.jpeg'))]
+            self.files = sorted(
+                [f for f in os.listdir(self.image_dir) if f.lower().endswith(('.jpg', '.png', '.jpeg'))],
+                key=natural_key
+            )
             if not keep_index:
                 self.index = 0
             else:
@@ -167,9 +169,7 @@ class LabelChecker(QWidget):
                 self.index = min(self.index, max_index)
             self.show_page()
 
-    # ---------------- 显示页面 ----------------
     def show_page(self):
-        # 清空grid
         for i in reversed(range(self.grid_layout.count())):
             widget = self.grid_layout.itemAt(i).widget()
             if widget:
@@ -209,13 +209,11 @@ class LabelChecker(QWidget):
 
             self.grid_layout.addWidget(frame, i//cols, i%cols)
 
-        # ---------- 更新进度条 ----------
         total = len(self.files)
         processed = min(self.index + self.batch_size, total)
         percent = int(processed / total * 100)
         self.progress_bar.setValue(percent)
 
-    # ---------------- Shift 批量选中 ----------------
     def shift_select(self, clicked_label):
         if not self.last_clicked:
             clicked_label.selected = True
@@ -228,12 +226,10 @@ class LabelChecker(QWidget):
             labels[i].selected = True
             labels[i].update()
 
-    # ---------------- 图片尺寸更新 ----------------
     def update_image_size(self, value):
         self.img_size = value
         self.show_page()
 
-    # ---------------- 翻页 ----------------
     def next_page(self):
         if self.index + self.batch_size < len(self.files):
             self.index += self.batch_size
@@ -244,7 +240,6 @@ class LabelChecker(QWidget):
             self.index -= self.batch_size
         self.show_page()
 
-    # ---------------- 唯一文件路径 ----------------
     def unique_path(self, path):
         base, ext = os.path.splitext(path)
         counter = 1
@@ -253,7 +248,6 @@ class LabelChecker(QWidget):
             counter += 1
         return path
 
-    # ---------------- 快捷键 ----------------
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_S:
             if not self.target_dir:

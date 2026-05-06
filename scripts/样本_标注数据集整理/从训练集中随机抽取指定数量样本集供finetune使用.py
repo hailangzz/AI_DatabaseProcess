@@ -85,9 +85,9 @@ def sample_dataset(src_root, dst_root, num_samples=None, ratio=None):
 
 
 # 默认路径
-src_database = "/data/database/AITotal_ProjectDatabase/handDatabaseProgrem"
-dst_database = "/data/database/AITotal_ProjectDatabase/finetune_random_sample_datebase/random_hand_database"
-number_default = 5000
+src_database = "/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment"
+dst_database = "/data/database/AITotal_SegmentDatabase/finetune_random_sample_datebase/random_wire_database"
+number_default = 10000
 
 
 def main():

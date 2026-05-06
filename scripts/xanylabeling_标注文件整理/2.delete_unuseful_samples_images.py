@@ -9,8 +9,8 @@ from PIL import Image
 # =====================
 # 路径配置
 # =====================
-images_dir = Path("/data/database/AITotal_ProjectDatabase/finetune_random_sample_datebase/random_hand_database/images/train")
-labels_dir = Path("/data/database/AITotal_ProjectDatabase/finetune_random_sample_datebase/random_hand_database/labels/train")
+images_dir = Path("/data/database/LiquadDatabase/TotalLiquidDatabase/images")
+labels_dir = Path("/data/database/LiquadDatabase/TotalLiquidDatabase/yolov8_labels/seg")
 
 # 安全模式（True只打印，不删除）
 # DRY_RUN = True

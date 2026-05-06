@@ -46,8 +46,8 @@ def random_copy_images(src_dir, dst_dir, num_images):
     print(f"[DONE] Copied {num_images} images to {dst_dir}")
 
 
-default_src = "/home/chenkejing/database/LiquidDatabase/TotalRealLiquidDatabase/camera_images_0403_batch1/images"
-default_dst = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/liquad_image_test"
+default_src = "/home/chenkejing/database/HandDetect/EmdoorRealHandImages/unshare_images/train/images"
+default_dst = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/hand_real_image"
 default_num = 250
 
 def parse_args():

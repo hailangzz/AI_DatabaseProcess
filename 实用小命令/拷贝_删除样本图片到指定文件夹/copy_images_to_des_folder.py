@@ -2,8 +2,8 @@ import os
 import shutil
 
 # ====== 配置路径 ======
-source_dir = r"/home/chenkejing/database/HandDetect/EmdoorRealHandImages/unshare_images/train/crop_mark_target_image_results"      # 原始图片目录
-target_dir = r"/home/chenkejing/database/HandDetect/EmdoorRealHandImages/HandTargetObjectImages"      # 目标目录
+source_dir = r"/data/database/LiquadDatabase/chemical Spills_.v1-spills-identification.coco/train/imgs"      # 原始图片目录
+target_dir = r"/data/database/LiquadDatabase/TotalLiquidDatabase/images"      # 目标目录
 
 # 支持的图片格式
 image_exts = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp"}

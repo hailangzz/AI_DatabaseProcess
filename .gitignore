@@ -8,3 +8,5 @@ Ultralytics_sam_auto_object_label/video_annotations/
 实用小命令/将连续图像合并为一段视频/hand_detect.mp4
 /模型优化_实验环境采集rostopic误检样本/CarpetSegmentProject/
 /模型优化_实验环境采集rostopic误检样本/images/
+/实用小命令/NPU_stress_test/test_models/
+/实用小命令/NPU_stress_test/lib/
