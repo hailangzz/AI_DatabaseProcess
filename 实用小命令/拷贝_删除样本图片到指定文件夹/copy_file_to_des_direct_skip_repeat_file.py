@@ -12,7 +12,6 @@ target_labels_dir = r"/data/database/AITotal_ProjectDatabase/finetune_random_sam
 # 支持的图片格式
 image_exts = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp", ".txt"}
 
-
 def copy_images(src, dst):
     copied_count = 0
     skipped_count = 0

@@ -45,5 +45,5 @@ def count_yolo_classes(label_dir):
 
 
 if __name__ == "__main__":
-    label_dir = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/labels/train"   # 修改为你的labels路径
+    label_dir = "/home/chenkejing/database/AITotal_ProjectDatabase/WireDetectProgrem/labels/train"   # 修改为你的labels路径
     count_yolo_classes(label_dir)

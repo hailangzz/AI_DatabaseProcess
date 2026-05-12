@@ -12,7 +12,13 @@ if __name__ == '__main__':
     # src_img_dir = part_database_origin_path + "/images"
     # src_label_dir = part_database_origin_path + "/labels"
 
-    part_database_origin_path = r"/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416/"
+    # 本地测试环境，采集样本
+    # part_database_origin_path = r"/home/chenkejing/database/object_camera_coordinates_image/carpet_detect/date0416/"
+    # src_img_dir = part_database_origin_path + "/images"
+    # src_label_dir = part_database_origin_path + "/yolov8_labels/seg"
+
+    # 客户现场，采集样本
+    part_database_origin_path = r"/data/database/AITotal_Real_Customer_Database/Real_Carpet_Customer_Database/date0508/"
     src_img_dir = part_database_origin_path + "/images"
     src_label_dir = part_database_origin_path + "/yolov8_labels/seg"
 
