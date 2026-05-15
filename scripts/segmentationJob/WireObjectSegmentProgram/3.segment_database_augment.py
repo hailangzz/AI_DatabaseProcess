@@ -397,10 +397,10 @@ class YOLOSegAugmentor:
 # ------------------------------------------------
 if __name__ == "__main__":
     augmentor = YOLOSegAugmentor(
-        img_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_0403_batch1/images",
-        label_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/camera_images_0403_batch1/yolov8_labels/seg",
-        output_dir="/home/chenkejing/database/WireDatabase/TotalRealWireDatabase/segment_database_augmentor_0403_batch_1",
-        batch_name="segment_real_wire_seg_0403_batch1",
+        img_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/images",
+        label_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/yolov8_labels/seg",
+        output_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1",
+        batch_name="segment_real_wire_seg_0514_batch1",
         augment_ratio=3.0
     )
 

@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常更新">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="整理基于位置的预测图像">
+      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_file_to_des_direct_skip_repeat_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_file_to_des_direct_skip_repeat_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法/get_database_target_classify_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法/get_database_target_classify_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/获取图片数量.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/获取图片数量.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,134 +41,140 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Python tests.Python tests for read_database.test.executor&quot;: &quot;Debug&quot;,
-    &quot;Python tests.Python tests in read_database.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.0. deduplicate_images_by_prefix.executor&quot;: &quot;Run&quot;,
-    &quot;Python.1.creat_yolo_label_from_labelme_json.executor&quot;: &quot;Run&quot;,
-    &quot;Python.1.cut_mark_target_images_save.executor&quot;: &quot;Run&quot;,
-    &quot;Python.1.read_coco_label_info (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.1.read_coco_label_info.executor&quot;: &quot;Run&quot;,
-    &quot;Python.1.read_coco_label_info_bk-ok.executor&quot;: &quot;Run&quot;,
-    &quot;Python.1.生成mask线框标注数据文件.executor&quot;: &quot;Run&quot;,
-    &quot;Python.1.生成地毯mask线框标注数据文件.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.1.copy_database_to_augmentor.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.augment_target_images_rgba.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.check_single_image_lable.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.delete_unuseful_samples_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.检查mask标注框效果.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.生成地毯mask标注框效果.executor&quot;: &quot;Run&quot;,
-    &quot;Python.2.生成线材mask标注框效果.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.1扣取地面区域最大内接矩形并保存.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.2.扣取线材区域并保存.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.2扣取地面区域并保存.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.3扣取地面区域并保存.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.augment_random_background_sample_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.copy_train_database_to_project_databse (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.copy_train_database_to_project_databse.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.segment_database_augment (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.segment_database_augment-ok.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.segment_database_augment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.segment_hard_sample_database_augment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.扣取地板区域最大内接矩形.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.扣取地面区域并保存.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.扣取线材区域并保存.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.扣取线材区域并保存_填充版本.executor&quot;: &quot;Run&quot;,
-    &quot;Python.3.渲染扫地机器人摄像头效果.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.blender_yolo_generate_full.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.blender_yolo_generate_full_copy.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.copy_train_database_to_project_databse (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.copy_train_database_to_project_databse.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.database_augment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.read_all_database_labels_classid_info.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.segment_database_augment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.扣取地毯区域图片并保存.executor&quot;: &quot;Run&quot;,
-    &quot;Python.4.扣取地毯区域最小外接矩形并保存.executor&quot;: &quot;Run&quot;,
-    &quot;Python.5.create_yolo_train_database.executor&quot;: &quot;Run&quot;,
-    &quot;Python.6.0.get_database_target_classify_info.executor&quot;: &quot;Run&quot;,
-    &quot;Python.6.1.replace_yolo_class_id.executor&quot;: &quot;Run&quot;,
-    &quot;Python.6.deal_database_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.AnnotationBoxAnalysis.executor&quot;: &quot;Run&quot;,
-    &quot;Python.AnnotationBoxAnalysis_detect_and_mark.executor&quot;: &quot;Run&quot;,
-    &quot;Python.AnnotationBoxAnalysis_only_detect.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ChechTrainingSampleIsValid.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CopyImageToDestFilde.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CreateCarpetNegativeSample.executor&quot;: &quot;Run&quot;,
-    &quot;Python.CreateHandNegativeSample.executor&quot;: &quot;Run&quot;,
-    &quot;Python.MoveImageToDestFilde.executor&quot;: &quot;Run&quot;,
-    &quot;Python.RandomDisplayDetectAndMarkSample.executor&quot;: &quot;Run&quot;,
-    &quot;Python.add_wire_on_mask_render_frame.executor&quot;: &quot;Run&quot;,
-    &quot;Python.blender_yolo_generate_full.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check_single_image_lable.executor&quot;: &quot;Run&quot;,
-    &quot;Python.combin_more_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.copy_file_to_des_direct_skip_repeat_file.executor&quot;: &quot;Run&quot;,
-    &quot;Python.copy_images_to_des_filte.executor&quot;: &quot;Run&quot;,
-    &quot;Python.copy_images_to_des_folder (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.copy_images_to_des_folder.executor&quot;: &quot;Run&quot;,
-    &quot;Python.copy_train_database_to_project_databse.executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_carpet_object_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_mp4_from_image.executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_mp4_vidoe_from_images (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_mp4_vidoe_from_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.create_quant_database.executor&quot;: &quot;Run&quot;,
-    &quot;Python.cut_videos_part.executor&quot;: &quot;Run&quot;,
-    &quot;Python.database_augment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.deal_database_main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.deduplicate_images_by_prefix.executor&quot;: &quot;Run&quot;,
-    &quot;Python.delete_unuseful_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.extract_mask_object_augment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.extract_target_class_image_database.executor&quot;: &quot;Run&quot;,
-    &quot;Python.gen_hollow_yolov8_seg.executor&quot;: &quot;Run&quot;,
-    &quot;Python.get_database_target_classify_info.executor&quot;: &quot;Run&quot;,
-    &quot;Python.hand_seglabel_to_detectlabel.executor&quot;: &quot;Run&quot;,
-    &quot;Python.health_timer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.kaggle_download_database.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.mark_to_yolo_seg_labels.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plot_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plot_mark_point_to_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.python_convex_hull.executor&quot;: &quot;Run&quot;,
-    &quot;Python.read_all_database_labels_classid_info.executor&quot;: &quot;Run&quot;,
-    &quot;Python.read_coco_label_info.executor&quot;: &quot;Run&quot;,
-    &quot;Python.render_floor.executor&quot;: &quot;Run&quot;,
-    &quot;Python.resize_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.roboflow_download_e_waste_train_database.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sam_anota_1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.save_Rostopics_detect_images.executor&quot;: &quot;Run&quot;,
-    &quot;Python.save_resize_image.executor&quot;: &quot;Run&quot;,
-    &quot;Python.split_train_test_database.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.yolov8_face_detect.executor&quot;: &quot;Run&quot;,
-    &quot;Python.yolov8_hand_detect.executor&quot;: &quot;Run&quot;,
-    &quot;Python.yolov8_seg_to_det_augment-bk.executor&quot;: &quot;Run&quot;,
-    &quot;Python.yolov8_seg_to_det_augment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.yolov8_seg_to_det_augment_hand.executor&quot;: &quot;Run&quot;,
-    &quot;Python.从训练集中随机抽取指定数量样本集供finetune使用.executor&quot;: &quot;Run&quot;,
-    &quot;Python.删除指定目录下特定文件名文件.executor&quot;: &quot;Run&quot;,
-    &quot;Python.增强.executor&quot;: &quot;Run&quot;,
-    &quot;Python.处理mask信息.executor&quot;: &quot;Run&quot;,
-    &quot;Python.大模型标注文件整理.executor&quot;: &quot;Run&quot;,
-    &quot;Python.批量修改数据集名称.executor&quot;: &quot;Run&quot;,
-    &quot;Python.抽取指定类别样本集_生成训练集.executor&quot;: &quot;Run&quot;,
-    &quot;Python.检查图像增强时空洞填充的有效性 (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.检查图像增强时空洞填充的有效性.executor&quot;: &quot;Run&quot;,
-    &quot;Python.检测标注文件是否有空洞.executor&quot;: &quot;Run&quot;,
-    &quot;Python.筛选mark目标图像.executor&quot;: &quot;Run&quot;,
-    &quot;Python.统一图像_标注文件_删除未对齐图片或标注.executor&quot;: &quot;Run&quot;,
-    &quot;Python.获取图片数量.executor&quot;: &quot;Run&quot;,
-    &quot;Python.获取特定文件名文件数量.executor&quot;: &quot;Run&quot;,
-    &quot;Python.训练集清洗.executor&quot;: &quot;Run&quot;,
-    &quot;Python.随机拷贝指定数量的图像到指定目录.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/NPU_stress_test/lib&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Python tests.Python tests for read_database.test.executor": "Debug",
+    "Python tests.Python tests in read_database.py.executor": "Run",
+    "Python.0. deduplicate_images_by_prefix.executor": "Run",
+    "Python.1.creat_yolo_label_from_labelme_json.executor": "Run",
+    "Python.1.cut_mark_target_images_save.executor": "Run",
+    "Python.1.read_coco_label_info (1).executor": "Run",
+    "Python.1.read_coco_label_info.executor": "Run",
+    "Python.1.read_coco_label_info_bk-ok.executor": "Run",
+    "Python.1.整理基于位置的预测图像整理.executor": "Run",
+    "Python.1.生成mask线框标注数据文件.executor": "Run",
+    "Python.1.生成地毯mask线框标注数据文件.executor": "Run",
+    "Python.2.1.copy_database_to_augmentor.executor": "Run",
+    "Python.2.augment_target_images_rgba.executor": "Run",
+    "Python.2.check_single_image_lable.executor": "Run",
+    "Python.2.delete_unuseful_samples_images.executor": "Run",
+    "Python.2.检查mask标注框效果.executor": "Run",
+    "Python.2.生成地毯mask标注框效果.executor": "Run",
+    "Python.2.生成线材mask标注框效果.executor": "Run",
+    "Python.3.1扣取地面区域最大内接矩形并保存.executor": "Run",
+    "Python.3.2.扣取线材区域并保存.executor": "Run",
+    "Python.3.2扣取地面区域并保存.executor": "Run",
+    "Python.3.3扣取地面区域并保存.executor": "Run",
+    "Python.3.augment_random_background_sample_images.executor": "Run",
+    "Python.3.copy_train_database_to_project_databse (1).executor": "Run",
+    "Python.3.copy_train_database_to_project_databse.executor": "Run",
+    "Python.3.segment_database_augment (1).executor": "Run",
+    "Python.3.segment_database_augment-ok.executor": "Run",
+    "Python.3.segment_database_augment.executor": "Run",
+    "Python.3.segment_hard_sample_database_augment.executor": "Run",
+    "Python.3.扣取地板区域最大内接矩形.executor": "Run",
+    "Python.3.扣取地面区域并保存.executor": "Run",
+    "Python.3.扣取线材区域并保存.executor": "Run",
+    "Python.3.扣取线材区域并保存_填充版本.executor": "Run",
+    "Python.3.渲染扫地机器人摄像头效果.executor": "Run",
+    "Python.4.blender_yolo_generate_full.executor": "Run",
+    "Python.4.blender_yolo_generate_full_copy.executor": "Run",
+    "Python.4.copy_train_database_to_project_databse (1).executor": "Run",
+    "Python.4.copy_train_database_to_project_databse.executor": "Run",
+    "Python.4.database_augment.executor": "Run",
+    "Python.4.read_all_database_labels_classid_info.executor": "Run",
+    "Python.4.segment_database_augment.executor": "Run",
+    "Python.4.扣取地毯区域图片并保存.executor": "Run",
+    "Python.4.扣取地毯区域最小外接矩形并保存.executor": "Run",
+    "Python.5.create_yolo_train_database.executor": "Run",
+    "Python.6.0.get_database_target_classify_info.executor": "Run",
+    "Python.6.1.replace_yolo_class_id.executor": "Run",
+    "Python.6.deal_database_main.executor": "Run",
+    "Python.AnnotationBoxAnalysis.executor": "Run",
+    "Python.AnnotationBoxAnalysis_detect_and_mark.executor": "Run",
+    "Python.AnnotationBoxAnalysis_only_detect.executor": "Run",
+    "Python.ChechTrainingSampleIsValid.executor": "Run",
+    "Python.CopyImageToDestFilde.executor": "Run",
+    "Python.CreateCarpetNegativeSample.executor": "Run",
+    "Python.CreateHandNegativeSample.executor": "Run",
+    "Python.MoveImageToDestFilde.executor": "Run",
+    "Python.RandomDisplayDetectAndMarkSample.executor": "Run",
+    "Python.add_wire_on_mask_render_frame.executor": "Run",
+    "Python.blender_yolo_generate_full.executor": "Run",
+    "Python.check_local_and_origin_GPU_repet_sample_info.executor": "Run",
+    "Python.check_single_image_lable.executor": "Run",
+    "Python.combin_more_images.executor": "Run",
+    "Python.copy_file_to_des_direct_skip_repeat_file.executor": "Run",
+    "Python.copy_images_to_des_filte.executor": "Run",
+    "Python.copy_images_to_des_folder (1).executor": "Run",
+    "Python.copy_images_to_des_folder.executor": "Run",
+    "Python.copy_train_database_to_project_databse.executor": "Run",
+    "Python.create_carpet_object_images.executor": "Run",
+    "Python.create_mp4_from_image.executor": "Run",
+    "Python.create_mp4_vidoe_from_images (1).executor": "Run",
+    "Python.create_mp4_vidoe_from_images.executor": "Run",
+    "Python.create_quant_database.executor": "Run",
+    "Python.cut_videos_part.executor": "Run",
+    "Python.database_augment.executor": "Run",
+    "Python.deal_database_main.executor": "Run",
+    "Python.deduplicate_images_by_prefix.executor": "Run",
+    "Python.delete_unuseful_images.executor": "Run",
+    "Python.extract_mask_object_augment.executor": "Run",
+    "Python.extract_target_class_image_database.executor": "Run",
+    "Python.gen_hollow_yolov8_seg.executor": "Run",
+    "Python.get_GPU_servers_file_numbers.executor": "Run",
+    "Python.get_GPU_servers_file_sample_numbers.executor": "Run",
+    "Python.get_database_target_classify_info.executor": "Run",
+    "Python.get_local_file_sample_numbers.executor": "Run",
+    "Python.hand_seglabel_to_detectlabel.executor": "Run",
+    "Python.health_timer.executor": "Run",
+    "Python.kaggle_download_database.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.mark_to_yolo_seg_labels.executor": "Run",
+    "Python.model.executor": "Run",
+    "Python.plot_images.executor": "Run",
+    "Python.plot_mark_point_to_images.executor": "Run",
+    "Python.push_local_sample_to_GPU_training.executor": "Run",
+    "Python.python_convex_hull.executor": "Run",
+    "Python.read_all_database_labels_classid_info.executor": "Run",
+    "Python.read_coco_label_info.executor": "Run",
+    "Python.render_floor.executor": "Run",
+    "Python.resize_images.executor": "Run",
+    "Python.roboflow_download_e_waste_train_database.executor": "Run",
+    "Python.sam_anota_1.executor": "Run",
+    "Python.save_Rostopics_detect_images.executor": "Run",
+    "Python.save_resize_image.executor": "Run",
+    "Python.split_train_test_database.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.yolov8_face_detect.executor": "Run",
+    "Python.yolov8_hand_detect.executor": "Run",
+    "Python.yolov8_seg_to_det_augment-bk.executor": "Run",
+    "Python.yolov8_seg_to_det_augment.executor": "Run",
+    "Python.yolov8_seg_to_det_augment_hand.executor": "Run",
+    "Python.从训练集中随机抽取指定数量样本集供finetune使用.executor": "Run",
+    "Python.删除指定目录下特定文件名文件.executor": "Run",
+    "Python.增强.executor": "Run",
+    "Python.处理mask信息.executor": "Run",
+    "Python.大模型标注文件整理.executor": "Run",
+    "Python.批量修改数据集名称.executor": "Run",
+    "Python.抽取指定类别样本集_生成训练集.executor": "Run",
+    "Python.检查图像增强时空洞填充的有效性 (1).executor": "Run",
+    "Python.检查图像增强时空洞填充的有效性.executor": "Run",
+    "Python.检测标注文件是否有空洞.executor": "Run",
+    "Python.筛选mark目标图像.executor": "Run",
+    "Python.统一图像_标注文件_删除未对齐图片或标注.executor": "Run",
+    "Python.获取图片数量.executor": "Run",
+    "Python.获取特定文件名文件数量.executor": "Run",
+    "Python.训练集清洗.executor": "Run",
+    "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/NPU_stress_test/lib",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/实用小命令/NPU_stress_test/lib" />
@@ -183,8 +191,8 @@
       <recent name="$PROJECT_DIR$/scripts/DetectJob/carpet" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.1.整理基于位置的预测图像整理">
-    <configuration name="获取图片数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.push_local_sample_to_GPU_training">
+    <configuration name="3.segment_database_augment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -193,11 +201,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/获取图片数量.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,7 +214,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="1.整理基于位置的预测图像整理" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="check_local_and_origin_GPU_repet_sample_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -215,11 +223,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/客户现场实测" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -228,7 +236,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="1.creat_yolo_label_from_labelme_json" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="get_GPU_servers_file_sample_numbers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -237,11 +245,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -250,7 +258,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="4.copy_train_database_to_project_databse" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="get_local_file_sample_numbers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -259,11 +267,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -272,7 +280,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="push_local_sample_to_GPU_training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -281,11 +289,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -296,11 +304,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.1.整理基于位置的预测图像整理" />
-        <item itemvalue="Python.获取图片数量" />
-        <item itemvalue="Python.4.copy_train_database_to_project_databse" />
-        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
-        <item itemvalue="Python.1.creat_yolo_label_from_labelme_json" />
+        <item itemvalue="Python.push_local_sample_to_GPU_training" />
+        <item itemvalue="Python.check_local_and_origin_GPU_repet_sample_info" />
+        <item itemvalue="Python.get_GPU_servers_file_sample_numbers" />
+        <item itemvalue="Python.get_local_file_sample_numbers" />
+        <item itemvalue="Python.3.segment_database_augment" />
       </list>
     </recent_temporary>
   </component>
@@ -640,7 +648,23 @@
       <option name="project" value="LOCAL" />
       <updated>1778061616752</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="日常更新">
+      <option name="closed" value="true" />
+      <created>1778578165295</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1778578165295</updated>
+    </task>
+    <task id="LOCAL-00042" summary="整理基于位置的预测图像">
+      <option name="closed" value="true" />
+      <created>1778587886578</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1778587886578</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -697,7 +721,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="身体健康小程序，提醒活动、喝水" />
     <MESSAGE value="提交一次代码" />
     <MESSAGE value="新增：线材分割项目" />
     <MESSAGE value="优化目标检测、分割的数据增强代码。合成更有效数据，防止引入新的异常样本，影响模型效果。" />
@@ -722,7 +745,8 @@
     <MESSAGE value="日常优化" />
     <MESSAGE value="新增hard sample样本增强功能" />
     <MESSAGE value="日常更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="日常更新" />
+    <MESSAGE value="整理基于位置的预测图像" />
+    <option name="LAST_COMMIT_MESSAGE" value="整理基于位置的预测图像" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
