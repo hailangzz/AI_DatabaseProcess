@@ -8,7 +8,7 @@ import shutil
 # =========================
 
 # 文件夹路径
-folder_path = "/home/chenkejing/Desktop/CarpetSegmentProject/spatial_location_val_images"
+folder_path = "/home/chenkejing/Desktop/WireSegmentProject/spatial_location_val_images"
 
 # 两个特定字符串
 keyword1 = "exist_target"
@@ -20,7 +20,8 @@ image_extensions = (
     ".jpeg",
     ".png",
     ".bmp",
-    ".webp"
+    ".webp",
+    ".txt"   # 增加上标注文件，移动处理
 )
 
 # =========================

@@ -198,12 +198,17 @@ def upload_to_server(
 
 
 if __name__ == "__main__":
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/images"    #
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+
+    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/yolov8_labels/seg"
+    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
 
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1/images"    #
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
-
-    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1/labels"
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
+    #
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1/labels"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
 
 
     hostname = "172.16.50.229"
