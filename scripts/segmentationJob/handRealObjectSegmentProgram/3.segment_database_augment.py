@@ -21,33 +21,81 @@ from shapely.geometry import Point
 import utils.util as util
 
 class YOLOSegAugmentor:
+    # def __init__(
+    #     self,
+    #     img_dir,
+    #     label_dir,
+    #     output_dir,
+    #     batch_name,
+    #     augment_sample_number=4000,
+    #     img_size=(1280, 1280),
+    #     long_edge_size=1280,
+    #     flip_prob=0.5,        # 水平翻转概率
+    #     mosaic_prob=0.2,      # Mosaic 概率（当前未使用）
+    #     cutout_prob=0.6,      # Cutout 概率（当前已注释掉）
+    #     hsv_prob=0.1,         # HSV 颜色增强概率
+    #     # hsv_gain=(0.015, 0.3, 0.25),  # HSV 增强幅度 (H, S, V) Saturation（饱和度）:
+    #     #                               # Hue（色相）: H = 0.015 效果：Hue 颜色随机偏移 ±2.7 度 → 颜色轻微变化，不会影响整体色调太多
+    #     #                               # S = 0.7 效果：饱和度随机缩放 0.3~1.7 倍；
+    #     #                               # V = 0.4 效果：亮度整体缩放 0.6~1.4 倍 → 图像变暗或变亮
+    #     hsv_gain=(0.015, 0.3, 0.25),  # 原来是 0.25 → 0.15，整体亮度偏暗
+    #     degrees=180.0,         # 仿射旋转角度范围
+    #     translate=0.1,        # 平移范围占图像比例
+    #     scale=0.1,            # 缩放范围
+    #     shear=2.0,            # 剪切角度范围
+    # ):
     def __init__(
-        self,
-        img_dir,
-        label_dir,
-        output_dir,
-        batch_name,
-        augment_sample_number=4000,
-        img_size=(1280, 1280),
-        long_edge_size=1280,
-        flip_prob=0.5,        # 水平翻转概率
-        mosaic_prob=0.2,      # Mosaic 概率（当前未使用）
-        cutout_prob=0.6,      # Cutout 概率（当前已注释掉）
-        hsv_prob=0.1,         # HSV 颜色增强概率
-        hsv_gain=(0.015, 0.3, 0.25),  # HSV 增强幅度 (H, S, V) Saturation（饱和度）: S = 0.7 效果：饱和度随机缩放 0.3~1.7 倍；
-                                                                               # V = 0.4 效果：亮度整体缩放 0.6~1.4 倍 → 图像变暗或变亮
-                                                                               # Hue（色相）: H = 0.015 效果：Hue 颜色随机偏移 ±2.7 度 → 颜色轻微变化，不会影响整体色调太多
-        degrees=90.0,         # 仿射旋转角度范围
-        translate=0.1,        # 平移范围占图像比例
-        scale=0.1,            # 缩放范围
-        shear=2.0,            # 剪切角度范围
+            self,
+            img_dir,
+            label_dir,
+            output_dir,
+            batch_name,
+            augment_ratio=2.0,  # ⭐ 改这里
+            img_size=(1280, 1280),
+            long_edge_size=1280,
+            flip_prob=0.5,
+            mosaic_prob=0.2,
+            cutout_prob=0.6,
+            hsv_prob=0.1,
+            # hsv_gain=(0.015, 0.3, 0.25),
+            hsv_gain=(0.015, 0.4, 0.6),  # 推荐的色彩明暗变化
+            degrees=90.0,
+            translate=0.1,
+            scale=0.1,
+            shear=2.0,
     ):
         # 初始化路径和参数
         self.img_dir = img_dir
         self.label_dir = label_dir
         self.output_dir = output_dir
         self.batch_name = batch_name
-        self.augment_sample_number = augment_sample_number
+
+        # # 获取所有图像文件
+        # self.img_files = sorted(
+        #     glob(os.path.join(img_dir, "*.jpg")) +
+        #     glob(os.path.join(img_dir, "*.jpeg")) +
+        #     glob(os.path.join(img_dir, "*.png"))
+        # )
+
+        # 获取所有图像文件
+        self.img_files = sorted(
+            glob(os.path.join(label_dir, "*.txt"))
+        )
+
+        # 原始数据数量
+        self.num_original = len(self.img_files)
+
+        # ⭐ 倍数参数
+        self.augment_ratio = augment_ratio
+
+        # ⭐ 自动计算增强数量
+        self.augment_sample_number = int(self.num_original * self.augment_ratio)
+
+        print(f"\n========== 数据增强配置 ==========")
+        print(f"原始数据量: {self.num_original}")
+        print(f"增强倍数: {self.augment_ratio}")
+        print(f"生成样本数: {self.augment_sample_number}")
+        print(f"=================================\n")
 
         self.img_h, self.img_w = img_size
         self.long_edge_size = long_edge_size
@@ -65,8 +113,11 @@ class YOLOSegAugmentor:
         self.shear = shear
 
         # 获取所有图像文件
-        self.img_files = sorted(glob(os.path.join(img_dir, "*.jpg")))
-
+        # self.img_files = sorted(glob(os.path.join(img_dir, "*.jpg")))
+        self.img_files = sorted(glob(os.path.join(img_dir, "*.jpg")) +
+                                glob(os.path.join(img_dir, "*.jpeg")) +
+                                glob(os.path.join(img_dir, "*.png"))
+                                )
         # 创建输出文件夹
         os.makedirs(os.path.join(output_dir, "images"), exist_ok=True)
         os.makedirs(os.path.join(output_dir, "labels"), exist_ok=True)
@@ -110,7 +161,7 @@ class YOLOSegAugmentor:
     # ------------------------------------------------
     # 数据增强函数
     # ------------------------------------------------
-    def random_brightness_contrast(self, img, brightness=0.2, contrast=0.15): # brightness 亮度、contrast 对比度
+    def random_brightness_contrast(self, img, brightness=0.1, contrast=0.15): # brightness 亮度、contrast 对比度
         # 随机亮度/对比度调整
         if random.random() > 0.8:
             return img
@@ -224,6 +275,74 @@ class YOLOSegAugmentor:
 
         return img, new_objects
 
+    def random_rotate(self, img, objects):
+        """
+        随机旋转（polygon 同步变换）
+        - 保持目标尽量不裁剪
+        - 自动过滤越界 polygon
+        """
+        if random.random() > 0.35:  # ⭐ 控制旋转概率（建议不要太高）
+            return img, objects
+
+        h, w = img.shape[:2]
+
+        # 随机角度（建议小角度更真实）
+        angle = random.uniform(-self.degrees, self.degrees)
+
+        # 旋转中心
+        cx, cy = w / 2, h / 2
+
+        # 仿射矩阵
+        M = cv2.getRotationMatrix2D((cx, cy), angle, 1.0)
+
+        # 计算新图尺寸（防止裁剪）
+        cos = abs(M[0, 0])
+        sin = abs(M[0, 1])
+        new_w = int((h * sin) + (w * cos))
+        new_h = int((h * cos) + (w * sin))
+
+        # 平移补偿
+        M[0, 2] += (new_w / 2) - cx
+        M[1, 2] += (new_h / 2) - cy
+
+        # 图像旋转
+        rotated_img = cv2.warpAffine(
+            img,
+            M,
+            (new_w, new_h),
+            flags=cv2.INTER_LINEAR,
+            borderValue=(114, 114, 114)
+        )
+
+        new_objects = []
+
+        # polygon 同步旋转
+        for obj in objects:
+            poly = obj["poly"]
+
+            # 转齐次坐标
+            ones = np.ones((poly.shape[0], 1))
+            pts = np.hstack([poly, ones])
+
+            # 仿射变换
+            rotated_pts = pts @ M.T
+
+            # 过滤掉完全出界的 polygon
+            if (
+                    rotated_pts[:, 0].max() < 0 or
+                    rotated_pts[:, 1].max() < 0 or
+                    rotated_pts[:, 0].min() > new_w or
+                    rotated_pts[:, 1].min() > new_h
+            ):
+                continue
+
+            new_objects.append({
+                "cls": obj["cls"],
+                "poly": rotated_pts
+            })
+
+        return rotated_img, new_objects
+
     # ------------------------------------------------
     # 保存增强图像及 YOLOv8 segmentation 标签
     # ------------------------------------------------
@@ -255,12 +374,21 @@ class YOLOSegAugmentor:
     def apply_pipeline(self):
         idx = random.randint(0, len(self.img_files) - 1)
         img, objects = self.load_image_and_labels(idx)
+
+        # ⭐ 先做几何变换（最重要）
+        img, objects = self.random_rotate(img, objects)
+
+        # 颜色类增强
         img = self.random_hsv(img)
         img = self.random_brightness_contrast(img)
         img = self.add_gaussian_noise(img, mean=0, std=10, prob=0.5)
+
+        # 空间增强
         img, objects = self.random_flip(img, objects)
-        # cutout 与 mask 同步更新 polygon
+
+        # ⭐ 最后做 cutout（避免影响旋转）
         img, objects = self.cutout_with_mask_raster_safe(img, objects)
+
         self.save_sample(img, objects)
         return img, objects
 
@@ -269,11 +397,12 @@ class YOLOSegAugmentor:
 # ------------------------------------------------
 if __name__ == "__main__":
     augmentor = YOLOSegAugmentor(
-        img_dir="/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/origin_real_carpet_database/images",
-        label_dir="/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/origin_real_carpet_database/labels",
-        output_dir="/home/chenkejing/database/carpetDatabase/EMdoorRealCarpetDatabase/segment_database_augmentor",
-        batch_name="real_seg_batch1",
-        augment_sample_number=9000
+        img_dir="/home/chenkejing/database/Negativew_Example_Dataset/hand_model_v7/wireDatabaseSegment/images",
+        label_dir="/home/chenkejing/database/Negativew_Example_Dataset/hand_model_v7/wireDatabaseSegment/yolov8_labels/seg",
+        output_dir="/home/chenkejing/database/Negativew_Example_Dataset/hand_model_v7/wireDatabaseSegment/segment_database_augmentor_0521_batch2",
+        batch_name="segment_public_hand_seg_0521_batch2",
+        # augment_ratio=3.0  # 高价值样本
+        augment_ratio=1.0    # 低价值样本
     )
 
     total = augmentor.augment_sample_number

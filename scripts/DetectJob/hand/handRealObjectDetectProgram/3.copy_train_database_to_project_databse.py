@@ -4,12 +4,12 @@ import utils.util as util
 
 if __name__ == '__main__':
 
-    part_database_origin_path = r"/home/chenkejing/database/Negativew_Example_Dataset/hand/Negative_hand_batch_0310_database/database_augmentor/"
+    part_database_origin_path = r"/home/chenkejing/database/Negativew_Example_Dataset/hand_model_v7/wireDatabaseSegment/database_augmentor/"
     src_img_dir = part_database_origin_path+"/images"
     src_label_dir = part_database_origin_path + "/labels"
     # src_label_dir = part_database_origin_path+"/yolov8_labels/bbox"
 
-    dst_img_dir = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/images/train"
-    dst_label_dir = "/home/chenkejing/database/AITotal_ProjectDatabase/handDatabaseProgrem/labels/train"
+    dst_img_dir = "/data/database/AITotal_ProjectDatabase/handDatabaseProgrem/images/train"
+    dst_label_dir = "/data/database/AITotal_ProjectDatabase/handDatabaseProgrem/labels/train"
 
     util.copy_yolo_dataset(src_img_dir, src_label_dir, dst_img_dir, dst_label_dir)

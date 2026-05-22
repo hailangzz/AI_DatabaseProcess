@@ -1,8 +1,9 @@
+import os
+from pathlib import Path
+
 import paramiko
 from paramiko import SSHClient
 from scp import SCPClient
-from pathlib import Path
-import os
 
 
 # 允许上传的后缀
@@ -31,7 +32,6 @@ def sizeof_fmt(num):
     for unit in ["B", "KB", "MB", "GB", "TB"]:
 
         if num < 1024:
-
             return f"{num:.2f} {unit}"
 
         num /= 1024
@@ -46,15 +46,16 @@ def progress(filename, size, sent):
 
     global uploaded_bytes
 
-    # bytes -> str
     if isinstance(filename, bytes):
-
         filename = filename.decode()
 
-    # 当前文件已完成
     current_total = uploaded_bytes + sent
 
-    percent = current_total / total_bytes * 100
+    # percent = current_total / total_bytes * 100
+    if total_bytes <= 0:
+        percent = 0
+    else:
+        percent = current_total / total_bytes * 100
 
     print(
         f"\r[{current_index}/{total_files}] "
@@ -80,10 +81,23 @@ def get_all_upload_files(local_path):
         if file_path.is_file():
 
             if file_path.suffix.lower() in ALLOW_SUFFIXES:
-
                 upload_files.append(file_path)
 
     return upload_files
+
+
+def remote_file_exists(ssh, remote_file_path):
+    """
+    检查远程文件是否存在
+    """
+
+    cmd = f'test -f "{remote_file_path}" && echo exists'
+
+    stdin, stdout, stderr = ssh.exec_command(cmd)
+
+    result = stdout.read().decode().strip()
+
+    return result == "exists"
 
 
 def upload_to_server(
@@ -127,7 +141,6 @@ def upload_to_server(
         transport = ssh.get_transport()
 
         if transport is None or not transport.is_active():
-
             raise Exception("SSH transport 未建立成功")
 
         print("服务器连接成功")
@@ -148,6 +161,9 @@ def upload_to_server(
         print(f"总大小: {sizeof_fmt(total_bytes)}")
 
         local_path = Path(local_path)
+
+        skipped_files = 0
+        uploaded_files = 0
 
         with SCPClient(
             transport,
@@ -175,18 +191,42 @@ def upload_to_server(
                     f'mkdir -p "{remote_dir}"'
                 )
 
-                # 上传
+                # =========================
+                # 检查远程文件是否已存在
+                # =========================
+                if remote_file_exists(
+                    ssh,
+                    str(remote_file_path)
+                ):
+
+                    # print(
+                    #     f"\n跳过已存在文件: "
+                    #     f"{relative_path}"
+                    # )
+
+                    skipped_files += 1
+
+                    continue
+
+                # =========================
+                # 上传文件
+                # =========================
                 scp.put(
                     str(file_path),
                     remote_path=str(remote_file_path)
                 )
 
-                # 文件上传完成后累计
                 uploaded_bytes += (
                     file_path.stat().st_size
                 )
 
+                uploaded_files += 1
+
         print("\n\n上传完成！")
+
+        print(f"实际上传文件数量: {uploaded_files}")
+
+        print(f"跳过文件数量: {skipped_files}")
 
     except Exception as e:
 
@@ -198,11 +238,13 @@ def upload_to_server(
 
 
 if __name__ == "__main__":
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/images"    #
+
+    # 线材检测样本它，推送
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder/segment_database_augmentor_0519_batch2/images"    #
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
 
-    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/yolov8_labels/seg"
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder/segment_database_augmentor_0519_batch2/labels"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
 
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1/images"    #
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
@@ -210,6 +252,15 @@ if __name__ == "__main__":
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1/labels"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
 
+
+
+    # 污渍检测样本它，推送
+
+    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/images"    #
+    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
+
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/labels"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"
     username = "robot-server"

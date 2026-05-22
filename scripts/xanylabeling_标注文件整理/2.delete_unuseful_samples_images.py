@@ -9,8 +9,8 @@ from PIL import Image
 # =====================
 # 路径配置
 # =====================
-images_dir = Path("/data/database/LiquadDatabase/TotalLiquidDatabase/images")
-labels_dir = Path("/data/database/LiquadDatabase/TotalLiquidDatabase/yolov8_labels/seg")
+images_dir = Path("/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder/images")
+labels_dir = Path("/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder/yolov8_labels/seg")
 
 # 安全模式（True只打印，不删除）
 # DRY_RUN = True

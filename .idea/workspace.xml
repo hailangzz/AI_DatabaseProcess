@@ -4,15 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="整理基于位置的预测图像">
-      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
+      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/hand/handRealObjectDetectProgram/3.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/hand/handRealObjectDetectProgram/3.copy_train_database_to_project_databse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/hand/handRealObjectDetectProgram/4.database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/hand/handRealObjectDetectProgram/4.database_augment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/3.segment_database_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/3.segment_database_augment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/handRealObjectSegmentProgram/4.copy_train_database_to_project_databse.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/2.delete_unuseful_samples_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/2.delete_unuseful_samples_images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/样本_标注数据集整理/统一图像_标注文件_删除未对齐图片或标注.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/统一图像_标注文件_删除未对齐图片或标注.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/获取图片数量.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/获取图片数量.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +111,7 @@
     "Python.RandomDisplayDetectAndMarkSample.executor": "Run",
     "Python.add_wire_on_mask_render_frame.executor": "Run",
     "Python.blender_yolo_generate_full.executor": "Run",
+    "Python.check_GPU_servers_is_exist_file.executor": "Run",
     "Python.check_local_and_origin_GPU_repet_sample_info.executor": "Run",
     "Python.check_single_image_lable.executor": "Run",
     "Python.combin_more_images.executor": "Run",
@@ -171,17 +180,17 @@
     "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/NPU_stress_test/lib",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/本地与GPU训练服务器样本传输",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <recent name="$PROJECT_DIR$/实用小命令/NPU_stress_test/lib" />
       <recent name="$PROJECT_DIR$/实用小命令/NPU压力测试/test_models" />
       <recent name="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹" />
       <recent name="$PROJECT_DIR$/scripts/segmentationJob/carpetRealObjectSegmentProgram" />
-      <recent name="$PROJECT_DIR$/DatabaseAnalysis" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本" />
@@ -192,7 +201,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.push_local_sample_to_GPU_training">
-    <configuration name="3.segment_database_augment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="获取图片数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -201,11 +210,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/WireObjectSegmentProgram/3.segment_database_augment.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/获取图片数量.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -214,7 +223,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="check_local_and_origin_GPU_repet_sample_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="1.creat_yolo_label_from_labelme_json" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -223,11 +232,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -305,10 +314,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.push_local_sample_to_GPU_training" />
-        <item itemvalue="Python.check_local_and_origin_GPU_repet_sample_info" />
-        <item itemvalue="Python.get_GPU_servers_file_sample_numbers" />
         <item itemvalue="Python.get_local_file_sample_numbers" />
-        <item itemvalue="Python.3.segment_database_augment" />
+        <item itemvalue="Python.获取图片数量" />
+        <item itemvalue="Python.get_GPU_servers_file_sample_numbers" />
+        <item itemvalue="Python.1.creat_yolo_label_from_labelme_json" />
       </list>
     </recent_temporary>
   </component>
@@ -664,7 +673,23 @@
       <option name="project" value="LOCAL" />
       <updated>1778587886578</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="新增本地上传样本到服务器。">
+      <option name="closed" value="true" />
+      <created>1778838096426</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1778838096426</updated>
+    </task>
+    <task id="LOCAL-00044" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1779153878358</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1779153878358</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -721,8 +746,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="提交一次代码" />
-    <MESSAGE value="新增：线材分割项目" />
     <MESSAGE value="优化目标检测、分割的数据增强代码。合成更有效数据，防止引入新的异常样本，影响模型效果。" />
     <MESSAGE value="线材检测数据仿真功能代码" />
     <MESSAGE value="训练集数据整理、处理代码" />
@@ -746,7 +769,9 @@
     <MESSAGE value="新增hard sample样本增强功能" />
     <MESSAGE value="日常更新" />
     <MESSAGE value="整理基于位置的预测图像" />
-    <option name="LAST_COMMIT_MESSAGE" value="整理基于位置的预测图像" />
+    <MESSAGE value="新增本地上传样本到服务器。" />
+    <MESSAGE value="日常提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="日常提交" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

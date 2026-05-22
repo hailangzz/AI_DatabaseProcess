@@ -46,7 +46,7 @@ def clean_yolo_dataset(image_dir, label_dir, image_exts={".jpg", ".png", ".jpeg"
 
 
 if __name__ == "__main__":
-    image_dir = "/data/database/AITotal_ProjectDatabase/LiquadDetectProgrem/images/train"
-    label_dir = "/data/database/AITotal_ProjectDatabase/LiquadDetectProgrem/labels/train"
+    image_dir = "/home/chenkejing/database/Negativew_Example_Dataset/hand_model_v7/wireDatabaseSegment/images"
+    label_dir = "/home/chenkejing/database/Negativew_Example_Dataset/hand_model_v7/wireDatabaseSegment/yolov8_labels/seg"
 
     clean_yolo_dataset(image_dir, label_dir)

@@ -82,8 +82,11 @@ def count_local_dataset(
 
 if __name__ == "__main__":
 
-    image_local_path = "/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
-    label_local_path = "/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
+    # image_local_path = "/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+    # label_local_path = "/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
+
+    image_local_path = "/data/database/AITotal_SegmentDatabase/LiquidDatabaseSegment/images/train"
+    label_local_path = "/data/database/AITotal_SegmentDatabase/LiquidDatabaseSegment/labels/train"
 
     count_local_dataset(
         image_local_path,

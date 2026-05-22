@@ -397,11 +397,12 @@ class YOLOSegAugmentor:
 # ------------------------------------------------
 if __name__ == "__main__":
     augmentor = YOLOSegAugmentor(
-        img_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/images",
-        label_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/yolov8_labels/seg",
-        output_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1",
-        batch_name="segment_real_wire_seg_0514_batch1",
-        augment_ratio=3.0
+        img_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSegmentProject/spatial_location_val_images/null_target/images",
+        label_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSegmentProject/spatial_location_val_images/null_target/yolov8_labels/seg",
+        output_dir="/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder/segment_database_augmentor_0519_batch2",
+        batch_name="segment_real_wire_seg_0519_batch2",
+        # augment_ratio=3.0  # 高价值样本
+        augment_ratio=1.0    # 低价值样本
     )
 
     total = augmentor.augment_sample_number

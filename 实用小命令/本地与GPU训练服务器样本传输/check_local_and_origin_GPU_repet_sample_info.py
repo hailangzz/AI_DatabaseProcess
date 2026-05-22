@@ -175,6 +175,7 @@ if __name__ == "__main__":
 
     # 远程路径
     remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
 
     hostname = "172.16.50.229"
     username = "robot-server"
