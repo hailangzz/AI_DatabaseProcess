@@ -1,0 +1,61 @@
+此项目，用于制作自定义的python功能，安装包。
+
+1、rknn模型转换、量化项目：
+    python安装包制作/onnx_export_rknn
+
+2、创建whl安装包：
+    cd python安装包制作/onnx_export_rknn
+    python -m build
+
+
+
+3、实际模型转换（在toolkit2环境中）
+
+    yolov8_onnx_export：
+        yolo_onnx_export \
+        -w /home/chenkejing/PycharmProjects/ultralytics/runs/my_carpet_seg_exp/yolov8s_carpet_seg_v1_5/weights/best.pt \
+        --input-shape 1 3 640 640 \
+        --device cuda:0 \
+        --sim
+
+        yolo_onnx_export \
+        -w /workspace/data/auto_train_deploy_env/onnx_models/yolov8s_carpet_seg_v1_5/weights/best.pt \
+        --input-shape 1 3 640 640 \
+        --device cuda:0 \
+        --sim
+
+        yolo_onnx_export \
+        -w /workspace/data/auto_train_deploy_env/onnx_models/yolov8s_carpet_seg_v1_5/weights/best.pt \
+        --input-shape 1 3 640 640 \
+        --device cpu \
+        --sim
+
+
+
+
+
+    rknn_export:
+        rknn_convert \
+        /home/chenkejing/PycharmProjects/ultralytics/runs/my_carpet_seg_exp/yolov8s_carpet_seg_v1_5/weights/best.onnx \
+        rk3588 \
+        --dataset /home/chenkejing/PycharmProjects/ultralytics/images_mode_test/carpet_real_image/carpet_quant.txt \
+        --output model.rknn \
+        --quant
+
+    rknn_export:
+        rknn_convert \
+        /home/chenkejing/PycharmProjects/ultralytics/runs/my_carpet_seg_exp/yolov8s_carpet_seg_v1_5/weights/best.onnx \
+        rk3568 \
+        --dataset /home/chenkejing/PycharmProjects/ultralytics/images_mode_test/carpet_real_image/carpet_quant.txt \
+        --output model_3568.rknn \
+        --quant
+
+        rknn_convert \
+        /workspace/data/auto_train_deploy_env/onnx_models/yolov8s_carpet_seg_v1_5/weights/best.onnx \
+        rk3588 \
+        --dataset /workspace/data/auto_train_deploy_env/images_mode_test/carpet_real_image/carpet_quant.txt \
+        --output carpet_3588.rknn \
+        --quant
+
+
+

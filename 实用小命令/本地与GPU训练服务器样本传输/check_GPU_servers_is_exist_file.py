@@ -60,7 +60,7 @@ def search_remote_file(
             return None
 
         if result:
-            print("找到目标文件:\n")
+            print("成功！！！\n 找到目标文件:\n")
 
             file_list = result.split("\n")
 
@@ -72,7 +72,7 @@ def search_remote_file(
             return file_list
 
         else:
-            print("未找到目标文件")
+            print("失败！！！\n 未找到目标文件")
 
             ssh.close()
 
@@ -87,10 +87,11 @@ def search_remote_file(
 
 if __name__ == "__main__":
 
-    remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+    # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+    remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
 
     # 要搜索的文件名
-    target_filename = "real_wire_image_0422_batch1_00450.jpg"
+    target_filename = "20260522_075113_026_liquid_detect.jpg"
 
     hostname = "172.16.50.229"
     username = "robot-server"
