@@ -1,0 +1,12 @@
+README.md
+setup.py
+segment_onnx_export/__init__.py
+segment_onnx_export/cli.py
+segment_onnx_export/exporter.py
+segment_onnx_export/model_structure/__init__.py
+segment_onnx_export/model_structure/myself_model_struct.py
+yolov8_onnx_export.egg-info/PKG-INFO
+yolov8_onnx_export.egg-info/SOURCES.txt
+yolov8_onnx_export.egg-info/dependency_links.txt
+yolov8_onnx_export.egg-info/entry_points.txt
+yolov8_onnx_export.egg-info/top_level.txt
