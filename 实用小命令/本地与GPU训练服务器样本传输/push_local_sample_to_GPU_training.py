@@ -79,9 +79,14 @@ def get_all_upload_files(local_path):
     for file_path in local_path.rglob("*"):
 
         if file_path.is_file():
-
-            if file_path.suffix.lower() in ALLOW_SUFFIXES:
-                upload_files.append(file_path)
+            if "images" in str(local_path):    # 上传图像样本
+                if file_path.suffix.lower() in ALLOW_SUFFIXES[:-1]:
+                    upload_files.append(file_path)
+                    # print(file_path)
+            elif "labels" in  str(local_path): # 上传标注样本
+                if file_path.suffix.lower() in ALLOW_SUFFIXES[-1:]:
+                    upload_files.append(file_path)
+                    # print(file_path)
 
     return upload_files
 
@@ -240,24 +245,26 @@ def upload_to_server(
 if __name__ == "__main__":
 
     # 线材检测样本它，推送
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder/segment_database_augmentor_0519_batch2/images"    #
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_2/images"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
 
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder/segment_database_augmentor_0519_batch2/labels"
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_2/yolov8_labels/seg"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
 
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1/images"    #
+
+    # 全部线材样本
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_1/segment_database_augmentor_0602_batch1/images"    #
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
     #
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0514/WireSampleFolder/segment_database_augmentor_0514_batch_1/labels"
-    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
+    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_1/segment_database_augmentor_0602_batch1/labels"
+    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
 
 
 
     # 污渍检测样本它，推送
 
-    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/images"    #
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/images"    #
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
 
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/labels"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
