@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="模型导出onnx安装包创建">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="加密python安装包实现">
       <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/requirements.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/__init__.py" afterDir="false" />
@@ -780,7 +780,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780563127339</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="加密python安装包实现">
+      <option name="closed" value="true" />
+      <created>1780977548505</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1780977548505</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -837,7 +845,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="线材检测数据仿真功能代码" />
     <MESSAGE value="训练集数据整理、处理代码" />
     <MESSAGE value="数据审核时，随机检查训练集、标注效果代码" />
     <MESSAGE value="模型测试返回的误检、漏检数据筛选应用" />
@@ -862,7 +869,8 @@
     <MESSAGE value="新增本地上传样本到服务器。" />
     <MESSAGE value="日常提交" />
     <MESSAGE value="模型导出onnx安装包创建" />
-    <option name="LAST_COMMIT_MESSAGE" value="模型导出onnx安装包创建" />
+    <MESSAGE value="加密python安装包实现" />
+    <option name="LAST_COMMIT_MESSAGE" value="加密python安装包实现" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
