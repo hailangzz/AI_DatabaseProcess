@@ -13,7 +13,10 @@ REQUEST_TOPIC = "rknn/infer/request"
 RESPONSE_TOPIC_PREFIX = "rknn/infer/response"
 
 MODEL_FILE = "/home/chenkejing/PycharmProjects/ultralytics/rknn_models/carpet_f_seg_0512.rknn"
-IMAGE_FILE = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/carpet_images_test/et2gUdzvbshFoDnUas0EqA.jpg"
+IMAGE_FILE = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/carpet_images_test/ca216e1a94cbbc27d8c010e21a85ddf7.jpg"
+
+# 新增：输出图片保存路径
+SAVE_OUTPUT_IMAGE_PATH = "./out.png"
 
 TASK_ID = str(uuid.uuid4())
 
@@ -22,6 +25,20 @@ TASK_ID = str(uuid.uuid4())
 def file_to_base64(path: str) -> str:
     with open(path, "rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
+
+
+def save_base64_image(data: str, save_path: str):
+    if not data:
+        print("无输出图片数据")
+        return
+
+    img_bytes = base64.b64decode(data)
+
+    with open(save_path, "wb") as f:
+        f.write(img_bytes)
+
+    print(f"\n输出图片已保存: {save_path}")
+    print("图片大小:", len(img_bytes), "bytes")
 
 
 def build_response_topic(task_id: str) -> str:
@@ -42,16 +59,24 @@ def print_json(result: dict):
 
         print("\nreturncode:", result["result"]["returncode"])
 
+    # ===================== 新增：处理输出图片 =====================
+    if "output_image" in result and result["output_image"]:
+        print("\n===== output image received =====")
+        save_base64_image(
+            result["output_image"]["data"],
+            SAVE_OUTPUT_IMAGE_PATH
+        )
+
 
 # ===================== MQTT Logic =====================
 def send_task(client):
-    print("读取RKNN模型...")
+    # print("读取RKNN模型...")
     model_bytes = file_to_base64(MODEL_FILE)
-    print("Base64模型长度:", len(model_bytes))
+    # print("Base64模型长度:", len(model_bytes))
 
-    print("读取测试图片...")
+    # print("读取测试图片...")
     image_bytes = file_to_base64(IMAGE_FILE)
-    print("Base64图片长度:", len(image_bytes))
+    # print("Base64图片长度:", len(image_bytes))
 
     payload = {
         "task_id": TASK_ID,
@@ -63,7 +88,7 @@ def send_task(client):
 
     msg = json.dumps(payload)
 
-    print("MQTT消息大小:", len(msg.encode()), "bytes")
+    # print("MQTT消息大小:", len(msg.encode()), "bytes")
 
     ret = client.publish(REQUEST_TOPIC, msg, qos=1)
 

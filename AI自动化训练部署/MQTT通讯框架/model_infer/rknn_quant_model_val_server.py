@@ -16,6 +16,9 @@ RKNN_WORK_DIR = "/home/robot/zhangzhuo/rknn_yolov8_seg_demo"
 RKNN_MODEL_DIR = os.path.join(RKNN_WORK_DIR, "model")
 RKNN_IMAGE_DIR = os.path.join(RKNN_WORK_DIR, "image")
 
+# 关键：输出图片路径
+OUTPUT_IMAGE_PATH = os.path.join(RKNN_WORK_DIR, "out.png")
+
 os.makedirs(RKNN_MODEL_DIR, exist_ok=True)
 os.makedirs(RKNN_IMAGE_DIR, exist_ok=True)
 
@@ -25,6 +28,11 @@ def save_base64_file(path: str, data: str) -> int:
     with open(path, "wb") as f:
         f.write(base64.b64decode(data))
     return os.path.getsize(path)
+
+
+def file_to_base64(path: str) -> str:
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode("utf-8")
 
 
 def run_rknn(model_path: str, image_path: str) -> dict:
@@ -75,30 +83,45 @@ def on_message(client, userdata, msg):
 
         # ---------------- Model ----------------
         model_path = os.path.join(RKNN_MODEL_DIR, model_name)
-        size = save_base64_file(model_path, model_data)
+        model_size = save_base64_file(model_path, model_data)
 
         print("保存模型:", model_path)
-        print("模型大小:", size)
+        print("模型大小:", model_size)
 
         # ---------------- Image ----------------
         image_path = os.path.join(RKNN_IMAGE_DIR, image_name)
-        size = save_base64_file(image_path, image_data)
+        image_size = save_base64_file(image_path, image_data)
 
         print("保存图片:", image_path)
-        print("图片大小:", size)
+        print("图片大小:", image_size)
 
         # ---------------- Inference ----------------
         infer_result = run_rknn(model_path, image_path)
 
+        # ---------------- 读取输出图片 out.png ----------------
+        output_image_data = None
+
+        if os.path.exists(OUTPUT_IMAGE_PATH):
+            output_image_data = file_to_base64(OUTPUT_IMAGE_PATH)
+            print("输出图片读取成功:", len(output_image_data))
+        else:
+            print("警告: 未找到 out.png")
+
+        # ---------------- 返回结果 ----------------
         result = {
             "task_id": task_id,
             "status": "success",
-            "result": infer_result
+            "result": infer_result,
+            "output_image": {
+                "name": "out.png",
+                "data": output_image_data
+            } if output_image_data else None
         }
 
         topic = build_response_topic(task_id)
 
         client.publish(topic, json.dumps(result))
+
         print("结果已返回:", topic)
 
     except Exception as e:
@@ -109,7 +132,8 @@ def on_message(client, userdata, msg):
         result = {
             "task_id": task_id,
             "status": "failed",
-            "error": str(e)
+            "error": str(e),
+            "output_image": None
         }
 
         topic = build_response_topic(task_id)
