@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: export_quant_rknn
+Version: 0.1.0
+Summary: Used for quantization of ONNX models to RKNN
+Author: zz
+Dynamic: author
+Dynamic: summary

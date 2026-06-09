@@ -1,0 +1,2 @@
+[console_scripts]
+rknn_convert = export_quant_rknn.cli:main

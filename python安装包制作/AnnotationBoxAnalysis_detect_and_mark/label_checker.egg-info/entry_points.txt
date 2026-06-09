@@ -1,0 +1,2 @@
+[console_scripts]
+label_checker = label_checker.app:main

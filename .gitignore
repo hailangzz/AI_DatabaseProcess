@@ -11,3 +11,12 @@ Ultralytics_sam_auto_object_label/video_annotations/
 /实用小命令/NPU_stress_test/test_models/
 /实用小命令/NPU_stress_test/lib/
 实用小命令/图像合并/combin_more_images.py
+/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/
+/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/dist/
+/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/build/
+/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/
+/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker.egg-info/
+/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/dist/
+/python安装包制作/onnx_to_rknn_export/dist/
+/python安装包制作/onnx_to_rknn_export/export_quant_rknn.egg-info/
+/python安装包制作/yolov8_onnx_export/yolov8_onnx_export.egg-info/

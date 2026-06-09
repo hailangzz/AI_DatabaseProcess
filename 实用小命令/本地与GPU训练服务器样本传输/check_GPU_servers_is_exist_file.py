@@ -87,17 +87,17 @@ def search_remote_file(
 
 if __name__ == "__main__":
 
-    # # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+    remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
     #
     # # 要搜索的文件名
     # target_filename = "20260522_150800_920_liquid_detect.jpg"
 
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
-    remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
+    # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
 
     # 要搜索的文件名
-    target_filename = "20260509_224649_682_liquid_detect.txt"
+    target_filename = "20260602_060005_935_carpet_detect.jpg"
 
     hostname = "172.16.50.229"
     username = "robot-server"
