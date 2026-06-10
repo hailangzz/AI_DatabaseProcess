@@ -4,74 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="加密python安装包实现">
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/cli.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/exporter.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/exporter.cpython-310-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/exporter.cpython-312-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/exporter.pyx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/model_structure/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/model_structure/myself_model_struct.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/model_structure/myself_model_struct.cpython-310-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/model_structure/myself_model_struct.cpython-312-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/segment_onnx_export/model_structure/myself_model_struct.pyx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/setup_cython.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/dependency_links.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/entry_points.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译/说明" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/build/lib/segment_onnx_export/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/build/lib/segment_onnx_export/cli.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/build/lib/segment_onnx_export/exporter.cpython-312-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/build/lib/segment_onnx_export/model_structure/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/build/lib/segment_onnx_export/model_structure/myself_model_struct.cpython-312-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/dist/yolov8_onnx_export-0.1.0-py3-none-any.whl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/segment_onnx_export/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/segment_onnx_export/cli.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/segment_onnx_export/exporter.cpython-312-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/segment_onnx_export/model_structure/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/segment_onnx_export/model_structure/myself_model_struct.cpython-312-x86_64-linux-gnu.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/setup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/dependency_links.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/entry_points.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译/yolov8_onnx_export/yolov8_onnx_export.egg-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/dist/label_checker-1.0.0-py3-none-any.whl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/dist/label_checker-1.0.0.tar.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker.egg-info/dependency_links.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker.egg-info/entry_points.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker.egg-info/requires.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker.egg-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/label_checker/gui.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/AnnotationBoxAnalysis_detect_and_mark/setup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/dist/export_quant_rknn-0.1.0-py3-none-any.whl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/dist/export_quant_rknn-0.1.0.tar.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/dist/model.rknn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn.egg-info/dependency_links.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn.egg-info/entry_points.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn.egg-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn/cli.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn/converter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python安装包制作/说明" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="自动化训练中NPU板端推理优化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare/rknn_quant_model_compare_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare/rknn_quant_model_compare_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/大模型标注文件整理.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/大模型标注文件整理.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python安装包制作/Readme" beforeDir="false" afterPath="$PROJECT_DIR$/python安装包制作/Readme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python安装包制作/说明" beforeDir="false" afterPath="$PROJECT_DIR$/python安装包制作/加密版安装包编译说秘密" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateCarpetNegativeSample.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateCarpetNegativeSample.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/训练集清洗.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/训练集清洗.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,17 +186,17 @@
     "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/AI自动化训练部署/MQTT通讯框架/quant_model_compare",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/python安装包制作/1.加密版安装包动态库编译",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译" />
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare" />
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架" />
       <recent name="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译" />
       <recent name="$PROJECT_DIR$/python安装包制作/加密版安装包/yolov8_onnx_export" />
-      <recent name="$PROJECT_DIR$/python安装包制作/加密版安装包" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/segment_model_infer" />
@@ -259,7 +206,51 @@
       <recent name="$PROJECT_DIR$/scripts/DetectJob/hand" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.rknn_quant_model_val_client (1)">
+  <component name="RunManager" selected="Python.push_local_sample_to_GPU_training">
+    <configuration name="check_GPU_servers_is_exist_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="push_local_sample_to_GPU_training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="rknn_quant_model_compare_client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -282,28 +273,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="rknn_quant_model_compare_server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare/rknn_quant_model_compare_server.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="rknn_quant_model_val_client (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -318,28 +287,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="rknn_quant_model_val_client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/segment_model_infer/rknn_quant_model_val_client.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -372,11 +319,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.push_local_sample_to_GPU_training" />
+        <item itemvalue="Python.check_GPU_servers_is_exist_file" />
         <item itemvalue="Python.rknn_quant_model_val_client (1)" />
-        <item itemvalue="Python.rknn_quant_model_val_server" />
         <item itemvalue="Python.rknn_quant_model_compare_client" />
-        <item itemvalue="Python.rknn_quant_model_compare_server" />
-        <item itemvalue="Python.rknn_quant_model_val_client" />
+        <item itemvalue="Python.rknn_quant_model_val_server" />
       </list>
     </recent_temporary>
   </component>
@@ -395,22 +342,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00001" summary="新增标注样本检查窗体应用。">
-      <option name="closed" value="true" />
-      <created>1763020144625</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1763020144625</updated>
-    </task>
-    <task id="LOCAL-00002" summary="线材检测项目，数据集生成任务。已经基本完成">
-      <option name="closed" value="true" />
-      <created>1763113567835</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1763113567835</updated>
     </task>
     <task id="LOCAL-00003" summary="地毯检测项目，数据集生成任务。已经基本完成">
       <option name="closed" value="true" />
@@ -788,7 +719,23 @@
       <option name="project" value="LOCAL" />
       <updated>1780977548505</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="自动化训练中NPU板端性能测试">
+      <option name="closed" value="true" />
+      <created>1780977592008</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1780977592008</updated>
+    </task>
+    <task id="LOCAL-00051" summary="自动化训练中NPU板端推理优化">
+      <option name="closed" value="true" />
+      <created>1780985499875</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1780985499876</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -845,8 +792,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="训练集数据整理、处理代码" />
-    <MESSAGE value="数据审核时，随机检查训练集、标注效果代码" />
     <MESSAGE value="模型测试返回的误检、漏检数据筛选应用" />
     <MESSAGE value="模型测试返回的误检、漏检数据筛选应用-增加进度条显示" />
     <MESSAGE value="线材样本仿真生成" />
@@ -870,7 +815,9 @@
     <MESSAGE value="日常提交" />
     <MESSAGE value="模型导出onnx安装包创建" />
     <MESSAGE value="加密python安装包实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="加密python安装包实现" />
+    <MESSAGE value="自动化训练中NPU板端性能测试" />
+    <MESSAGE value="自动化训练中NPU板端推理优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="自动化训练中NPU板端推理优化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

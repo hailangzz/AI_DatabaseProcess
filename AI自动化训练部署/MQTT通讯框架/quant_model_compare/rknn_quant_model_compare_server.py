@@ -3,6 +3,8 @@ import json
 import base64
 import subprocess
 import re
+import threading
+import queue
 import paho.mqtt.client as mqtt
 
 
@@ -18,6 +20,10 @@ RKNN_IMAGE_DIR = os.path.join(RKNN_WORK_DIR, "image")
 
 os.makedirs(RKNN_MODEL_DIR, exist_ok=True)
 os.makedirs(RKNN_IMAGE_DIR, exist_ok=True)
+
+
+# ===================== Task Queue =====================
+task_queue = queue.Queue()
 
 
 # ===================== Utils =====================
@@ -40,8 +46,7 @@ def save_base64_file(path: str, data: str) -> int:
 def run_rknn(model1_path, model2_path, image_path):
     cmd = ["./rknn_npu_quant_compare_demo", model1_path, model2_path, image_path]
 
-    print("\nExecuting command:")
-    print(" ".join(cmd))
+    print("\nExecuting:", " ".join(cmd))
 
     result = subprocess.run(
         cmd,
@@ -59,6 +64,7 @@ def run_rknn(model1_path, model2_path, image_path):
 
 def publish_result(client, task_id, status, result=None, error=None):
     topic = f"{RESPONSE_TOPIC_PREFIX}/{task_id}"
+
     payload = {
         "task_id": task_id,
         "status": status,
@@ -72,83 +78,117 @@ def publish_result(client, task_id, status, result=None, error=None):
     client.publish(topic, json.dumps(payload))
 
 
+# ===================== Worker =====================
+def worker():
+    while True:
+        task = task_queue.get()
+
+        payload = {}
+        try:
+            print("\n========== Worker Got Task ==========")
+
+            client = task["client"]
+            payload = task["payload"]
+
+            task_id = payload["task_id"]
+            models = payload["models"]
+
+            if len(models) != 2:
+                raise ValueError(f"Expected 2 models, got {len(models)}")
+
+            # -------- save models --------
+            print("Saving models...")
+            saved_models = []
+
+            for i, m in enumerate(models, 1):
+                path = os.path.join(RKNN_MODEL_DIR, m["model_name"])
+                size = save_base64_file(path, m["model_data"])
+                saved_models.append(path)
+
+                print(f"Model {i}: {path} ({size} bytes)")
+
+            # -------- save image --------
+            image_path = os.path.join(RKNN_IMAGE_DIR, payload["image_name"])
+            img_size = save_base64_file(image_path, payload["image_data"])
+
+            print("Image saved:", image_path, img_size, "bytes")
+
+            # -------- run inference --------
+            print("Running inference...")
+            infer_result = run_rknn(
+                saved_models[0],
+                saved_models[1],
+                image_path
+            )
+
+            # -------- publish --------
+            publish_result(
+                client,
+                task_id,
+                "success",
+                result=infer_result
+            )
+
+            print("Task success:", task_id)
+
+        except Exception as e:
+            print("Worker error:", str(e))
+
+            task_id = payload.get("task_id", "unknown")
+
+            publish_result(
+                client,
+                task_id,
+                "failed",
+                error=str(e)
+            )
+
+        finally:
+            task_queue.task_done()
+
+
 # ===================== MQTT callbacks =====================
 def on_connect(client, userdata, flags, rc):
     print("MQTT Connected")
     client.subscribe(TASK_TOPIC)
-    print("Subscribed to:", TASK_TOPIC)
+    print("Subscribed:", TASK_TOPIC)
 
 
 def on_message(client, userdata, msg):
-    payload = {}
-
     try:
-        print("\n========== Task Received ==========")
-
         payload = json.loads(msg.payload.decode())
-        task_id = payload["task_id"]
-        models = payload["models"]
-
-        if len(models) != 2:
-            raise ValueError(f"Expected 2 models, got {len(models)}")
-
-        print("\nSaving models...")
-        saved_models = []
-
-        for i, m in enumerate(models, 1):
-            path = os.path.join(RKNN_MODEL_DIR, m["model_name"])
-            size = save_base64_file(path, m["model_data"])
-
-            print(f"Model {i} saved:")
-            print("Path:", path)
-            print("Size:", size, "bytes")
-
-            saved_models.append(path)
-
-        print("\nSaving image...")
-        image_path = os.path.join(RKNN_IMAGE_DIR, payload["image_name"])
-        img_size = save_base64_file(image_path, payload["image_data"])
-
-        print("Image saved:")
-        print("Path:", image_path)
-        print("Size:", img_size, "bytes")
-
-        print("\nStarting inference...")
-        infer_result = run_rknn(
-            saved_models[0],
-            saved_models[1],
-            image_path
-        )
-
-        publish_result(
-            client,
-            task_id,
-            "success",
-            result=infer_result
-        )
-
-        print("\nInference completed")
-        print("Result published to:", f"rknn/model_quant_compare/response/{task_id}")
-
-    except Exception as e:
-        print("\nException:", str(e))
 
         task_id = payload.get("task_id", "unknown")
 
-        publish_result(
-            client,
-            task_id,
-            "failed",
-            error=str(e)
-        )
+        print("\nTask received:", task_id)
 
+        # 只入队，不做任何重计算
+        task_queue.put({
+            "client": client,
+            "payload": payload
+        })
+
+        print("Task queued:", task_id)
+
+    except Exception as e:
+        print("MQTT parse error:", e)
+
+
+# ===================== Main =====================
 def main():
+    # start worker thread
+    print("Starting worker thread...")
+    t = threading.Thread(target=worker, daemon=True)
+    t.start()
+
+    # MQTT
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
 
-    print("Connecting to MQTT broker...")
+    print("Connecting MQTT...")
     client.connect(BROKER, PORT, 60)
+
     client.loop_forever()
 
 

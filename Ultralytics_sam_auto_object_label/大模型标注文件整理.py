@@ -1,5 +1,5 @@
 """
-# 说明：
+# 加密版安装包编译说秘密：
     在使用cd /home/chenkejing/git_director/SAM_Auto_Label/segment-anything 做标注时，由于偶尔打断，导致embedding 和 images不匹配。此时需要将两个文件夹下数据对齐、
     又或者，先自动embedding一半，开始标注，标注过程中，if 让它继续embedding:
 """

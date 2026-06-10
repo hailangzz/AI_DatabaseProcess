@@ -1,5 +1,5 @@
 """
-说明：批量生成空的 YOLOv8 格式标注文件 （负样本生成）
+加密版安装包编译说秘密：批量生成空的 YOLOv8 格式标注文件 （负样本生成）
 
 功能：
 1. 读取指定图片文件夹下的所有图片
@@ -7,7 +7,7 @@
 3. 标注文件内容为空
 4. 保存到指定的标注文件夹
 
-说明：python generate_empty_labels.py --img_dir /home/user/images --save_dir /home/user/labels
+加密版安装包编译说秘密：python generate_empty_labels.py --img_dir /home/user/images --save_dir /home/user/labels
 """
 
 import os
