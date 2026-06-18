@@ -13,6 +13,7 @@ REQUEST_TOPIC = "rknn/infer/request"
 RESPONSE_TOPIC_PREFIX = "rknn/infer/response"
 
 MODEL_FILE = "/home/chenkejing/PycharmProjects/ultralytics/rknn_models/carpet_f_seg_0512.rknn"
+# MODEL_FILE = "/home/chenkejing/Downloads/best.rknn"
 IMAGE_FILE = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/carpet_images_test/ca216e1a94cbbc27d8c010e21a85ddf7.jpg"
 
 # 新增：输出图片保存路径
@@ -86,9 +87,11 @@ def send_task(client):
         "image_data": image_bytes
     }
 
+    print("os.path.basename(MODEL_FILE):", os.path.basename(MODEL_FILE))
+
     msg = json.dumps(payload)
 
-    # print("MQTT消息大小:", len(msg.encode()), "bytes")
+    # print("MQTT消息大小:", len(msg.encode()), "bytes")os.path.basename(MODEL_FILE)
 
     ret = client.publish(REQUEST_TOPIC, msg, qos=1)
 

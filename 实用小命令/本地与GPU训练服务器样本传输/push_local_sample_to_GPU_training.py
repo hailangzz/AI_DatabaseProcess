@@ -5,17 +5,8 @@ import paramiko
 from paramiko import SSHClient
 from scp import SCPClient
 
-
 # 允许上传的后缀
-ALLOW_SUFFIXES = [
-    ".jpg",
-    ".jpeg",
-    ".png",
-    ".bmp",
-    ".webp",
-    ".txt"
-]
-
+ALLOW_SUFFIXES = [".jpg", ".jpeg", ".png", ".bmp", ".webp", ".txt"]
 
 # 全局进度变量
 uploaded_bytes = 0
@@ -63,7 +54,7 @@ def progress(filename, size, sent):
         f"| {sizeof_fmt(current_total)} / {sizeof_fmt(total_bytes)} "
         f"| {percent:.2f}%",
         end="",
-        flush=True
+        flush=True,
     )
 
 
@@ -79,11 +70,11 @@ def get_all_upload_files(local_path):
     for file_path in local_path.rglob("*"):
 
         if file_path.is_file():
-            if "images" in str(local_path):    # 上传图像样本
+            if "images" in str(local_path):  # 上传图像样本
                 if file_path.suffix.lower() in ALLOW_SUFFIXES[:-1]:
                     upload_files.append(file_path)
                     # print(file_path)
-            elif "labels" in  str(local_path): # 上传标注样本
+            elif "labels" in str(local_path):  # 上传标注样本
                 if file_path.suffix.lower() in ALLOW_SUFFIXES[-1:]:
                     upload_files.append(file_path)
                     # print(file_path)
@@ -113,7 +104,6 @@ def upload_to_server(
     password=None,
     port=22,
 ):
-
     global uploaded_bytes
     global total_bytes
     global current_index
@@ -123,9 +113,7 @@ def upload_to_server(
 
     ssh.load_system_host_keys()
 
-    ssh.set_missing_host_key_policy(
-        paramiko.AutoAddPolicy()
-    )
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     print(f"正在连接服务器 {hostname} ...")
 
@@ -156,10 +144,7 @@ def upload_to_server(
         total_files = len(upload_files)
 
         # 统计总大小
-        total_bytes = sum(
-            file.stat().st_size
-            for file in upload_files
-        )
+        total_bytes = sum(file.stat().st_size for file in upload_files)
 
         print(f"待上传文件数量: {total_files}")
 
@@ -170,40 +155,25 @@ def upload_to_server(
         skipped_files = 0
         uploaded_files = 0
 
-        with SCPClient(
-            transport,
-            progress=progress
-        ) as scp:
+        with SCPClient(transport, progress=progress) as scp:
 
             for idx, file_path in enumerate(upload_files):
 
                 current_index = idx + 1
 
-                relative_path = (
-                    file_path.relative_to(local_path)
-                )
+                relative_path = file_path.relative_to(local_path)
 
-                remote_file_path = (
-                    Path(remote_path) / relative_path
-                )
+                remote_file_path = Path(remote_path) / relative_path
 
-                remote_dir = str(
-                    remote_file_path.parent
-                )
+                remote_dir = str(remote_file_path.parent)
 
                 # 创建远程目录
-                ssh.exec_command(
-                    f'mkdir -p "{remote_dir}"'
-                )
+                ssh.exec_command(f'mkdir -p "{remote_dir}"')
 
                 # =========================
                 # 检查远程文件是否已存在
                 # =========================
-                if remote_file_exists(
-                    ssh,
-                    str(remote_file_path)
-                ):
-
+                if remote_file_exists(ssh, str(remote_file_path)):
                     # print(
                     #     f"\n跳过已存在文件: "
                     #     f"{relative_path}"
@@ -216,14 +186,9 @@ def upload_to_server(
                 # =========================
                 # 上传文件
                 # =========================
-                scp.put(
-                    str(file_path),
-                    remote_path=str(remote_file_path)
-                )
+                scp.put(str(file_path), remote_path=str(remote_file_path))
 
-                uploaded_bytes += (
-                    file_path.stat().st_size
-                )
+                uploaded_bytes += file_path.stat().st_size
 
                 uploaded_files += 1
 
@@ -243,14 +208,20 @@ def upload_to_server(
 
 
 if __name__ == "__main__":
-
     # real线材检测样本它，推送
-    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_2/segment_database_augmentor_0602_batch2/images"
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_2/segment_database_augmentor_0602_batch2/images"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
 
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_2/segment_database_augmentor_0602_batch2/labels"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
 
+    # 地毯检测
+
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Carpet_Customer_Database/date0612/images"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
+
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Carpet_Customer_Database/date0612/labels"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/carpetDatabaseSegment/labels/train"
 
     # 全部线材样本
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_1/segment_database_augmentor_0602_batch1/images"    #
@@ -259,14 +230,12 @@ if __name__ == "__main__":
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_1/segment_database_augmentor_0602_batch1/labels"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
 
-
-
     # 污渍检测样本它，推送
 
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/images"    #
-    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
+    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/segment_database_augmentor_0617_batch_1/images"
+    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
 
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/labels"
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/segment_database_augmentor_0617_batch_1/labels"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"

@@ -5,15 +5,17 @@
     kill -9 Pid
 """
 
-import cv2
-import time
 import os
+import time
 
+import cv2
+
+batch_images_names = r"real_camera_images_0616_liquid_batch1"
 # ---------- 配置 ----------
-camera_index = 0                 # 摄像头索引，一般主摄像头为 0
-save_dir = "./public_real_camera_images_0417_batch1"     # 保存路径
-duration = 15 * 60                # 持续时间，2分钟，单位秒
-interval = 0.1                     # 每秒保存10张图像，100毫秒一张
+camera_index = 0  # 摄像头索引，一般主摄像头为 0
+save_dir = "./" + batch_images_names  # 保存路径
+duration = 15 * 60  # 持续时间，2分钟，单位秒
+interval = 0.1  # 每秒保存10张图像，100毫秒一张
 total_frames = duration // interval  # 总帧数，2分钟内每秒保存一帧
 
 # 创建保存目录
@@ -38,7 +40,8 @@ while True:
 
     # 保存图片
     # filename = os.path.join(save_dir, f"real_liquid_image_batch5_soy_{frame_count + 1}.jpg")
-    filename = os.path.join(save_dir, f"real_liquid_image_batch5_soy_{frame_count + 1:05d}.jpg")
+    image_name = batch_images_names + f"_{frame_count + 1:05d}.jpg"
+    filename = os.path.join(save_dir, image_name)
     cv2.imwrite(filename, frame)
     print(f"Saved image: {filename}")
 

@@ -15,14 +15,13 @@ def exec_count_cmd(ssh, cmd):
 
 
 def count_remote_dataset(
-    image_remote_path,
-    label_remote_path,
-    hostname,
-    username,
-    password=None,
-    port=22,
+        image_remote_path,
+        label_remote_path,
+        hostname,
+        username,
+        password=None,
+        port=22,
 ):
-
     ssh = SSHClient()
 
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -61,10 +60,7 @@ def count_remote_dataset(
         )
 
         # txt统计命令
-        txt_cmd = (
-            f'find "{label_remote_path}" -type f '
-            f'-iname "*.txt" | wc -l'
-        )
+        txt_cmd = f'find "{label_remote_path}" -type f ' f'-iname "*.txt" | wc -l'
 
         # 获取数量
         image_count = exec_count_cmd(ssh, image_cmd)
@@ -101,15 +97,17 @@ def count_remote_dataset(
 
 
 if __name__ == "__main__":
-
-    image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
-    label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
+    # image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
+    # label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
 
     # image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
     # label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
 
-    # image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
-    # label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
+    image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
+    label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
+
+    # image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
+    # label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/carpetDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"
     username = "robot-server"

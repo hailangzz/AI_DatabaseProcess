@@ -4,26 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="自动化训练中NPU板端推理优化">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare/rknn_quant_model_compare_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare/rknn_quant_model_compare_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/大模型标注文件整理.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ultralytics_sam_auto_object_label/大模型标注文件整理.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python安装包制作/Readme" beforeDir="false" afterPath="$PROJECT_DIR$/python安装包制作/Readme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python安装包制作/说明" beforeDir="false" afterPath="$PROJECT_DIR$/python安装包制作/加密版安装包编译说秘密" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateCarpetNegativeSample.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateCarpetNegativeSample.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateHandNegativeSample.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/DetectJob/训练集清洗.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/DetectJob/训练集清洗.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/resized_images/resize_images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/客户现场实测/1.整理基于位置的预测图像整理.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/chenkejing/PycharmProjects/AI_DatabaseProcess" value="35PleTsA665hh2QBifxeZWenMpu" />
+    </persistenceIdMap>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -32,8 +33,14 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -105,9 +112,11 @@
     "Python.CopyImageToDestFilde.executor": "Run",
     "Python.CreateCarpetNegativeSample.executor": "Run",
     "Python.CreateHandNegativeSample.executor": "Run",
+    "Python.Mask2Former_ground_mask.executor": "Run",
     "Python.MoveImageToDestFilde.executor": "Run",
     "Python.RandomDisplayDetectAndMarkSample.executor": "Run",
     "Python.add_wire_on_mask_render_frame.executor": "Run",
+    "Python.batch_create_mask_to_yolov8_seg_labels.executor": "Run",
     "Python.blender_yolo_generate_full.executor": "Run",
     "Python.check_GPU_servers_is_exist_file.executor": "Run",
     "Python.check_local_and_origin_GPU_repet_sample_info.executor": "Run",
@@ -118,6 +127,7 @@
     "Python.copy_images_to_des_folder (1).executor": "Run",
     "Python.copy_images_to_des_folder.executor": "Run",
     "Python.copy_train_database_to_project_databse.executor": "Run",
+    "Python.create_batch_mask_to_yolov8_seg_labels.executor": "Run",
     "Python.create_carpet_object_images.executor": "Run",
     "Python.create_mp4_from_image.executor": "Run",
     "Python.create_mp4_vidoe_from_images (1).executor": "Run",
@@ -141,6 +151,7 @@
     "Python.kaggle_download_database.executor": "Run",
     "Python.main.executor": "Run",
     "Python.mark_to_yolo_seg_labels.executor": "Run",
+    "Python.mask2former_create_yolov8_seg_labels.executor": "Run",
     "Python.model.executor": "Run",
     "Python.plot_images.executor": "Run",
     "Python.plot_mark_point_to_images.executor": "Run",
@@ -163,6 +174,7 @@
     "Python.save_resize_image.executor": "Run",
     "Python.split_train_test_database.executor": "Run",
     "Python.test.executor": "Run",
+    "Python.wire_augmentor.executor": "Run",
     "Python.yolov8_face_detect.executor": "Run",
     "Python.yolov8_hand_detect.executor": "Run",
     "Python.yolov8_seg_to_det_augment-bk.executor": "Run",
@@ -186,28 +198,28 @@
     "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/python安装包制作/1.加密版安装包动态库编译",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/地面分割模型应用",
+    "settings.editor.selected.configurable": "com.jetbrains.python.black.configuration.BlackFormatterConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/地面分割模型应用" />
       <recent name="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译" />
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare" />
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架" />
       <recent name="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译" />
-      <recent name="$PROJECT_DIR$/python安装包制作/加密版安装包/yolov8_onnx_export" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/数据仿真生成" />
+      <recent name="$PROJECT_DIR$/地面分割模型应用/绘制地面分割图像demo/test_images" />
+      <recent name="$PROJECT_DIR$/地面分割模型应用/绘制地面分割图像demo" />
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/segment_model_infer" />
       <recent name="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本" />
-      <recent name="$PROJECT_DIR$/scripts/DetectJob/Liquad" />
-      <recent name="$PROJECT_DIR$/scripts/DetectJob/wire" />
-      <recent name="$PROJECT_DIR$/scripts/DetectJob/hand" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.push_local_sample_to_GPU_training">
-    <configuration name="check_GPU_servers_is_exist_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -216,11 +228,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -229,7 +241,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="push_local_sample_to_GPU_training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="batch_create_mask_to_yolov8_seg_labels" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -238,11 +250,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/地面分割模型应用/绘制地面分割图像demo" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/地面分割模型应用/绘制地面分割图像demo/batch_create_mask_to_yolov8_seg_labels.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -251,7 +263,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="rknn_quant_model_compare_client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -260,11 +272,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare/rknn_quant_model_compare_client.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -273,7 +285,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="rknn_quant_model_val_client (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="mask2former_single_image_create_yolov8_seg_labels" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -282,11 +294,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/地面分割模型应用/绘制地面分割图像demo" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/地面分割模型应用/绘制地面分割图像demo/mask2former_single_image_create_yolov8_seg_labels.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -295,7 +307,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="rknn_quant_model_val_server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="wire_augmentor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -304,11 +316,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/wire_augmentor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -319,11 +331,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.push_local_sample_to_GPU_training" />
-        <item itemvalue="Python.check_GPU_servers_is_exist_file" />
-        <item itemvalue="Python.rknn_quant_model_val_client (1)" />
-        <item itemvalue="Python.rknn_quant_model_compare_client" />
-        <item itemvalue="Python.rknn_quant_model_val_server" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.wire_augmentor" />
+        <item itemvalue="Python.batch_create_mask_to_yolov8_seg_labels" />
+        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
+        <item itemvalue="Python.mask2former_single_image_create_yolov8_seg_labels" />
       </list>
     </recent_temporary>
   </component>
@@ -342,14 +354,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00003" summary="地毯检测项目，数据集生成任务。已经基本完成">
-      <option name="closed" value="true" />
-      <created>1764833734053</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1764833734053</updated>
     </task>
     <task id="LOCAL-00004" summary="新增数据仿真，生成">
       <option name="closed" value="true" />
@@ -735,7 +739,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780985499876</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1781073317762</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1781073317762</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -812,12 +824,12 @@
     <MESSAGE value="日常更新" />
     <MESSAGE value="整理基于位置的预测图像" />
     <MESSAGE value="新增本地上传样本到服务器。" />
-    <MESSAGE value="日常提交" />
     <MESSAGE value="模型导出onnx安装包创建" />
     <MESSAGE value="加密python安装包实现" />
     <MESSAGE value="自动化训练中NPU板端性能测试" />
     <MESSAGE value="自动化训练中NPU板端推理优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="自动化训练中NPU板端推理优化" />
+    <MESSAGE value="日常提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="日常提交" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -845,5 +857,13 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>

@@ -1,15 +1,18 @@
-import os
 import json
+import os
 
 
 # ==================
+
 
 def ensure_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
+
 def normalize_point(x, y, w, h):
     return x / w, y / h
+
 
 def polygon_to_bbox(points):
     xs = [p[0] for p in points]
@@ -24,8 +27,9 @@ def polygon_to_bbox(points):
 
     return cx, cy, bw, bh
 
+
 def process_json(json_path, seg_out_path, bbox_out_path):
-    with open(json_path, 'r') as f:
+    with open(json_path, "r") as f:
         data = json.load(f)
 
     img_w = data["imageWidth"]
@@ -60,10 +64,10 @@ def process_json(json_path, seg_out_path, bbox_out_path):
         bbox_lines.append(bbox_line)
 
     # 写文件
-    with open(seg_out_path, 'w') as f:
+    with open(seg_out_path, "w") as f:
         f.write("\n".join(seg_lines))
 
-    with open(bbox_out_path, 'w') as f:
+    with open(bbox_out_path, "w") as f:
         f.write("\n".join(bbox_lines))
 
 
@@ -94,16 +98,16 @@ def main():
 
 # OUTPUT_DIR = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder"  # 输出目录
 # INPUT_DIR = os.path.join(OUTPUT_DIR, "images")
-OUTPUT_DIR = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_2"  # 输出目录
+OUTPUT_DIR = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1"  # 输出目录
 INPUT_DIR = os.path.join(OUTPUT_DIR, "images")
 
 # 类别映射（根据你的实际类别修改）
 CLASS_MAP = {
-    #"liquid": 0,
-    #"hand":0,
-    #"carpet":0,
-    "wire":0
-    }
+    "liquid": 0,
+    # "hand":0,
+    # "carpet":0,
+    # "wire":0
+}
 
 if __name__ == "__main__":
     main()

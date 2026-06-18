@@ -14,8 +14,8 @@ import os
 import argparse
 
 # 默认路径（可修改为你的实际路径）
-DEFAULT_IMG_DIR = "/home/chenkejing/database/No_Target_Example_Dataset/No_Target_database/NO_target_camera_images_0407_batch1/images"
-DEFAULT_SAVE_DIR = "/home/chenkejing/database/No_Target_Example_Dataset/No_Target_database/NO_target_camera_images_0407_batch1/labels"
+DEFAULT_IMG_DIR = "/data/database/AITotal_Real_Customer_Database/Real_Carpet_Customer_Database/date0612/images"
+DEFAULT_SAVE_DIR = "/data/database/AITotal_Real_Customer_Database/Real_Carpet_Customer_Database/date0612/labels"
 
 
 def generate_empty_yolo_labels(img_dir, save_dir):

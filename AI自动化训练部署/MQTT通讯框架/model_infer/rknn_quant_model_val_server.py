@@ -41,6 +41,15 @@ def file_to_base64(path: str) -> str:
 
 
 def run_rknn(model_path: str, image_path: str) -> dict:
+    # ---------------- 删除旧的输出图像 ----------------
+    if os.path.exists(OUTPUT_IMAGE_PATH):
+        try:
+            os.remove(OUTPUT_IMAGE_PATH)
+            print("Removed existing output image:", OUTPUT_IMAGE_PATH)
+        except Exception as e:
+            print("Failed to remove output image:", e)
+
+    # ---------------- 执行推理 ----------------
     cmd = ["./rknn_yolov8_seg_demo", model_path, image_path]
 
     print("Executing:", cmd)

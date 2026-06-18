@@ -42,10 +42,7 @@ def search_remote_file(
         print("服务器连接成功")
 
         # find 搜索命令
-        search_cmd = (
-            f'find "{remote_dir}" -type f '
-            f'-name "{target_filename}"'
-        )
+        search_cmd = f'find "{remote_dir}" -type f ' f'-name "{target_filename}"'
 
         print(f"\n执行搜索命令:\n{search_cmd}\n")
 
@@ -86,10 +83,9 @@ def search_remote_file(
 
 
 if __name__ == "__main__":
-
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
-    remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
-    # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
+    # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
+    remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
     #
     # # 要搜索的文件名
     # target_filename = "20260522_150800_920_liquid_detect.jpg"
@@ -98,7 +94,7 @@ if __name__ == "__main__":
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
 
     # 要搜索的文件名
-    target_filename = "augment_segment_real_wire_seg_0602_batch1_000147.jpg"
+    target_filename = "augment_segment_real_liquid_seg_0617_batch1_001374.jpg"
 
     hostname = "172.16.50.229"
     username = "robot-server"
