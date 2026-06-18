@@ -1,11 +1,15 @@
-import sys, os, random, math, json
-import bpy
-from mathutils import Euler
-from bpy_extras.object_utils import world_to_camera_view
-from pathlib import Path
-
 # ---------- parse args ----------
 import argparse
+import json
+import math
+import os
+import random
+import sys
+from pathlib import Path
+
+import bpy
+from bpy_extras.object_utils import world_to_camera_view
+from mathutils import Euler
 
 argv = sys.argv
 if "--" in argv:
@@ -13,12 +17,14 @@ if "--" in argv:
 else:
     argv = []
 parser = argparse.ArgumentParser()
-parser.add_argument('--outdir', type=str, default='./output')
-parser.add_argument('--num', type=int, default=100)
-parser.add_argument('--res', nargs=2, type=int, default=[640, 480])
-parser.add_argument('--seed', type=int, default=42)
-parser.add_argument('--samples', type=int, default=32)
-parser.add_argument('--engine', type=str, default='CYCLES', choices=['CYCLES', 'BLENDER_EEVEE'])
+parser.add_argument("--outdir", type=str, default="./output2")
+parser.add_argument("--num", type=int, default=100)
+parser.add_argument("--res", nargs=2, type=int, default=[640, 480])
+parser.add_argument("--seed", type=int, default=42)
+parser.add_argument("--samples", type=int, default=32)
+parser.add_argument(
+    "--engine", type=str, default="CYCLES", choices=["CYCLES", "BLENDER_EEVEE"]
+)
 args = parser.parse_args(argv)
 
 OUTDIR = os.path.abspath(args.outdir)
@@ -43,24 +49,25 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 scene = bpy.context.scene
 
 # render engine
-if ENGINE == 'CYCLES':
-    scene.render.engine = 'CYCLES'
+if ENGINE == "CYCLES":
+    scene.render.engine = "CYCLES"
     try:
-        scene.cycles.device = 'GPU'
+        scene.cycles.device = "GPU"
     except:
         pass
 else:
-    scene.render.engine = 'BLENDER_EEVEE'
+    scene.render.engine = "BLENDER_EEVEE"
 
-scene.render.image_settings.file_format = 'PNG'
+scene.render.image_settings.file_format = "PNG"
 scene.render.resolution_x = WIDTH
 scene.render.resolution_y = HEIGHT
-if scene.render.engine == 'CYCLES':
+if scene.render.engine == "CYCLES":
     scene.cycles.samples = SAMPLES
 
 vl = scene.view_layers["View Layer"]
 vl.use_pass_object_index = True
 vl.use_pass_z = True
+
 
 # ---------- helpers ----------
 def ensure_world():
@@ -71,10 +78,11 @@ def ensure_world():
     nt = scene.world.node_tree
     for n in list(nt.nodes):
         nt.nodes.remove(n)
-    bg = nt.nodes.new(type='ShaderNodeBackground')
-    out = nt.nodes.new(type='ShaderNodeOutputWorld')
-    nt.links.new(bg.outputs['Background'], out.inputs['Surface'])
+    bg = nt.nodes.new(type="ShaderNodeBackground")
+    out = nt.nodes.new(type="ShaderNodeOutputWorld")
+    nt.links.new(bg.outputs["Background"], out.inputs["Surface"])
     return bg
+
 
 def clear_scene_keep(names_keep):
     for ob in list(scene.objects):
@@ -82,27 +90,29 @@ def clear_scene_keep(names_keep):
             continue
         bpy.data.objects.remove(ob, do_unlink=True)
 
+
 def make_pbr_mat_from_image(name, image_path, scale_uv=(1, 1)):
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
     nt = mat.node_tree
     for n in list(nt.nodes):
         nt.nodes.remove(n)
-    out = nt.nodes.new(type='ShaderNodeOutputMaterial')
-    bsdf = nt.nodes.new(type='ShaderNodeBsdfPrincipled')
-    tex_image = nt.nodes.new(type='ShaderNodeTexImage')
+    out = nt.nodes.new(type="ShaderNodeOutputMaterial")
+    bsdf = nt.nodes.new(type="ShaderNodeBsdfPrincipled")
+    tex_image = nt.nodes.new(type="ShaderNodeTexImage")
     tex_image.image = bpy.data.images.load(image_path)
 
-    tex_coord = nt.nodes.new(type='ShaderNodeTexCoord')
-    mapping = nt.nodes.new(type='ShaderNodeMapping')
-    mapping.inputs['Scale'].default_value[0] = scale_uv[0]
-    mapping.inputs['Scale'].default_value[1] = scale_uv[1]
-    nt.links.new(tex_coord.outputs['UV'], mapping.inputs['Vector'])
-    nt.links.new(mapping.outputs['Vector'], tex_image.inputs['Vector'])
+    tex_coord = nt.nodes.new(type="ShaderNodeTexCoord")
+    mapping = nt.nodes.new(type="ShaderNodeMapping")
+    mapping.inputs["Scale"].default_value[0] = scale_uv[0]
+    mapping.inputs["Scale"].default_value[1] = scale_uv[1]
+    nt.links.new(tex_coord.outputs["UV"], mapping.inputs["Vector"])
+    nt.links.new(mapping.outputs["Vector"], tex_image.inputs["Vector"])
 
-    nt.links.new(tex_image.outputs['Color'], bsdf.inputs['Base Color'])
+    nt.links.new(tex_image.outputs["Color"], bsdf.inputs["Base Color"])
     nt.links.new(bsdf.outputs[0], out.inputs[0])
     return mat
+
 
 # ---------- Load resources ----------
 floor_folder = "/home/chenkejing/database/Floor/floor_background"
@@ -117,6 +127,7 @@ ground = bpy.context.active_object
 ground.name = "Ground"
 ground_mat = make_pbr_mat_from_image("floor_mat", str(random.choice(floor_images)))
 ground.data.materials.append(ground_mat)
+
 
 # ---------- Camera ----------
 # def make_camera():
@@ -145,25 +156,34 @@ def make_camera():
 
     # 俯仰角调整：保持俯视但不完全垂直
     pitch_deg = random.uniform(75, 85)  # 75~85°俯视角
-    cam.rotation_euler = Euler((math.radians(pitch_deg), 0, 0), 'XYZ')
+    cam.rotation_euler = Euler((math.radians(pitch_deg), 0, 0), "XYZ")
 
     scene.camera = cam
     return cam
 
+
 cam = make_camera()
+
 
 # ---------- Lighting ----------
 def randomize_lighting():
     bg = ensure_world()
     bg.inputs["Color"].default_value = (1, 1, 1, 1)
     bg.inputs["Strength"].default_value = random.uniform(0.05, 0.4)
-    for ob in [o for o in scene.objects if o.type == 'LIGHT']:
+    for ob in [o for o in scene.objects if o.type == "LIGHT"]:
         bpy.data.objects.remove(ob, do_unlink=True)
     for i in range(random.randint(1, 3)):
-        bpy.ops.object.light_add(type='POINT',
-                                 location=(random.uniform(-1, 1), random.uniform(-1, 1), random.uniform(0.6, 1.6)))
+        bpy.ops.object.light_add(
+            type="POINT",
+            location=(
+                random.uniform(-1, 1),
+                random.uniform(-1, 1),
+                random.uniform(0.6, 1.6),
+            ),
+        )
         l = bpy.context.active_object
         l.data.energy = random.uniform(20, 150)
+
 
 # ---------- Carpet generator with min distance ----------
 def add_carpet(idx, cam, min_dist=0.5):
@@ -175,7 +195,11 @@ def add_carpet(idx, cam, min_dist=0.5):
         x_loc = random.uniform(-1, 2)
         y_loc = random.uniform(0.5, 2)
         z_loc = carpet_thickness / 2
-        dist = math.sqrt((x_loc - cam.location.x)**2 + (y_loc - cam.location.y)**2 + (z_loc - cam.location.z)**2)
+        dist = math.sqrt(
+            (x_loc - cam.location.x) ** 2
+            + (y_loc - cam.location.y) ** 2
+            + (z_loc - cam.location.z) ** 2
+        )
         if dist >= min_dist:
             break
 
@@ -186,17 +210,20 @@ def add_carpet(idx, cam, min_dist=0.5):
     carpet.scale.y = carpet_h / 2
     carpet.scale.z = carpet_thickness / 2
 
-    mat = make_pbr_mat_from_image(f"carpet_mat_{idx}", str(random.choice(carpet_images)))
+    mat = make_pbr_mat_from_image(
+        f"carpet_mat_{idx}", str(random.choice(carpet_images))
+    )
     carpet.data.materials.append(mat)
 
     carpet.pass_index = idx + 1
     carpet["cls"] = 0
 
     # 小角度随机旋转（±30°）
-    carpet.rotation_euler[2] = random.uniform(-math.pi/6, math.pi/6)
+    carpet.rotation_euler[2] = random.uniform(-math.pi / 6, math.pi / 6)
     # carpet.rotation_euler[2] = random.uniform(0, 2 * math.pi)
 
     return carpet
+
 
 # ---------- YOLO bbox with padding and clipping ----------
 # def object_bbox_yolo(obj, cam, scene, min_size=0.01, padding=0.02):
@@ -242,6 +269,7 @@ def add_carpet(idx, cam, min_dist=0.5):
 #
 #     return (x_c, y_c, w, h)
 
+
 def object_bbox_yolo(obj, cam, scene, min_size=0.01, padding=0.02):
     """基于 mesh 面片采样（面中心 + 边中心 + 顶点）的 YOLO bbox"""
 
@@ -263,7 +291,9 @@ def object_bbox_yolo(obj, cam, scene, min_size=0.01, padding=0.02):
         for loop_index in poly.loop_indices:
             v1 = mesh.vertices[mesh.loops[loop_index].vertex_index].co
             # 下一个 loop顶点
-            v2 = mesh.vertices[mesh.loops[(loop_index + 1) % len(poly.loop_indices)].vertex_index].co
+            v2 = mesh.vertices[
+                mesh.loops[(loop_index + 1) % len(poly.loop_indices)].vertex_index
+            ].co
             edge_centers.append(mw @ ((v1 + v2) * 0.5))
 
         # --- 3. 原始顶点（增强稳定性） ---
@@ -310,10 +340,13 @@ def object_bbox_yolo(obj, cam, scene, min_size=0.01, padding=0.02):
 
     return (x_c, y_c, w, h)
 
+
 # ---------- Render frame ----------
 def render_frame(i):
     clear_scene_keep(["Ground", cam.name])
-    ground.data.materials[0] = make_pbr_mat_from_image("floor_mat", str(random.choice(floor_images)))
+    ground.data.materials[0] = make_pbr_mat_from_image(
+        "floor_mat", str(random.choice(floor_images))
+    )
 
     instances = []
     for idx in range(1):
@@ -323,11 +356,11 @@ def render_frame(i):
     # 随机化摄像机位置，但保持合理俯视
     cam.location.x = random.uniform(-0.15, 0.15)
     cam.location.y = random.uniform(-0.2, 0.2)  # 小范围平移
-    cam.location.z = random.uniform(0.6, 1.2)   # 提高高度，避免贴近地毯
+    cam.location.z = random.uniform(0.6, 1.2)  # 提高高度，避免贴近地毯
 
     # 俯仰角保持75~85°俯视
     pitch_deg = random.uniform(75, 85)
-    cam.rotation_euler = Euler((math.radians(pitch_deg), 0, 0), 'XYZ')
+    cam.rotation_euler = Euler((math.radians(pitch_deg), 0, 0), "XYZ")
 
     # 可以加小幅偏转yaw，增加随机性
     yaw_deg = random.uniform(-5, 5)
@@ -344,7 +377,7 @@ def render_frame(i):
     labels = []
     meta_instances = []
     for obj in instances:
-        if obj.type != 'MESH':
+        if obj.type != "MESH":
             continue
         bbox = object_bbox_yolo(obj, cam, scene)
         if bbox is None:
@@ -354,7 +387,7 @@ def render_frame(i):
         labels.append(f"{cls} {x_c:.6f} {y_c:.6f} {w:.6f} {h:.6f}")
         meta_instances.append({"name": obj.name, "cls": cls, "bbox": [x_c, y_c, w, h]})
 
-    with open(lbl_path, 'w') as f:
+    with open(lbl_path, "w") as f:
         f.write("\n".join(labels))
     meta = {
         "img": os.path.relpath(img_path, OUTDIR),
@@ -362,9 +395,9 @@ def render_frame(i):
         "height": HEIGHT,
         "camera_location": list(cam.location),
         "camera_rotation_euler": list(cam.rotation_euler),
-        "instances": meta_instances
+        "instances": meta_instances,
     }
-    with open(meta_path, 'w') as f:
+    with open(meta_path, "w") as f:
         json.dump(meta, f, indent=2)
     print(f"[{i + 1}/{NUM}] saved image={img_path} labels={len(labels)}")
 
@@ -383,8 +416,8 @@ data_yaml = {
     "train": os.path.join(OUTDIR, "images"),
     "val": os.path.join(OUTDIR, "images"),
     "nc": 1,
-    "names": ["carpet"]
+    "names": ["carpet"],
 }
-with open(os.path.join(OUTDIR, "data.yaml"), 'w') as f:
+with open(os.path.join(OUTDIR, "data.yaml"), "w") as f:
     json.dump(data_yaml, f, indent=2)
 print("Wrote data.yaml")

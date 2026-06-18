@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增自动化地面区域分割+线材地面样本生成。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_carpet_real_videos/get_camare_image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateCarpetNegativeSample.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/CreateNegativeSample/CreateCarpetNegativeSample.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn/cli.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images_bk.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images_bk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images_bk2.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images_bk2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/add_wire_on_mask_render_frame.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/add_wire_on_mask_render_frame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/blender_generate.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/blender_generate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/blender_yolo_generate_full.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/blender_yolo_generate_full.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -332,9 +334,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
         <item itemvalue="Python.wire_augmentor" />
         <item itemvalue="Python.batch_create_mask_to_yolov8_seg_labels" />
-        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
         <item itemvalue="Python.mask2former_single_image_create_yolov8_seg_labels" />
       </list>
     </recent_temporary>
@@ -354,14 +356,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00004" summary="新增数据仿真，生成">
-      <option name="closed" value="true" />
-      <created>1765350680362</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1765350680362</updated>
     </task>
     <task id="LOCAL-00005" summary="数据仿真，生成优化">
       <option name="closed" value="true" />
@@ -747,7 +741,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781073317762</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="新增自动化地面区域分割+线材地面样本生成。">
+      <option name="closed" value="true" />
+      <created>1781745979840</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1781745979840</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -804,7 +806,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="模型测试返回的误检、漏检数据筛选应用" />
     <MESSAGE value="模型测试返回的误检、漏检数据筛选应用-增加进度条显示" />
     <MESSAGE value="线材样本仿真生成" />
     <MESSAGE value="整理代码" />
@@ -829,7 +830,8 @@
     <MESSAGE value="自动化训练中NPU板端性能测试" />
     <MESSAGE value="自动化训练中NPU板端推理优化" />
     <MESSAGE value="日常提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="日常提交" />
+    <MESSAGE value="新增自动化地面区域分割+线材地面样本生成。" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增自动化地面区域分割+线材地面样本生成。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

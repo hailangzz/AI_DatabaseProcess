@@ -4,31 +4,17 @@ from .converter import convert_onnx_to_rknn
 
 
 def main():
-
     parser = argparse.ArgumentParser()
 
-    parser.add_argument(
-        "model_path"
-    )
+    parser.add_argument("model_path")
 
-    parser.add_argument(
-        "platform"
-    )
+    parser.add_argument("platform")
 
-    parser.add_argument(
-        "--dataset",
-        required=True
-    )
+    parser.add_argument("--dataset", required=True)
 
-    parser.add_argument(
-        "--output",
-        default="model.rknn"
-    )
+    parser.add_argument("--output2", default="model.rknn")
 
-    parser.add_argument(
-        "--quant",
-        action="store_true"
-    )
+    parser.add_argument("--quant", action="store_true")
 
     args = parser.parse_args()
 
@@ -37,7 +23,7 @@ def main():
         platform=args.platform,
         dataset_path=args.dataset,
         output_path=args.output,
-        do_quant=args.quant
+        do_quant=args.quant,
     )
 
 

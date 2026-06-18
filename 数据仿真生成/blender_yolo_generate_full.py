@@ -1,12 +1,15 @@
-import sys, os, random, math, json
-import bpy
-import bmesh
-from mathutils import Vector, Euler
-from bpy_extras.object_utils import world_to_camera_view
-from pathlib import Path
-
 # ---------- parse args ----------
 import argparse
+import json
+import math
+import os
+import random
+import sys
+from pathlib import Path
+
+import bpy
+from bpy_extras.object_utils import world_to_camera_view
+from mathutils import Euler
 
 argv = sys.argv
 if "--" in argv:
@@ -14,12 +17,16 @@ if "--" in argv:
 else:
     argv = []
 parser = argparse.ArgumentParser()
-parser.add_argument('--outdir', type=str, default='./output')
-parser.add_argument('--num', type=int, default=100)
-parser.add_argument('--res', nargs=2, type=int, default=[640, 480])
-parser.add_argument('--seed', type=int, default=42)
-parser.add_argument('--samples', type=int, default=32, help='Cycles samples (set low for speed)')
-parser.add_argument('--engine', type=str, default='CYCLES', choices=['CYCLES', 'BLENDER_EEVEE'])
+parser.add_argument("--outdir", type=str, default="./output2")
+parser.add_argument("--num", type=int, default=100)
+parser.add_argument("--res", nargs=2, type=int, default=[640, 480])
+parser.add_argument("--seed", type=int, default=42)
+parser.add_argument(
+    "--samples", type=int, default=32, help="Cycles samples (set low for speed)"
+)
+parser.add_argument(
+    "--engine", type=str, default="CYCLES", choices=["CYCLES", "BLENDER_EEVEE"]
+)
 args = parser.parse_args(argv)
 
 OUTDIR = os.path.abspath(args.outdir)
@@ -44,20 +51,20 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 scene = bpy.context.scene
 
 # choose engine
-if ENGINE == 'CYCLES':
-    scene.render.engine = 'CYCLES'
+if ENGINE == "CYCLES":
+    scene.render.engine = "CYCLES"
     try:
-        scene.cycles.device = 'GPU'
+        scene.cycles.device = "GPU"
     except Exception:
         pass
-elif ENGINE == 'BLENDER_EEVEE':
-    scene.render.engine = 'BLENDER_EEVEE'
+elif ENGINE == "BLENDER_EEVEE":
+    scene.render.engine = "BLENDER_EEVEE"
 
-scene.render.image_settings.file_format = 'PNG'
+scene.render.image_settings.file_format = "PNG"
 scene.render.resolution_x = WIDTH
 scene.render.resolution_y = HEIGHT
 # set samples if cycles
-if scene.render.engine == 'CYCLES':
+if scene.render.engine == "CYCLES":
     scene.cycles.samples = SAMPLES
 
 # ensure view layer passes
@@ -77,9 +84,9 @@ def ensure_world():
     # clear nodes but be tolerant
     for n in list(node_tree.nodes):
         node_tree.nodes.remove(n)
-    bg = node_tree.nodes.new(type='ShaderNodeBackground')
-    out = node_tree.nodes.new(type='ShaderNodeOutputWorld')
-    node_tree.links.new(bg.outputs['Background'], out.inputs['Surface'])
+    bg = node_tree.nodes.new(type="ShaderNodeBackground")
+    out = node_tree.nodes.new(type="ShaderNodeOutputWorld")
+    node_tree.links.new(bg.outputs["Background"], out.inputs["Surface"])
     return bg
 
 
@@ -99,14 +106,14 @@ def make_pbr_mat_from_image(name, image_path):
     # clear nodes
     for n in list(nt.nodes):
         nt.nodes.remove(n)
-    out = nt.nodes.new(type='ShaderNodeOutputMaterial')
-    bsdf = nt.nodes.new(type='ShaderNodeBsdfPrincipled')
+    out = nt.nodes.new(type="ShaderNodeOutputMaterial")
+    bsdf = nt.nodes.new(type="ShaderNodeBsdfPrincipled")
 
     # Load the image texture
-    tex_image = nt.nodes.new(type='ShaderNodeTexImage')
+    tex_image = nt.nodes.new(type="ShaderNodeTexImage")
     tex_image.image = bpy.data.images.load(image_path)
 
-    nt.links.new(tex_image.outputs['Color'], bsdf.inputs['Base Color'])
+    nt.links.new(tex_image.outputs["Color"], bsdf.inputs["Base Color"])
     nt.links.new(bsdf.outputs[0], out.inputs[0])
     return mat
 
@@ -132,8 +139,8 @@ def make_camera():
     cam = bpy.context.active_object
     cam.name = "SimCam"
     cam.data.lens = 10.0
-    cam.location = (0.0, -0.6, 0.25)  #相机的起始位置
-    cam.rotation_euler = Euler((math.radians(90 - 5), 0, 0), 'XYZ')
+    cam.location = (0.0, -0.6, 0.25)  # 相机的起始位置
+    cam.rotation_euler = Euler((math.radians(90 - 5), 0, 0), "XYZ")
     scene.camera = cam
     return cam
 
@@ -148,12 +155,18 @@ def randomize_lighting():
     bg.inputs["Color"].default_value = (1.0, 1.0, 1.0, 1.0)
     bg.inputs["Strength"].default_value = random.uniform(0.05, 0.4)  # 世界环境能量强度
     # remove existing lights
-    for ob in [o for o in scene.objects if o.type == 'LIGHT']:
+    for ob in [o for o in scene.objects if o.type == "LIGHT"]:
         bpy.data.objects.remove(ob, do_unlink=True)
     # add 1-3 point lights
     for i in range(random.randint(1, 3)):
-        bpy.ops.object.light_add(type='POINT',
-                                 location=(random.uniform(-1, 1), random.uniform(-1, 1), random.uniform(0.6, 1.6)))
+        bpy.ops.object.light_add(
+            type="POINT",
+            location=(
+                random.uniform(-1, 1),
+                random.uniform(-1, 1),
+                random.uniform(0.6, 1.6),
+            ),
+        )
         l = bpy.context.active_object
         # ★★★ 降低光强，避免地面过亮 ★★★
         l.data.energy = random.uniform(20, 150)
@@ -192,18 +205,20 @@ def add_wire(idx):
         z = random.uniform(0, 0.02) * math.sin(t * math.pi * random.uniform(1.0, 2.0))
 
         p.co = (x, y, z)
-        p.handle_left_type = p.handle_right_type = 'AUTO'
+        p.handle_left_type = p.handle_right_type = "AUTO"
 
     # 设置线材厚度
     curve.bevel_depth = wire_radius
     curve.bevel_resolution = 8
 
     # 转成 mesh
-    bpy.ops.object.convert(target='MESH')
+    bpy.ops.object.convert(target="MESH")
     wire_obj = bpy.context.active_object
 
     # 添加材质
-    wire_mat = make_pbr_mat_from_image(f"wire_mat_{idx}", str(random.choice(wire_images)))
+    wire_mat = make_pbr_mat_from_image(
+        f"wire_mat_{idx}", str(random.choice(wire_images))
+    )
     wire_obj.data.materials.append(wire_mat)
 
     # 标签信息
@@ -214,7 +229,6 @@ def add_wire(idx):
     wire_obj.rotation_euler[2] = random.uniform(0, 2 * math.pi)
 
     return wire_obj
-
 
 
 # ---------- bbox projection (robust) ----------
@@ -296,13 +310,13 @@ def render_frame(i):
     obj_idx = 0
     n_wires = random.randint(1, 4)
     for k in range(n_wires):
-        o = add_wire(obj_idx);
-        instances.append(o);
+        o = add_wire(obj_idx)
+        instances.append(o)
         obj_idx += 1
     cam.location.x = random.uniform(-0.15, 0.15)
     cam.location.y = -random.uniform(0.3, 0.8)
     cam.location.z = random.uniform(0.2, 0.35)  # 相机在Z轴的随机移动
-    cam.rotation_euler = Euler((math.radians(90 - random.uniform(0, 10)), 0, 0), 'XYZ')
+    cam.rotation_euler = Euler((math.radians(90 - random.uniform(0, 10)), 0, 0), "XYZ")
     randomize_lighting()
     img_path = os.path.join(IMG_DIR, f"{i:06d}.png")
     lbl_path = os.path.join(LBL_DIR, f"{i:06d}.txt")
@@ -312,7 +326,7 @@ def render_frame(i):
     labels = []
     meta_instances = []
     for obj in instances:
-        if obj.type != 'MESH':
+        if obj.type != "MESH":
             continue
         bbox = object_bbox_yolo(obj, cam, scene)
         if bbox is None:
@@ -323,7 +337,7 @@ def render_frame(i):
             continue
         labels.append(f"{cls} {x_c:.6f} {y_c:.6f} {w:.6f} {h:.6f}")
         meta_instances.append({"name": obj.name, "cls": cls, "bbox": [x_c, y_c, w, h]})
-    with open(lbl_path, 'w') as f:
+    with open(lbl_path, "w") as f:
         f.write("\n".join(labels))
     meta = {
         "img": os.path.relpath(img_path, OUTDIR),
@@ -331,9 +345,9 @@ def render_frame(i):
         "height": HEIGHT,
         "camera_location": list(cam.location),
         "camera_rotation_euler": list(cam.rotation_euler),
-        "instances": meta_instances
+        "instances": meta_instances,
     }
-    with open(meta_path, 'w') as f:
+    with open(meta_path, "w") as f:
         json.dump(meta, f, indent=2)
     print(f"[{i + 1}/{NUM}] saved image={img_path} labels={len(labels)}")
 
@@ -352,8 +366,8 @@ data_yaml = {
     "train": os.path.join(OUTDIR, "images"),
     "val": os.path.join(OUTDIR, "images"),
     "nc": 1,
-    "names": ["wire"]
+    "names": ["wire"],
 }
-with open(os.path.join(OUTDIR, "data.yaml"), 'w') as f:
+with open(os.path.join(OUTDIR, "data.yaml"), "w") as f:
     json.dump(data_yaml, f, indent=2)
 print("Wrote data.yaml")

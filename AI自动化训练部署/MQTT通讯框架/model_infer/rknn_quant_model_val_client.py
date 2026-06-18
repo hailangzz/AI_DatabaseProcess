@@ -1,9 +1,9 @@
-import json
-import uuid
 import base64
+import json
 import os
-import paho.mqtt.client as mqtt
+import uuid
 
+import paho.mqtt.client as mqtt
 
 # ===================== Config =====================
 BROKER = "172.16.50.91"
@@ -12,7 +12,9 @@ PORT = 1883
 REQUEST_TOPIC = "rknn/infer/request"
 RESPONSE_TOPIC_PREFIX = "rknn/infer/response"
 
-MODEL_FILE = "/home/chenkejing/PycharmProjects/ultralytics/rknn_models/carpet_f_seg_0512.rknn"
+MODEL_FILE = (
+    "/home/chenkejing/PycharmProjects/ultralytics/rknn_models/carpet_f_seg_0512.rknn"
+)
 # MODEL_FILE = "/home/chenkejing/Downloads/best.rknn"
 IMAGE_FILE = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/carpet_images_test/ca216e1a94cbbc27d8c010e21a85ddf7.jpg"
 
@@ -62,11 +64,8 @@ def print_json(result: dict):
 
     # ===================== 新增：处理输出图片 =====================
     if "output_image" in result and result["output_image"]:
-        print("\n===== output image received =====")
-        save_base64_image(
-            result["output_image"]["data"],
-            SAVE_OUTPUT_IMAGE_PATH
-        )
+        print("\n===== output2 image received =====")
+        save_base64_image(result["output_image"]["data"], SAVE_OUTPUT_IMAGE_PATH)
 
 
 # ===================== MQTT Logic =====================
@@ -84,7 +83,7 @@ def send_task(client):
         "model_name": os.path.basename(MODEL_FILE),
         "model_data": model_bytes,
         "image_name": os.path.basename(IMAGE_FILE),
-        "image_data": image_bytes
+        "image_data": image_bytes,
     }
 
     print("os.path.basename(MODEL_FILE):", os.path.basename(MODEL_FILE))
@@ -127,9 +126,7 @@ def on_disconnect(client, userdata, disconnect_flags, reason_code, properties):
 
 # ===================== Main =====================
 def main():
-    client = mqtt.Client(
-        callback_api_version=mqtt.CallbackAPIVersion.VERSION2
-    )
+    client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 
     client.on_connect = on_connect
     client.on_message = on_message

@@ -1,11 +1,11 @@
-import json
 import base64
-import subprocess
+import json
 import os
-import threading
 import queue
-import paho.mqtt.client as mqtt
+import subprocess
+import threading
 
+import paho.mqtt.client as mqtt
 
 # ===================== Config =====================
 BROKER = "0.0.0.0"
@@ -22,7 +22,6 @@ OUTPUT_IMAGE_PATH = os.path.join(RKNN_WORK_DIR, "out.png")
 
 os.makedirs(RKNN_MODEL_DIR, exist_ok=True)
 os.makedirs(RKNN_IMAGE_DIR, exist_ok=True)
-
 
 # ===================== Task Queue =====================
 task_queue = queue.Queue()
@@ -45,26 +44,21 @@ def run_rknn(model_path: str, image_path: str) -> dict:
     if os.path.exists(OUTPUT_IMAGE_PATH):
         try:
             os.remove(OUTPUT_IMAGE_PATH)
-            print("Removed existing output image:", OUTPUT_IMAGE_PATH)
+            print("Removed existing output2 image:", OUTPUT_IMAGE_PATH)
         except Exception as e:
-            print("Failed to remove output image:", e)
+            print("Failed to remove output2 image:", e)
 
     # ---------------- 执行推理 ----------------
     cmd = ["./rknn_yolov8_seg_demo", model_path, image_path]
 
     print("Executing:", cmd)
 
-    result = subprocess.run(
-        cmd,
-        cwd=RKNN_WORK_DIR,
-        capture_output=True,
-        text=True
-    )
+    result = subprocess.run(cmd, cwd=RKNN_WORK_DIR, capture_output=True, text=True)
 
     return {
         "stdout": result.stdout,
         "stderr": result.stderr,
-        "returncode": result.returncode
+        "returncode": result.returncode,
     }
 
 
@@ -112,7 +106,7 @@ def worker():
 
             if os.path.exists(OUTPUT_IMAGE_PATH):
                 output_image_data = file_to_base64(OUTPUT_IMAGE_PATH)
-                print("output image read success:", len(output_image_data))
+                print("output2 image read success:", len(output_image_data))
             else:
                 print("worning: out.png not exist.")
 
@@ -121,10 +115,9 @@ def worker():
                 "task_id": task_id,
                 "status": "success",
                 "result": infer_result,
-                "output_image": {
-                    "name": "out.png",
-                    "data": output_image_data
-                } if output_image_data else None
+                "output_image": {"name": "out.png", "data": output_image_data}
+                if output_image_data
+                else None,
             }
 
             topic = build_response_topic(task_id)
@@ -141,7 +134,7 @@ def worker():
                 "task_id": task_id,
                 "status": "failed",
                 "error": str(e),
-                "output_image": None
+                "output_image": None,
             }
 
             topic = build_response_topic(task_id)
@@ -167,10 +160,7 @@ def on_message(client, userdata, msg):
         print("\ntask into queue:", task_id)
 
         # 只入队，不做任何重计算
-        task_queue.put({
-            "client": client,
-            "payload": payload
-        })
+        task_queue.put({"client": client, "payload": payload})
 
     except Exception as e:
         print("MQTT Parsing failed:", e)
