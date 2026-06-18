@@ -12,7 +12,7 @@ from mathutils import Euler
 # ---------- parse args ----------
 argv = sys.argv
 if "--" in argv:
-    argv = argv[argv.index("--") + 1:]
+    argv = argv[argv.index("--") + 1 :]
 else:
     argv = []
 

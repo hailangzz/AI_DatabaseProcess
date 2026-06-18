@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增自动化地面区域分割+线材地面样本生成。">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="地面区域，目标样本生成。添加基于空间距离的，目标样本生成。使样本更真实。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/python安装包制作/onnx_to_rknn_export/export_quant_rknn/cli.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseAnalysis/筛选mark目标图像.py" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseAnalysis/FilteringMaskTargetSamples.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images_bk.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images_bk.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images_bk2.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images_bk2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/线材mask处理/4.blender_yolo_generate_full_copy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/add_wire_on_mask_render_frame.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/add_wire_on_mask_render_frame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/copy_paste.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/copy_paste.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/wire_augmentor.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/wire_augmentor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/blender_generate.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/blender_generate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/blender_yolo_generate_full.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/blender_yolo_generate_full.py" afterDir="false" />
     </list>
@@ -114,6 +116,7 @@
     "Python.CopyImageToDestFilde.executor": "Run",
     "Python.CreateCarpetNegativeSample.executor": "Run",
     "Python.CreateHandNegativeSample.executor": "Run",
+    "Python.FilteringMaskTargetSamples.executor": "Run",
     "Python.Mask2Former_ground_mask.executor": "Run",
     "Python.MoveImageToDestFilde.executor": "Run",
     "Python.RandomDisplayDetectAndMarkSample.executor": "Run",
@@ -128,6 +131,7 @@
     "Python.copy_images_to_des_filte.executor": "Run",
     "Python.copy_images_to_des_folder (1).executor": "Run",
     "Python.copy_images_to_des_folder.executor": "Run",
+    "Python.copy_paste.executor": "Run",
     "Python.copy_train_database_to_project_databse.executor": "Run",
     "Python.create_batch_mask_to_yolov8_seg_labels.executor": "Run",
     "Python.create_carpet_object_images.executor": "Run",
@@ -151,6 +155,7 @@
     "Python.hand_seglabel_to_detectlabel.executor": "Run",
     "Python.health_timer.executor": "Run",
     "Python.kaggle_download_database.executor": "Run",
+    "Python.liquid_augmentor.executor": "Run",
     "Python.main.executor": "Run",
     "Python.mark_to_yolo_seg_labels.executor": "Run",
     "Python.mask2former_create_yolov8_seg_labels.executor": "Run",
@@ -200,17 +205,17 @@
     "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/地面分割模型应用",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/数据仿真生成/SegmentSampleAugmentor",
     "settings.editor.selected.configurable": "com.jetbrains.python.black.configuration.BlackFormatterConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor" />
       <recent name="$PROJECT_DIR$/地面分割模型应用" />
       <recent name="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译" />
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare" />
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架" />
-      <recent name="$PROJECT_DIR$/python安装包制作/2.加密版发布安装包编译" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/数据仿真生成" />
@@ -220,8 +225,8 @@
       <recent name="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.liquid_augmentor">
+    <configuration name="FilteringMaskTargetSamples" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -234,7 +239,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/FilteringMaskTargetSamples.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -243,7 +248,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="batch_create_mask_to_yolov8_seg_labels" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="check_GPU_servers_is_exist_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -252,11 +257,33 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/地面分割模型应用/绘制地面分割图像demo" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/地面分割模型应用/绘制地面分割图像demo/batch_create_mask_to_yolov8_seg_labels.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="liquid_augmentor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor/liquid_augmentor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -279,28 +306,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="mask2former_single_image_create_yolov8_seg_labels" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/地面分割模型应用/绘制地面分割图像demo" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/地面分割模型应用/绘制地面分割图像demo/mask2former_single_image_create_yolov8_seg_labels.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -333,11 +338,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
+        <item itemvalue="Python.liquid_augmentor" />
+        <item itemvalue="Python.check_GPU_servers_is_exist_file" />
         <item itemvalue="Python.wire_augmentor" />
-        <item itemvalue="Python.batch_create_mask_to_yolov8_seg_labels" />
-        <item itemvalue="Python.mask2former_single_image_create_yolov8_seg_labels" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.FilteringMaskTargetSamples" />
       </list>
     </recent_temporary>
   </component>
@@ -356,22 +361,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00005" summary="数据仿真，生成优化">
-      <option name="closed" value="true" />
-      <created>1765770273354</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1765770273354</updated>
-    </task>
-    <task id="LOCAL-00006" summary="标注数据审查、分析程序新增mark、detect功能">
-      <option name="closed" value="true" />
-      <created>1769671948817</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1769671948817</updated>
     </task>
     <task id="LOCAL-00007" summary="标注数据审查、分析程序：增大显示图像的200*200变为400*400">
       <option name="closed" value="true" />
@@ -749,7 +738,23 @@
       <option name="project" value="LOCAL" />
       <updated>1781745979840</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="地面区域，目标样本生成。添加基于空间距离的，目标样本生成。使样本更真实。">
+      <option name="closed" value="true" />
+      <created>1781751691431</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1781751691431</updated>
+    </task>
+    <task id="LOCAL-00055" summary="地面区域，目标样本生成。添加基于空间距离的，目标样本生成。使样本更真实。">
+      <option name="closed" value="true" />
+      <created>1781752706481</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1781752706481</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -806,7 +811,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="模型测试返回的误检、漏检数据筛选应用-增加进度条显示" />
     <MESSAGE value="线材样本仿真生成" />
     <MESSAGE value="整理代码" />
     <MESSAGE value="新增液体检测，数据处理、增强脚本" />
@@ -831,18 +835,19 @@
     <MESSAGE value="自动化训练中NPU板端推理优化" />
     <MESSAGE value="日常提交" />
     <MESSAGE value="新增自动化地面区域分割+线材地面样本生成。" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增自动化地面区域分割+线材地面样本生成。" />
+    <MESSAGE value="地面区域，目标样本生成。添加基于空间距离的，目标样本生成。使样本更真实。" />
+    <option name="LAST_COMMIT_MESSAGE" value="地面区域，目标样本生成。添加基于空间距离的，目标样本生成。使样本更真实。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DatabaseAnalysis/筛选mark目标图像.py</url>
+          <url>file://$PROJECT_DIR$/DatabaseAnalysis/FilteringMaskTargetSamples.py</url>
           <line>146</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DatabaseAnalysis/筛选mark目标图像.py</url>
+          <url>file://$PROJECT_DIR$/DatabaseAnalysis/FilteringMaskTargetSamples.py</url>
           <line>148</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>

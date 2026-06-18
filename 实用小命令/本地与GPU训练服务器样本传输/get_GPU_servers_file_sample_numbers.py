@@ -15,12 +15,12 @@ def exec_count_cmd(ssh, cmd):
 
 
 def count_remote_dataset(
-        image_remote_path,
-        label_remote_path,
-        hostname,
-        username,
-        password=None,
-        port=22,
+    image_remote_path,
+    label_remote_path,
+    hostname,
+    username,
+    password=None,
+    port=22,
 ):
     ssh = SSHClient()
 

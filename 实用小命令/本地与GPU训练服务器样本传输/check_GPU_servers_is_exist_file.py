@@ -3,12 +3,12 @@ from paramiko import SSHClient
 
 
 def search_remote_file(
-    remote_dir,
-    target_filename,
-    hostname,
-    username,
-    password=None,
-    port=22,
+        remote_dir,
+        target_filename,
+        hostname,
+        username,
+        password=None,
+        port=22,
 ):
     """
     在远程服务器指定目录下搜索文件
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
 
     # 要搜索的文件名
-    target_filename = "augment_segment_real_liquid_seg_0617_batch1_001374.jpg"
+    target_filename = "20260522_075115_735_liquid_detect.jpg"
 
     hostname = "172.16.50.229"
     username = "robot-server"

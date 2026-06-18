@@ -8,11 +8,11 @@ from tqdm import tqdm
 
 class WireAugmentor:
     def __init__(
-        self,
-        image_dir,
-        label_dir,
-        output_dir,
-        min_short_side=32,  # 最小短边长度，单位像素，防止生成过小的目标难以学习
+            self,
+            image_dir,
+            label_dir,
+            output_dir,
+            min_short_side=20,  # 最小短边长度，单位像素，防止生成过小的目标难以学习
     ):
 
         self.image_dir = image_dir
@@ -88,9 +88,9 @@ class WireAugmentor:
 
         x, y, w, h = cv2.boundingRect(polygon.astype(np.int32))
 
-        crop_img = image[y : y + h, x : x + w]
+        crop_img = image[y: y + h, x: x + w]
 
-        crop_mask = mask[y : y + h, x : x + w]
+        crop_mask = mask[y: y + h, x: x + w]
 
         crop_poly = polygon.copy()
 
@@ -186,8 +186,8 @@ class WireAugmentor:
         saved_count = 0
 
         for image_name in tqdm(
-            image_names,
-            desc="Processing Images",
+                image_names,
+                desc="Processing Images",
         ):
 
             try:
@@ -221,7 +221,6 @@ class WireAugmentor:
                 )
 
                 for idx, (cls_id, polygon) in enumerate(polygons):
-
                     # -------------------------
                     # 小目标过滤
                     # -------------------------
@@ -281,10 +280,15 @@ class WireAugmentor:
 
 if __name__ == "__main__":
     augmentor = WireAugmentor(
-        image_dir="/data/database/WireDatabase/EMdoorWireDatabase/origin_publish_wire_database/images",
-        label_dir="/data/database/WireDatabase/EMdoorWireDatabase/origin_publish_wire_database/labels",
-        output_dir="/data/database/Total_model_target_mask_png_library/public_image_mask/wire_mask_png_library",
-        min_short_side=45,
+        # image_dir="/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/images",
+        # label_dir="/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/yolov8_labels/seg",
+        # # 真实图像mask库
+        # output_dir="/data/database/Total_model_target_mask_png_library/real_image_mask/liquid_mask_png_library",
+        image_dir="/data/database/LiquadDatabase/TotalLiquidDatabase/images",
+        label_dir="/data/database/LiquadDatabase/TotalLiquidDatabase/yolov8_labels/seg",
+        # 公开图像mask库
+        output_dir="/data/database/Total_model_target_mask_png_library/public_image_mask/liquid_mask_png_library",
+        min_short_side=32,
     )
 
     augmentor.run()

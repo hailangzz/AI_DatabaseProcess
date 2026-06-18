@@ -20,7 +20,7 @@ parser.add_argument("--num", type=int, default=100)
 parser.add_argument("--res", nargs=2, type=int, default=[640, 480])
 parser.add_argument("--seed", type=int, default=42)
 args = parser.parse_args(
-    sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+    sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else []
 )
 random.seed(args.seed)
 
