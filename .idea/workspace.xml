@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -350,14 +351,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00011" summary="创建针对混杂样本集的，误检负样本集。">
-      <option name="closed" value="true" />
-      <created>1770023738417</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1770023738417</updated>
     </task>
     <task id="LOCAL-00012" summary="扣取分割标注正样本集，贴合至误检负样本图像，生成新的标注文件">
       <option name="closed" value="true" />
@@ -743,7 +736,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782097978661</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1782098054294</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1782098054294</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
