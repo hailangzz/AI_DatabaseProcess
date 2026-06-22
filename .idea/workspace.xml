@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
-      <change afterPath="$PROJECT_DIR$/DatabaseAnalysis/Fast_target_image_detection_effect.py" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor/liquid_augmentor.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor/liquid_augmentor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -352,14 +352,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00008" summary="标注数据审查、分析程序：新增进度条显示功能">
-      <option name="closed" value="true" />
-      <created>1769674151355</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1769674151355</updated>
     </task>
     <task id="LOCAL-00009" summary="添加上gitignore,信息">
       <option name="closed" value="true" />
@@ -745,7 +737,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781773202191</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;">
+      <option name="closed" value="true" />
+      <created>1782095994782</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1782095994782</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -802,7 +802,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="线材样本仿真生成" />
     <MESSAGE value="整理代码" />
     <MESSAGE value="新增液体检测，数据处理、增强脚本" />
     <MESSAGE value="1、新增缩放、旋转数据增强变换&#10;2、新增xanylabeling，自动追踪标注json文件，转为yolov8_seg、yolov8_det标签文件" />
@@ -827,7 +826,8 @@
     <MESSAGE value="新增自动化地面区域分割+线材地面样本生成。" />
     <MESSAGE value="地面区域，目标样本生成。添加基于空间距离的，目标样本生成。使样本更真实。" />
     <MESSAGE value="日常提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="日常提交" />
+    <MESSAGE value="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

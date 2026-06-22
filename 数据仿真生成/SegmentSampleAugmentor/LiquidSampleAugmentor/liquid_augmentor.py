@@ -1,3 +1,12 @@
+"""
+WireAugmentor - YOLOv8 Segmentation Polygon Augmentation for Wire Detection
+-获取图像和标签
+-解析YOLOv8 Segmentation标签为Polygon
+-过滤过小目标 (短边小于min_short_side)
+-抠图生成RGBA图像 (背景透明)
+-随机旋转缩放Polygon和图像
+-保存增强后的PNG图像和对应的YOLOv8 Segmentation标签   
+"""
 import os
 import random
 
