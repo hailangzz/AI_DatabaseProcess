@@ -20,3 +20,6 @@ Ultralytics_sam_auto_object_label/video_annotations/
 /python安装包制作/onnx_to_rknn_export/dist/
 /python安装包制作/onnx_to_rknn_export/export_quant_rknn.egg-info/
 /python安装包制作/yolov8_onnx_export/yolov8_onnx_export.egg-info/
+# Python cache
+__pycache__/
+*.py[cod]
