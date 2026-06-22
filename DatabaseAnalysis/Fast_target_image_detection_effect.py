@@ -288,7 +288,7 @@ class ImageChecker(QWidget):
 
         self.cache.put(path, qimg)
 
-        batch_files = self.files[self.index: self.index + self.batch_size]
+        batch_files = self.files[self.index : self.index + self.batch_size]
 
         for i, file in enumerate(batch_files):
 
@@ -316,7 +316,7 @@ class ImageChecker(QWidget):
         if not self.files:
             return
 
-        batch_files = self.files[self.index: self.index + self.batch_size]
+        batch_files = self.files[self.index : self.index + self.batch_size]
 
         self.selected_labels = {}
 
