@@ -23,7 +23,3 @@ Ultralytics_sam_auto_object_label/video_annotations/
 # Python cache
 __pycache__/
 *.py[cod]
-
-.idea/workspace.xml
-.idea/shelf/
-.idea/httpRequests/
