@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -351,14 +350,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00010" summary="git rm -r --cached 移除不必要的大文件跟踪">
-      <option name="closed" value="true" />
-      <created>1769741029527</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1769741029527</updated>
     </task>
     <task id="LOCAL-00011" summary="创建针对混杂样本集的，误检负样本集。">
       <option name="closed" value="true" />
@@ -744,7 +735,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782097896939</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1782097978661</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1782097978661</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
