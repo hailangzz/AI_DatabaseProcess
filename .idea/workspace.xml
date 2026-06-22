@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -352,14 +352,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00014" summary="提交一次代码">
-      <option name="closed" value="true" />
-      <created>1772174097285</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1772174097285</updated>
     </task>
     <task id="LOCAL-00015" summary="新增：线材分割项目">
       <option name="closed" value="true" />
@@ -745,7 +737,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782100020824</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1782100194376</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1782100194376</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
