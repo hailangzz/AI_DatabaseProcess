@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/Mask标注数据处理工具集/地面mask处理/create_carpet_object_images.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor/liquid_augmentor.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor/liquid_augmentor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +104,7 @@
     "Python.CopyImageToDestFilde.executor": "Run",
     "Python.CreateCarpetNegativeSample.executor": "Run",
     "Python.CreateHandNegativeSample.executor": "Run",
+    "Python.Fast_target_image_detection_effect.executor": "Run",
     "Python.FilteringMaskTargetSamples.executor": "Run",
     "Python.Mask2Former_ground_mask.executor": "Run",
     "Python.MoveImageToDestFilde.executor": "Run",
@@ -352,14 +351,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00009" summary="添加上gitignore,信息">
-      <option name="closed" value="true" />
-      <created>1769740328774</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1769740328774</updated>
     </task>
     <task id="LOCAL-00010" summary="git rm -r --cached 移除不必要的大文件跟踪">
       <option name="closed" value="true" />
@@ -745,7 +736,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782095994782</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1782097896939</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1782097896939</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -825,9 +824,9 @@
     <MESSAGE value="自动化训练中NPU板端推理优化" />
     <MESSAGE value="新增自动化地面区域分割+线材地面样本生成。" />
     <MESSAGE value="地面区域，目标样本生成。添加基于空间距离的，目标样本生成。使样本更真实。" />
-    <MESSAGE value="日常提交" />
     <MESSAGE value="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;" />
+    <MESSAGE value="日常提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="日常提交" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
