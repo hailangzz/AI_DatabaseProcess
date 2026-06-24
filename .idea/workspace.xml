@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAnalysis/Fast_target_image_detection_effect.py" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseAnalysis/Fast_target_image_detection_effect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +134,7 @@
     "Python.deal_database_main.executor": "Run",
     "Python.deduplicate_images_by_prefix.executor": "Run",
     "Python.delete_unuseful_images.executor": "Run",
+    "Python.download_bilibili_video.executor": "Run",
     "Python.extract_mask_object_augment.executor": "Run",
     "Python.extract_target_class_image_database.executor": "Run",
     "Python.gen_hollow_yolov8_seg.executor": "Run",
@@ -262,7 +262,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="check_GPU_servers_is_exist_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="download_bilibili_video" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -271,11 +271,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bilibili_videos_download" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bilibili_videos_download/download_bilibili_video.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -284,7 +284,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="liquid_augmentor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -293,11 +293,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor/liquid_augmentor.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -306,7 +306,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="rknn_quant_model_val_client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -315,11 +315,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -331,10 +331,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Fast_target_image_detection_effect" />
+        <item itemvalue="Python.download_bilibili_video" />
+        <item itemvalue="Python.rknn_quant_model_val_client" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.FilteringMaskTargetSamples" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.liquid_augmentor" />
-        <item itemvalue="Python.check_GPU_servers_is_exist_file" />
       </list>
     </recent_temporary>
   </component>
@@ -353,14 +353,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00018" summary="训练集数据整理、处理代码">
-      <option name="closed" value="true" />
-      <created>1773113411700</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1773113411700</updated>
     </task>
     <task id="LOCAL-00019" summary="数据审核时，随机检查训练集、标注效果代码">
       <option name="closed" value="true" />
@@ -746,7 +738,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782100617090</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1782100707222</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1782100707222</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
