@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
+      <change afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/统计样本集类别种类数量信息.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/segmentationJob/carpetPublicObjectSegmentProgram/0. deduplicate_images_by_prefix.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/segmentationJob/carpetPublicObjectSegmentProgram/0. deduplicate_images_by_prefix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法/get_database_target_classify_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法/get_database_target_classify_info.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +182,7 @@
     "Python.yolov8_seg_to_det_augment_hand.executor": "Run",
     "Python.从训练集中随机抽取指定数量样本集供finetune使用.executor": "Run",
     "Python.删除指定目录下特定文件名文件.executor": "Run",
+    "Python.删除标签文件中特定标注记录.executor": "Run",
     "Python.增强.executor": "Run",
     "Python.处理mask信息.executor": "Run",
     "Python.大模型标注文件整理.executor": "Run",
@@ -196,18 +199,18 @@
     "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/DatabaseAnalysis/Fast_target_image_detection_effect.py",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/scripts/segmentationJob",
     "settings.editor.selected.configurable": "actions.on.save",
     "two.files.diff.last.used.file": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/DatabaseAnalysis/Fast_target_image_detection_effect.py"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/segmentationJob" />
       <recent name="$PROJECT_DIR$/DatabaseAnalysis" />
       <recent name="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor" />
       <recent name="$PROJECT_DIR$/地面分割模型应用" />
       <recent name="$PROJECT_DIR$/python安装包制作/1.加密版安装包动态库编译" />
-      <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/数据仿真生成" />
@@ -217,7 +220,73 @@
       <recent name="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Fast_target_image_detection_effect">
+  <component name="RunManager" selected="Python.AnnotationBoxAnalysis_detect_and_mark">
+    <configuration name="删除标签文件中特定标注记录" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/样本_标注数据集整理" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/样本_标注数据集整理/删除标签文件中特定标注记录.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="1.read_coco_label_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/segmentationJob/PlasticBagObjectSegmentProgram" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/segmentationJob/PlasticBagObjectSegmentProgram/1.read_coco_label_info.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/AnnotationBoxAnalysis_detect_and_mark.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Fast_target_image_detection_effect" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -240,7 +309,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="FilteringMaskTargetSamples" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="get_database_target_classify_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -249,77 +318,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/FilteringMaskTargetSamples.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="download_bilibili_video" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bilibili_videos_download" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bilibili_videos_download/download_bilibili_video.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/WireSampleAugmentor/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="rknn_quant_model_val_client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/model_infer/rknn_quant_model_val_client.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法/get_database_target_classify_info.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -330,11 +333,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
+        <item itemvalue="Python.1.read_coco_label_info" />
+        <item itemvalue="Python.删除标签文件中特定标注记录" />
+        <item itemvalue="Python.get_database_target_classify_info" />
         <item itemvalue="Python.Fast_target_image_detection_effect" />
-        <item itemvalue="Python.download_bilibili_video" />
-        <item itemvalue="Python.rknn_quant_model_val_client" />
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.FilteringMaskTargetSamples" />
       </list>
     </recent_temporary>
   </component>
@@ -353,14 +356,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00019" summary="数据审核时，随机检查训练集、标注效果代码">
-      <option name="closed" value="true" />
-      <created>1773113445835</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1773113445836</updated>
     </task>
     <task id="LOCAL-00020" summary="模型测试返回的误检、漏检数据筛选应用">
       <option name="closed" value="true" />
@@ -746,7 +741,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782100707222</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1782289371647</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1782289371647</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">

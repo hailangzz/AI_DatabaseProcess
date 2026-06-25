@@ -1,13 +1,21 @@
-import os
+"""
+# 功能: 根据文件名前缀去重图片，保留最大的图片
+# 规则:
+# 1. 文件名前缀相同的图片为一组
+# 2. 每组中保留最大的图片，删除其他图片
+# 3. 支持的图片格式: jpg, jpeg, png, bmp, webp
+# 4. 可配置是否为干运行模式（只打印不删除）
+"""
 from collections import defaultdict
 from pathlib import Path
 
 # ==============================
 # 配置区
 # ==============================
-IMAGE_DIR = "/home/chenkejing/database/carpetDatabase/PublicCarpetDatabase_Myself/images"   # 修改为你的图像目录
+IMAGE_DIR = "/home/chenkejing/database/carpetDatabase/PublicCarpetDatabase_Myself/images"  # 修改为你的图像目录
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 DRY_RUN = False  # True = 只打印不删除；False = 真正删除
+
 
 # ==============================
 # 主逻辑
@@ -56,6 +64,7 @@ def deduplicate_images(image_dir: str):
             f.unlink()
 
     print("[DONE] 去重完成")
+
 
 # ==============================
 # 入口
