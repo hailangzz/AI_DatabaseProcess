@@ -1,15 +1,15 @@
-import sys
 import os
+import sys
+
 import cv2
 import numpy as np
-
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QLineEdit,
     QFileDialog, QVBoxLayout, QHBoxLayout, QGridLayout,
     QFrame, QRadioButton, QButtonGroup, QProgressBar, QSlider
 )
-from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen
-from PyQt5.QtCore import Qt
 
 os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = "/home/chenkejing/anaconda3/plugins/platforms"
 
@@ -289,9 +289,26 @@ class LabelChecker(QWidget):
 
             self.current_batch.append(img_label)
 
-            name_label = QLabel(fname)
+            name_label = QLineEdit(fname)
+
+            # 设置为只读
+            name_label.setReadOnly(True)
+
+            # 居中显示
             name_label.setAlignment(Qt.AlignCenter)
-            name_label.setStyleSheet("font-size:11px;color:gray")
+
+            # 允许鼠标选择文本
+            name_label.setCursorPosition(0)
+
+            # 样式
+            name_label.setStyleSheet("""
+                QLineEdit{
+                    border:none;
+                    background:transparent;
+                    color:gray;
+                    font-size:11px;
+                }
+            """)
 
             box = QVBoxLayout()
             frame = QFrame()
@@ -360,7 +377,6 @@ class LabelChecker(QWidget):
 
 # ================= main =================
 if __name__ == "__main__":
-
     app = QApplication(sys.argv)
 
     win = LabelChecker()
