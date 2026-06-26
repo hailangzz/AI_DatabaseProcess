@@ -1,29 +1,32 @@
-import sys
 import os
+import re  # ✅ 新增
+import shutil
+import sys
+
 import cv2
 import numpy as np
-import shutil
-import re  # ✅ 新增
-
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QLineEdit,
     QFileDialog, QVBoxLayout, QHBoxLayout, QGridLayout,
     QFrame, QSlider, QDialog, QProgressBar
 )
-from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen
-from PyQt5.QtCore import Qt
 
 os.environ.pop("QT_QPA_PLATFORM_PLUGIN_PATH", None)
 os.environ.pop("QT_QPA_FONTDIR", None)
+
 
 # ---------------- 自然排序函数 ----------------
 def natural_key(s):
     return [int(text) if text.isdigit() else text.lower()
             for text in re.split('([0-9]+)', s)]
 
+
 # ---------------- 原图查看窗口 ----------------
 class ImageViewer(QDialog):
     """原图查看窗口"""
+
     def __init__(self, img_path):
         super().__init__()
         self.setWindowTitle("原图查看")
@@ -43,6 +46,7 @@ class ImageViewer(QDialog):
         layout.addWidget(label)
         self.setLayout(layout)
 
+
 # ---------------- 可点击图片 ----------------
 class ClickableLabel(QLabel):
     def __init__(self, file_path, parent_checker):
@@ -52,11 +56,16 @@ class ClickableLabel(QLabel):
         self.parent_checker = parent_checker
 
     def mousePressEvent(self, event):
-        if event.modifiers() == Qt.ShiftModifier:
+
+        if event.modifiers() & Qt.ShiftModifier:
             self.parent_checker.shift_select(self)
+
         else:
             self.selected = not self.selected
-            self.parent_checker.last_clicked = self
+
+            # 记录路径，不记录控件
+            self.parent_checker.last_clicked_path = self.file_path
+
         self.update()
 
     def paintEvent(self, event):
@@ -66,9 +75,10 @@ class ClickableLabel(QLabel):
             pen = QPen(QColor(0, 255, 0), 5)
             painter.setPen(pen)
             w, h = self.width(), self.height()
-            painter.drawLine(int(w*0.2), int(h*0.5), int(w*0.45), int(h*0.75))
-            painter.drawLine(int(w*0.45), int(h*0.75), int(w*0.8), int(h*0.25))
+            painter.drawLine(int(w * 0.2), int(h * 0.5), int(w * 0.45), int(h * 0.75))
+            painter.drawLine(int(w * 0.45), int(h * 0.75), int(w * 0.8), int(h * 0.25))
             painter.end()
+
 
 # ---------------- 主窗口 ----------------
 class LabelChecker(QWidget):
@@ -82,7 +92,7 @@ class LabelChecker(QWidget):
         self.files = []
         self.batch_size = 10
         self.selected_labels = {}
-        self.last_clicked = None
+        self.last_clicked_path = None
         self.img_size = 200
         self.viewer = None
         self.move_history = []
@@ -170,6 +180,7 @@ class LabelChecker(QWidget):
             self.show_page()
 
     def show_page(self):
+        self.last_clicked_path = None
         for i in reversed(range(self.grid_layout.count())):
             widget = self.grid_layout.itemAt(i).widget()
             if widget:
@@ -178,7 +189,7 @@ class LabelChecker(QWidget):
             self.progress_bar.setValue(0)
             return
 
-        batch_files = self.files[self.index:self.index+self.batch_size]
+        batch_files = self.files[self.index:self.index + self.batch_size]
         cols = 5
         self.selected_labels.clear()
 
@@ -207,7 +218,7 @@ class LabelChecker(QWidget):
             container.addWidget(img_label)
             container.addWidget(name_label)
 
-            self.grid_layout.addWidget(frame, i//cols, i%cols)
+            self.grid_layout.addWidget(frame, i // cols, i % cols)
 
         total = len(self.files)
         processed = min(self.index + self.batch_size, total)
@@ -215,16 +226,42 @@ class LabelChecker(QWidget):
         self.progress_bar.setValue(percent)
 
     def shift_select(self, clicked_label):
-        if not self.last_clicked:
-            clicked_label.selected = True
-            return
+
         labels = list(self.selected_labels.values())
-        i1 = labels.index(self.last_clicked)
-        i2 = labels.index(clicked_label)
-        start, end = min(i1,i2), max(i1,i2)
-        for i in range(start,end+1):
+
+        # 第一次点击
+        if self.last_clicked_path is None:
+            clicked_label.selected = True
+            clicked_label.update()
+
+            self.last_clicked_path = clicked_label.file_path
+            return
+
+        # 构建路径索引
+        path_to_index = {
+            label.file_path: idx
+            for idx, label in enumerate(labels)
+        }
+
+        # 上一次点击的图片不在当前页
+        if self.last_clicked_path not in path_to_index:
+            clicked_label.selected = True
+            clicked_label.update()
+
+            self.last_clicked_path = clicked_label.file_path
+            return
+
+        start_idx = path_to_index[self.last_clicked_path]
+        end_idx = path_to_index[clicked_label.file_path]
+
+        start = min(start_idx, end_idx)
+        end = max(start_idx, end_idx)
+
+        for i in range(start, end + 1):
             labels[i].selected = True
             labels[i].update()
+
+        self.last_clicked_path = clicked_label.file_path
 
     def update_image_size(self, value):
         self.img_size = value

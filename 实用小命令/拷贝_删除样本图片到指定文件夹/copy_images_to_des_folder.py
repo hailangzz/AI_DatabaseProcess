@@ -2,8 +2,8 @@ import os
 import shutil
 
 # ====== 配置路径 ======
-source_dir = r"/data/database/LiquadDatabase/chemical Spills_.v1-spills-identification.coco/train/imgs"      # 原始图片目录
-target_dir = r"/data/database/LiquadDatabase/TotalLiquidDatabase/images"      # 目标目录
+source_dir = r"/data/database/AITotal_Real_Customer_Database/Real_PlasticBag_Customer_Database/real_camera_images_0626_PlasticBag_batch1/plasticbag_mask_png_library"  # 原始图片目录
+target_dir = r"/data/database/Total_model_target_mask_png_library/real_image_mask/plasticbag_mask_png_library"  # 目标目录
 
 # 支持的图片格式
 image_exts = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp"}
@@ -18,7 +18,7 @@ def copy_images(src, dst):
         for file in files:
             ext = os.path.splitext(file)[1].lower()
             if ext in image_exts:
-                image_count+=1
+                image_count += 1
                 src_path = os.path.join(root, file)
 
                 # 处理重名文件
@@ -33,7 +33,7 @@ def copy_images(src, dst):
 
                 shutil.copy2(src_path, dst_path)
                 print(f"已复制: {src_path} -> {dst_path}")
-    print("拷贝的图像数量：%d",image_count)
+    print("拷贝的图像数量：%d", image_count)
 
 
 if __name__ == "__main__":

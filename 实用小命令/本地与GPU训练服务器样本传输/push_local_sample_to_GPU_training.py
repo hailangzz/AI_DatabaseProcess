@@ -97,12 +97,12 @@ def remote_file_exists(ssh, remote_file_path):
 
 
 def upload_to_server(
-    local_path,
-    remote_path,
-    hostname,
-    username,
-    password=None,
-    port=22,
+        local_path,
+        remote_path,
+        hostname,
+        username,
+        password=None,
+        port=22,
 ):
     global uploaded_bytes
     global total_bytes
@@ -230,13 +230,20 @@ if __name__ == "__main__":
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0602_1/segment_database_augmentor_0602_batch1/labels"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
 
-    # 污渍检测样本它，推送
+    # 污渍检测样本，推送
 
-    local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/segment_database_augmentor_0617_batch_1/images"
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
+    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/segment_database_augmentor_0617_batch_1/images"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
 
     # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/segment_database_augmentor_0617_batch_1/labels"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
+
+    # 塑料袋检测样本，推送
+    local_path = "/data/database/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
+    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
+
+    # local_path = "/data/database/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"
     username = "robot-server"
