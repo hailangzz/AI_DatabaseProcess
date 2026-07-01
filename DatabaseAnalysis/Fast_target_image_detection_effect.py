@@ -1,10 +1,5 @@
 """
-高性能图片检查器
-- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff
-- 使用多线程加载图片，提升响应速度
-- LRU缓存机制，减少内存占用
-- 点击图片可选中，选中状态会有明显标记
-- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  
+高性能图片检查器（完整版 + Shift连选修复）
 """
 import os
 import sys
@@ -13,36 +8,45 @@ from collections import OrderedDict
 import cv2
 import numpy as np
 from PyQt5.QtCore import Qt, QObject, QRunnable, QThreadPool, pyqtSignal
-from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen
+from PyQt5.QtGui import QPixmap, QImage, QPainter, QColor, QPen, QFont
 from PyQt5.QtWidgets import (
-    QApplication,
-    QWidget,
-    QLabel,
-    QPushButton,
-    QLineEdit,
-    QFileDialog,
-    QVBoxLayout,
-    QHBoxLayout,
-    QGridLayout,
-    QFrame,
-    QProgressBar,
+    QApplication, QWidget, QLabel, QPushButton, QLineEdit,
+    QFileDialog, QVBoxLayout, QHBoxLayout, QGridLayout,
+    QFrame, QProgressBar, QSlider
 )
-from PyQt5.QtWidgets import QSlider
 
-# 如有需要修改为你的 Qt 插件目录
-os.environ[
-    "QT_QPA_PLATFORM_PLUGIN_PATH"
-] = "/home/chenkejing/anaconda3/plugins/platforms"
+os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = "/home/chenkejing/anaconda3/plugins/platforms"
 
 
+# =========================
+# 可点击Label
+# =========================
 class ClickableLabel(QLabel):
-    def __init__(self, file_path=""):
+    def __init__(self, file_path="", global_index=0, parent_checker=None):
         super().__init__()
+
         self.file_path = file_path
+        self.global_index = global_index
+        self.parent_checker = parent_checker
         self.selected = False
 
     def mousePressEvent(self, event):
+
+        modifiers = QApplication.keyboardModifiers()
+
+        # Shift 连选
+        if modifiers & Qt.ShiftModifier:
+            if self.parent_checker:
+                self.parent_checker.select_range(self.global_index)
+            return
+
+        # 普通点击
         self.selected = not self.selected
+
+        if self.parent_checker:
+            self.parent_checker.update_selection(self.file_path, self.selected)
+            self.parent_checker.last_clicked = self.global_index
+
         self.update()
 
     def paintEvent(self, event):
@@ -50,18 +54,38 @@ class ClickableLabel(QLabel):
 
         if self.selected:
             painter = QPainter(self)
-            pen = QPen(QColor(0, 255, 0), 5)
-            painter.setPen(pen)
+
+            # 抗锯齿（更清晰）
+            painter.setRenderHint(QPainter.Antialiasing)
 
             w, h = self.width(), self.height()
 
-            painter.drawLine(int(w * 0.2), int(h * 0.5), int(w * 0.45), int(h * 0.75))
+            # =========================
+            # 半透明遮罩（可选，但很专业）
+            # =========================
+            painter.fillRect(0, 0, w, h, QColor(0, 0, 0, 60))
 
-            painter.drawLine(int(w * 0.45), int(h * 0.75), int(w * 0.8), int(h * 0.25))
+            # =========================
+            # √ 颜色和大小
+            # =========================
+            alpha = 180  # 0~255  # 字体透明度
+            pen = QPen(QColor(0, 255, 0, alpha), 12)
+            painter.setPen(pen)
+
+            font = QFont()
+            font.setPointSize(int(min(w, h) * 0.5))
+            font.setBold(True)
+            painter.setFont(font)
+
+            # 居中绘制 √
+            painter.drawText(self.rect(), Qt.AlignCenter, "√")
 
             painter.end()
 
 
+# =========================
+# Worker
+# =========================
 class WorkerSignals(QObject):
     finished = pyqtSignal(str, object)
 
@@ -73,78 +97,59 @@ class ImageLoader(QRunnable):
         self.signals = signals
 
     def run(self):
-
         try:
-            img = cv2.imdecode(
-                np.fromfile(self.path, dtype=np.uint8), cv2.IMREAD_UNCHANGED
-            )
-
+            img = cv2.imdecode(np.fromfile(self.path, np.uint8), cv2.IMREAD_UNCHANGED)
             if img is None:
                 return
 
-            img = cv2.resize(img, (200, 200), interpolation=cv2.INTER_AREA)
+            img = cv2.resize(img, (200, 200))
 
-            if len(img.shape) == 3 and img.shape[2] == 4:
-
+            if len(img.shape) == 2:
+                img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+                fmt = QImage.Format_RGB888
+            elif img.shape[2] == 4:
                 img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
-
-                qimg = QImage(
-                    img.data,
-                    img.shape[1],
-                    img.shape[0],
-                    img.strides[0],
-                    QImage.Format_RGBA8888,
-                ).copy()
-
+                fmt = QImage.Format_RGBA8888
             else:
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                fmt = QImage.Format_RGB888
 
-                if len(img.shape) == 2:
-                    img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
-                else:
-                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-
-                qimg = QImage(
-                    img.data,
-                    img.shape[1],
-                    img.shape[0],
-                    img.strides[0],
-                    QImage.Format_RGB888,
-                ).copy()
-
+            qimg = QImage(img.data, img.shape[1], img.shape[0], img.strides[0], fmt).copy()
             self.signals.finished.emit(self.path, qimg)
 
         except Exception as e:
             print(e)
 
 
+# =========================
+# LRU
+# =========================
 class LRUCache:
     def __init__(self, max_size=500):
-        self.max_size = max_size
         self.cache = OrderedDict()
+        self.max_size = max_size
 
-    def get(self, key):
-
-        if key not in self.cache:
+    def get(self, k):
+        if k not in self.cache:
             return None
+        self.cache.move_to_end(k)
+        return self.cache[k]
 
-        self.cache.move_to_end(key)
-        return self.cache[key]
-
-    def put(self, key, value):
-
-        self.cache[key] = value
-        self.cache.move_to_end(key)
-
+    def put(self, k, v):
+        self.cache[k] = v
+        self.cache.move_to_end(k)
         if len(self.cache) > self.max_size:
             self.cache.popitem(last=False)
 
 
+# =========================
+# 主界面
+# =========================
 class ImageChecker(QWidget):
     def __init__(self):
-
         super().__init__()
 
-        self.setWindowTitle("高性能图片检查器")
+        self.setWindowTitle("高性能图片检查器（完整修复版）")
         self.resize(1400, 900)
 
         self.image_dir = ""
@@ -157,287 +162,229 @@ class ImageChecker(QWidget):
         self.thread_pool.setMaxThreadCount(8)
 
         self.cache = LRUCache(500)
-        self.loading_set = set()
-        self.signals_holder = []
 
-        self.selected_labels = {}
+        self.selected_set = set()
+        self.last_clicked = None
+
+        self.labels = []
+        self.name_labels = []
 
         self.init_ui()
 
-    def update_image_size(self, value):
-
-        self.image_size = value
-
-        for label in self.image_labels:
-            label.setFixedSize(value, value)
-
-        self.show_page()
-
+    # =========================
+    # UI
+    # =========================
     def init_ui(self):
 
         layout = QVBoxLayout()
 
-        path_layout = QHBoxLayout()
+        # 顶部路径
+        top = QHBoxLayout()
+        self.path_edit = QLineEdit()
+        btn = QPushButton("选择文件夹")
+        btn.clicked.connect(self.open_dir)
 
-        self.image_path_edit = QLineEdit()
+        top.addWidget(self.path_edit)
+        top.addWidget(btn)
+        layout.addLayout(top)
 
-        browse_btn = QPushButton("浏览图片")
-        browse_btn.clicked.connect(self.browse_image_dir)
+        # 进度 + slider
+        mid = QHBoxLayout()
 
-        path_layout.addWidget(self.image_path_edit)
+        self.progress = QProgressBar()
 
-        path_layout.addWidget(browse_btn)
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.setMinimum(120)
+        self.slider.setMaximum(520)
+        self.slider.setValue(self.image_size)
+        self.slider.valueChanged.connect(self.on_resize)
 
-        layout.addLayout(path_layout)
+        mid.addWidget(self.progress)
+        mid.addWidget(QLabel("大小"))
+        mid.addWidget(self.slider)
 
-        progress_layout = QHBoxLayout()
+        layout.addLayout(mid)
 
-        self.progress_bar = QProgressBar()
-
-        self.size_slider = QSlider(Qt.Horizontal)
-        # 滑块范围设置为 120 到 320，初始值为 220
-        self.size_slider.setMinimum(220)
-        self.size_slider.setMaximum(520)
-        self.size_slider.setValue(280)
-        self.size_slider.setFixedWidth(220)
-        self.size_slider.valueChanged.connect(self.update_image_size)
-
-        progress_layout.addWidget(self.progress_bar)
-        progress_layout.addWidget(QLabel("图片大小"))
-        progress_layout.addWidget(self.size_slider)
-
-        layout.addLayout(progress_layout)
-
-        self.grid_layout = QGridLayout()
-        layout.addLayout(self.grid_layout)
-
-        self.image_labels = []
-        self.name_labels = []
+        # grid
+        self.grid = QGridLayout()
+        layout.addLayout(self.grid)
 
         cols = 5
-
         for i in range(10):
-            img_label = ClickableLabel()
-            img_label.setFixedSize(self.image_size, self.image_size)
-            img_label.setScaledContents(True)
-            img_label.setAlignment(Qt.AlignCenter)
+            label = ClickableLabel(parent_checker=self)
+            label.setFixedSize(self.image_size, self.image_size)
+            label.setScaledContents(True)
 
-            name_label = QLabel()
-            name_label.setAlignment(Qt.AlignCenter)
+            name = QLabel()
+            name.setAlignment(Qt.AlignCenter)
 
             frame = QFrame()
-            frame.setMinimumWidth(self.image_size + 20)
+            v = QVBoxLayout()
+            v.addWidget(label)
+            v.addWidget(name)
+            frame.setLayout(v)
 
-            vbox = QVBoxLayout()
+            self.grid.addWidget(frame, i // cols, i % cols)
 
-            vbox.addWidget(img_label)
-            vbox.addWidget(name_label)
+            self.labels.append(label)
+            self.name_labels.append(name)
 
-            frame.setLayout(vbox)
-
-            self.grid_layout.addWidget(frame, i // cols, i % cols)
-
-            self.image_labels.append(img_label)
-
-            self.name_labels.append(name_label)
-
-        btn_layout = QHBoxLayout()
+        # bottom buttons
+        bottom = QHBoxLayout()
 
         self.prev_btn = QPushButton("上一页(A)")
         self.next_btn = QPushButton("下一页(D)")
 
         self.prev_btn.clicked.connect(self.prev_page)
-
         self.next_btn.clicked.connect(self.next_page)
 
-        btn_layout.addWidget(self.prev_btn)
+        bottom.addWidget(self.prev_btn)
+        bottom.addWidget(self.next_btn)
 
-        btn_layout.addWidget(self.next_btn)
-
-        layout.addLayout(btn_layout)
+        layout.addLayout(bottom)
 
         self.setLayout(layout)
 
-    def browse_image_dir(self):
-
-        path = QFileDialog.getExistingDirectory(self, "选择图片文件夹")
-
-        if path:
-            self.image_dir = path
-
-            self.image_path_edit.setText(path)
-
-            self.update_file_list()
-
-    def update_file_list(self):
-
-        exts = {".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tif", ".tiff"}
-
-        files = []
-
-        for entry in os.scandir(self.image_dir):
-
-            if not entry.is_file():
-                continue
-
-            ext = os.path.splitext(entry.name)[1].lower()
-
-            if ext in exts:
-                files.append(entry.name)
-
-        self.files = sorted(files)
-
-        self.progress_bar.setMaximum(len(self.files))
-
-        self.index = 0
-
-        self.show_page()
-
-    def request_image(self, img_path):
-
-        if img_path in self.loading_set:
+    # =========================
+    # 文件
+    # =========================
+    def open_dir(self):
+        path = QFileDialog.getExistingDirectory(self, "选择目录")
+        if not path:
             return
 
-        self.loading_set.add(img_path)
+        self.image_dir = path
+        self.path_edit.setText(path)
 
-        signals = WorkerSignals()
+        exts = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 
-        signals.finished.connect(self.image_loaded)
+        self.files = sorted(
+            f for f in os.listdir(path)
+            if os.path.splitext(f)[1].lower() in exts
+        )
 
-        self.signals_holder.append(signals)
+        self.index = 0
+        self.show_page()
 
-        task = ImageLoader(img_path, signals)
+    # =========================
+    # selection update
+    # =========================
+    def update_selection(self, path, selected):
+        if selected:
+            self.selected_set.add(path)
+        else:
+            self.selected_set.discard(path)
 
-        self.thread_pool.start(task)
+    # =========================
+    # ⭐ Shift 连选核心
+    # =========================
+    def select_range(self, current_global):
 
-    def image_loaded(self, path, qimg):
+        if self.last_clicked is None:
+            self.last_clicked = current_global
+            return
 
-        self.loading_set.discard(path)
+        start = min(self.last_clicked, current_global)
+        end = max(self.last_clicked, current_global)
 
-        self.cache.put(path, qimg)
+        self.current_batch = self.files[self.index:self.index + self.batch_size]
 
-        batch_files = self.files[self.index:self.index + self.batch_size]
+        for i, label in enumerate(self.labels):
 
-        for i, file in enumerate(batch_files):
+            if i >= len(self.current_batch):
+                continue
 
-            full_path = os.path.join(self.image_dir, file)
+            global_i = self.index + i
+            path = os.path.join(self.image_dir, self.current_batch[i])
 
-            if full_path == path:
-                pix = QPixmap.fromImage(qimg)
+            if start <= global_i <= end:
+                label.selected = True
+                self.selected_set.add(path)
+            else:
+                label.selected = False
+                self.selected_set.discard(path)
 
-                pix = pix.scaled(
-                    self.image_labels[i].size(),
-                    Qt.KeepAspectRatio,
-                    Qt.SmoothTransformation,
-                )
+            label.update()
 
-                self.image_labels[i].setPixmap(pix)
+        self.last_clicked = current_global
 
-                break
-
-    def preload_next_page(self):
-
-        start = self.index + self.batch_size
-        end = start + self.batch_size
-
-        for file in self.files[start:end]:
-
-            img_path = os.path.join(self.image_dir, file)
-
-            if self.cache.get(img_path) is None:
-                self.request_image(img_path)
-
+    # =========================
+    # 页面
+    # =========================
     def show_page(self):
 
         if not self.files:
             return
 
-        batch_files = self.files[self.index: self.index + self.batch_size]
+        self.current_batch = self.files[self.index:self.index + self.batch_size]
 
-        self.selected_labels = {}
+        for i, label in enumerate(self.labels):
 
-        for i in range(10):
-
-            if i >= len(batch_files):
-                self.image_labels[i].clear()
+            if i >= len(self.current_batch):
+                label.clear()
                 self.name_labels[i].setText("")
                 continue
 
-            file = batch_files[i]
+            file = self.current_batch[i]
+            path = os.path.join(self.image_dir, file)
 
-            img_path = os.path.join(self.image_dir, file)
+            label.file_path = path
+            label.global_index = self.index + i
 
-            self.image_labels[i].clear()
-            self.image_labels[i].selected = False
-            self.image_labels[i].file_path = img_path
+            label.selected = path in self.selected_set
+            label.update()
 
             self.name_labels[i].setText(file)
 
-            self.selected_labels[img_path] = self.image_labels[i]
-
-            qimg = self.cache.get(img_path)
-
-            if qimg is not None:
-
-                self.image_labels[i].setPixmap(QPixmap.fromImage(qimg))
-
+            cached = self.cache.get(path)
+            if cached:
+                label.setPixmap(QPixmap.fromImage(cached))
             else:
+                self.load_image(path, label)
 
-                self.request_image(img_path)
+        self.progress.setMaximum(len(self.files))
+        self.progress.setValue(min(self.index + self.batch_size, len(self.files)))
 
-        self.preload_next_page()
+    # =========================
+    # load
+    # =========================
+    def load_image(self, path, label):
 
-        self.progress_bar.setValue(min(self.index + self.batch_size, len(self.files)))
+        signals = WorkerSignals()
+        signals.finished.connect(lambda p, img: self.on_loaded(p, img, label))
 
+        task = ImageLoader(path, signals)
+        self.thread_pool.start(task)
+
+    def on_loaded(self, path, img, label):
+        self.cache.put(path, img)
+        label.setPixmap(QPixmap.fromImage(img))
+
+    # =========================
+    # slider
+    # =========================
+    def on_resize(self, v):
+        self.image_size = v
+        for l in self.labels:
+            l.setFixedSize(v, v)
+        self.show_page()
+
+    # =========================
+    # page control
+    # =========================
     def next_page(self):
-
         if self.index + self.batch_size < len(self.files):
             self.index += self.batch_size
             self.show_page()
 
     def prev_page(self):
-
-        if self.index >= self.batch_size:
+        if self.index > 0:
             self.index -= self.batch_size
             self.show_page()
 
-    def delete_selected(self):
-
-        to_delete = [
-            label.file_path for label in self.selected_labels.values() if label.selected
-        ]
-
-        if not to_delete:
-            return
-
-        deleted_names = set()
-
-        for path in to_delete:
-
-            try:
-
-                if os.path.exists(path):
-                    os.remove(path)
-
-                txt_path = os.path.splitext(path)[0] + ".txt"
-
-                if os.path.exists(txt_path):
-                    os.remove(txt_path)
-
-                deleted_names.add(os.path.basename(path))
-
-            except Exception as e:
-                print(e)
-
-        self.files = [f for f in self.files if f not in deleted_names]
-
-        if self.index >= len(self.files):
-            self.index = max(0, len(self.files) - self.batch_size)
-
-        self.progress_bar.setMaximum(len(self.files))
-
-        self.show_page()
-
+    # =========================
+    # keyboard
+    # =========================
     def keyPressEvent(self, event):
 
         if event.key() == Qt.Key_D:
@@ -447,17 +394,31 @@ class ImageChecker(QWidget):
             self.prev_page()
 
         elif event.key() in (Qt.Key_Delete, Qt.Key_S):
-
             self.delete_selected()
 
-        else:
-            super().keyPressEvent(event)
+    # =========================
+    # delete
+    # =========================
+    def delete_selected(self):
+
+        for path in list(self.selected_set):
+            try:
+                os.remove(path)
+            except:
+                pass
+
+        self.files = [
+            f for f in self.files
+            if os.path.join(self.image_dir, f) not in self.selected_set
+        ]
+
+        self.selected_set.clear()
+        self.show_page()
 
 
+# =========================
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-
-    win = ImageChecker()
-    win.show()
-
+    w = ImageChecker()
+    w.show()
     sys.exit(app.exec_())
