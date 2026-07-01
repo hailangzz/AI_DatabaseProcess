@@ -5,13 +5,14 @@ WireAugmentor - YOLOv8 Segmentation Polygon Augmentation for Wire Detection
 -过滤过小目标 (短边小于min_short_side)
 -抠图生成RGBA图像 (背景透明)
 -随机旋转缩放Polygon和图像
--保存增强后的PNG图像和对应的YOLOv8 Segmentation标签   
+-保存增强后的PNG图像和对应的YOLOv8 Segmentation标签
 """
 import os
 import random
 
 import cv2
 import numpy as np
+from scipy.ndimage import gaussian_filter
 from tqdm import tqdm
 
 
@@ -21,7 +22,7 @@ class WireAugmentor:
             image_dir,
             label_dir,
             output_dir,
-            min_short_side=20,  # 最小短边长度，单位像素，防止生成过小的目标难以学习
+            min_short_side=32,  # 最小短边长度，单位像素，防止生成过小的目标难以学习
     ):
 
         self.image_dir = image_dir
@@ -111,6 +112,57 @@ class WireAugmentor:
         rgba[:, :, 3] = crop_mask
 
         return (rgba, crop_poly)
+
+    # ------------------------------------------------
+    # Elastic Transform 弹性变换
+    # ------------------------------------------------
+    def elastic_transform(
+            self,
+            rgba,
+            polygon,
+            alpha=40,
+            sigma=8,
+    ):
+
+        h, w = rgba.shape[:2]
+
+        # 生成随机位移场
+        dx = np.random.rand(h, w).astype(np.float32) * 2 - 1
+        dy = np.random.rand(h, w).astype(np.float32) * 2 - 1
+
+        dx = gaussian_filter(dx, sigma) * alpha
+        dy = gaussian_filter(dy, sigma) * alpha
+
+        # 构建映射坐标
+        x, y = np.meshgrid(np.arange(w), np.arange(h))
+
+        map_x = (x + dx).astype(np.float32)
+        map_y = (y + dy).astype(np.float32)
+
+        # 图像形变
+        transformed = cv2.remap(
+            rgba,
+            map_x,
+            map_y,
+            interpolation=cv2.INTER_LINEAR,
+            borderMode=cv2.BORDER_CONSTANT,
+            borderValue=(0, 0, 0, 0),
+        )
+
+        # polygon同步形变
+        poly = polygon.copy()
+
+        for i in range(poly.shape[0]):
+            px = int(np.clip(poly[i, 0], 0, w - 1))
+            py = int(np.clip(poly[i, 1], 0, h - 1))
+
+            poly[i, 0] += dx[py, px]
+            poly[i, 1] += dy[py, px]
+
+        poly[:, 0] = np.clip(poly[:, 0], 0, w - 1)
+        poly[:, 1] = np.clip(poly[:, 1], 0, h - 1)
+
+        return transformed, poly
 
     # ------------------------------------------------
     # 随机旋转缩放
@@ -230,6 +282,7 @@ class WireAugmentor:
                 )
 
                 for idx, (cls_id, polygon) in enumerate(polygons):
+
                     # -------------------------
                     # 小目标过滤
                     # -------------------------
@@ -246,6 +299,18 @@ class WireAugmentor:
                         rgba,
                         crop_poly,
                     )
+
+                    # 70%概率执行弹性变换
+                    if random.random() < 0.7:
+                        alpha = random.uniform(20, 60)
+                        sigma = random.uniform(5, 10)
+
+                        aug_img, aug_poly = self.elastic_transform(
+                            aug_img,
+                            aug_poly,
+                            alpha=alpha,
+                            sigma=sigma,
+                        )
 
                     save_name = os.path.splitext(image_name)[0] + f"_{idx}"
 
@@ -291,13 +356,14 @@ if __name__ == "__main__":
     augmentor = WireAugmentor(
         # image_dir="/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/images",
         # label_dir="/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/yolov8_labels/seg",
+
         # # 真实图像mask库
         # output_dir="/data/database/Total_model_target_mask_png_library/real_image_mask/liquid_mask_png_library",
         image_dir="/data/database/LiquadDatabase/TotalLiquidDatabase/images",
         label_dir="/data/database/LiquadDatabase/TotalLiquidDatabase/yolov8_labels/seg",
         # 公开图像mask库
         output_dir="/data/database/Total_model_target_mask_png_library/public_image_mask/liquid_mask_png_library",
-        min_short_side=32,
+        min_short_side=45,
     )
 
     augmentor.run()

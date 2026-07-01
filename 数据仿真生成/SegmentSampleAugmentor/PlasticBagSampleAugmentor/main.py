@@ -4,6 +4,7 @@ Wire Copy-Paste Data Augmentation
 
 import os
 import random
+from datetime import datetime
 
 from tqdm import tqdm
 
@@ -107,6 +108,9 @@ def main():
                     png_path = os.path.join(Target_DIR, wire_name)
 
                     txt_path = png_path.replace(".png", ".txt")
+                    if not os.path.exists(txt_path):
+                        print(f"Label not found: {txt_path}")
+                        continue
 
                     rgba = cv2.imread(
                         png_path,
@@ -315,22 +319,23 @@ def main():
 
                 # 整图增强
                 bg = augmentor.image_augment(bg)
-                
+
                 # =============================================
                 # 保存
                 # =============================================
 
-                stem = os.path.splitext(image_name)[0]
+                global sample_number
 
-                save_img_name = (
-                    f"{stem}_aug_"
-                    f"{generated_count:06d}.jpg"
+                file_stem = (
+                    f"{CURRENT_DATE}_"
+                    f"{MODEL_NAME}_"
+                    f"{BATCH_NUMBER}_"
+                    f"{sample_number:06d}"
                 )
 
-                save_label_name = (
-                    f"{stem}_aug_"
-                    f"{generated_count:06d}.txt"
-                )
+                save_img_name = f"{file_stem}.jpg"
+
+                save_label_name = f"{file_stem}.txt"
 
                 save_img_path = os.path.join(
                     OUTPUT_IMG_DIR,
@@ -350,6 +355,9 @@ def main():
                     H,
                     save_label_path,
                 )
+
+                # 样本编号递增
+                sample_number += 1
 
                 generated_count += 1
 
@@ -371,19 +379,30 @@ def main():
 AUG_PER_IMAGE = 3
 
 # 最终希望生成多少张增强样本
-TARGET_NUM_SAMPLES = 5000
+TARGET_NUM_SAMPLES = 3000
 
 IMAGE_EXTS = (".jpg", ".jpeg", ".png", ".bmp", ".webp")
+
+# 自定义变量
+MODEL_NAME = "plasticbag"  # 模型名称
+BATCH_NUMBER = "real_batch1"  # 批次号
+
+# 获取当前日期
+CURRENT_DATE = datetime.now().strftime("%Y%m%d")
+
+# 样本编号起始值
+sample_number = 1
 
 if __name__ == "__main__":
     FLOOR_IMG_DIR = "/data/database/Total_Flooring_Images/images"
     FLOOR_LABEL_DIR = "/data/database/Total_Flooring_Images/ground_mask_labels"
 
-    Target_DIR = "/data/database/Total_model_target_mask_png_library/public_image_mask/plasticbag_mask_png_library"
+    Target_DIR = "/data/database/Total_model_target_mask_png_library/real_image_mask/plasticbag_mask_png_library"
 
     output_dir = (
-        "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0625"
+        "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0625_real"
     )
+    OUTPUT_IMG_DIR = os.path.join(output_dir, "images")
     OUTPUT_IMG_DIR = os.path.join(output_dir, "images")
     OUTPUT_LABEL_DIR = os.path.join(output_dir, "labels")
 

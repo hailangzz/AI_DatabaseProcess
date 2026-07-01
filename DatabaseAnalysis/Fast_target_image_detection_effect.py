@@ -27,6 +27,7 @@ from PyQt5.QtWidgets import (
     QFrame,
     QProgressBar,
 )
+from PyQt5.QtWidgets import QSlider
 
 # 如有需要修改为你的 Qt 插件目录
 os.environ[
@@ -150,6 +151,7 @@ class ImageChecker(QWidget):
         self.files = []
         self.index = 0
         self.batch_size = 10
+        self.image_size = 220
 
         self.thread_pool = QThreadPool()
         self.thread_pool.setMaxThreadCount(8)
@@ -161,6 +163,15 @@ class ImageChecker(QWidget):
         self.selected_labels = {}
 
         self.init_ui()
+
+    def update_image_size(self, value):
+
+        self.image_size = value
+
+        for label in self.image_labels:
+            label.setFixedSize(value, value)
+
+        self.show_page()
 
     def init_ui(self):
 
@@ -179,8 +190,23 @@ class ImageChecker(QWidget):
 
         layout.addLayout(path_layout)
 
+        progress_layout = QHBoxLayout()
+
         self.progress_bar = QProgressBar()
-        layout.addWidget(self.progress_bar)
+
+        self.size_slider = QSlider(Qt.Horizontal)
+        # 滑块范围设置为 120 到 320，初始值为 220
+        self.size_slider.setMinimum(220)
+        self.size_slider.setMaximum(520)
+        self.size_slider.setValue(280)
+        self.size_slider.setFixedWidth(220)
+        self.size_slider.valueChanged.connect(self.update_image_size)
+
+        progress_layout.addWidget(self.progress_bar)
+        progress_layout.addWidget(QLabel("图片大小"))
+        progress_layout.addWidget(self.size_slider)
+
+        layout.addLayout(progress_layout)
 
         self.grid_layout = QGridLayout()
         layout.addLayout(self.grid_layout)
@@ -192,13 +218,15 @@ class ImageChecker(QWidget):
 
         for i in range(10):
             img_label = ClickableLabel()
-            img_label.setFixedSize(220, 220)
+            img_label.setFixedSize(self.image_size, self.image_size)
+            img_label.setScaledContents(True)
             img_label.setAlignment(Qt.AlignCenter)
 
             name_label = QLabel()
             name_label.setAlignment(Qt.AlignCenter)
 
             frame = QFrame()
+            frame.setMinimumWidth(self.image_size + 20)
 
             vbox = QVBoxLayout()
 
@@ -295,7 +323,15 @@ class ImageChecker(QWidget):
             full_path = os.path.join(self.image_dir, file)
 
             if full_path == path:
-                self.image_labels[i].setPixmap(QPixmap.fromImage(qimg))
+                pix = QPixmap.fromImage(qimg)
+
+                pix = pix.scaled(
+                    self.image_labels[i].size(),
+                    Qt.KeepAspectRatio,
+                    Qt.SmoothTransformation,
+                )
+
+                self.image_labels[i].setPixmap(pix)
 
                 break
 

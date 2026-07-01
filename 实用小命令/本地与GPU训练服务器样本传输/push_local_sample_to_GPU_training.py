@@ -1,123 +1,60 @@
-import os
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import paramiko
 from paramiko import SSHClient
 from scp import SCPClient
 
-# 允许上传的后缀
 ALLOW_SUFFIXES = [".jpg", ".jpeg", ".png", ".bmp", ".webp", ".txt"]
 
-# 全局进度变量
 uploaded_bytes = 0
 total_bytes = 0
-current_index = 0
-total_files = 0
+uploaded_files = 0
+skipped_files = 0
+
+lock = threading.Lock()
+
+thread_local = threading.local()
 
 
 def sizeof_fmt(num):
-    """
-    文件大小格式化
-    """
-
     for unit in ["B", "KB", "MB", "GB", "TB"]:
-
         if num < 1024:
             return f"{num:.2f} {unit}"
-
         num /= 1024
-
     return f"{num:.2f} PB"
 
 
-def progress(filename, size, sent):
-    """
-    当前文件上传进度
-    """
-
-    global uploaded_bytes
-
-    if isinstance(filename, bytes):
-        filename = filename.decode()
-
-    current_total = uploaded_bytes + sent
-
-    # percent = current_total / total_bytes * 100
-    if total_bytes <= 0:
-        percent = 0
-    else:
-        percent = current_total / total_bytes * 100
-
-    print(
-        f"\r[{current_index}/{total_files}] "
-        f"{os.path.basename(filename)} "
-        f"| {sizeof_fmt(current_total)} / {sizeof_fmt(total_bytes)} "
-        f"| {percent:.2f}%",
-        end="",
-        flush=True,
-    )
-
-
 def get_all_upload_files(local_path):
-    """
-    获取待上传文件
-    """
-
     local_path = Path(local_path)
 
     upload_files = []
 
     for file_path in local_path.rglob("*"):
 
-        if file_path.is_file():
-            if "images" in str(local_path):  # 上传图像样本
-                if file_path.suffix.lower() in ALLOW_SUFFIXES[:-1]:
-                    upload_files.append(file_path)
-                    # print(file_path)
-            elif "labels" in str(local_path):  # 上传标注样本
-                if file_path.suffix.lower() in ALLOW_SUFFIXES[-1:]:
-                    upload_files.append(file_path)
-                    # print(file_path)
+        if not file_path.is_file():
+            continue
+
+        if file_path.suffix.lower() in ALLOW_SUFFIXES:
+            upload_files.append(file_path)
 
     return upload_files
 
 
-def remote_file_exists(ssh, remote_file_path):
-    """
-    检查远程文件是否存在
-    """
-
-    cmd = f'test -f "{remote_file_path}" && echo exists'
-
-    stdin, stdout, stderr = ssh.exec_command(cmd)
-
-    result = stdout.read().decode().strip()
-
-    return result == "exists"
-
-
-def upload_to_server(
-        local_path,
-        remote_path,
+def get_ssh_client(
         hostname,
         username,
-        password=None,
-        port=22,
-):
-    global uploaded_bytes
-    global total_bytes
-    global current_index
-    global total_files
+        password,
+        port):
+    if not hasattr(thread_local, "ssh"):
+        ssh = SSHClient()
 
-    ssh = SSHClient()
+        ssh.load_system_host_keys()
 
-    ssh.load_system_host_keys()
-
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-    print(f"正在连接服务器 {hostname} ...")
-
-    try:
+        ssh.set_missing_host_key_policy(
+            paramiko.AutoAddPolicy()
+        )
 
         ssh.connect(
             hostname=hostname,
@@ -128,83 +65,166 @@ def upload_to_server(
             banner_timeout=30,
             auth_timeout=30,
             look_for_keys=False,
-            allow_agent=False,
+            allow_agent=False
         )
 
-        transport = ssh.get_transport()
+        thread_local.ssh = ssh
 
-        if transport is None or not transport.is_active():
-            raise Exception("SSH transport 未建立成功")
+    return thread_local.ssh
 
-        print("服务器连接成功")
 
-        # 获取上传文件
-        upload_files = get_all_upload_files(local_path)
+def remote_file_exists(ssh, remote_file_path):
+    cmd = f'test -f "{remote_file_path}" && echo exists'
 
-        total_files = len(upload_files)
+    stdin, stdout, stderr = ssh.exec_command(cmd)
 
-        # 统计总大小
-        total_bytes = sum(file.stat().st_size for file in upload_files)
+    result = stdout.read().decode().strip()
 
-        print(f"待上传文件数量: {total_files}")
+    return result == "exists"
 
-        print(f"总大小: {sizeof_fmt(total_bytes)}")
 
-        local_path = Path(local_path)
+def upload_one_file(
+        file_path,
+        local_root,
+        remote_root,
+        hostname,
+        username,
+        password,
+        port):
+    global uploaded_bytes
+    global uploaded_files
+    global skipped_files
 
-        skipped_files = 0
-        uploaded_files = 0
+    try:
 
-        with SCPClient(transport, progress=progress) as scp:
+        ssh = get_ssh_client(
+            hostname,
+            username,
+            password,
+            port
+        )
 
-            for idx, file_path in enumerate(upload_files):
+        relative_path = file_path.relative_to(local_root)
 
-                current_index = idx + 1
+        remote_file = Path(remote_root) / relative_path
 
-                relative_path = file_path.relative_to(local_path)
+        remote_file = str(remote_file)
 
-                remote_file_path = Path(remote_path) / relative_path
+        remote_dir = str(Path(remote_file).parent)
 
-                remote_dir = str(remote_file_path.parent)
+        ssh.exec_command(
+            f'mkdir -p "{remote_dir}"'
+        )
 
-                # 创建远程目录
-                ssh.exec_command(f'mkdir -p "{remote_dir}"')
+        if remote_file_exists(ssh, remote_file):
+            with lock:
+                skipped_files += 1
 
-                # =========================
-                # 检查远程文件是否已存在
-                # =========================
-                if remote_file_exists(ssh, str(remote_file_path)):
-                    # print(
-                    #     f"\n跳过已存在文件: "
-                    #     f"{relative_path}"
-                    # )
+            return
 
-                    skipped_files += 1
+        with SCPClient(
+                ssh.get_transport()) as scp:
 
-                    continue
+            scp.put(
+                str(file_path),
+                remote_path=remote_file
+            )
 
-                # =========================
-                # 上传文件
-                # =========================
-                scp.put(str(file_path), remote_path=str(remote_file_path))
+        file_size = file_path.stat().st_size
 
-                uploaded_bytes += file_path.stat().st_size
+        with lock:
 
-                uploaded_files += 1
+            uploaded_files += 1
 
-        print("\n\n上传完成！")
+            uploaded_bytes += file_size
 
-        print(f"实际上传文件数量: {uploaded_files}")
+            percent = uploaded_bytes / total_bytes * 100
 
-        print(f"跳过文件数量: {skipped_files}")
+            print(
+                f"\r上传: "
+                f"{uploaded_files} "
+                f"| "
+                f"{sizeof_fmt(uploaded_bytes)}"
+                f"/"
+                f"{sizeof_fmt(total_bytes)} "
+                f"| {percent:.2f}%",
+                end="",
+                flush=True
+            )
 
     except Exception as e:
 
-        print(f"\n上传失败: {e}")
+        print(
+            f"\n上传失败: {file_path}\n{e}"
+        )
 
-    finally:
 
-        ssh.close()
+def upload_to_server(
+        local_path,
+        remote_path,
+        hostname,
+        username,
+        password=None,
+        port=22,
+        max_workers=16):
+    global total_bytes
+
+    local_path = Path(local_path)
+
+    upload_files = get_all_upload_files(local_path)
+
+    total_bytes = sum(
+        f.stat().st_size
+        for f in upload_files
+    )
+
+    print(
+        f"待上传文件数量: "
+        f"{len(upload_files)}"
+    )
+
+    print(
+        f"总大小: "
+        f"{sizeof_fmt(total_bytes)}"
+    )
+
+    print(
+        f"线程数: {max_workers}"
+    )
+
+    with ThreadPoolExecutor(
+            max_workers=max_workers) as executor:
+
+        futures = []
+
+        for file_path in upload_files:
+            future = executor.submit(
+                upload_one_file,
+                file_path,
+                local_path,
+                remote_path,
+                hostname,
+                username,
+                password,
+                port
+            )
+
+            futures.append(future)
+
+        for future in as_completed(futures):
+            future.result()
+
+    print("\n\n上传完成")
+
+    print(
+        f"实际上传文件: "
+        f"{uploaded_files}"
+    )
+
+    print(
+        f"跳过文件: "
+        f"{skipped_files}"
+    )
 
 
 if __name__ == "__main__":
@@ -232,17 +252,17 @@ if __name__ == "__main__":
 
     # 污渍检测样本，推送
 
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/segment_database_augmentor_0617_batch_1/images"
+    # local_path = "/data/database/Total_auto_augmentor_database/liquidDatabaseAugmentor/date0629/real_liquid/images"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
 
-    # local_path = "/data/database/AITotal_Real_Customer_Database/Real_Liquid_Customer_Database/date0616_1/segment_database_augmentor_0617_batch_1/labels"
-    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
+    local_path = "/data/database/Total_auto_augmentor_database/liquidDatabaseAugmentor/date0629/real_liquid/labels"
+    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
 
     # 塑料袋检测样本，推送
-    local_path = "/data/database/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
+    # local_path = "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0625_real/images"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
 
-    # local_path = "/data/database/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
+    # local_path = "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0625_real/labels"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"
@@ -255,4 +275,5 @@ if __name__ == "__main__":
         hostname=hostname,
         username=username,
         password=password,
+        max_workers=8
     )

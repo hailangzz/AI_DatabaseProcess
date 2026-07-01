@@ -47,6 +47,82 @@ class CopyPasteAugmentor:
     def __init__(self):
         pass
 
+    def image_augment(self, img):
+
+        img = img.copy()
+
+        # ==========================
+        # 亮度
+        # ==========================
+        if random.random() < 0.5:
+            alpha = random.uniform(0.8, 1.2)  # 对比度
+            beta = random.randint(-20, 20)  # 亮度
+
+            img = cv2.convertScaleAbs(
+                img,
+                alpha=alpha,
+                beta=beta
+            )
+
+        # ==========================
+        # Gamma
+        # ==========================
+        if random.random() < 0.3:
+            gamma = random.uniform(0.7, 1.5)
+
+            table = np.array(
+                [((i / 255.0) ** (1.0 / gamma)) * 255
+                 for i in np.arange(256)]
+            ).astype("uint8")
+
+            img = cv2.LUT(img, table)
+
+        # ==========================
+        # 高斯噪声
+        # ==========================
+        if random.random() < 0.4:
+            sigma = random.uniform(3, 12)
+
+            noise = np.random.normal(
+                0,
+                sigma,
+                img.shape
+            )
+
+            img = img.astype(np.float32)
+
+            img += noise
+
+            img = np.clip(img, 0, 255).astype(np.uint8)
+
+        # ==========================
+        # 高斯模糊
+        # ==========================
+        if random.random() < 0.3:
+            k = random.choice([3, 5])
+
+            img = cv2.GaussianBlur(
+                img,
+                (k, k),
+                0
+            )
+
+        # ==========================
+        # JPEG压缩
+        # ==========================
+        if random.random() < 0.3:
+            quality = random.randint(60, 95)
+
+            _, enc = cv2.imencode(
+                '.jpg',
+                img,
+                [int(cv2.IMWRITE_JPEG_QUALITY), quality]
+            )
+
+            img = cv2.imdecode(enc, 1)
+
+        return img
+
     def sample_wire_length(self):
         """
         生成真实世界线材长度(米)
@@ -211,7 +287,7 @@ class CopyPasteAugmentor:
         elif DISTANCE_MODE == "near":
 
             # 底部权重大
-            weights = y_norm**DISTANCE_BIAS_POWER
+            weights = y_norm ** DISTANCE_BIAS_POWER
 
         elif DISTANCE_MODE == "middle":
 
@@ -220,7 +296,7 @@ class CopyPasteAugmentor:
 
             weights = np.clip(weights, 0.01, None)
 
-            weights = weights**DISTANCE_BIAS_POWER
+            weights = weights ** DISTANCE_BIAS_POWER
 
         else:
             # uniform
@@ -292,7 +368,7 @@ class CopyPasteAugmentor:
 
         h, w = rgba.shape[:2]
 
-        roi = bg[y : y + h, x : x + w]
+        roi = bg[y: y + h, x: x + w]
 
         alpha = (rgba[:, :, 3].astype(np.float32) / 255.0)[..., None]
 
@@ -300,6 +376,6 @@ class CopyPasteAugmentor:
 
         blended = fg * alpha + roi * (1 - alpha)
 
-        bg[y : y + h, x : x + w] = blended.astype(np.uint8)
+        bg[y: y + h, x: x + w] = blended.astype(np.uint8)
 
         return bg
