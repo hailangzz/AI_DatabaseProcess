@@ -1,17 +1,17 @@
 import os
+
 import cv2
 import numpy as np
 from tqdm import tqdm
-
 
 # ==========================================
 # 配置
 # ==========================================
 
-IMAGE_DIR = "/home/chenkejing/Desktop/WireSegmentProject1/images"
-LABEL_DIR = "/home/chenkejing/Desktop/WireSegmentProject1/images"
+IMAGE_DIR = "/home/chenkejing/Desktop/LiquidSegmentProject/images"
+LABEL_DIR = "/home/chenkejing/Desktop/LiquidSegmentProject/images"
 
-OUTPUT_VIDEO = "WireSegmentProject_result_0602_1.mp4"
+OUTPUT_VIDEO = "LiquidSegmentProject_result_0702_1.mp4"
 
 FPS = 5
 
@@ -23,7 +23,6 @@ MASK_ALPHA = 0.4
 # ==========================================
 
 def load_yolov8_seg(label_file, img_w, img_h):
-
     polygons = []
 
     if not os.path.exists(label_file):
@@ -45,7 +44,6 @@ def load_yolov8_seg(label_file, img_w, img_h):
             pts = []
 
             for i in range(0, len(coords), 2):
-
                 x = int(coords[i] * img_w)
                 y = int(coords[i + 1] * img_h)
 
@@ -66,7 +64,6 @@ def load_yolov8_seg(label_file, img_w, img_h):
 # ==========================================
 
 def draw_segmentation(image, polygons):
-
     overlay = image.copy()
 
     color_table = [
@@ -125,7 +122,6 @@ def draw_segmentation(image, polygons):
 # ==========================================
 
 def main():
-
     image_files = sorted([
         f for f in os.listdir(IMAGE_DIR)
         if f.lower().endswith(

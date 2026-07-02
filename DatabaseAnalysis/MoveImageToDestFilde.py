@@ -33,13 +33,34 @@ class ImageViewer(QDialog):
         self.resize(900, 700)
 
         layout = QVBoxLayout()
-        img = cv2.imdecode(np.fromfile(img_path, dtype=np.uint8), cv2.IMREAD_COLOR)
+        img = cv2.imdecode(
+            np.fromfile(img_path, dtype=np.uint8),
+            cv2.IMREAD_UNCHANGED
+        )
+
         if img is None:
             img = np.zeros((700, 900, 3), dtype=np.uint8)
+            fmt = QImage.Format_RGB888
+
+        elif len(img.shape) == 2:
+            img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+            fmt = QImage.Format_RGB888
+
+        elif img.shape[2] == 4:
+            img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
+            fmt = QImage.Format_RGBA8888
+
         else:
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            fmt = QImage.Format_RGB888
 
-        qimg = QImage(img.data, img.shape[1], img.shape[0], img.strides[0], QImage.Format_RGB888)
+        qimg = QImage(
+            img.data,
+            img.shape[1],
+            img.shape[0],
+            img.strides[0],
+            fmt
+        ).copy()
         label = QLabel()
         label.setPixmap(QPixmap.fromImage(qimg))
         label.setAlignment(Qt.AlignCenter)
@@ -195,12 +216,38 @@ class LabelChecker(QWidget):
 
         for i, file in enumerate(batch_files):
             img_path = os.path.join(self.image_dir, file)
-            img = cv2.imdecode(np.fromfile(img_path, dtype=np.uint8), cv2.IMREAD_COLOR)
+            img = cv2.imdecode(
+                np.fromfile(img_path, dtype=np.uint8),
+                cv2.IMREAD_UNCHANGED
+            )
+
             if img is None:
                 continue
+
             img = cv2.resize(img, (self.img_size, self.img_size))
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            qimg = QImage(img.data, img.shape[1], img.shape[0], img.strides[0], QImage.Format_RGB888)
+
+            if len(img.shape) == 2:
+
+                img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+                fmt = QImage.Format_RGB888
+
+            elif img.shape[2] == 4:
+
+                img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
+                fmt = QImage.Format_RGBA8888
+
+            else:
+
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                fmt = QImage.Format_RGB888
+
+            qimg = QImage(
+                img.data,
+                img.shape[1],
+                img.shape[0],
+                img.strides[0],
+                fmt
+            ).copy()
             pix = QPixmap.fromImage(qimg)
 
             img_label = ClickableLabel(img_path, self)

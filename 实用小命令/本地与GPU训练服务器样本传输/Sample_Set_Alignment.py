@@ -173,8 +173,25 @@ if __name__ == "__main__":
     # DRY_RUN = True  # 测试，不会删除文件
     DRY_RUN = False  # 正式删除文件
 
-    image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
-    label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
+    ## 塑料袋检测数据库
+    # image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
+    # label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
+
+    ## 线材检测数据库
+    image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
+    label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/labels/train"
+
+    ## 线材检测数据库
+    # image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+    # label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
+
+    ## 液体检测数据库
+    # image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
+    # label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
+
+    ## 地毯检测数据库
+    # image_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
+    # label_remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/carpetDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"
     username = "robot-server"

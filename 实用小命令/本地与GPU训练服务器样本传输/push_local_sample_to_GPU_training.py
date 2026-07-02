@@ -259,11 +259,11 @@ if __name__ == "__main__":
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
 
     # 塑料袋检测样本，推送
-    local_path = "/data/database/PlasticBagDatabase/plastic bag.v1i.coco (1)_useful_sample/images"
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
+    # local_path = "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0702_public/images"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
 
-    # local_path = "/data/database/PlasticBagDatabase/plastic bag.v1i.coco (1)_useful_sample/yolov8_labels/seg"
-    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
+    local_path = "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0702_public/labels"
+    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"
     username = "robot-server"

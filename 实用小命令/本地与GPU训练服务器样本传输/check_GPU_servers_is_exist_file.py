@@ -95,7 +95,7 @@ if __name__ == "__main__":
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
 
     # 要搜索的文件名
-    target_filename = "-5_jpg.rf.8d9fe72bf6af960ade296433ad7a4226.jpg"
+    target_filename = "20260702_plasticbag_public_batch1_000007.jpg"
 
     hostname = "172.16.50.229"
     username = "robot-server"

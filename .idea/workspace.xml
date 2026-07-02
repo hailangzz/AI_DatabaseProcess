@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="单张图像审核程序:V2新版本">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增远程数据库，图像、标注文件整理。删除图像、标注不对齐的情况。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseAnalysis/Fast_target_image_detection_effect.py" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseAnalysis/Fast_target_image_detection_effect.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DatabaseAnalysis/MoveImageToDestFilde.py" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseAnalysis/MoveImageToDestFilde.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/xanylabeling_标注文件整理/1.creat_yolo_label_from_labelme_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/Sample_Set_Alignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/Sample_Set_Alignment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/PlasticBagSampleAugmentor/Plasticbag_augmentor.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/PlasticBagSampleAugmentor/Plasticbag_augmentor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/PlasticBagSampleAugmentor/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/PlasticBagSampleAugmentor/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/模型真机测试_预测视频合成/create_seg_video.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/模型真机测试_预测视频合成/create_seg_video.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +115,7 @@
     "Python.MoveImageToDestFilde.executor": "Run",
     "Python.Plasticbag_augmentor.executor": "Run",
     "Python.RandomDisplayDetectAndMarkSample.executor": "Run",
+    "Python.Sample_Set_Alignment.executor": "Run",
     "Python.add_wire_on_mask_render_frame.executor": "Run",
     "Python.batch_create_mask_to_yolov8_seg_labels.executor": "Run",
     "Python.blender_yolo_generate_full.executor": "Run",
@@ -227,8 +226,8 @@
       <recent name="$PROJECT_DIR$/模型优化_实验环境采集rostopic误检样本" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.MoveImageToDestFilde">
-    <configuration name="Fast_target_image_detection_effect" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.rknn_quant_model_compare_client">
+    <configuration name="Sample_Set_Alignment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -237,11 +236,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/Fast_target_image_detection_effect.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/Sample_Set_Alignment.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -250,7 +249,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="MoveImageToDestFilde" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="check_GPU_servers_is_exist_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -259,33 +258,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DatabaseAnalysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DatabaseAnalysis/MoveImageToDestFilde.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Plasticbag_augmentor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/PlasticBagSampleAugmentor" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/PlasticBagSampleAugmentor/Plasticbag_augmentor.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -316,7 +293,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="push_local_sample_to_GPU_training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -325,11 +302,33 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/PlasticBagSampleAugmentor" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/PlasticBagSampleAugmentor/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="rknn_quant_model_compare_client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/quant_model_compare/rknn_quant_model_compare_client.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -340,11 +339,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.MoveImageToDestFilde" />
-        <item itemvalue="Python.Fast_target_image_detection_effect" />
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.Plasticbag_augmentor" />
+        <item itemvalue="Python.rknn_quant_model_compare_client" />
         <item itemvalue="Python.get_GPU_servers_file_sample_numbers" />
+        <item itemvalue="Python.Sample_Set_Alignment" />
+        <item itemvalue="Python.push_local_sample_to_GPU_training" />
+        <item itemvalue="Python.check_GPU_servers_is_exist_file" />
       </list>
     </recent_temporary>
   </component>
@@ -363,22 +362,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00026" summary="新增液体检测，数据处理、增强脚本">
-      <option name="closed" value="true" />
-      <created>1773997500324</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1773997500324</updated>
-    </task>
-    <task id="LOCAL-00027" summary="1、新增缩放、旋转数据增强变换&#10;2、新增xanylabeling，自动追踪标注json文件，转为yolov8_seg、yolov8_det标签文件">
-      <option name="closed" value="true" />
-      <created>1774490604588</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1774490604588</updated>
     </task>
     <task id="LOCAL-00028" summary="线材检测，标注数据处理">
       <option name="closed" value="true" />
@@ -756,7 +739,23 @@
       <option name="project" value="LOCAL" />
       <updated>1782874589840</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1782957791836</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1782957791836</updated>
+    </task>
+    <task id="LOCAL-00076" summary="新增远程数据库，图像、标注文件整理。删除图像、标注不对齐的情况。">
+      <option name="closed" value="true" />
+      <created>1782976737231</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1782976737231</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -813,7 +812,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="线材检测，标注数据处理" />
     <MESSAGE value="切分训练集、验证集" />
     <MESSAGE value="finetune模型训练时，抽取随机公共数据集" />
     <MESSAGE value="0408日常更新" />
@@ -836,9 +834,10 @@
     <MESSAGE value="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;" />
     <MESSAGE value="优化目标检测、分割效果查看程序" />
     <MESSAGE value="塑料袋样本增强，新增合成样本的数据增强。噪点、亮度、对比度。" />
-    <MESSAGE value="日常提交" />
     <MESSAGE value="单张图像审核程序:V2新版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="单张图像审核程序:V2新版本" />
+    <MESSAGE value="日常提交" />
+    <MESSAGE value="新增远程数据库，图像、标注文件整理。删除图像、标注不对齐的情况。" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增远程数据库，图像、标注文件整理。删除图像、标注不对齐的情况。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
