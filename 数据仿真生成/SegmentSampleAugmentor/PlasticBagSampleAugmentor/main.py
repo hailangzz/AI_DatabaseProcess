@@ -379,13 +379,13 @@ def main():
 AUG_PER_IMAGE = 3
 
 # 最终希望生成多少张增强样本
-TARGET_NUM_SAMPLES = 3000
+TARGET_NUM_SAMPLES = 1200
 
 IMAGE_EXTS = (".jpg", ".jpeg", ".png", ".bmp", ".webp")
 
 # 自定义变量
 MODEL_NAME = "plasticbag"  # 模型名称
-BATCH_NUMBER = "real_batch1"  # 批次号
+BATCH_NUMBER = "public_batch1"  # 批次号
 
 # 获取当前日期
 CURRENT_DATE = datetime.now().strftime("%Y%m%d")
@@ -397,10 +397,10 @@ if __name__ == "__main__":
     FLOOR_IMG_DIR = "/data/database/Total_Flooring_Images/images"
     FLOOR_LABEL_DIR = "/data/database/Total_Flooring_Images/ground_mask_labels"
 
-    Target_DIR = "/data/database/Total_model_target_mask_png_library/real_image_mask/plasticbag_mask_png_library"
+    Target_DIR = "/data/database/PlasticBagDatabase/plastic bag.v1i.coco (1)_useful_sample/target_sample_images"
 
     output_dir = (
-        "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0625_real"
+        "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0702_public"
     )
     OUTPUT_IMG_DIR = os.path.join(output_dir, "images")
     OUTPUT_IMG_DIR = os.path.join(output_dir, "images")

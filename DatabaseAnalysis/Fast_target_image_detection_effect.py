@@ -170,6 +170,7 @@ class ImageChecker(QWidget):
         self.name_labels = []
 
         self.init_ui()
+        self.undo_stack = []  # 用于撤销删除
 
     # =========================
     # UI
@@ -396,23 +397,69 @@ class ImageChecker(QWidget):
         elif event.key() in (Qt.Key_Delete, Qt.Key_S):
             self.delete_selected()
 
+        elif event.key() == Qt.Key_Z and (event.modifiers() & Qt.ControlModifier):
+            self.undo_delete()
+
     # =========================
     # delete
     # =========================
     def delete_selected(self):
 
+        if not self.selected_set:
+            return
+
+        deleted_batch = []
+
         for path in list(self.selected_set):
             try:
-                os.remove(path)
+                if os.path.exists(path):
+                    # 先记录（用于撤销）
+                    deleted_batch.append(path)
+
+                    os.remove(path)
+
             except:
                 pass
 
+        # ⭐ 保存这次删除操作
+        if deleted_batch:
+            self.undo_stack.append(deleted_batch)
+
+        # 更新文件列表
         self.files = [
             f for f in self.files
             if os.path.join(self.image_dir, f) not in self.selected_set
         ]
 
         self.selected_set.clear()
+        self.show_page()
+
+    def undo_delete(self):
+
+        if not self.undo_stack:
+            return
+
+        last_deleted = self.undo_stack.pop()
+
+        for path in last_deleted:
+            try:
+                # 这里无法真正恢复文件（除非用回收站）
+                # 所以只能重新加入列表刷新界面
+                if os.path.exists(path):
+                    continue
+
+                # 重新加入文件列表
+                filename = os.path.basename(path)
+
+                if filename not in self.files:
+                    self.files.append(filename)
+
+            except:
+                pass
+
+        # 重新排序
+        self.files = sorted(self.files)
+
         self.show_page()
 
 

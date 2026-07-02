@@ -345,9 +345,9 @@ class WireAugmentor:
 
 if __name__ == "__main__":
     augmentor = WireAugmentor(
-        image_dir="/data/database/AITotal_Real_Customer_Database/Real_PlasticBag_Customer_Database/real_camera_images_0626_PlasticBag_batch1/images",
-        label_dir="/data/database/AITotal_Real_Customer_Database/Real_PlasticBag_Customer_Database/real_camera_images_0626_PlasticBag_batch1/yolov8_labels/seg",
-        output_dir="/data/database/AITotal_Real_Customer_Database/Real_PlasticBag_Customer_Database/real_camera_images_0626_PlasticBag_batch1/plasticbag_mask_png_library",
+        image_dir="/data/database/PlasticBagDatabase/plastic bag.v1i.coco (1)_useful_sample/images",
+        label_dir="/data/database/PlasticBagDatabase/plastic bag.v1i.coco (1)_useful_sample/yolov8_labels/seg",
+        output_dir="/data/database/Total_model_target_mask_png_library/public_image_mask/plasticbag_mask_png_library",
         min_short_side=45,
     )
 

@@ -98,7 +98,7 @@ def main():
 
 # OUTPUT_DIR = "/data/database/AITotal_Real_Customer_Database/Real_Wire_Customer_Database/date0519/WireSampleFolder"  # 输出目录
 # INPUT_DIR = os.path.join(OUTPUT_DIR, "images")
-OUTPUT_DIR = "/data/database/AITotal_Real_Customer_Database/Real_PlasticBag_Customer_Database/real_camera_images_0626_PlasticBag_batch1"  # 输出目录
+OUTPUT_DIR = "/data/database/PlasticBagDatabase/plastic bag.v1i.coco (1)_useful_sample"  # 输出目录
 INPUT_DIR = os.path.join(OUTPUT_DIR, "images")
 
 # 类别映射（根据你的实际类别修改）
@@ -107,7 +107,7 @@ CLASS_MAP = {
     # "hand":0,
     # "carpet":0,
     # "wire":0
-    "plasticbag": 0
+    "plastic": 0
 }
 
 if __name__ == "__main__":
