@@ -23,3 +23,10 @@ Ultralytics_sam_auto_object_label/video_annotations/
 # Python cache
 __pycache__/
 *.py[cod]
+/bilibili_videos_download/downloads/
+*.pt
+*.jpg
+*.png
+*.mp4
+*.avi
+*.mov
