@@ -1,0 +1,35 @@
+# 说明：将项目打包成可执行文件，方便在没有安装Python环境的电脑上运行。
+
+方案一（推荐⭐⭐⭐⭐⭐）：打包成单个可执行文件
+
+使用 PyInstaller。
+
+安装：
+
+pip install pyinstaller
+
+打包：
+
+pyinstaller  --onefile  --name ai_perception_camera_collector  auto_get_camare_images.py
+或者：
+python3 -m PyInstaller \
+    --onefile \
+    --name ai_perception_camera_collector \
+    auto_get_camare_images.py
+
+生成：
+
+dist/
+    camera_collector
+
+以后测试人员只需要
+
+./camera_collector
+
+或者
+
+./camera_collector \
+    --duration 10 \
+    --batch_images_names liquid
+
+完全不用安装 Python。  （注意：项目打包时，一定要在真正执行的，系统框架下打包。不同系统上打包的项目，不可以混用。否则报错：./camera_collector -bash: ./camera_collector: cannot execute binary file: Exec format error）

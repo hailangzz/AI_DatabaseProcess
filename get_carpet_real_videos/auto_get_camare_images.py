@@ -2,30 +2,30 @@
 # -*- coding: utf-8 -*-
 
 """
-摄像头图像采集程序
+Camera Image Collection Tool
 
-功能：
-1. 自动检查并结束占用摄像头的进程
-2. 定时采集图片
-3. Ctrl+C 安全退出
-4. 异常退出自动释放摄像头
-5. 支持命令行参数
+Features:
+1. Automatically detect and kill processes occupying the camera
+2. Capture images at a fixed interval
+3. Safe exit with Ctrl+C
+4. Automatically release camera on abnormal exit
+5. Support command-line arguments
 
-示例：
+Examples:
 
-默认运行
+Run with default parameters
 python3 auto_get_camare_images.py
 
-采集10分钟
-python3 auto_get_camare_images.py --duration 1
+Capture for 10 minutes
+python3 auto_get_camare_images.py --duration 10
 
-修改保存目录
+Change output directory
 python3 auto_get_camare_images.py --batch_images_names liquid_batch2
 
-修改摄像头
+Use another camera
 python3 auto_get_camare_images.py --camera_index 1
 
-组合使用
+Combined usage
 python3 auto_get_camare_images.py \
     --batch_images_names liquid_batch3 \
     --duration 10 \
@@ -45,23 +45,23 @@ from datetime import datetime
 import cv2
 
 # ======================================================
-# 默认参数
+# Default parameters
 # ======================================================
 
 DEFAULT_BATCH_NAME = "real_camera_images_debug_ai_perception"
-DEFAULT_DURATION = 1  # 分钟
-DEFAULT_INTERVAL = 0.1  # 秒
+DEFAULT_DURATION = 1  # minutes
+DEFAULT_INTERVAL = 0.1  # seconds
 DEFAULT_CAMERA_INDEX = 0
 
 # ======================================================
-# 全局摄像头对象（仅用于退出时释放）
+# Global camera object
 # ======================================================
 
 _cap = None
 
 
 # ======================================================
-# 参数解析
+# Parse command-line arguments
 # ======================================================
 
 def parse_args():
@@ -73,35 +73,35 @@ def parse_args():
         "--batch_images_names",
         type=str,
         default=DEFAULT_BATCH_NAME,
-        help=f"图片保存目录(默认: {DEFAULT_BATCH_NAME})"
+        help=f"Output directory name (default: {DEFAULT_BATCH_NAME})"
     )
 
     parser.add_argument(
         "--duration",
         type=int,
         default=DEFAULT_DURATION,
-        help=f"采集时长(秒)，默认{DEFAULT_DURATION}"
+        help=f"Capture duration in minutes (default: {DEFAULT_DURATION})"
     )
 
     parser.add_argument(
         "--camera_index",
         type=int,
         default=DEFAULT_CAMERA_INDEX,
-        help="摄像头编号"
+        help="Camera index"
     )
 
     parser.add_argument(
         "--interval",
         type=float,
         default=DEFAULT_INTERVAL,
-        help="采集间隔(秒)"
+        help="Capture interval in seconds"
     )
 
     return parser.parse_args()
 
 
 # ======================================================
-# 检查并结束占用摄像头的进程
+# Kill processes occupying the camera
 # ======================================================
 
 def kill_camera_process(camera_index):
@@ -117,10 +117,10 @@ def kill_camera_process(camera_index):
         lines = result.stdout.strip().split("\n")
 
         if len(lines) <= 1:
-            print(f"[INFO] {device} 未被占用")
+            print(f"[INFO] {device} is not occupied.")
             return
 
-        print(f"[INFO] 检测到 {device} 被以下进程占用：")
+        print(f"[INFO] The following processes are using {device}:")
 
         for line in lines[1:]:
 
@@ -139,20 +139,20 @@ def kill_camera_process(camera_index):
 
             try:
                 os.kill(pid, signal.SIGKILL)
-                print(f"    已结束 PID={pid}")
+                print(f"    Process {pid} has been terminated.")
             except Exception as e:
-                print(f"    无法结束 {pid}: {e}")
+                print(f"    Failed to terminate {pid}: {e}")
 
         time.sleep(1)
 
     except FileNotFoundError:
-        print("系统未安装 lsof")
-        print("请执行：")
+        print("lsof is not installed.")
+        print("Please install it using:")
         print("sudo apt install lsof")
 
 
 # ======================================================
-# 释放摄像头
+# Release camera
 # ======================================================
 
 def release_camera():
@@ -161,22 +161,22 @@ def release_camera():
     if _cap is not None:
         _cap.release()
         _cap = None
-        print("\n[INFO] 摄像头已释放")
+        print("\n[INFO] Camera released.")
 
 
 # ======================================================
-# Ctrl+C
+# Ctrl+C handler
 # ======================================================
 
 def signal_handler(sig, frame):
-    print("\n收到退出信号...")
+    print("\nExit signal received...")
     release_camera()
     cv2.destroyAllWindows()
     sys.exit(0)
 
 
 # ======================================================
-# 主程序
+# Main function
 # ======================================================
 
 def main():
@@ -206,15 +206,15 @@ def main():
         _cap = cv2.VideoCapture(camera_index)
 
         if not _cap.isOpened():
-            print("无法打开摄像头")
+            print("Failed to open camera.")
             return
 
         print("=" * 60)
-        print("开始采集")
-        print(f"保存目录 : {save_dir}")
-        print(f"采集时间 : {duration} 秒")
-        print(f"采集间隔 : {interval} 秒")
-        print(f"摄像头编号 : {camera_index}")
+        print("Camera image collection started")
+        print(f"Output directory : {save_dir}")
+        print(f"Duration         : {duration} seconds")
+        print(f"Capture interval : {interval} seconds")
+        print(f"Camera index     : {camera_index}")
         print("=" * 60)
 
         start_time = time.time()
@@ -226,7 +226,7 @@ def main():
             ret, frame = _cap.read()
 
             if not ret:
-                print("读取图像失败")
+                print("Failed to capture image.")
                 break
 
             image_name = (
@@ -236,25 +236,24 @@ def main():
 
             filename = os.path.join(save_dir, image_name)
 
-            # cv2.imwrite(filename, frame)  // 原始保存
-
-            # 压缩到 1280×720
+            # Resize to 1280×720
             frame = cv2.resize(
                 frame,
                 (1280, 720),
                 interpolation=cv2.INTER_AREA
             )
-            # JPEG质量（可选，95基本无明显损失）
+
+            # Save as JPEG (quality=95)
             cv2.imwrite(
                 filename,
                 frame,
                 [cv2.IMWRITE_JPEG_QUALITY, 95]
-            )  # // 压缩保存
+            )
 
             frame_count += 1
 
             print(
-                f"\r已保存 {frame_count:05d} 张",
+                f"\rCaptured {frame_count:05d} images",
                 end="",
                 flush=True
             )
@@ -264,22 +263,22 @@ def main():
 
             time.sleep(interval)
 
-        print("\n采集完成！")
+        print("\nImage collection completed.")
 
     except KeyboardInterrupt:
-        print("\n用户终止程序")
+        print("\nProgram interrupted by user.")
 
     except Exception as e:
-        print(f"\n程序异常：{e}")
+        print(f"\nProgram error: {e}")
 
     finally:
         release_camera()
         cv2.destroyAllWindows()
-        print("程序结束")
+        print("Program terminated.")
 
 
 # ======================================================
-# 程序入口
+# Entry point
 # ======================================================
 
 if __name__ == "__main__":
