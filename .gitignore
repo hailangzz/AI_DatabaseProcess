@@ -30,3 +30,5 @@ __pycache__/
 *.mp4
 *.avi
 *.mov
+/get_carpet_real_videos/build/
+/get_carpet_real_videos/dist/

@@ -2,8 +2,8 @@ from pathlib import Path
 
 
 def count_local_files(
-    directory,
-    suffix_list,
+        directory,
+        suffix_list,
 ):
     """
     统计指定后缀文件数量
@@ -14,7 +14,6 @@ def count_local_files(
     count = 0
 
     for suffix in suffix_list:
-
         count += len(
             list(
                 path.rglob(f"*{suffix}")
@@ -25,10 +24,9 @@ def count_local_files(
 
 
 def count_local_dataset(
-    image_local_path,
-    label_local_path,
+        image_local_path,
+        label_local_path,
 ):
-
     print("开始统计本地数据集...\n")
 
     # 图像后缀
@@ -81,12 +79,17 @@ def count_local_dataset(
 
 
 if __name__ == "__main__":
-
     # image_local_path = "/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
     # label_local_path = "/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/labels/train"
 
-    image_local_path = "/data/database/AITotal_SegmentDatabase/LiquidDatabaseSegment/images/train"
-    label_local_path = "/data/database/AITotal_SegmentDatabase/LiquidDatabaseSegment/labels/train"
+    # image_local_path = "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
+    # label_local_path = "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/labels/train"
+
+    # image_local_path = "/data/database/AITotal_SegmentDatabase/LiquidDatabaseSegment/images/train"
+    # label_local_path = "/data/database/AITotal_SegmentDatabase/LiquidDatabaseSegment/labels/train"
+
+    image_local_path = "/run/user/1001/gvfs/smb-share:server=172.16.50.250,share=share/算法领域/数据集/AI数据集/AISampleDataset/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
+    label_local_path = "/run/user/1001/gvfs/smb-share:server=172.16.50.250,share=share/算法领域/数据集/AI数据集/AISampleDataset/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
 
     count_local_dataset(
         image_local_path,
