@@ -1,48 +1,78 @@
-import os
+# -*- coding: utf-8 -*-
+
 import shutil
+from pathlib import Path
 
-# ====== 配置路径 ======
-source_images_dir = r"/home/chenkejing/database/object_camera_coordinates_image/hand_detect/date0420/images"
-target_images_dir = r"/data/database/AITotal_ProjectDatabase/finetune_random_sample_datebase/random_hand_database/images/train"
+# =========================
+# 配置
+# =========================
 
-# # ====== 配置路径 ======
-source_labels_dir = r"/home/chenkejing/database/object_camera_coordinates_image/hand_detect/date0420/yolov8_labels/bbox"
-target_labels_dir = r"/data/database/AITotal_ProjectDatabase/finetune_random_sample_datebase/random_hand_database/labels/train"
+SOURCE_IMAGES_DIR = Path(
+    "/home/chenkejing/Downloads/CrowdHuman/CrowdHuman_train03/Images"
+)
 
-# 支持的图片格式
-image_exts = {".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp", ".txt"}
+TARGET_IMAGES_DIR = Path("/home/chenkejing/Downloads/CrowdHuman/images")
 
-def copy_images(src, dst):
-    copied_count = 0
-    skipped_count = 0
+SOURCE_LABELS_DIR = Path(
+    "/home/chenkejing/Downloads/CrowdHuman/CrowdHuman_train03/Images"
+)
 
-    if not os.path.exists(dst):
-        os.makedirs(dst)
+TARGET_LABELS_DIR = Path("/home/chenkejing/Downloads/CrowdHuman/labels")
 
-    for root, dirs, files in os.walk(src):
-        for file in files:
-            ext = os.path.splitext(file)[1].lower()
-            if ext in image_exts:
-                src_path = os.path.join(root, file)
-                dst_path = os.path.join(dst, file)
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 
-                # ✅ 如果目标中已存在同名文件，则跳过
-                if os.path.exists(dst_path):
-                    skipped_count += 1
-                    print(f"跳过（已存在）: {dst_path}")
-                    continue
+LABEL_EXTS = {".txt"}
 
-                # 执行复制
-                shutil.copy2(src_path, dst_path)
-                copied_count += 1
-                print(f"已复制: {src_path} -> {dst_path}")
 
-    print(f"\n拷贝完成！")
-    print(f"成功复制数量: {copied_count}")
-    print(f"跳过数量: {skipped_count}")
+def copy_files(source_dir: Path, target_dir: Path, extensions: set, prefix=""):
+    """
+    复制指定类型文件
+
+    """
+
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    copied = 0
+    skipped = 0
+
+    for src_file in source_dir.rglob("*"):
+
+        if not src_file.is_file():
+            continue
+
+        if src_file.suffix.lower() not in extensions:
+            continue
+
+        dst_file = target_dir / src_file.name
+
+        # 已存在
+        if dst_file.exists():
+            skipped += 1
+
+            print(f"[skip] {dst_file}")
+
+            continue
+
+        shutil.copy2(src_file, dst_file)
+
+        copied += 1
+
+        print(f"[{prefix}] {src_file.name}")
+
+    print("\n====================")
+    print(f"{prefix} 完成")
+    print(f"复制: {copied}")
+    print(f"跳过: {skipped}")
+    print("====================\n")
 
 
 if __name__ == "__main__":
-    copy_images(source_images_dir, target_images_dir)
-    copy_images(source_labels_dir, target_labels_dir)
-    print("✅ 图片复制完成！")
+    # copy images
+
+    copy_files(SOURCE_IMAGES_DIR, TARGET_IMAGES_DIR, IMAGE_EXTS, prefix="IMAGE")
+
+    # copy labels
+
+    copy_files(SOURCE_LABELS_DIR, TARGET_LABELS_DIR, LABEL_EXTS, prefix="LABEL")
+
+    print("✅ 全部完成")
