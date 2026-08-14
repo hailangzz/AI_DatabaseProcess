@@ -14,10 +14,76 @@ from PyQt5.QtWidgets import (
 os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = "/home/chenkejing/anaconda3/plugins/platforms"
 
 
+# =========================
+# ImageViewer
+# =========================
+class ImageViewer(QWidget):
+
+    def __init__(self, image_path):
+        super().__init__()
+
+        self.image_path = image_path
+
+        self.setWindowTitle(
+            os.path.basename(image_path)
+        )
+
+        self.resize(
+            1000,
+            800
+        )
+
+        layout = QVBoxLayout()
+
+        self.label = QLabel()
+
+        self.label.setAlignment(
+            Qt.AlignCenter
+        )
+
+        layout.addWidget(
+            self.label
+        )
+
+        self.setLayout(
+            layout
+        )
+
+        self.show_image()
+
+    def show_image(self):
+        pixmap = QPixmap(
+            self.image_path
+        )
+
+        self.label.setPixmap(
+            pixmap.scaled(
+                self.size(),
+                Qt.KeepAspectRatio,
+                Qt.SmoothTransformation
+            )
+        )
+
+    def keyPressEvent(self, event):
+
+        if event.key() == Qt.Key_Space:
+
+            self.close()
+
+        else:
+
+            super().keyPressEvent(event)
+
+
 # ------------------ 可点击图片 ------------------
 class ClickableLabel(QLabel):
     def __init__(self, file_path, index, parent):
         super().__init__()
+
+        # 允许接收键盘事件
+        self.setFocusPolicy(
+            Qt.StrongFocus
+        )
         self.file_path = file_path
         self.index = index
         self.parent_widget = parent
@@ -44,6 +110,13 @@ class ClickableLabel(QLabel):
 
         self.parent_widget.last_clicked_index = self.index
 
+        # 记录当前选中的图片
+        self.parent_widget.current_image = self.file_path
+
+        # 键盘事件交给主窗口
+
+        self.parent_widget.setFocus()
+
     def paintEvent(self, event):
         super().paintEvent(event)
         if self.selected:
@@ -62,6 +135,9 @@ class ClickableLabel(QLabel):
 class LabelChecker(QWidget):
     def __init__(self):
         super().__init__()
+        self.setFocusPolicy(
+            Qt.StrongFocus
+        )
         self.setWindowTitle("YOLO 标注质量校验工具（Detection / Segmentation）")
         self.resize(1200, 780)
 
@@ -75,9 +151,14 @@ class LabelChecker(QWidget):
         self.task_type = "det"
         self.img_size = 420
 
-        # 新增变量
         self.last_clicked_index = None
         self.current_batch = []
+
+        # 当前选中的图片
+        self.current_image = None
+
+        # 原图窗口
+        self.viewer = None
 
         self.init_ui()
 
@@ -343,9 +424,47 @@ class LabelChecker(QWidget):
     # ---------------- 快捷键 ----------------
     def keyPressEvent(self, event):
 
-        if event.key() in (Qt.Key_Delete, Qt.Key_S):
+        # =========================
+        # 空格查看原图
+        # =========================
 
-            to_delete = [p for p, l in self.selected_labels.items() if l.selected]
+        if event.key() == Qt.Key_Space:
+
+            if self.current_image is None:
+                return
+
+            if self.viewer is None:
+
+                self.viewer = ImageViewer(
+                    self.current_image
+                )
+
+                self.viewer.show()
+
+
+            else:
+
+                self.viewer.close()
+
+                self.viewer = None
+
+            return
+
+        # =========================
+        # 原删除逻辑
+        # =========================
+
+        if event.key() in (
+                Qt.Key_Delete,
+                Qt.Key_S
+        ):
+
+            to_delete = [
+                p
+                for p, l
+                in self.selected_labels.items()
+                if l.selected
+            ]
 
             for p in to_delete:
 
@@ -354,24 +473,41 @@ class LabelChecker(QWidget):
 
                 lp = os.path.join(
                     self.label_dir,
-                    os.path.splitext(os.path.basename(p))[0] + ".txt"
+                    os.path.splitext(
+                        os.path.basename(p)
+                    )[0] + ".txt"
                 )
 
                 if os.path.exists(lp):
                     os.remove(lp)
 
-            self.files = [f for f in self.files
-                          if os.path.join(self.image_dir, f) not in to_delete]
+            self.files = [
+                f
+                for f in self.files
+                if os.path.join(
+                    self.image_dir,
+                    f
+                )
+                   not in to_delete
+            ]
 
-            self.update_file_list(keep_index=True)
+            self.update_file_list(
+                keep_index=True
+            )
+
 
         elif event.key() == Qt.Key_A:
+
             self.prev_page()
 
+
         elif event.key() == Qt.Key_D:
+
             self.next_page()
 
+
         else:
+
             super().keyPressEvent(event)
 
 
