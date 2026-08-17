@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增：文件自动重命名程序">
+      <change afterPath="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_file_to_des_direct_skip_repeat_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_file_to_des_direct_skip_repeat_file.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +126,7 @@
     "Python.RandomDisplayDetectAndMarkSample.executor": "Run",
     "Python.Sample_Set_Alignment.executor": "Run",
     "Python.add_wire_on_mask_render_frame.executor": "Run",
+    "Python.auto_rename_sample_file.executor": "Run",
     "Python.batch_create_mask_to_yolov8_seg_labels.executor": "Run",
     "Python.blender_yolo_generate_full.executor": "Run",
     "Python.check_GPU_servers_is_exist_file.executor": "Run",
@@ -142,6 +143,7 @@
     "Python.copy_train_database_to_project_databse.executor": "Run",
     "Python.create_batch_mask_to_yolov8_seg_labels.executor": "Run",
     "Python.create_carpet_object_images.executor": "Run",
+    "Python.create_empty_labels.executor": "Run",
     "Python.create_mp4_from_image.executor": "Run",
     "Python.create_mp4_vidoe_from_images (1).executor": "Run",
     "Python.create_mp4_vidoe_from_images.executor": "Run",
@@ -198,6 +200,8 @@
     "Python.yolov8_seg_to_det_augment-bk.executor": "Run",
     "Python.yolov8_seg_to_det_augment.executor": "Run",
     "Python.yolov8_seg_to_det_augment_hand.executor": "Run",
+    "Python.上传数据到aws.executor": "Run",
+    "Python.下载aws到本地.executor": "Run",
     "Python.从训练集中随机抽取指定数量样本集供finetune使用.executor": "Run",
     "Python.删除指定目录下特定文件名文件.executor": "Run",
     "Python.删除标签文件中特定标注记录.executor": "Run",
@@ -261,51 +265,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="copy_GPU_database_to_public_share_server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/copy_GPU_database_to_public_share_server.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="copy_database_to_public_share_server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/copy_database_to_public_share_server.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="copy_file_to_des_direct_skip_repeat_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="auto_rename_sample_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -318,7 +278,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/copy_file_to_des_direct_skip_repeat_file.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/auto_rename_sample_file.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -327,7 +287,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="get_local_file_sample_numbers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="上传数据到aws" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -336,11 +296,55 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AWS_S3数据操作" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="下载aws到本地" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AWS_S3数据操作" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AWS_S3数据操作/下载aws到本地.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="get_database_target_classify_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/检查训练样本集是否合法/get_database_target_classify_info.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -352,10 +356,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
-        <item itemvalue="Python.copy_file_to_des_direct_skip_repeat_file" />
-        <item itemvalue="Python.get_local_file_sample_numbers" />
-        <item itemvalue="Python.copy_GPU_database_to_public_share_server" />
-        <item itemvalue="Python.copy_database_to_public_share_server" />
+        <item itemvalue="Python.下载aws到本地" />
+        <item itemvalue="Python.上传数据到aws" />
+        <item itemvalue="Python.auto_rename_sample_file" />
+        <item itemvalue="Python.get_database_target_classify_info" />
       </list>
     </recent_temporary>
   </component>
@@ -374,38 +378,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00038" summary="新增hard sample样本增强功能">
-      <option name="closed" value="true" />
-      <created>1776397235409</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1776397235409</updated>
-    </task>
-    <task id="LOCAL-00039" summary="日常更新">
-      <option name="closed" value="true" />
-      <created>1776760605530</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1776760605530</updated>
-    </task>
-    <task id="LOCAL-00040" summary="日常更新">
-      <option name="closed" value="true" />
-      <created>1778061616752</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1778061616752</updated>
-    </task>
-    <task id="LOCAL-00041" summary="日常更新">
-      <option name="closed" value="true" />
-      <created>1778578165295</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1778578165295</updated>
     </task>
     <task id="LOCAL-00042" summary="整理基于位置的预测图像">
       <option name="closed" value="true" />
@@ -767,7 +739,39 @@
       <option name="project" value="LOCAL" />
       <updated>1785404669330</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1786693118190</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1786693118190</updated>
+    </task>
+    <task id="LOCAL-00088" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1786693139118</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1786693139119</updated>
+    </task>
+    <task id="LOCAL-00089" summary="新增标注效果见检查软件中，空格键打开、关闭原图功能">
+      <option name="closed" value="true" />
+      <created>1786695041693</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1786695041693</updated>
+    </task>
+    <task id="LOCAL-00090" summary="新增：文件自动重命名程序">
+      <option name="closed" value="true" />
+      <created>1786948996191</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1786948996191</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -824,8 +828,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="抽取指定类别，生成训练集" />
-    <MESSAGE value="货架手势识别功能，绘制椭圆区域。测试fov" />
     <MESSAGE value="高质量存储图片" />
     <MESSAGE value="# 说明：随机拷贝指定数量的图像到指定目录。&#10;# 作用：在生成量化数据集时，一般用1000张样本。随机从真实数据集中提取样本生成量化数据集" />
     <MESSAGE value="新增存取rostopic，误检样本存储代码" />
@@ -849,7 +851,9 @@
     <MESSAGE value="优化新增自动化设备端图像存储脚本" />
     <MESSAGE value="新增现场视频采集脚本说明，且将real carmare collect脚本中文字符串改为英文，防止乱码" />
     <MESSAGE value="日常提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="日常提交" />
+    <MESSAGE value="新增标注效果见检查软件中，空格键打开、关闭原图功能" />
+    <MESSAGE value="新增：文件自动重命名程序" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增：文件自动重命名程序" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
