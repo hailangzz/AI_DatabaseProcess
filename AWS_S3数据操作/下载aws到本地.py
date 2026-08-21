@@ -85,8 +85,8 @@ def fast_s3_download(s3_uri: str, local_dir: str, max_workers: int = 50):
 
 if __name__ == "__main__":
     # ================= 自定义配置 =================
-    S3_TARGET_URI = "s3://robot-ai-platform/datasets/wire_detection/annotations/sam3/yolo/UT-A10XCNA00815T006/20260811/exist/"  # 替换为你的 S3 路径
-    LOCAL_SAVE_DIR = "/home/chenkejing/Downloads/WireSegmentProject/downloaded_dataset"  # 替换为本地保存路径
+    S3_TARGET_URI = "s3://robot-ai-platform/datasets/wire_detection/annotations/sam3/yolo/UT-A10XCNA00815T006/20260811/null/"  # 替换为你的 S3 路径
+    LOCAL_SAVE_DIR = "/home/chenkejing/Downloads/WireSegmentProject/downloaded_dataset_null"  # 替换为本地保存路径
     MAX_WORKERS = 64  # 如果大部分是几百 KB 到几 MB 的小文件，设为 64 或 128 速度极快
     # ==============================================
 

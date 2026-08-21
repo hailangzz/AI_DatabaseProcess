@@ -243,16 +243,15 @@ def sync_to_s3():
 # 配置
 # ============================================================
 
-# 本地目录
-LOCAL_DIR = (
-    r"/home/chenkejing/Downloads/WireSegmentProject/spatial_location_val_images/wire_detect"
-)
+# 本地目录 (设备SN目录的上级目录)
+LOCAL_DIR = (r"/data/database/carpetDatabase")
 
 # S3 Bucket
 S3_BUCKET = "robot-ai-platform"
 
 # S3 目标目录
-S3_PREFIX = "datasets/wire_detection" + "/source/images"
+S3_PREFIX = "datasets/carpet_detection" + "/source/images"
+# S3_PREFIX = "datasets/wire_detection" + "/source/images"
 
 # 线程数量
 MAX_WORKERS = 20

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增：文件自动重命名程序">
-      <change afterPath="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增：新增本地与aws端数据同步功能（涉及多线程加速）">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/下载aws到本地.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/下载aws到本地.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +133,7 @@
     "Python.check_GPU_servers_is_exist_file.executor": "Run",
     "Python.check_local_and_origin_GPU_repet_sample_info.executor": "Run",
     "Python.check_single_image_lable.executor": "Run",
+    "Python.coco2017样本集整理程序.executor": "Run",
     "Python.combin_more_images.executor": "Run",
     "Python.copy_GPU_database_to_public_share_server.executor": "Run",
     "Python.copy_database_to_public_share_server.executor": "Run",
@@ -242,7 +244,7 @@
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/segment_model_infer" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.AnnotationBoxAnalysis_detect_and_mark">
+  <component name="RunManager" selected="Python.coco2017样本集整理程序">
     <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -331,6 +333,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="coco2017样本集整理程序" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/coco2017样本集整理程序.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="get_database_target_classify_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -355,9 +379,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
-        <item itemvalue="Python.下载aws到本地" />
+        <item itemvalue="Python.coco2017样本集整理程序" />
         <item itemvalue="Python.上传数据到aws" />
+        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
         <item itemvalue="Python.auto_rename_sample_file" />
         <item itemvalue="Python.get_database_target_classify_info" />
       </list>
@@ -378,14 +402,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00042" summary="整理基于位置的预测图像">
-      <option name="closed" value="true" />
-      <created>1778587886578</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1778587886578</updated>
     </task>
     <task id="LOCAL-00043" summary="新增本地上传样本到服务器。">
       <option name="closed" value="true" />
@@ -771,7 +787,15 @@
       <option name="project" value="LOCAL" />
       <updated>1786948996191</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="新增：新增本地与aws端数据同步功能（涉及多线程加速）">
+      <option name="closed" value="true" />
+      <created>1786961816514</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1786961816514</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -828,7 +852,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="高质量存储图片" />
     <MESSAGE value="# 说明：随机拷贝指定数量的图像到指定目录。&#10;# 作用：在生成量化数据集时，一般用1000张样本。随机从真实数据集中提取样本生成量化数据集" />
     <MESSAGE value="新增存取rostopic，误检样本存储代码" />
     <MESSAGE value="日常优化" />
@@ -853,7 +876,8 @@
     <MESSAGE value="日常提交" />
     <MESSAGE value="新增标注效果见检查软件中，空格键打开、关闭原图功能" />
     <MESSAGE value="新增：文件自动重命名程序" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增：文件自动重命名程序" />
+    <MESSAGE value="新增：新增本地与aws端数据同步功能（涉及多线程加速）" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增：新增本地与aws端数据同步功能（涉及多线程加速）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
