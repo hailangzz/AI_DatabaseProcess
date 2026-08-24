@@ -42,19 +42,13 @@ def get_all_upload_files(local_path):
     return upload_files
 
 
-def get_ssh_client(
-        hostname,
-        username,
-        password,
-        port):
+def get_ssh_client(hostname, username, password, port):
     if not hasattr(thread_local, "ssh"):
         ssh = SSHClient()
 
         ssh.load_system_host_keys()
 
-        ssh.set_missing_host_key_policy(
-            paramiko.AutoAddPolicy()
-        )
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         ssh.connect(
             hostname=hostname,
@@ -65,7 +59,7 @@ def get_ssh_client(
             banner_timeout=30,
             auth_timeout=30,
             look_for_keys=False,
-            allow_agent=False
+            allow_agent=False,
         )
 
         thread_local.ssh = ssh
@@ -84,25 +78,15 @@ def remote_file_exists(ssh, remote_file_path):
 
 
 def upload_one_file(
-        file_path,
-        local_root,
-        remote_root,
-        hostname,
-        username,
-        password,
-        port):
+    file_path, local_root, remote_root, hostname, username, password, port
+):
     global uploaded_bytes
     global uploaded_files
     global skipped_files
 
     try:
 
-        ssh = get_ssh_client(
-            hostname,
-            username,
-            password,
-            port
-        )
+        ssh = get_ssh_client(hostname, username, password, port)
 
         relative_path = file_path.relative_to(local_root)
 
@@ -112,9 +96,7 @@ def upload_one_file(
 
         remote_dir = str(Path(remote_file).parent)
 
-        ssh.exec_command(
-            f'mkdir -p "{remote_dir}"'
-        )
+        ssh.exec_command(f'mkdir -p "{remote_dir}"')
 
         if remote_file_exists(ssh, remote_file):
             with lock:
@@ -122,13 +104,9 @@ def upload_one_file(
 
             return
 
-        with SCPClient(
-                ssh.get_transport()) as scp:
+        with SCPClient(ssh.get_transport()) as scp:
 
-            scp.put(
-                str(file_path),
-                remote_path=remote_file
-            )
+            scp.put(str(file_path), remote_path=remote_file)
 
         file_size = file_path.stat().st_size
 
@@ -149,51 +127,32 @@ def upload_one_file(
                 f"{sizeof_fmt(total_bytes)} "
                 f"| {percent:.2f}%",
                 end="",
-                flush=True
+                flush=True,
             )
 
     except Exception as e:
 
-        print(
-            f"\n上传失败: {file_path}\n{e}"
-        )
+        print(f"\n上传失败: {file_path}\n{e}")
 
 
 def upload_to_server(
-        local_path,
-        remote_path,
-        hostname,
-        username,
-        password=None,
-        port=22,
-        max_workers=16):
+    local_path, remote_path, hostname, username, password=None, port=22, max_workers=16
+):
     global total_bytes
 
     local_path = Path(local_path)
 
     upload_files = get_all_upload_files(local_path)
 
-    total_bytes = sum(
-        f.stat().st_size
-        for f in upload_files
-    )
+    total_bytes = sum(f.stat().st_size for f in upload_files)
 
-    print(
-        f"待上传文件数量: "
-        f"{len(upload_files)}"
-    )
+    print(f"待上传文件数量: " f"{len(upload_files)}")
 
-    print(
-        f"总大小: "
-        f"{sizeof_fmt(total_bytes)}"
-    )
+    print(f"总大小: " f"{sizeof_fmt(total_bytes)}")
 
-    print(
-        f"线程数: {max_workers}"
-    )
+    print(f"线程数: {max_workers}")
 
-    with ThreadPoolExecutor(
-            max_workers=max_workers) as executor:
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
 
         futures = []
 
@@ -206,7 +165,7 @@ def upload_to_server(
                 hostname,
                 username,
                 password,
-                port
+                port,
             )
 
             futures.append(future)
@@ -216,15 +175,9 @@ def upload_to_server(
 
     print("\n\n上传完成")
 
-    print(
-        f"实际上传文件: "
-        f"{uploaded_files}"
-    )
+    print(f"实际上传文件: " f"{uploaded_files}")
 
-    print(
-        f"跳过文件: "
-        f"{skipped_files}"
-    )
+    print(f"跳过文件: " f"{skipped_files}")
 
 
 if __name__ == "__main__":
@@ -259,21 +212,30 @@ if __name__ == "__main__":
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/labels/train"
 
     # 塑料袋检测样本，推送
-    # local_path = "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0702_public/images"
-    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
+    local_images_path = "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0702_public/images"
+    remote_images_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
 
-    local_path = "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0702_public/labels"
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
+    local_labels_path = "/data/database/Total_auto_augmentor_database/plasticbagDatabaseAugmentor/date0702_public/labels"
+    remote_labels_path = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"
     username = "robot-server"
     password = "black@box"
 
     upload_to_server(
-        local_path=local_path,
-        remote_path=remote_path,
+        local_path=local_images_path,
+        remote_path=remote_images_path,
         hostname=hostname,
         username=username,
         password=password,
-        max_workers=8
+        max_workers=8,
+    )
+
+    upload_to_server(
+        local_path=local_labels_path,
+        remote_path=remote_labels_path,
+        hostname=hostname,
+        username=username,
+        password=password,
+        max_workers=8,
     )

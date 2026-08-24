@@ -56,11 +56,11 @@ def create_empty_labels(images_dir, labels_dir):
 
 if __name__ == "__main__":
     images_dir = (
-        "/home/chenkejing/Downloads/WireSegmentProject/person_images_yolov11-seg"
+        "/data/database/coco2017_non_person/images"
     )
 
     labels_dir = (
-        "/home/chenkejing/Downloads/WireSegmentProject/person_detect_yolov11_auto_labels"
+        "/data/database/coco2017_non_person/labels"
     )
 
     create_empty_labels(
