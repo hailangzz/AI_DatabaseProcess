@@ -285,12 +285,12 @@ def download_one_zip(file_name, local_zip_dir):
         print(f"       大小：" f"{sizeof_fmt(total_size)}")
 
         with tqdm(
-            total=total_size,
-            unit="B",
-            unit_scale=True,
-            unit_divisor=1024,
-            desc=zip_filename[:35],
-            leave=True,
+                total=total_size,
+                unit="B",
+                unit_scale=True,
+                unit_divisor=1024,
+                desc=zip_filename[:35],
+                leave=True,
         ) as pbar:
 
             def callback(bytes_amount):
@@ -498,162 +498,267 @@ def organize_one_zip(zip_path, extract_root, output_root):
     # 解压
     # --------------------------------------------------------
 
-    extract_dir = extract_zip(zip_path, extract_root)
+    extract_dir = extract_zip(
+        zip_path,
+        extract_root
+    )
 
-    # --------------------------------------------------------
-    # 找图片
-    # --------------------------------------------------------
+    try:
 
-    image_files = find_images(extract_dir)
+        # ----------------------------------------------------
+        # 找图片
+        # ----------------------------------------------------
 
-    # --------------------------------------------------------
-    # 找标签
-    # --------------------------------------------------------
+        image_files = find_images(extract_dir)
 
-    label_files = find_labels(extract_dir)
+        # ----------------------------------------------------
+        # 找标签
+        # ----------------------------------------------------
 
-    # --------------------------------------------------------
-    # 建立 label 映射
-    #
-    # xxx.txt
-    # ->
-    # xxx
-    # --------------------------------------------------------
+        label_files = find_labels(extract_dir)
 
-    label_map = {}
-
-    for label_path in label_files:
-        stem = label_path.stem
-
-        label_map[stem] = label_path
-
-    # --------------------------------------------------------
-    # 统计
-    # --------------------------------------------------------
-
-    copied_images = 0
-    copied_labels = 0
-    generated_empty_labels = 0
-
-    image_conflicts = 0
-    label_conflicts = 0
-
-    # --------------------------------------------------------
-    # 处理图片
-    # --------------------------------------------------------
-
-    for image_path in image_files:
-
-        image_name = image_path.name
-
-        image_stem = image_path.stem
-
-        destination_image = images_dir / image_name
-
-        # ----------------------------------------------
-        # 图片已经存在
-        # ----------------------------------------------
-
-        if destination_image.exists():
-
-            image_conflicts += 1
-
-        else:
-
-            shutil.copy2(image_path, destination_image)
-
-            copied_images += 1
-
-        # ----------------------------------------------
-        # 对应 TXT
-        # ----------------------------------------------
-
-        destination_label = labels_dir / f"{image_stem}.txt"
-
-        # 已经存在 label
-        if destination_label.exists():
-            continue
-
-        # ----------------------------------------------
-        # ZIP 中存在 TXT
-        # ----------------------------------------------
-
-        if image_stem in label_map:
-
-            shutil.copy2(label_map[image_stem], destination_label)
-
-            copied_labels += 1
-
-        # ----------------------------------------------
-        # ZIP 中没有 TXT
+        # ----------------------------------------------------
+        # 建立 label 映射
         #
-        # 自动创建空 TXT
-        # ----------------------------------------------
+        # xxx.txt
+        # ->
+        # xxx
+        # ----------------------------------------------------
 
-        else:
+        label_map = {}
 
-            destination_label.touch()
+        for label_path in label_files:
+            stem = label_path.stem
 
-            generated_empty_labels += 1
+            label_map[stem] = label_path
 
-    # --------------------------------------------------------
-    # 处理那些没有对应图片的 TXT
-    #
-    # 这里不复制。
-    #
-    # YOLO 数据集最终以 image 为基准。
-    # --------------------------------------------------------
+        # ----------------------------------------------------
+        # 统计
+        # ----------------------------------------------------
 
-    orphan_labels = 0
+        copied_images = 0
 
-    image_stems = {image.stem for image in image_files}
+        copied_labels = 0
 
-    for label_path in label_files:
+        generated_empty_labels = 0
 
-        if label_path.stem not in image_stems:
-            orphan_labels += 1
+        image_conflicts = 0
 
-    # --------------------------------------------------------
-    # 输出
-    # --------------------------------------------------------
+        label_conflicts = 0
 
-    print()
-    print("=" * 70)
+        # ----------------------------------------------------
+        # 处理图片
+        # ----------------------------------------------------
 
-    print(f"任务：{task_name}")
+        for image_path in image_files:
 
-    print(f"ZIP：{file_name}")
+            image_name = image_path.name
 
-    print(f"图片：{len(image_files)}")
+            image_stem = image_path.stem
 
-    print(f"原始 TXT：{len(label_files)}")
+            destination_image = images_dir / image_name
 
-    print(f"复制图片：{copied_images}")
+            # ----------------------------------------------
+            # 图片已经存在
+            # ----------------------------------------------
 
-    print(f"复制标签：{copied_labels}")
+            if destination_image.exists():
 
-    print(f"自动生成空标签：" f"{generated_empty_labels}")
+                image_conflicts += 1
 
-    print(f"图片冲突：" f"{image_conflicts}")
+            else:
 
-    print(f"孤立 TXT：" f"{orphan_labels}")
+                shutil.copy2(
+                    image_path,
+                    destination_image
+                )
 
-    print(f"输出：" f"{dataset_root}")
+                copied_images += 1
 
-    print("=" * 70)
+            # ----------------------------------------------
+            # 对应 TXT
+            # ----------------------------------------------
 
-    return {
-        "success": True,
-        "task_name": task_name,
-        "dataset_root": str(dataset_root),
-        "images": len(image_files),
-        "labels": len(label_files),
-        "copied_images": copied_images,
-        "copied_labels": copied_labels,
-        "empty_labels": generated_empty_labels,
-        "image_conflicts": image_conflicts,
-        "orphan_labels": orphan_labels,
-    }
+            destination_label = (
+                    labels_dir /
+                    f"{image_stem}.txt"
+            )
+
+            # 已经存在 label
+
+            if destination_label.exists():
+                continue
+
+            # ----------------------------------------------
+            # ZIP 中存在 TXT
+            # ----------------------------------------------
+
+            if image_stem in label_map:
+
+                shutil.copy2(
+                    label_map[image_stem],
+                    destination_label
+                )
+
+                copied_labels += 1
+
+            # ----------------------------------------------
+            # ZIP 中没有 TXT
+            #
+            # 自动创建空 TXT
+            # ----------------------------------------------
+
+            else:
+
+                destination_label.touch()
+
+                generated_empty_labels += 1
+
+        # ----------------------------------------------------
+        # 处理那些没有对应图片的 TXT
+        #
+        # 这里不复制。
+        #
+        # YOLO 数据集最终以 image 为基准。
+        # ----------------------------------------------------
+
+        orphan_labels = 0
+
+        image_stems = {
+            image.stem
+            for image in image_files
+        }
+
+        for label_path in label_files:
+
+            if label_path.stem not in image_stems:
+                orphan_labels += 1
+
+        # ----------------------------------------------------
+        # 输出
+        # ----------------------------------------------------
+
+        print()
+        print("=" * 70)
+
+        print(f"任务：{task_name}")
+
+        print(f"ZIP：{file_name}")
+
+        print(f"图片：{len(image_files)}")
+
+        print(f"原始 TXT：{len(label_files)}")
+
+        print(f"复制图片：{copied_images}")
+
+        print(f"复制标签：{copied_labels}")
+
+        print(
+            f"自动生成空标签："
+            f"{generated_empty_labels}"
+        )
+
+        print(
+            f"图片冲突："
+            f"{image_conflicts}"
+        )
+
+        print(
+            f"孤立 TXT："
+            f"{orphan_labels}"
+        )
+
+        print(
+            f"输出："
+            f"{dataset_root}"
+        )
+
+        print("=" * 70)
+
+        # ====================================================
+        # 清理原始 ZIP 和解压目录
+        #
+        # 只有上面的所有解析、复制操作全部成功后，
+        # 才会执行这里。
+        # ====================================================
+
+        print()
+        print("[清理] 开始删除原始 ZIP 和解压文件")
+
+        # ----------------------------------------------------
+        # 删除解压目录
+        # ----------------------------------------------------
+
+        if extract_dir.exists():
+            shutil.rmtree(
+                extract_dir
+            )
+
+            print(
+                f"[删除] 解压目录："
+                f"{extract_dir}"
+            )
+
+        # ----------------------------------------------------
+        # 删除 ZIP
+        # ----------------------------------------------------
+
+        if zip_path.exists():
+            zip_path.unlink()
+
+            print(
+                f"[删除] ZIP 文件："
+                f"{zip_path}"
+            )
+
+        print("[清理完成] 原始 ZIP 和解压文件已删除")
+
+        # ----------------------------------------------------
+        # 返回
+        # ----------------------------------------------------
+
+        return {
+            "success": True,
+
+            "task_name": task_name,
+
+            "dataset_root": str(
+                dataset_root
+            ),
+
+            "images": len(image_files),
+
+            "labels": len(label_files),
+
+            "copied_images": copied_images,
+
+            "copied_labels": copied_labels,
+
+            "empty_labels": generated_empty_labels,
+
+            "image_conflicts": image_conflicts,
+
+            "orphan_labels": orphan_labels,
+        }
+
+    except Exception:
+
+        # ====================================================
+        # 重要：
+        #
+        # 如果解析 / 拷贝过程中发生异常，
+        # 不删除 ZIP 和解压目录。
+        #
+        # 这样可以保留现场方便排查。
+        # ====================================================
+
+        print()
+        print(
+            "[警告] 数据解析失败，"
+            "保留原始 ZIP 和解压目录"
+        )
+
+        raise
 
 
 # ============================================================
