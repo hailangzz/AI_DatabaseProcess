@@ -35,7 +35,7 @@ MAX_POOL_CONNECTIONS = 16
 # ============================================================
 # 任务类型映射
 # ============================================================
-
+# 注：也可以考虑，直接将以下目录，映射到本地的AITotal_SegmentDatabase目录下的对应任务目录。
 PROJECT_TO_TASK = {
     "carpet_detection": "carpet_detect",
     "wire_detection": "wire_detect",
@@ -285,12 +285,12 @@ def download_one_zip(file_name, local_zip_dir):
         print(f"       大小：" f"{sizeof_fmt(total_size)}")
 
         with tqdm(
-                total=total_size,
-                unit="B",
-                unit_scale=True,
-                unit_divisor=1024,
-                desc=zip_filename[:35],
-                leave=True,
+            total=total_size,
+            unit="B",
+            unit_scale=True,
+            unit_divisor=1024,
+            desc=zip_filename[:35],
+            leave=True,
         ) as pbar:
 
             def callback(bytes_amount):
@@ -498,10 +498,7 @@ def organize_one_zip(zip_path, extract_root, output_root):
     # 解压
     # --------------------------------------------------------
 
-    extract_dir = extract_zip(
-        zip_path,
-        extract_root
-    )
+    extract_dir = extract_zip(zip_path, extract_root)
 
     try:
 
@@ -568,10 +565,7 @@ def organize_one_zip(zip_path, extract_root, output_root):
 
             else:
 
-                shutil.copy2(
-                    image_path,
-                    destination_image
-                )
+                shutil.copy2(image_path, destination_image)
 
                 copied_images += 1
 
@@ -579,10 +573,7 @@ def organize_one_zip(zip_path, extract_root, output_root):
             # 对应 TXT
             # ----------------------------------------------
 
-            destination_label = (
-                    labels_dir /
-                    f"{image_stem}.txt"
-            )
+            destination_label = labels_dir / f"{image_stem}.txt"
 
             # 已经存在 label
 
@@ -595,10 +586,7 @@ def organize_one_zip(zip_path, extract_root, output_root):
 
             if image_stem in label_map:
 
-                shutil.copy2(
-                    label_map[image_stem],
-                    destination_label
-                )
+                shutil.copy2(label_map[image_stem], destination_label)
 
                 copied_labels += 1
 
@@ -624,10 +612,7 @@ def organize_one_zip(zip_path, extract_root, output_root):
 
         orphan_labels = 0
 
-        image_stems = {
-            image.stem
-            for image in image_files
-        }
+        image_stems = {image.stem for image in image_files}
 
         for label_path in label_files:
 
@@ -653,25 +638,13 @@ def organize_one_zip(zip_path, extract_root, output_root):
 
         print(f"复制标签：{copied_labels}")
 
-        print(
-            f"自动生成空标签："
-            f"{generated_empty_labels}"
-        )
+        print(f"自动生成空标签：" f"{generated_empty_labels}")
 
-        print(
-            f"图片冲突："
-            f"{image_conflicts}"
-        )
+        print(f"图片冲突：" f"{image_conflicts}")
 
-        print(
-            f"孤立 TXT："
-            f"{orphan_labels}"
-        )
+        print(f"孤立 TXT：" f"{orphan_labels}")
 
-        print(
-            f"输出："
-            f"{dataset_root}"
-        )
+        print(f"输出：" f"{dataset_root}")
 
         print("=" * 70)
 
@@ -690,14 +663,9 @@ def organize_one_zip(zip_path, extract_root, output_root):
         # ----------------------------------------------------
 
         if extract_dir.exists():
-            shutil.rmtree(
-                extract_dir
-            )
+            shutil.rmtree(extract_dir)
 
-            print(
-                f"[删除] 解压目录："
-                f"{extract_dir}"
-            )
+            print(f"[删除] 解压目录：" f"{extract_dir}")
 
         # ----------------------------------------------------
         # 删除 ZIP
@@ -706,10 +674,7 @@ def organize_one_zip(zip_path, extract_root, output_root):
         if zip_path.exists():
             zip_path.unlink()
 
-            print(
-                f"[删除] ZIP 文件："
-                f"{zip_path}"
-            )
+            print(f"[删除] ZIP 文件：" f"{zip_path}")
 
         print("[清理完成] 原始 ZIP 和解压文件已删除")
 
@@ -719,25 +684,14 @@ def organize_one_zip(zip_path, extract_root, output_root):
 
         return {
             "success": True,
-
             "task_name": task_name,
-
-            "dataset_root": str(
-                dataset_root
-            ),
-
+            "dataset_root": str(dataset_root),
             "images": len(image_files),
-
             "labels": len(label_files),
-
             "copied_images": copied_images,
-
             "copied_labels": copied_labels,
-
             "empty_labels": generated_empty_labels,
-
             "image_conflicts": image_conflicts,
-
             "orphan_labels": orphan_labels,
         }
 
@@ -753,10 +707,7 @@ def organize_one_zip(zip_path, extract_root, output_root):
         # ====================================================
 
         print()
-        print(
-            "[警告] 数据解析失败，"
-            "保留原始 ZIP 和解压目录"
-        )
+        print("[警告] 数据解析失败，" "保留原始 ZIP 和解压目录")
 
         raise
 
@@ -874,7 +825,7 @@ if __name__ == "__main__":
     # 4. 最终数据集目录
     # ========================================================
 
-    DATASET_OUTPUT_ROOT = "/home/chenkejing/Downloads/" "cvat_dataset"
+    DATASET_OUTPUT_ROOT = "/data/database/AITotal_SegmentDatabase"
 
     # ========================================================
     # 5. 下载 ZIP
