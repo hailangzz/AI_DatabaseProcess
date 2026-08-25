@@ -125,8 +125,8 @@ def move_all_files(src_dir, dst_dir, workers=16, overwrite=False):
 
 
 if __name__ == "__main__":
-    src_dir = "/home/chenkejing/Downloads/coco_person"
+    src_dir = "/home/chenkejing/database/No_Target_Example_Dataset/No_Target_database/NO_target_camera_images_0407_batch1_output_empty_only/person_labels"
 
-    dst_dir = "/data/database/AITotal_SegmentDatabase/personDatabaseSegment"
+    dst_dir = "/data/database/AITotal_SegmentDatabase/personDatabaseSegment/labels/train"
 
     move_all_files(src_dir, dst_dir, workers=32, overwrite=False)
