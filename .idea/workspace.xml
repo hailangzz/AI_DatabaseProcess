@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增自动化下载AWS上cvat标注数据的功能">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增：扫地机器人设备端，推送数采样本到aws仓库">
+      <change afterPath="$PROJECT_DIR$/AWS_S3数据操作/设备端数据操作/push_sample_to_aws.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/download_aws_cvat_train_sample_to_local.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/download_aws_cvat_train_sample_to_local.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/move_file_direct_to_dest_direct.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/move_file_direct_to_dest_direct.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/GPU服务器上快速上传_下载数据至数据共享服务空间_/安装配置说明.md" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/GPU服务器上快速上传_下载数据至数据共享服务空间_/安装配置说明.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,7 +247,7 @@
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/segment_model_infer" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.AnnotationBoxAnalysis_detect_and_mark">
+  <component name="RunManager" selected="Python.download_aws_cvat_train_sample_to_local">
     <configuration name="获取图片数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -359,8 +360,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
         <item itemvalue="Python.download_aws_cvat_train_sample_to_local" />
+        <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
         <item itemvalue="Python.move_file_direct_to_dest_direct" />
         <item itemvalue="Python.create_empty_labels" />
         <item itemvalue="Python.获取图片数量" />
@@ -382,46 +383,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00048" summary="模型导出onnx安装包创建">
-      <option name="closed" value="true" />
-      <created>1780563127339</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1780563127339</updated>
-    </task>
-    <task id="LOCAL-00049" summary="加密python安装包实现">
-      <option name="closed" value="true" />
-      <created>1780977548505</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1780977548505</updated>
-    </task>
-    <task id="LOCAL-00050" summary="自动化训练中NPU板端性能测试">
-      <option name="closed" value="true" />
-      <created>1780977592008</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1780977592008</updated>
-    </task>
-    <task id="LOCAL-00051" summary="自动化训练中NPU板端推理优化">
-      <option name="closed" value="true" />
-      <created>1780985499875</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1780985499876</updated>
-    </task>
-    <task id="LOCAL-00052" summary="日常提交">
-      <option name="closed" value="true" />
-      <created>1781073317762</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1781073317762</updated>
     </task>
     <task id="LOCAL-00053" summary="新增自动化地面区域分割+线材地面样本生成。">
       <option name="closed" value="true" />
@@ -775,7 +736,47 @@
       <option name="project" value="LOCAL" />
       <updated>1787646311867</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="优化aws上cvat标注任务里，标注文件自动下载、解析为yolo-seg标注样本">
+      <option name="closed" value="true" />
+      <created>1787646674811</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1787646674811</updated>
+    </task>
+    <task id="LOCAL-00098" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1787646697217</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1787646697217</updated>
+    </task>
+    <task id="LOCAL-00099" summary="aws上cvat标注数据解析后，删除zip原始样本文件。减少内存占用">
+      <option name="closed" value="true" />
+      <created>1787647300810</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1787647300810</updated>
+    </task>
+    <task id="LOCAL-00100" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1787647701057</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1787647701057</updated>
+    </task>
+    <task id="LOCAL-00101" summary="新增：扫地机器人设备端，推送数采样本到aws仓库">
+      <option name="closed" value="true" />
+      <created>1787735986284</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1787735986284</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -832,9 +833,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="日常优化" />
-    <MESSAGE value="新增hard sample样本增强功能" />
-    <MESSAGE value="日常更新" />
     <MESSAGE value="整理基于位置的预测图像" />
     <MESSAGE value="新增本地上传样本到服务器。" />
     <MESSAGE value="模型导出onnx安装包创建" />
@@ -854,10 +852,13 @@
     <MESSAGE value="新增标注效果见检查软件中，空格键打开、关闭原图功能" />
     <MESSAGE value="新增：文件自动重命名程序" />
     <MESSAGE value="新增：新增本地与aws端数据同步功能（涉及多线程加速）" />
-    <MESSAGE value="日常提交" />
     <MESSAGE value="升级GPU样本上传功能，上传同时，给本地也备份" />
     <MESSAGE value="新增自动化下载AWS上cvat标注数据的功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增自动化下载AWS上cvat标注数据的功能" />
+    <MESSAGE value="优化aws上cvat标注任务里，标注文件自动下载、解析为yolo-seg标注样本" />
+    <MESSAGE value="aws上cvat标注数据解析后，删除zip原始样本文件。减少内存占用" />
+    <MESSAGE value="日常提交" />
+    <MESSAGE value="新增：扫地机器人设备端，推送数采样本到aws仓库" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增：扫地机器人设备端，推送数采样本到aws仓库" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

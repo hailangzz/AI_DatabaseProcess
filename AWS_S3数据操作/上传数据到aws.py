@@ -244,7 +244,7 @@ def sync_to_s3():
 # ============================================================
 
 # 本地目录 (设备SN目录的上级目录)
-LOCAL_DIR = (r"/data/database/carpetDatabase")
+LOCAL_DIR = r"/data/database/carpetDatabase"
 
 # S3 Bucket
 S3_BUCKET = "robot-ai-platform"
