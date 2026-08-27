@@ -1,10 +1,10 @@
+import argparse
 import os
 import random
 import shutil
 from pathlib import Path
-import argparse
-from tqdm import tqdm
 
+from tqdm import tqdm
 
 # 固定随机种子（保证每次采样一致）
 random.seed(42)
@@ -44,7 +44,8 @@ def sample_dataset(src_root, dst_root, num_samples=None, ratio=None):
     dst_root = Path(dst_root)
 
     # 只采 train（你原来的逻辑）
-    splits = ["train"]
+    # splits = ["train"]
+    splits = ["val"]
 
     for split in splits:
         print(f"\n📂 Processing split: {split}")
@@ -85,9 +86,13 @@ def sample_dataset(src_root, dst_root, num_samples=None, ratio=None):
 
 
 # 默认路径
-src_database = "/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment"
-dst_database = "/data/database/AITotal_SegmentDatabase/finetune_random_sample_datebase/random_wire_database"
-number_default = 10000
+# src_database = "/home/chenkejing/database/AITotal_SegmentDatabase/wireDatabaseSegment"
+# dst_database = "/data/database/AITotal_SegmentDatabase/finetune_random_sample_datebase/random_wire_database"
+
+src_database = "/data/database/jrdb_yolo"
+dst_database = "/data/database/jrdb_yolo_random_val"
+
+number_default = 6000
 
 
 def main():
@@ -115,7 +120,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 """
 拷贝公共训练数据集，到GPU服务器，进行finetune实际训练

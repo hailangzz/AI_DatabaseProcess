@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增：扫地机器人设备端，推送数采样本到aws仓库">
-      <change afterPath="$PROJECT_DIR$/AWS_S3数据操作/设备端数据操作/push_sample_to_aws.py" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
+      <change afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/get_local_file_sample_numbers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training_and_local.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/上传数据到aws.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/GPU服务器上快速上传_下载数据至数据共享服务空间_/安装配置说明.md" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/GPU服务器上快速上传_下载数据至数据共享服务空间_/安装配置说明.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,6 +138,7 @@
     "Python.check_single_image_lable.executor": "Run",
     "Python.coco2017样本集整理程序.executor": "Run",
     "Python.combin_more_images.executor": "Run",
+    "Python.convert_jrdb_to_yolo.executor": "Run",
     "Python.copy_GPU_database_to_public_share_server.executor": "Run",
     "Python.copy_database_to_public_share_server.executor": "Run",
     "Python.copy_file_to_des_direct_skip_repeat_file.executor": "Run",
@@ -226,18 +229,18 @@
     "Python.随机拷贝指定数量的图像到指定目录.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/data/Sam3-yolo-distill-ultralytics",
+    "last_opened_file_path": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/实用小命令/本地与GPU训练服务器样本传输",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "two.files.diff.last.used.file": "/home/chenkejing/PycharmProjects/AI_DatabaseProcess/DatabaseAnalysis/Fast_target_image_detection_effect.py"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <recent name="$PROJECT_DIR$/scripts/样本_标注数据集整理" />
       <recent name="$PROJECT_DIR$/scripts" />
       <recent name="$PROJECT_DIR$/实用小命令/身体健康小程序" />
       <recent name="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor/LiquidSampleAugmentor" />
-      <recent name="$PROJECT_DIR$/数据仿真生成/SegmentSampleAugmentor" />
-      <recent name="$PROJECT_DIR$/scripts/segmentationJob" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/GPU服务器上快速上传_下载数据至数据共享服务空间_" />
@@ -247,29 +250,7 @@
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/segment_model_infer" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.download_aws_cvat_train_sample_to_local">
-    <configuration name="获取图片数量" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/获取图片数量.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.push_local_sample_to_GPU_training">
     <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -292,7 +273,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="create_empty_labels" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="convert_jrdb_to_yolo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -301,11 +282,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/经典数据集-标注文件处理" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/create_empty_labels.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/经典数据集-标注文件处理/convert_jrdb_to_yolo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -314,7 +295,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="download_aws_cvat_train_sample_to_local" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="从训练集中随机抽取指定数量样本集供finetune使用" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -323,11 +304,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AWS_S3数据操作" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/样本_标注数据集整理" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AWS_S3数据操作/download_aws_cvat_train_sample_to_local.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -336,7 +317,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="move_file_direct_to_dest_direct" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="get_local_file_sample_numbers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -345,11 +326,33 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/move_file_direct_to_dest_direct.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="push_local_sample_to_GPU_training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -360,11 +363,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.download_aws_cvat_train_sample_to_local" />
+        <item itemvalue="Python.push_local_sample_to_GPU_training" />
+        <item itemvalue="Python.从训练集中随机抽取指定数量样本集供finetune使用" />
         <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
-        <item itemvalue="Python.move_file_direct_to_dest_direct" />
-        <item itemvalue="Python.create_empty_labels" />
-        <item itemvalue="Python.获取图片数量" />
+        <item itemvalue="Python.get_local_file_sample_numbers" />
+        <item itemvalue="Python.convert_jrdb_to_yolo" />
       </list>
     </recent_temporary>
   </component>
@@ -383,14 +386,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00053" summary="新增自动化地面区域分割+线材地面样本生成。">
-      <option name="closed" value="true" />
-      <created>1781745979840</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1781745979840</updated>
     </task>
     <task id="LOCAL-00054" summary="地面区域，目标样本生成。添加基于空间距离的，目标样本生成。使样本更真实。">
       <option name="closed" value="true" />
@@ -776,7 +771,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787735986284</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1787736000682</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1787736000682</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -856,9 +859,9 @@
     <MESSAGE value="新增自动化下载AWS上cvat标注数据的功能" />
     <MESSAGE value="优化aws上cvat标注任务里，标注文件自动下载、解析为yolo-seg标注样本" />
     <MESSAGE value="aws上cvat标注数据解析后，删除zip原始样本文件。减少内存占用" />
-    <MESSAGE value="日常提交" />
     <MESSAGE value="新增：扫地机器人设备端，推送数采样本到aws仓库" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增：扫地机器人设备端，推送数采样本到aws仓库" />
+    <MESSAGE value="日常提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="日常提交" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
