@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-import tkinter as tk
-import time
-import threading
-import sys
 import math
+import sys
+import threading
+import time
+import tkinter as tk
+
 from screeninfo import get_monitors
+
 
 # =========================
 # 全屏提醒窗口（Insert键关闭）
@@ -18,15 +20,15 @@ class FullScreenReminder:
         self.root.attributes("-fullscreen", True)
         self.root.attributes("-topmost", True)
 
-        # 背景嫩绿色
-        light_green = "#90EE90"
-        self.root.configure(bg=light_green)
+        # 1. 背景调为纯黑色
+        bg_color = "#000000"
+        self.root.configure(bg=bg_color)
 
         canvas = tk.Canvas(
             self.root,
             width=monitor.width,
             height=monitor.height,
-            bg=light_green,
+            bg=bg_color,
             highlightthickness=0
         )
         canvas.pack(fill="both", expand=True)
@@ -34,12 +36,17 @@ class FullScreenReminder:
         # 屏幕中心
         cx, cy = monitor.width // 2, monitor.height // 2
 
-        # 向日葵
+        # 向日葵尺寸计算
         petal_count = 24
         petal_radius = int(monitor.height * 0.125)
         petal_width = int(monitor.height * 0.042)
         petal_height = int(monitor.height * 0.104)
         flower_center_radius = int(monitor.height * 0.0625)
+
+        # 2. 花瓣：柔和的浅绿/薄荷绿 (#8FBC8F 或 #7BCD96)
+        petal_color = "#8FBC8F"
+        # 3. 花心：稍深但同系柔和的森林绿/墨绿 (#2E8B57)
+        center_color = "#2E8B57"
 
         for i in range(petal_count):
             angle = 2 * math.pi * i / petal_count
@@ -50,7 +57,7 @@ class FullScreenReminder:
                 y - petal_height // 2,
                 x + petal_width // 2,
                 y + petal_height // 2,
-                fill="#FFD700",
+                fill=petal_color,
                 outline=""
             )
 
@@ -60,7 +67,7 @@ class FullScreenReminder:
             cy - flower_center_radius,
             cx + flower_center_radius,
             cy + flower_center_radius,
-            fill="#8B4513",
+            fill=center_color,
             outline=""
         )
 
@@ -69,7 +76,7 @@ class FullScreenReminder:
             cx,
             cy + int(monitor.height * 0.14),
             text="该活动一下，喝点水 💧\n（请按 Insert 键关闭）",
-            fill="white",
+            fill="#E0E0E0",  # 暗光黑背景下改用稍微柔和的浅灰白文字，不刺眼
             font=("Noto Sans CJK SC", int(monitor.height * 0.028), "bold"),
             justify="center"
         )
@@ -121,7 +128,7 @@ def choose_interval():
     print("3 - 90 分钟")
 
     choice_map = {
-        "1": 60,  # 测试用
+        "1": 60,
         "2": 70,
         "3": 90
     }
