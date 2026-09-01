@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="健康小程序修改：背景配色：将原来的 #90EE90（亮绿）调整为 #000000（纯黑）。">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="删除远程GPU服务器上训练集中，不需要的样本">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/随机拷贝指定数量的图像到指定目录.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +247,7 @@
       <recent name="$PROJECT_DIR$/AI自动化训练部署/MQTT通讯框架/segment_model_infer" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.model_result_compare">
+  <component name="RunManager" selected="Python.check_local_and_origin_GPU_repet_sample_info">
     <configuration name="AnnotationBoxAnalysis_detect_and_mark" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -271,6 +270,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="check_local_and_origin_GPU_repet_sample_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="从训练集中随机抽取指定数量样本集供finetune使用" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -285,28 +306,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/样本_标注数据集整理/从训练集中随机抽取指定数量样本集供finetune使用.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="get_local_file_sample_numbers" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -361,11 +360,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.check_local_and_origin_GPU_repet_sample_info" />
         <item itemvalue="Python.model_result_compare" />
         <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
         <item itemvalue="Python.从训练集中随机抽取指定数量样本集供finetune使用" />
         <item itemvalue="Python.push_local_sample_to_GPU_training" />
-        <item itemvalue="Python.get_local_file_sample_numbers" />
       </list>
     </recent_temporary>
   </component>
@@ -384,30 +383,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00056" summary="日常提交">
-      <option name="closed" value="true" />
-      <created>1781773202191</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1781773202191</updated>
-    </task>
-    <task id="LOCAL-00057" summary="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;">
-      <option name="closed" value="true" />
-      <created>1782095994782</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1782095994782</updated>
-    </task>
-    <task id="LOCAL-00058" summary="日常提交">
-      <option name="closed" value="true" />
-      <created>1782097896939</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1782097896939</updated>
     </task>
     <task id="LOCAL-00059" summary="日常提交">
       <option name="closed" value="true" />
@@ -777,7 +752,31 @@
       <option name="project" value="LOCAL" />
       <updated>1787903363975</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1788226142849</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1788226142849</updated>
+    </task>
+    <task id="LOCAL-00106" summary="模型性能评价脚本">
+      <option name="closed" value="true" />
+      <created>1788226190774</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1788226190774</updated>
+    </task>
+    <task id="LOCAL-00107" summary="删除远程GPU服务器上训练集中，不需要的样本">
+      <option name="closed" value="true" />
+      <created>1788229921868</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1788229921868</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -834,8 +833,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="新增本地上传样本到服务器。" />
-    <MESSAGE value="模型导出onnx安装包创建" />
     <MESSAGE value="加密python安装包实现" />
     <MESSAGE value="自动化训练中NPU板端性能测试" />
     <MESSAGE value="自动化训练中NPU板端推理优化" />
@@ -857,9 +854,11 @@
     <MESSAGE value="优化aws上cvat标注任务里，标注文件自动下载、解析为yolo-seg标注样本" />
     <MESSAGE value="aws上cvat标注数据解析后，删除zip原始样本文件。减少内存占用" />
     <MESSAGE value="新增：扫地机器人设备端，推送数采样本到aws仓库" />
-    <MESSAGE value="日常提交" />
     <MESSAGE value="健康小程序修改：背景配色：将原来的 #90EE90（亮绿）调整为 #000000（纯黑）。" />
-    <option name="LAST_COMMIT_MESSAGE" value="健康小程序修改：背景配色：将原来的 #90EE90（亮绿）调整为 #000000（纯黑）。" />
+    <MESSAGE value="日常提交" />
+    <MESSAGE value="模型性能评价脚本" />
+    <MESSAGE value="删除远程GPU服务器上训练集中，不需要的样本" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除远程GPU服务器上训练集中，不需要的样本" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

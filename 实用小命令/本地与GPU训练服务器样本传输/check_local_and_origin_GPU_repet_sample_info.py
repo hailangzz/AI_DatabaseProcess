@@ -1,7 +1,7 @@
-import paramiko
-from paramiko import SSHClient
 from pathlib import Path
 
+import paramiko
+from paramiko import SSHClient
 
 # 图像后缀
 IMAGE_SUFFIXES = [
@@ -14,8 +14,8 @@ IMAGE_SUFFIXES = [
 
 
 def get_local_files(
-    local_path,
-    file_type="image"
+        local_path,
+        file_type="image"
 ):
     """
     获取本地文件名集合
@@ -40,16 +40,15 @@ def get_local_files(
     for suffix in suffixes:
 
         for file_path in path.rglob(f"*{suffix}"):
-
             file_set.add(file_path.stem)
 
     return file_set
 
 
 def get_remote_files(
-    ssh,
-    remote_path,
-    file_type="image"
+        ssh,
+        remote_path,
+        file_type="image"
 ):
     """
     获取远程文件名集合
@@ -80,7 +79,6 @@ def get_remote_files(
     file_set = set()
 
     for file in files:
-
         stem = Path(file).stem
 
         file_set.add(stem)
@@ -89,15 +87,14 @@ def get_remote_files(
 
 
 def compare_local_and_remote(
-    local_path,
-    remote_path,
-    hostname,
-    username,
-    password,
-    file_type="image",
-    port=22,
+        local_path,
+        remote_path,
+        hostname,
+        username,
+        password,
+        file_type="image",
+        port=22,
 ):
-
     print(f"\n===== 开始检查 {file_type} 文件 =====\n")
 
     # 获取本地文件
@@ -169,13 +166,15 @@ def compare_local_and_remote(
 
 
 if __name__ == "__main__":
-
     # 本地路径
-    local_path = "/data/database/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+    # local_path = "/data/database/coco2017_non_person/images"
+    local_path = "/data/database/coco2017_non_person/labels"
 
     # 远程路径
-    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
     # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
+    # remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/personDatabaseSegment/images/train"
+    remote_path = "/home/robot-server/data/AITotal_SegmentDatabase/personDatabaseSegment/labels/train"
 
     hostname = "172.16.50.229"
     username = "robot-server"
@@ -187,5 +186,5 @@ if __name__ == "__main__":
         hostname=hostname,
         username=username,
         password=password,
-        file_type="image",  # image 或 txt
+        file_type="txt",  # image 或 txt
     )
