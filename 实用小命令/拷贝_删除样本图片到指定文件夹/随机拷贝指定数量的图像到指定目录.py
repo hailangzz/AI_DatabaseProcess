@@ -1,10 +1,11 @@
 # 加密版安装包编译说秘密：随机拷贝指定数量的图像到指定目录。
 # 作用：在生成量化数据集时，一般用1000张样本。随机从真实数据集中提取样本生成量化数据集
 
-import os
-import shutil
-import random
 import argparse
+import os
+import random
+import shutil
+
 
 def random_copy_images(src_dir, dst_dir, num_images):
     # 支持的图片格式
@@ -41,14 +42,15 @@ def random_copy_images(src_dir, dst_dir, num_images):
 
         shutil.copy2(src_path, dst_path)
 
-        print(f"[{i+1}/{num_images}] Copied: {img_name}")
+        print(f"[{i + 1}/{num_images}] Copied: {img_name}")
 
     print(f"[DONE] Copied {num_images} images to {dst_dir}")
 
 
 default_src = "/home/chenkejing/database/HandDetect/EmdoorRealHandImages/unshare_images/train/images"
-default_dst = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/hand_real_image"
+default_dst = "/home/chenkejing/PycharmProjects/ultralytics/images_mode_test/person_real_image"
 default_num = 250
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Randomly copy images")
@@ -64,4 +66,3 @@ if __name__ == "__main__":
     args = parse_args()
 
     random_copy_images(args.src, args.dst, args.num)
-

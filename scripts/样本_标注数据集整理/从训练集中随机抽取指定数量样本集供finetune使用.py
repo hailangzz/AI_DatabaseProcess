@@ -92,7 +92,7 @@ def sample_dataset(src_root, dst_root, num_samples=None, ratio=None):
 src_database = "/data/database/jrdb_yolo"
 dst_database = "/data/database/jrdb_yolo_random_val"
 
-number_default = 6000
+number_default = 1000
 
 
 def main():
