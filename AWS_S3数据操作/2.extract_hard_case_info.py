@@ -413,11 +413,11 @@ def generate_hard_case_info(local_save_dir: str):
 
 
 def create_target_datasets(
-    local_save_dir: str,
-    hard_case_info_json: str,
-    TARGET_DATASET,
-    random_seed=42,
-    unexitst_sample_ratio=1 / 3,
+        local_save_dir: str,
+        hard_case_info_json: str,
+        TARGET_DATASET,
+        random_seed=42,
+        unexitst_sample_ratio=1 / 3,
 ):
     """
     根据 hard_case_info.json 创建：
@@ -926,6 +926,351 @@ def generate_image_path_txt(hard_case_exist_target_images_dir, base_prefix):
 
 
 # ============================================================
+# 创建数据集增量信息记录
+# ============================================================
+
+def update_dataset_increment_info(
+        target_dataset: str
+):
+    """
+    在 TARGET_DATASET 的上一层目录下，
+    创建 / 更新：
+
+        dataset_increment_info.json
+
+    例如：
+
+        TARGET_DATASET =
+        /data/database/AITotal_SegmentDatabase/
+        carpetDatabaseSegment/date_20260915
+
+    则：
+
+        /data/database/AITotal_SegmentDatabase/
+        carpetDatabaseSegment/dataset_increment_info.json
+
+
+    JSON 结构：
+
+    {
+        "date_20260915": {
+            "batch_id": "date_20260915",
+            "processed_time": "2026-09-16 10:25:30",
+            "exist_target_image_count": 856,
+            "unexist_target_image_count": 126,
+            "total_image_count": 982
+        },
+
+        "date_20260916": {
+            ...
+        }
+    }
+
+
+    参数：
+        target_dataset:
+            最终目标数据集目录
+    """
+
+    print("\n" + "=" * 80)
+    print("开始更新数据集增量信息")
+    print("=" * 80)
+
+    # ========================================================
+    # 检查 TARGET_DATASET
+    # ========================================================
+
+    if not os.path.isdir(target_dataset):
+        raise FileNotFoundError(
+            f"TARGET_DATASET 不存在：{target_dataset}"
+        )
+
+    # ========================================================
+    # 获取 TARGET_DATASET 最终目录名
+    #
+    # 例如：
+    #
+    # /xxx/carpetDatabaseSegment/date_20260915
+    #
+    # 得到：
+    #
+    # date_20260915
+    # ========================================================
+
+    target_dataset_name = os.path.basename(
+        os.path.normpath(target_dataset)
+    )
+
+    # ========================================================
+    # TARGET_DATASET 上一级目录
+    #
+    # 例如：
+    #
+    # /xxx/carpetDatabaseSegment/date_20260915
+    #
+    # 上一级：
+    #
+    # /xxx/carpetDatabaseSegment
+    # ========================================================
+
+    parent_dir = os.path.dirname(
+        os.path.normpath(target_dataset)
+    )
+
+    # ========================================================
+    # 增量信息 JSON
+    # ========================================================
+
+    increment_info_path = os.path.join(
+        parent_dir,
+        "dataset_increment_info.json"
+    )
+
+    # ========================================================
+    # exist_target_dataset
+    # ========================================================
+
+    exist_images_dir = os.path.join(
+        target_dataset,
+        "exist_target_dataset",
+        "images"
+    )
+
+    # ========================================================
+    # unexist_target_dataset
+    # ========================================================
+
+    unexist_images_dir = os.path.join(
+        target_dataset,
+        "unexist_target_dataset",
+        "images"
+    )
+
+    # ========================================================
+    # 检查目录
+    # ========================================================
+
+    if not os.path.isdir(exist_images_dir):
+        raise FileNotFoundError(
+            "找不到 exist_target_dataset/images："
+            f"{exist_images_dir}"
+        )
+
+    if not os.path.isdir(unexist_images_dir):
+        raise FileNotFoundError(
+            "找不到 unexist_target_dataset/images："
+            f"{unexist_images_dir}"
+        )
+
+    # ========================================================
+    # 统计 exist_target_dataset/images
+    # ========================================================
+
+    exist_image_count = 0
+
+    for filename in os.listdir(
+            exist_images_dir
+    ):
+
+        extension = os.path.splitext(
+            filename
+        )[1].lower()
+
+        if extension in IMAGE_EXTENSIONS:
+            exist_image_count += 1
+
+    # ========================================================
+    # 统计 unexist_target_dataset/images
+    # ========================================================
+
+    unexist_image_count = 0
+
+    for filename in os.listdir(
+            unexist_images_dir
+    ):
+
+        extension = os.path.splitext(
+            filename
+        )[1].lower()
+
+        if extension in IMAGE_EXTENSIONS:
+            unexist_image_count += 1
+
+    # ========================================================
+    # 总图片数量
+    # ========================================================
+
+    total_image_count = (
+            exist_image_count
+            +
+            unexist_image_count
+    )
+
+    # ========================================================
+    # 当前处理时间
+    #
+    # 使用本地时间。
+    # ========================================================
+
+    from datetime import datetime
+
+    processed_time = datetime.now().strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
+
+    # ========================================================
+    # 如果增量信息 JSON 已经存在，则读取
+    #
+    # 这样不会覆盖之前的数据批次。
+    # ========================================================
+
+    if os.path.isfile(
+            increment_info_path
+    ):
+
+        try:
+
+            with open(
+                    increment_info_path,
+                    "r",
+                    encoding="utf-8"
+            ) as f:
+
+                increment_info = json.load(f)
+
+            if not isinstance(
+                    increment_info,
+                    dict
+            ):
+                print(
+                    "[WARNING] 增量信息文件格式异常，"
+                    "重新创建。"
+                )
+
+                increment_info = {}
+
+        except Exception as e:
+
+            print(
+                "[WARNING] 读取已有增量信息失败："
+                f"{e}"
+            )
+
+            print(
+                "将重新创建增量信息文件。"
+            )
+
+            increment_info = {}
+
+    else:
+
+        increment_info = {}
+
+    # ========================================================
+    # 当前数据批次
+    # ========================================================
+
+    current_batch_info = {
+
+        # 数据批次 ID
+        "batch_id":
+            target_dataset_name,
+
+        # 最后处理时间
+        "processed_time":
+            processed_time,
+
+        # 有标注目标数据集图片数量
+        "exist_target_image_count":
+            exist_image_count,
+
+        # 无标注目标数据集图片数量
+        "unexist_target_image_count":
+            unexist_image_count,
+
+        # 总图片数量
+        "total_image_count":
+            total_image_count,
+    }
+
+    # ========================================================
+    # 写入 / 更新当前批次
+    #
+    # 以 TARGET_DATASET 最终目录名作为 key
+    # ========================================================
+
+    increment_info[
+        target_dataset_name
+    ] = current_batch_info
+
+    # ========================================================
+    # 排序
+    #
+    # 让 JSON 中的 batch 按目录名排序，
+    # 方便后续查看。
+    # ========================================================
+
+    increment_info = dict(
+        sorted(
+            increment_info.items()
+        )
+    )
+
+    # ========================================================
+    # 写入 JSON
+    # ========================================================
+
+    with open(
+            increment_info_path,
+            "w",
+            encoding="utf-8"
+    ) as f:
+
+        json.dump(
+            increment_info,
+            f,
+            ensure_ascii=False,
+            indent=4
+        )
+
+    # ========================================================
+    # 输出结果
+    # ========================================================
+
+    print(
+        f"数据批次：              "
+        f"{target_dataset_name}"
+    )
+
+    print(
+        f"最后处理时间：          "
+        f"{processed_time}"
+    )
+
+    print(
+        f"exist_target 图片数量： "
+        f"{exist_image_count}"
+    )
+
+    print(
+        f"unexist_target 图片数量："
+        f"{unexist_image_count}"
+    )
+
+    print(
+        f"总图片数量：             "
+        f"{total_image_count}"
+    )
+
+    print(
+        f"增量信息文件：           "
+        f"{increment_info_path}"
+    )
+
+    print("=" * 80)
+
+
+# ============================================================
 # Main
 # ============================================================
 # ============================================================
@@ -968,9 +1313,7 @@ RANDOM_SEED = 42
 unexitst_sample_ratio = 1 / 2  # 无标注图片抽取比例
 
 # 2. 需要拼接的前缀路径字符串 (例如服务器/远程/相对路径字符串)
-base_prefix = (
-    "/workspace/data/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
-)
+base_prefix = ("/workspace/data/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train")
 
 if __name__ == "__main__":
     # ========================================================
@@ -1003,3 +1346,8 @@ if __name__ == "__main__":
 
     # 执行函数
     generate_image_path_txt(TARGET_DATASET, base_prefix)
+    # ========================================================
+    # 第四步：
+    # 更新数据集增量信息
+    # ========================================================
+    update_dataset_increment_info(TARGET_DATASET)
