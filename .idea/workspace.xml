@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增：数据批次dvc git 管理程序">
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常：调整本地与GPU数据传输脚本位置">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/GPU服务器上快速上传_下载数据至数据共享服务空间_/安装配置说明.md" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/GPU服务器上快速上传_下载数据至数据共享服务空间_/安装配置说明.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/Sample_Set_Alignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/Sample_Set_Alignment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/check_local_and_origin_GPU_repet_sample_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/copy_GPU_database_to_public_share_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/copy_GPU_database_to_public_share_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/copy_database_to_public_share_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/copy_database_to_public_share_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/delete_remote_same_files.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/delete_remote_same_files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/get_GPU_servers_file_sample_numbers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/get_local_file_sample_numbers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/实用小命令/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training_and_local.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training_and_local.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/2.extract_hard_case_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/2.extract_hard_case_info.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +250,7 @@
       <recent name="$PROJECT_DIR$/地面分割模型应用/绘制地面分割图像demo/test_images" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.push_local_sample_to_GPU_training">
+  <component name="RunManager" selected="Python.2.extract_hard_case_info">
     <configuration name="1.download_extract_complit_aws_cvat_Annotation_file_to_local" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -373,8 +363,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.push_local_sample_to_GPU_training" />
         <item itemvalue="Python.2.extract_hard_case_info" />
+        <item itemvalue="Python.push_local_sample_to_GPU_training" />
         <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
         <item itemvalue="Python.1.download_extract_complit_aws_cvat_Annotation_file_to_local" />
         <item itemvalue="Python.model_result_compare" />
@@ -396,14 +386,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00064" summary="日常提交">
-      <option name="closed" value="true" />
-      <created>1782100382083</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1782100382083</updated>
     </task>
     <task id="LOCAL-00065" summary="日常提交">
       <option name="closed" value="true" />
@@ -789,7 +771,15 @@
       <option name="project" value="LOCAL" />
       <updated>1789530109418</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="日常：调整本地与GPU数据传输脚本位置">
+      <option name="closed" value="true" />
+      <created>1789538756680</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1789538756680</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -846,7 +836,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&quot;&quot;&quot;&#10;高性能图片检查器&#10;- 支持常见图片格式（jpg/jpeg/png/bmp/webp/tif/tiff&#10;- 使用多线程加载图片，提升响应速度&#10;- LRU缓存机制，减少内存占用&#10;- 点击图片可选中，选中状态会有明显标记&#10;- 支持键盘快捷键：A/D翻页，Delete/S删除选中图片  &#10;&quot;&quot;&quot;" />
     <MESSAGE value="优化目标检测、分割效果查看程序" />
     <MESSAGE value="塑料袋样本增强，新增合成样本的数据增强。噪点、亮度、对比度。" />
     <MESSAGE value="单张图像审核程序:V2新版本" />
@@ -871,7 +860,8 @@
     <MESSAGE value="日常" />
     <MESSAGE value="新增：cvat上标注文件处理，版本控制功能" />
     <MESSAGE value="新增：数据批次dvc git 管理程序" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增：数据批次dvc git 管理程序" />
+    <MESSAGE value="日常：调整本地与GPU数据传输脚本位置" />
+    <option name="LAST_COMMIT_MESSAGE" value="日常：调整本地与GPU数据传输脚本位置" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

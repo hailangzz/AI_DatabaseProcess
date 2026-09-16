@@ -1271,6 +1271,178 @@ def update_dataset_increment_info(
 
 
 # ============================================================
+# 增量更新 total_hard_cases.txt
+# ============================================================
+
+def update_total_hard_cases(target_dataset: str):
+    """
+    将当前批次生成的 hard_cases.txt 增量合并到：
+
+        LOCAL_SAVE_DIR 的上一级目录 / total_hard_cases.txt
+
+    处理规则：
+
+    1. 读取当前批次 hard_cases.txt
+    2. 读取已有 total_hard_cases.txt
+    3. 历史记录保持原有顺序
+    4. 当前批次中已经存在于 total_hard_cases.txt 的记录不再追加
+    5. 当前批次内部重复记录只保留一次
+    6. 新记录按照当前 hard_cases.txt 的顺序追加到末尾
+    7. 最终 total_hard_cases.txt 不存在重复记录
+    """
+
+    print("\n" + "=" * 80)
+    print("开始更新 total_hard_cases.txt")
+    print("=" * 80)
+
+    # ========================================================
+    # 当前批次 hard_cases.txt
+    # ========================================================
+
+    current_hard_cases_path = os.path.join(
+        target_dataset,
+        "exist_target_dataset",
+        "hard_cases.txt"
+    )
+
+    if not os.path.isfile(current_hard_cases_path):
+        raise FileNotFoundError(
+            f"找不到当前批次 hard_cases.txt："
+            f"{current_hard_cases_path}"
+        )
+
+    # ========================================================
+    # LOCAL_SAVE_DIR 上一级目录
+    # ========================================================
+
+    parent_dir = os.path.dirname(
+        os.path.normpath(target_dataset)
+    )
+
+    total_hard_cases_path = os.path.join(
+        parent_dir,
+        "total_hard_cases.txt"
+    )
+
+    # ========================================================
+    # 读取当前批次 hard_cases.txt
+    # ========================================================
+
+    current_records = []
+
+    with open(
+            current_hard_cases_path,
+            "r",
+            encoding="utf-8"
+    ) as f:
+
+        for line in f:
+
+            line = line.strip()
+
+            if not line:
+                continue
+
+            current_records.append(line)
+
+    # ========================================================
+    # 当前批次去重
+    #
+    # 保持原始顺序
+    # ========================================================
+
+    current_unique_records = []
+    current_seen = set()
+
+    for record in current_records:
+
+        if record in current_seen:
+            continue
+
+        current_seen.add(record)
+        current_unique_records.append(record)
+
+    # ========================================================
+    # 读取历史 total_hard_cases.txt
+    # ========================================================
+
+    existing_records = []
+    existing_seen = set()
+
+    if os.path.isfile(total_hard_cases_path):
+
+        with open(
+                total_hard_cases_path,
+                "r",
+                encoding="utf-8"
+        ) as f:
+
+            for line in f:
+
+                line = line.strip()
+
+                if not line:
+                    continue
+
+                # 历史文件如果存在重复，
+                # 这里也直接去掉
+                if line in existing_seen:
+                    continue
+
+                existing_seen.add(line)
+                existing_records.append(line)
+
+    # ========================================================
+    # 找出当前批次真正新增的记录
+    # ========================================================
+
+    new_records = []
+
+    for record in current_unique_records:
+
+        if record in existing_seen:
+            continue
+
+        existing_seen.add(record)
+        new_records.append(record)
+
+    # ========================================================
+    # 合并最终结果
+    #
+    # 历史记录保持原顺序
+    # 新记录追加到最后
+    # ========================================================
+
+    all_records = existing_records + new_records
+
+    # ========================================================
+    # 写回 total_hard_cases.txt
+    # ========================================================
+
+    with open(
+            total_hard_cases_path,
+            "w",
+            encoding="utf-8"
+    ) as f:
+
+        for record in all_records:
+            f.write(record + "\n")
+
+    # ========================================================
+    # 输出统计
+    # ========================================================
+
+    print(f"当前批次原始记录数量：       {len(current_records)}")
+    print(f"当前批次去重后数量：         {len(current_unique_records)}")
+    print(f"历史已有记录数量：           {len(existing_records)}")
+    print(f"本次新增记录数量：           {len(new_records)}")
+    print(f"累计 Hard Case 数量：        {len(all_records)}")
+    print(f"累计文件：                   {total_hard_cases_path}")
+
+    print("=" * 80)
+
+
+# ============================================================
 # Main
 # ============================================================
 # ============================================================
@@ -1351,3 +1523,10 @@ if __name__ == "__main__":
     # 更新数据集增量信息
     # ========================================================
     update_dataset_increment_info(TARGET_DATASET)
+
+    # ========================================================
+    # 第五步：
+    # 增量更新 total_hard_cases.txt
+    # ========================================================
+
+    update_total_hard_cases(TARGET_DATASET)
