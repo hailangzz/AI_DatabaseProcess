@@ -417,6 +417,7 @@ def generate_hard_case_info(local_save_dir: str):
 # ============================================================
 # Hard Case 样本集数据增强
 # ============================================================
+
 class YOLOSegAugmentor:
     """
     对 TARGET_DATASET/exist_target_dataset 进行离线数据增强。
@@ -444,6 +445,9 @@ class YOLOSegAugmentor:
         - 使用 YOLOv8-seg polygon 标签进行同步几何变换。
         - 每张原始 Hard Case 默认生成 3 张增强图。
         - 如果某张图片增强后目标全部消失，则重新生成，避免产生无目标增强样本。
+        - 空 Label 文件属于合法样本：
+            * 图片正常进行增强
+            * 增强后的 Label 生成空 txt
     """
 
     def __init__(
@@ -463,12 +467,14 @@ class YOLOSegAugmentor:
         self.output_dir = output_dir
 
         self.augment_ratio = float(augment_ratio)
+
         if self.augment_ratio <= 0:
             raise ValueError("augment_ratio 必须 > 0")
 
         # 这里采用“每张原图生成 N 张增强图”的方式。
         # 例如 3.0 -> 每张原图生成 3 张。
         self.augment_per_image = int(self.augment_ratio)
+
         if self.augment_per_image < 1:
             self.augment_per_image = 1
 
@@ -482,7 +488,8 @@ class YOLOSegAugmentor:
             [
                 os.path.join(img_dir, f)
                 for f in os.listdir(img_dir)
-                if os.path.splitext(f)[1].lower() in IMAGE_EXTENSIONS
+                if os.path.splitext(f)[1].lower()
+                   in IMAGE_EXTENSIONS
             ]
         )
 
@@ -491,8 +498,15 @@ class YOLOSegAugmentor:
                 f"没有找到可增强的图片：{img_dir}"
             )
 
-        os.makedirs(os.path.join(output_dir, "images"), exist_ok=True)
-        os.makedirs(os.path.join(output_dir, "labels"), exist_ok=True)
+        os.makedirs(
+            os.path.join(output_dir, "images"),
+            exist_ok=True
+        )
+
+        os.makedirs(
+            os.path.join(output_dir, "labels"),
+            exist_ok=True
+        )
 
         self.success_count = 0
         self.failed_count = 0
@@ -511,17 +525,65 @@ class YOLOSegAugmentor:
         )
         print("=" * 80)
 
+    def resize_to_max_size(self, img, objects, max_size=640):
+        """
+        等比例缩放图片，使最长边不超过 max_size。
+
+        同时同步缩放 polygon 像素坐标。
+
+        注意：
+            YOLO 最终保存的是归一化坐标，
+            所以同步缩放后，最终归一化坐标理论上保持不变。
+        """
+
+        h, w = img.shape[:2]
+
+        max_edge = max(h, w)
+
+        if max_edge <= max_size:
+            return img, objects
+
+        scale = max_size / max_edge
+
+        new_w = int(round(w * scale))
+        new_h = int(round(h * scale))
+
+        resized_img = cv2.resize(
+            img,
+            (new_w, new_h),
+            interpolation=cv2.INTER_AREA
+        )
+
+        # 同步缩放 polygon 像素坐标
+        for obj in objects:
+            obj["poly"][:, 0] *= scale
+            obj["poly"][:, 1] *= scale
+
+        return resized_img, objects
+
     def load_image_and_labels(self, img_path):
         """读取图片和 YOLOv8-seg polygon 标签。"""
+
         image_name = os.path.basename(img_path)
         stem = os.path.splitext(image_name)[0]
-        label_path = os.path.join(self.label_dir, stem + ".txt")
+
+        label_path = os.path.join(
+            self.label_dir,
+            stem + ".txt"
+        )
 
         img = cv2.imread(img_path)
-        if img is None:
-            raise RuntimeError(f"无法读取图片：{img_path}")
 
-        img = util.resize_long_edge_image(img, self.long_edge_size)
+        if img is None:
+            raise RuntimeError(
+                f"无法读取图片：{img_path}"
+            )
+
+        img = util.resize_long_edge_image(
+            img,
+            self.long_edge_size
+        )
+
         h, w = img.shape[:2]
 
         objects = []
@@ -531,13 +593,37 @@ class YOLOSegAugmentor:
                 f"找不到对应 Label：{label_path}"
             )
 
-        with open(label_path, "r", encoding="utf-8") as f:
+        # ========================================================
+        # 新增逻辑：
+        # 空 Label 文件属于合法样本。
+        #
+        # 如果 txt 文件存在，但大小为 0：
+        #     objects = []
+        #     返回空对象列表
+        #
+        # run() 会继续执行增强，而不是跳过。
+        #
+        # 注意：
+        # 这里不把“空文件”当成错误。
+        # ========================================================
+        if os.path.getsize(label_path) == 0:
+            return img, objects, True
+
+        with open(
+                label_path,
+                "r",
+                encoding="utf-8"
+        ) as f:
+
             for line in f:
                 line = line.strip()
+
                 if not line:
                     continue
 
-                parts = list(map(float, line.split()))
+                parts = list(
+                    map(float, line.split())
+                )
 
                 # class + 至少 3 个 polygon 点
                 if len(parts) < 7:
@@ -549,7 +635,10 @@ class YOLOSegAugmentor:
                 if len(coords) % 2 != 0:
                     continue
 
-                poly = np.array(coords, dtype=np.float32).reshape(-1, 2)
+                poly = np.array(
+                    coords,
+                    dtype=np.float32
+                ).reshape(-1, 2)
 
                 poly[:, 0] *= w
                 poly[:, 1] *= h
@@ -560,7 +649,12 @@ class YOLOSegAugmentor:
                         "poly": poly
                     })
 
-        return img, objects
+        # 非空 Label，但没有解析出有效 polygon。
+        #
+        # 这里仍然返回 False，
+        # 这样 run() 可以保持原来的行为：
+        # objects=[] -> 跳过增强。
+        return img, objects, False
 
     def random_brightness_contrast(
             self,
@@ -702,6 +796,7 @@ class YOLOSegAugmentor:
 
         for _ in range(num_holes):
             for _try in range(max_try):
+
                 ch = random.randint(
                     max(1, int(0.05 * h)),
                     max(1, int(max_h_ratio * h))
@@ -754,6 +849,7 @@ class YOLOSegAugmentor:
         new_objects = []
 
         for obj in objects:
+
             obj_mask = np.zeros(
                 (h, w),
                 dtype=np.uint8
@@ -783,6 +879,7 @@ class YOLOSegAugmentor:
                 continue
 
             for i, cnt in enumerate(contours):
+
                 # 只保留外轮廓
                 if hierarchy[0][i][3] != -1:
                     continue
@@ -844,6 +941,7 @@ class YOLOSegAugmentor:
         new_objects = []
 
         for obj in objects:
+
             poly = obj["poly"]
 
             ones = np.ones(
@@ -886,6 +984,7 @@ class YOLOSegAugmentor:
         return rotated_img, new_objects
 
     def apply_pipeline(self, img, objects):
+
         # 每次都复制，防止修改原始 objects。
         work_objects = [
             {
@@ -904,10 +1003,14 @@ class YOLOSegAugmentor:
         )
 
         # 颜色增强
-        work_img = self.random_hsv(work_img)
+        work_img = self.random_hsv(
+            work_img
+        )
+
         work_img = self.random_brightness_contrast(
             work_img
         )
+
         work_img = self.add_gaussian_noise(
             work_img,
             mean=0,
@@ -929,6 +1032,13 @@ class YOLOSegAugmentor:
             )
         )
 
+        # 最后 Resize （压缩图像大小，防止内存占用较大）
+        work_img, work_objects = self.resize_to_max_size(
+            work_img,
+            work_objects,
+            max_size=720
+        )
+
         return work_img, work_objects
 
     @staticmethod
@@ -938,15 +1048,17 @@ class YOLOSegAugmentor:
     ):
         """
         命名规则：
-            Augmentor_ + 原文件名主体 + _序号 + 原扩展名
+            Augmentor_ + 原文件名主体 + _序号
 
         例如：
             001.jpg
-            -> Augmentor_001_001.jpg
+            ->
+            Augmentor_001_aug_001.jpg
 
         这样既满足以 Augmentor_ + 原文件名为核心，
         又避免同一原图生成多次时发生覆盖。
         """
+
         stem = Path(
             original_filename
         ).stem
@@ -1001,6 +1113,21 @@ class YOLOSegAugmentor:
                 f"增强图片保存失败：{output_image}"
             )
 
+        # --------------------------------------------------------
+        # 注意：
+        # 即使 objects == []，
+        # 这里仍然会创建 txt 文件。
+        #
+        # 因此：
+        #
+        # objects 有内容
+        #     -> 写入正常 polygon Label
+        #
+        # objects == []
+        #     -> 创建 0 字节空 Label
+        #
+        # 这正好符合当前需求。
+        # --------------------------------------------------------
         with open(
                 output_label,
                 "w",
@@ -1008,6 +1135,7 @@ class YOLOSegAugmentor:
         ) as f:
 
             for obj in objects:
+
                 poly = obj["poly"].astype(
                     np.float32
                 )
@@ -1038,7 +1166,12 @@ class YOLOSegAugmentor:
         """
         对 exist_target_dataset 中的每张图片，
         按 augment_per_image 生成增强样本。
+
+        空 Label 图片：
+            仍然进行图像增强，
+            并生成对应的空 Label。
         """
+
         total_expected = (
                 len(self.img_files)
                 * self.augment_per_image
@@ -1057,39 +1190,76 @@ class YOLOSegAugmentor:
         ) as pbar:
 
             for img_path in self.img_files:
+
                 original_filename = os.path.basename(
                     img_path
                 )
 
                 try:
-                    img, objects = (
+
+                    img, objects, label_is_empty = (
                         self.load_image_and_labels(
                             img_path
                         )
                     )
 
-                    if not objects:
+                    # ====================================================
+                    # 关键修改：
+                    #
+                    # 只有“真正的空 Label 文件”才允许 objects=[] 继续增强。
+                    #
+                    # 非空 Label 但解析不到有效 polygon，
+                    # 仍保持原来的行为：跳过。
+                    # ====================================================
+
+                    if not objects and not label_is_empty:
                         print(
-                            f"[WARNING] Label为空，"
+                            f"[WARNING] Label无有效Polygon，"
                             f"跳过增强："
                             f"{original_filename}"
                         )
+
                         self.failed_count += (
                             self.augment_per_image
                         )
+
                         pbar.update(
                             self.augment_per_image
                         )
+
                         continue
+
+                    # ====================================================
+                    # 空 Label：
+                    #
+                    # objects = []
+                    # label_is_empty = True
+                    #
+                    # 不再跳过。
+                    # ====================================================
+
+                    if label_is_empty:
+                        print(
+                            f"[INFO] Label为空，"
+                            f"仍执行增强："
+                            f"{original_filename}"
+                        )
 
                     for augment_index in range(
                             1,
                             self.augment_per_image + 1
                     ):
+
                         # 避免极端随机增强后 polygon 全部消失。
+                        #
+                        # 对于空 Label：
+                        #     objects 本来就是 []
+                        #     因此不需要“目标全部消失”的判断。
+                        #
                         success = False
 
                         for _try in range(10):
+
                             aug_img, aug_objects = (
                                 self.apply_pipeline(
                                     img,
@@ -1097,6 +1267,23 @@ class YOLOSegAugmentor:
                                 )
                             )
 
+                            # ------------------------------------------------
+                            # 空 Label 是合法样本。
+                            #
+                            # 如果原始 Label 为空，
+                            # 那么 aug_objects == [] 是正常结果。
+                            #
+                            # 因此直接认为增强成功。
+                            # ------------------------------------------------
+                            if label_is_empty:
+                                success = True
+                                break
+
+                            # ------------------------------------------------
+                            # 原有逻辑保持不变：
+                            # 有目标 Label 如果增强后目标全部消失，
+                            # 则重新生成。
+                            # ------------------------------------------------
                             if aug_objects:
                                 success = True
                                 break
@@ -1109,7 +1296,9 @@ class YOLOSegAugmentor:
                             )
 
                             self.failed_count += 1
+
                             pbar.update(1)
+
                             continue
 
                         self.save_sample(
@@ -1120,9 +1309,11 @@ class YOLOSegAugmentor:
                         )
 
                         self.success_count += 1
+
                         pbar.update(1)
 
                 except Exception as e:
+
                     print(
                         f"[ERROR] 增强失败："
                         f"{original_filename} | {e}"
@@ -1216,6 +1407,120 @@ def augment_exist_target_dataset(
     )
 
     return augment_output_dir
+
+
+def cleanup_dataset_pair(images_dir, labels_dir, dataset_name):
+    """
+    清理 images / labels 中无法一一对应的孤儿文件。
+
+    规则：
+
+        image 有、label 无
+            -> 删除 image
+
+        label 有、image 无
+            -> 删除 label
+    """
+
+    print("\n" + "=" * 80)
+    print(f"开始清理 {dataset_name} 孤儿文件")
+    print("=" * 80)
+
+    image_map = {}
+    label_map = {}
+
+    # --------------------------------------------------------
+    # Images
+    # --------------------------------------------------------
+
+    if os.path.isdir(images_dir):
+
+        for filename in os.listdir(images_dir):
+
+            ext = os.path.splitext(filename)[1].lower()
+
+            if ext not in IMAGE_EXTENSIONS:
+                continue
+
+            stem = os.path.splitext(filename)[0]
+
+            image_map[stem] = os.path.join(
+                images_dir,
+                filename
+            )
+
+    # --------------------------------------------------------
+    # Labels
+    # --------------------------------------------------------
+
+    if os.path.isdir(labels_dir):
+
+        for filename in os.listdir(labels_dir):
+
+            if not filename.lower().endswith(".txt"):
+                continue
+
+            stem = os.path.splitext(filename)[0]
+
+            label_map[stem] = os.path.join(
+                labels_dir,
+                filename
+            )
+
+    # --------------------------------------------------------
+    # Image 有，Label 没有
+    # --------------------------------------------------------
+
+    orphan_images = set(image_map) - set(label_map)
+
+    # --------------------------------------------------------
+    # Label 有，Image 没有
+    # --------------------------------------------------------
+
+    orphan_labels = set(label_map) - set(image_map)
+
+    # --------------------------------------------------------
+    # 删除孤儿 Image
+    # --------------------------------------------------------
+
+    for stem in sorted(orphan_images):
+        path = image_map[stem]
+
+        print(
+            f"[DELETE] Image 无对应 Label：{path}"
+        )
+
+        os.remove(path)
+
+    # --------------------------------------------------------
+    # 删除孤儿 Label
+    # --------------------------------------------------------
+
+    for stem in sorted(orphan_labels):
+        path = label_map[stem]
+
+        print(
+            f"[DELETE] Label 无对应 Image：{path}"
+        )
+
+        os.remove(path)
+
+    # --------------------------------------------------------
+    # 输出
+    # --------------------------------------------------------
+
+    print(
+        f"删除孤儿 Image：{len(orphan_images)}"
+    )
+
+    print(
+        f"删除孤儿 Label：{len(orphan_labels)}"
+    )
+
+    if not orphan_images and not orphan_labels:
+        print("✓ 没有发现孤儿文件")
+
+    print("=" * 80)
 
 
 # ============================================================
@@ -1577,6 +1882,34 @@ def create_target_datasets(
             pass
 
         unexist_success_count += 1
+
+    # ========================================================
+    # 清理孤儿文件
+    # ========================================================
+    # Image 有、Label 无
+    #     -> 删除 Image
+    #
+    # Label 有、Image 无
+    #     -> 删除 Label
+    #
+    # 清理完成后，再进行最终对应关系检查。
+    # ========================================================
+
+    print("\n" + "-" * 80)
+    print("开始清理 images / labels 孤儿文件")
+    print("-" * 80)
+
+    cleanup_dataset_pair(
+        exist_images_dir,
+        exist_labels_dir,
+        "exist_target_dataset"
+    )
+
+    cleanup_dataset_pair(
+        unexist_images_dir,
+        unexist_labels_dir,
+        "unexist_target_dataset"
+    )
 
     # ========================================================
     # 最终检查 images / labels 是否一一对应
@@ -2349,9 +2682,9 @@ if __name__ == "__main__":
 
     update_total_hard_cases(TARGET_DATASET)
 
-    # ========================================================
-    # 第六步：增强 exist_target_dataset 中的 Hard Case 样本
-    # ========================================================
+    # # ========================================================
+    # # 第六步：增强 exist_target_dataset 中的 Hard Case 样本
+    # # ========================================================
     augment_exist_target_dataset(
         TARGET_DATASET,
         augment_ratio=AUGMENT_RATIO,
