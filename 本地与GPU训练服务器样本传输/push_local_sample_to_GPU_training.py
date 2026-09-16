@@ -1,4 +1,3 @@
-import os
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -517,46 +516,74 @@ if __name__ == "__main__":
     #
     # --------------------------------------------------------
 
-    password = os.getenv(
-        "UPLOAD_PASSWORD"
-    )
+    # password = os.getenv(
+    #     "GPUSERVICE_UPLOAD_PASSWORD"
+    # )
+
+    password = 'black@box'
 
     if not password:
         raise RuntimeError(
-            "请设置环境变量 UPLOAD_PASSWORD"
+            "请设置环境变量 GPUSERVICE_UPLOAD_PASSWORD"
         )
 
+    # # --------------------------------------------------------
+    # # Person detection dataset
+    # # --------------------------------------------------------
+    #
+    # local_images_path = (
+    #     "/data/database/"
+    #     "AITotal_SegmentDatabase/"
+    #     "personDatabaseSegment/"
+    #     "date_20260826/"
+    #     "images/train"
+    # )
+    #
+    # local_labels_path = (
+    #     "/data/database/"
+    #     "AITotal_SegmentDatabase/"
+    #     "personDatabaseSegment/"
+    #     "date_20260826/"
+    #     "labels/train"
+    # )
+    #
+    # remote_images_path = (
+    #     "/home/robot-server/data/"
+    #     "AITotal_SegmentDatabase/"
+    #     "personDatabaseSegment/"
+    #     "images/train"
+    # )
+    #
+    # remote_labels_path = (
+    #     "/home/robot-server/data/"
+    #     "AITotal_SegmentDatabase/"
+    #     "personDatabaseSegment/"
+    #     "labels/train"
+    # )
+
     # --------------------------------------------------------
-    # Person detection dataset
+    # carpet detection dataset
     # --------------------------------------------------------
 
     local_images_path = (
-        "/data/database/"
-        "AITotal_SegmentDatabase/"
-        "personDatabaseSegment/"
-        "date_20260826/"
-        "images/train"
+        "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/date_20260915/unexist_target_dataset/images"
     )
 
     local_labels_path = (
-        "/data/database/"
-        "AITotal_SegmentDatabase/"
-        "personDatabaseSegment/"
-        "date_20260826/"
-        "labels/train"
+        "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/date_20260915/unexist_target_dataset/labels"
     )
 
     remote_images_path = (
         "/home/robot-server/data/"
         "AITotal_SegmentDatabase/"
-        "personDatabaseSegment/"
+        "carpetDatabaseSegment//"
         "images/train"
     )
 
     remote_labels_path = (
         "/home/robot-server/data/"
         "AITotal_SegmentDatabase/"
-        "personDatabaseSegment/"
+        "carpetDatabaseSegment//"
         "labels/train"
     )
 
