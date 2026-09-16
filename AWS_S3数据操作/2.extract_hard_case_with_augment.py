@@ -54,6 +54,13 @@ import json
 import os
 import random
 import shutil
+from pathlib import Path
+
+import cv2
+import numpy as np
+from tqdm import tqdm
+
+import utils.util as util
 
 # ============================================================
 # 支持的图片格式
@@ -405,6 +412,810 @@ def generate_hard_case_info(local_save_dir: str):
     print(f"JSON 文件：           " f"{HARD_CASE_INFO_JSON}")
 
     print("=" * 80)
+
+
+# ============================================================
+# Hard Case 样本集数据增强
+# ============================================================
+class YOLOSegAugmentor:
+    """
+    对 TARGET_DATASET/exist_target_dataset 进行离线数据增强。
+
+    输出：
+        TARGET_DATASET/
+        └── Augmentor_exist_target_dataset/
+            ├── images/
+            └── labels/
+
+    命名：
+        原图：xxx.jpg
+        增强：Augmentor_xxx_001.jpg
+              Augmentor_xxx_002.jpg
+              ...
+
+        对应 Label：
+        Augmentor_xxx_001.txt
+        Augmentor_xxx_002.txt
+        ...
+
+    说明：
+        - 保留原始 exist_target_dataset 不变。
+        - 只读取 exist_target_dataset/images + labels。
+        - 使用 YOLOv8-seg polygon 标签进行同步几何变换。
+        - 每张原始 Hard Case 默认生成 3 张增强图。
+        - 如果某张图片增强后目标全部消失，则重新生成，避免产生无目标增强样本。
+    """
+
+    def __init__(
+            self,
+            img_dir,
+            label_dir,
+            output_dir,
+            augment_ratio=3.0,
+            long_edge_size=1280,
+            flip_prob=0.5,
+            hsv_prob=0.1,
+            hsv_gain=(0.015, 0.4, 0.6),
+            degrees=90.0,
+    ):
+        self.img_dir = img_dir
+        self.label_dir = label_dir
+        self.output_dir = output_dir
+
+        self.augment_ratio = float(augment_ratio)
+        if self.augment_ratio <= 0:
+            raise ValueError("augment_ratio 必须 > 0")
+
+        # 这里采用“每张原图生成 N 张增强图”的方式。
+        # 例如 3.0 -> 每张原图生成 3 张。
+        self.augment_per_image = int(self.augment_ratio)
+        if self.augment_per_image < 1:
+            self.augment_per_image = 1
+
+        self.long_edge_size = long_edge_size
+        self.flip_prob = flip_prob
+        self.hsv_prob = hsv_prob
+        self.h_gain, self.s_gain, self.v_gain = hsv_gain
+        self.degrees = degrees
+
+        self.img_files = sorted(
+            [
+                os.path.join(img_dir, f)
+                for f in os.listdir(img_dir)
+                if os.path.splitext(f)[1].lower() in IMAGE_EXTENSIONS
+            ]
+        )
+
+        if not self.img_files:
+            raise FileNotFoundError(
+                f"没有找到可增强的图片：{img_dir}"
+            )
+
+        os.makedirs(os.path.join(output_dir, "images"), exist_ok=True)
+        os.makedirs(os.path.join(output_dir, "labels"), exist_ok=True)
+
+        self.success_count = 0
+        self.failed_count = 0
+
+        print("\n" + "=" * 80)
+        print("Hard Case 样本增强配置")
+        print("=" * 80)
+        print(f"输入图片目录：      {self.img_dir}")
+        print(f"输入 Label 目录：   {self.label_dir}")
+        print(f"输出目录：          {self.output_dir}")
+        print(f"原始样本数量：      {len(self.img_files)}")
+        print(f"每张图片增强数量：  {self.augment_per_image}")
+        print(
+            f"预计增强样本数量：  "
+            f"{len(self.img_files) * self.augment_per_image}"
+        )
+        print("=" * 80)
+
+    def load_image_and_labels(self, img_path):
+        """读取图片和 YOLOv8-seg polygon 标签。"""
+        image_name = os.path.basename(img_path)
+        stem = os.path.splitext(image_name)[0]
+        label_path = os.path.join(self.label_dir, stem + ".txt")
+
+        img = cv2.imread(img_path)
+        if img is None:
+            raise RuntimeError(f"无法读取图片：{img_path}")
+
+        img = util.resize_long_edge_image(img, self.long_edge_size)
+        h, w = img.shape[:2]
+
+        objects = []
+
+        if not os.path.isfile(label_path):
+            raise FileNotFoundError(
+                f"找不到对应 Label：{label_path}"
+            )
+
+        with open(label_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+
+                parts = list(map(float, line.split()))
+
+                # class + 至少 3 个 polygon 点
+                if len(parts) < 7:
+                    continue
+
+                cls = int(parts[0])
+                coords = parts[1:]
+
+                if len(coords) % 2 != 0:
+                    continue
+
+                poly = np.array(coords, dtype=np.float32).reshape(-1, 2)
+
+                poly[:, 0] *= w
+                poly[:, 1] *= h
+
+                if len(poly) >= 3:
+                    objects.append({
+                        "cls": cls,
+                        "poly": poly
+                    })
+
+        return img, objects
+
+    def random_brightness_contrast(
+            self,
+            img,
+            brightness=0.1,
+            contrast=0.15
+    ):
+        if random.random() > 0.8:
+            return img
+
+        img = img.astype(np.float32)
+
+        alpha = 1.0 + random.uniform(
+            -contrast,
+            contrast
+        )
+
+        beta = random.uniform(
+            -brightness,
+            brightness
+        ) * 255
+
+        img = img * alpha + beta
+
+        return np.clip(
+            img,
+            0,
+            255
+        ).astype(np.uint8)
+
+    def add_gaussian_noise(
+            self,
+            img,
+            mean=0,
+            std=10,
+            prob=0.5
+    ):
+        if random.random() > prob:
+            return img
+
+        noise = np.random.normal(
+            mean,
+            std,
+            img.shape
+        ).astype(np.float32)
+
+        img = img.astype(np.float32) + noise
+
+        return np.clip(
+            img,
+            0,
+            255
+        ).astype(np.uint8)
+
+    def random_hsv(self, img):
+        if random.random() > self.hsv_prob:
+            return img
+
+        r = (
+                np.random.uniform(-1, 1, 3)
+                * np.array(
+            [
+                self.h_gain,
+                self.s_gain,
+                self.v_gain
+            ]
+        )
+        )
+
+        h, s, v = r
+
+        img = cv2.cvtColor(
+            img,
+            cv2.COLOR_BGR2HSV
+        ).astype(np.float32)
+
+        img[..., 0] = (
+                              img[..., 0] + h * 180
+                      ) % 180
+
+        img[..., 1] *= (1 + s)
+        img[..., 2] *= (1 + v)
+
+        img[..., 1:] = np.clip(
+            img[..., 1:],
+            0,
+            255
+        )
+
+        return cv2.cvtColor(
+            img.astype(np.uint8),
+            cv2.COLOR_HSV2BGR
+        )
+
+    def random_flip(self, img, objects):
+        if random.random() < self.flip_prob:
+            img = np.fliplr(img).copy()
+
+            w = img.shape[1]
+
+            for obj in objects:
+                obj["poly"][:, 0] = (
+                        w - obj["poly"][:, 0]
+                )
+
+        return img, objects
+
+    def cutout_with_mask_raster_safe(
+            self,
+            img,
+            objects,
+            max_h_ratio=0.4,
+            max_w_ratio=0.4,
+            num_holes=(1, 3),
+            max_try=50
+    ):
+        h, w = img.shape[:2]
+
+        if not objects:
+            return img, objects
+
+        num_holes = random.randint(*num_holes)
+
+        union_mask = np.zeros(
+            (h, w),
+            dtype=np.uint8
+        )
+
+        for obj in objects:
+            pts = obj["poly"].astype(np.int32)
+
+            cv2.fillPoly(
+                union_mask,
+                [pts],
+                255
+            )
+
+        cutouts = []
+
+        for _ in range(num_holes):
+            for _try in range(max_try):
+                ch = random.randint(
+                    max(1, int(0.05 * h)),
+                    max(1, int(max_h_ratio * h))
+                )
+
+                cw = random.randint(
+                    max(1, int(0.05 * w)),
+                    max(1, int(max_w_ratio * w))
+                )
+
+                if ch >= h or cw >= w:
+                    continue
+
+                x = random.randint(
+                    0,
+                    w - cw
+                )
+
+                y = random.randint(
+                    0,
+                    h - ch
+                )
+
+                roi = union_mask[
+                      y:y + ch,
+                      x:x + cw
+                      ]
+
+                # 与原增强代码保持一致：
+                # 如果 cutout 完全位于 polygon 内，则放弃。
+                if np.all(roi == 255):
+                    continue
+
+                cutouts.append(
+                    (x, y, cw, ch)
+                )
+
+                img[
+                y:y + ch,
+                x:x + cw
+                ] = np.random.randint(
+                    0,
+                    255,
+                    (ch, cw, 3),
+                    dtype=np.uint8
+                )
+
+                break
+
+        new_objects = []
+
+        for obj in objects:
+            obj_mask = np.zeros(
+                (h, w),
+                dtype=np.uint8
+            )
+
+            pts = obj["poly"].astype(np.int32)
+
+            cv2.fillPoly(
+                obj_mask,
+                [pts],
+                255
+            )
+
+            for x, y, cw, ch in cutouts:
+                obj_mask[
+                y:y + ch,
+                x:x + cw
+                ] = 0
+
+            contours, hierarchy = cv2.findContours(
+                obj_mask,
+                cv2.RETR_CCOMP,
+                cv2.CHAIN_APPROX_SIMPLE
+            )
+
+            if hierarchy is None:
+                continue
+
+            for i, cnt in enumerate(contours):
+                # 只保留外轮廓
+                if hierarchy[0][i][3] != -1:
+                    continue
+
+                if len(cnt) >= 3:
+                    new_objects.append({
+                        "cls": obj["cls"],
+                        "poly": cnt.reshape(-1, 2)
+                    })
+
+        return img, new_objects
+
+    def random_rotate(self, img, objects):
+        if random.random() > 0.35:
+            return img, objects
+
+        h, w = img.shape[:2]
+
+        angle = random.uniform(
+            -self.degrees,
+            self.degrees
+        )
+
+        cx, cy = w / 2, h / 2
+
+        M = cv2.getRotationMatrix2D(
+            (cx, cy),
+            angle,
+            1.0
+        )
+
+        cos = abs(M[0, 0])
+        sin = abs(M[0, 1])
+
+        new_w = int(
+            (h * sin) + (w * cos)
+        )
+
+        new_h = int(
+            (h * cos) + (w * sin)
+        )
+
+        M[0, 2] += (
+                           new_w / 2
+                   ) - cx
+
+        M[1, 2] += (
+                           new_h / 2
+                   ) - cy
+
+        rotated_img = cv2.warpAffine(
+            img,
+            M,
+            (new_w, new_h),
+            flags=cv2.INTER_LINEAR,
+            borderValue=(114, 114, 114)
+        )
+
+        new_objects = []
+
+        for obj in objects:
+            poly = obj["poly"]
+
+            ones = np.ones(
+                (poly.shape[0], 1),
+                dtype=np.float32
+            )
+
+            pts = np.hstack(
+                [poly, ones]
+            )
+
+            rotated_pts = pts @ M.T
+
+            if (
+                    rotated_pts[:, 0].max() < 0
+                    or rotated_pts[:, 1].max() < 0
+                    or rotated_pts[:, 0].min() > new_w
+                    or rotated_pts[:, 1].min() > new_h
+            ):
+                continue
+
+            rotated_pts[:, 0] = np.clip(
+                rotated_pts[:, 0],
+                0,
+                new_w - 1
+            )
+
+            rotated_pts[:, 1] = np.clip(
+                rotated_pts[:, 1],
+                0,
+                new_h - 1
+            )
+
+            if len(rotated_pts) >= 3:
+                new_objects.append({
+                    "cls": obj["cls"],
+                    "poly": rotated_pts
+                })
+
+        return rotated_img, new_objects
+
+    def apply_pipeline(self, img, objects):
+        # 每次都复制，防止修改原始 objects。
+        work_objects = [
+            {
+                "cls": obj["cls"],
+                "poly": obj["poly"].copy()
+            }
+            for obj in objects
+        ]
+
+        work_img = img.copy()
+
+        # 先几何变换
+        work_img, work_objects = self.random_rotate(
+            work_img,
+            work_objects
+        )
+
+        # 颜色增强
+        work_img = self.random_hsv(work_img)
+        work_img = self.random_brightness_contrast(
+            work_img
+        )
+        work_img = self.add_gaussian_noise(
+            work_img,
+            mean=0,
+            std=10,
+            prob=0.5
+        )
+
+        # 空间增强
+        work_img, work_objects = self.random_flip(
+            work_img,
+            work_objects
+        )
+
+        # Cutout
+        work_img, work_objects = (
+            self.cutout_with_mask_raster_safe(
+                work_img,
+                work_objects
+            )
+        )
+
+        return work_img, work_objects
+
+    @staticmethod
+    def _build_output_name(
+            original_filename,
+            augment_index
+    ):
+        """
+        命名规则：
+            Augmentor_ + 原文件名主体 + _序号 + 原扩展名
+
+        例如：
+            001.jpg
+            -> Augmentor_001_001.jpg
+
+        这样既满足以 Augmentor_ + 原文件名为核心，
+        又避免同一原图生成多次时发生覆盖。
+        """
+        stem = Path(
+            original_filename
+        ).stem
+
+        suffix = Path(
+            original_filename
+        ).suffix.lower()
+
+        return (
+            f"Augmentor_{stem}_"
+            f"aug_"
+            f"{augment_index:03d}"
+            f"{suffix}"
+        )
+
+    def save_sample(
+            self,
+            original_filename,
+            augment_index,
+            img,
+            objects
+    ):
+        h, w = img.shape[:2]
+
+        image_name = self._build_output_name(
+            original_filename,
+            augment_index
+        )
+
+        label_name = (
+                Path(image_name).stem
+                + ".txt"
+        )
+
+        output_image = os.path.join(
+            self.output_dir,
+            "images",
+            image_name
+        )
+
+        output_label = os.path.join(
+            self.output_dir,
+            "labels",
+            label_name
+        )
+
+        if not cv2.imwrite(
+                output_image,
+                img
+        ):
+            raise RuntimeError(
+                f"增强图片保存失败：{output_image}"
+            )
+
+        with open(
+                output_label,
+                "w",
+                encoding="utf-8"
+        ) as f:
+
+            for obj in objects:
+                poly = obj["poly"].astype(
+                    np.float32
+                )
+
+                poly[:, 0] /= w
+                poly[:, 1] /= h
+
+                poly = np.clip(
+                    poly,
+                    0,
+                    1
+                ).reshape(-1)
+
+                if len(poly) < 6:
+                    continue
+
+                line = " ".join(
+                    [str(obj["cls"])]
+                    + [
+                        f"{v:.6f}"
+                        for v in poly
+                    ]
+                )
+
+                f.write(line + "\n")
+
+    def run(self):
+        """
+        对 exist_target_dataset 中的每张图片，
+        按 augment_per_image 生成增强样本。
+        """
+        total_expected = (
+                len(self.img_files)
+                * self.augment_per_image
+        )
+
+        print("\n" + "=" * 80)
+        print("开始 Hard Case 样本增强")
+        print("=" * 80)
+
+        with tqdm(
+                total=total_expected,
+                desc="Hard Case Augmenting",
+                unit="img",
+                ncols=100,
+                dynamic_ncols=True
+        ) as pbar:
+
+            for img_path in self.img_files:
+                original_filename = os.path.basename(
+                    img_path
+                )
+
+                try:
+                    img, objects = (
+                        self.load_image_and_labels(
+                            img_path
+                        )
+                    )
+
+                    if not objects:
+                        print(
+                            f"[WARNING] Label为空，"
+                            f"跳过增强："
+                            f"{original_filename}"
+                        )
+                        self.failed_count += (
+                            self.augment_per_image
+                        )
+                        pbar.update(
+                            self.augment_per_image
+                        )
+                        continue
+
+                    for augment_index in range(
+                            1,
+                            self.augment_per_image + 1
+                    ):
+                        # 避免极端随机增强后 polygon 全部消失。
+                        success = False
+
+                        for _try in range(10):
+                            aug_img, aug_objects = (
+                                self.apply_pipeline(
+                                    img,
+                                    objects
+                                )
+                            )
+
+                            if aug_objects:
+                                success = True
+                                break
+
+                        if not success:
+                            print(
+                                f"[WARNING] 增强失败，"
+                                f"目标全部消失："
+                                f"{original_filename}"
+                            )
+
+                            self.failed_count += 1
+                            pbar.update(1)
+                            continue
+
+                        self.save_sample(
+                            original_filename,
+                            augment_index,
+                            aug_img,
+                            aug_objects
+                        )
+
+                        self.success_count += 1
+                        pbar.update(1)
+
+                except Exception as e:
+                    print(
+                        f"[ERROR] 增强失败："
+                        f"{original_filename} | {e}"
+                    )
+
+                    self.failed_count += (
+                        self.augment_per_image
+                    )
+
+                    pbar.update(
+                        self.augment_per_image
+                    )
+
+                pbar.set_postfix({
+                    "success": self.success_count,
+                    "failed": self.failed_count
+                })
+
+        print("\n" + "=" * 80)
+        print("Hard Case 样本增强完成")
+        print("=" * 80)
+        print(f"原始样本数量：      {len(self.img_files)}")
+        print(f"计划生成数量：      {total_expected}")
+        print(f"成功生成数量：      {self.success_count}")
+        print(f"失败数量：          {self.failed_count}")
+        print(f"输出目录：          {self.output_dir}")
+        print("=" * 80)
+
+
+def augment_exist_target_dataset(
+        target_dataset: str,
+        augment_ratio: float = 2.0
+):
+    """
+    对：
+        TARGET_DATASET/exist_target_dataset
+
+    进行增强，并输出到：
+        TARGET_DATASET/Augmentor_exist_target_dataset
+    """
+
+    exist_images_dir = os.path.join(
+        target_dataset,
+        "exist_target_dataset",
+        "images"
+    )
+
+    exist_labels_dir = os.path.join(
+        target_dataset,
+        "exist_target_dataset",
+        "labels"
+    )
+
+    augment_output_dir = os.path.join(
+        target_dataset,
+        "Augmentor_exist_target_dataset"
+    )
+
+    if not os.path.isdir(exist_images_dir):
+        raise FileNotFoundError(
+            f"找不到 exist_target_dataset/images："
+            f"{exist_images_dir}"
+        )
+
+    if not os.path.isdir(exist_labels_dir):
+        raise FileNotFoundError(
+            f"找不到 exist_target_dataset/labels："
+            f"{exist_labels_dir}"
+        )
+
+    augmentor = YOLOSegAugmentor(
+        img_dir=exist_images_dir,
+        label_dir=exist_labels_dir,
+        output_dir=augment_output_dir,
+        augment_ratio=augment_ratio
+    )
+
+    augmentor.run()
+
+    # 增强数据集自身做一次 images / labels 对应性检查。
+    check_dataset_pair(
+        os.path.join(
+            augment_output_dir,
+            "images"
+        ),
+        os.path.join(
+            augment_output_dir,
+            "labels"
+        ),
+        "Augmentor_exist_target_dataset"
+    )
+
+    return augment_output_dir
 
 
 # ============================================================
@@ -1484,6 +2295,13 @@ RANDOM_SEED = 42
 
 unexitst_sample_ratio = 1 / 2  # 无标注图片抽取比例
 
+# ============================================================
+# Hard Case 样本增强配置
+# ============================================================
+# 每张 exist_target_dataset 原图生成 3 张增强图。
+# 例如：001.jpg -> Augmentor_001_001.jpg / _002.jpg / _003.jpg
+AUGMENT_RATIO = 2.0
+
 # 2. 需要拼接的前缀路径字符串 (例如服务器/远程/相对路径字符串)
 base_prefix = ("/workspace/data/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train")
 
@@ -1530,3 +2348,11 @@ if __name__ == "__main__":
     # ========================================================
 
     update_total_hard_cases(TARGET_DATASET)
+
+    # ========================================================
+    # 第六步：增强 exist_target_dataset 中的 Hard Case 样本
+    # ========================================================
+    augment_exist_target_dataset(
+        TARGET_DATASET,
+        augment_ratio=AUGMENT_RATIO,
+    )
