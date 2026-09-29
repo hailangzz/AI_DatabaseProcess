@@ -86,7 +86,8 @@ if __name__ == "__main__":
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment/images/train"
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/wireDatabaseSegment_all_database/images/train"
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/liquidDatabaseSegment/images/train"
-    remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
+    # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/images/train"
+    remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/carpetDatabaseSegment/images/train"
     # # 要搜索的文件名
     # target_filename = "20260522_150800_920_liquid_detect.jpg"
 
@@ -95,7 +96,7 @@ if __name__ == "__main__":
     # remote_dir = "/home/robot-server/data/AITotal_SegmentDatabase/plasticbagDatabaseSegment/labels/train"
 
     # 要搜索的文件名
-    target_filename = "augment_segment_real_plasticbag_seg_0630_batch1_000008.jpg"
+    target_filename = "Augmentor_1785403414523_A10-25-YD-005002-test_carpet_detect_null_0.000_aug_001.jpg"
 
     hostname = "172.16.50.229"
     username = "robot-server"

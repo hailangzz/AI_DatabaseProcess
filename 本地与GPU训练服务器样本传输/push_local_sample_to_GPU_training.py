@@ -566,11 +566,11 @@ if __name__ == "__main__":
     # --------------------------------------------------------
 
     local_images_path = (
-        "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/date_20260915/unexist_target_dataset/images"
+        "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/date_20260915/Augmentor_exist_target_dataset/images"
     )
 
     local_labels_path = (
-        "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/date_20260915/unexist_target_dataset/labels"
+        "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/date_20260915/Augmentor_exist_target_dataset/labels"
     )
 
     remote_images_path = (

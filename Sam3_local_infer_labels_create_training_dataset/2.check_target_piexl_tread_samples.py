@@ -9,38 +9,20 @@ YOLO-Segmentation 训练集样本筛选工具
 1. 给定 images / labels 文件夹
 2. 读取 YOLO Segmentation Label
 3. 指定 MARK_CLASS_ID
-4. 计算 mark 目标 Polygon 的外接矩形：
-       x_min
-       x_max
-       y_min
-       y_max
-
-5. 根据原始图片尺寸：
-       1280 x 720
-
-   将 YOLO 归一化坐标转换成实际像素坐标。
-
+4. 计算 mark 目标 Polygon 的外接矩形
+5. 根据原始图片尺寸 1280 x 720
+   将 YOLO 归一化坐标转换成实际像素坐标
 6. 当存在一个 mark 目标满足：
-
        width  > MIN_WIDTH
        height > MIN_HEIGHT
-
-   则将：
-
-       image
-       label
-
-   一起复制到筛选目录。
-
-7. 保证 images / labels 一一对应。
-
-YOLO Segmentation Label 格式：
-
-    class_id x1 y1 x2 y2 x3 y3 ...
-
-坐标范围：
-
-    0 ~ 1
+   则将 image + NMS 后的 label
+   一起复制到筛选目录
+7. 对单张样本中的 MARK_CLASS_ID 标注执行 Polygon NMS：
+   - Polygon IoU 过大 -> 删除面积较小的目标
+   - 大 mark 对小 mark 覆盖率过高 -> 删除面积较小的目标
+8. 保证 images / labels 一一对应
+9. 使用 tqdm 显示处理进度
+10. 不修改原始 Label
 """
 
 # ============================================================
@@ -49,6 +31,9 @@ YOLO Segmentation Label 格式：
 
 import shutil
 from pathlib import Path
+
+from shapely.geometry import Polygon
+from tqdm import tqdm
 
 # ============================================================
 # 是否覆盖已经存在的文件
@@ -68,11 +53,40 @@ IMAGE_SUFFIXES = {
     ".webp",
 }
 
+# ============================================================
+# NMS 参数
+# ============================================================
+
+# Polygon IoU 阈值
+#
+# 两个 mark：
+#
+#     intersection_area / union_area
+#
+# 大于等于该阈值时：
+#
+#     删除面积较小的 mark
+#
+NMS_IOU_THRESHOLD = 0.70
+
+# ============================================================
+# 小目标覆盖率阈值
+# ============================================================
+
+# 大 mark 对小 mark 的覆盖率：
+#
+#     intersection_area / small_mark_area
+#
+# 大于等于该阈值时：
+#
+#     删除小 mark
+#
+SMALL_MARK_COVERAGE_THRESHOLD = 0.80
+
 
 # ============================================================
 # 创建输出目录
 # ============================================================
-
 
 def create_output_dirs():
     """
@@ -106,29 +120,18 @@ def create_output_dirs():
 # 获取图片路径
 # ============================================================
 
-
 def build_image_mapping():
     """
     建立：
 
         image_stem -> image_path
-
-    例如：
-
-        001.jpg
-        001.png
-
-    对应：
-
-        "001" -> Path(...)
     """
 
     image_mapping = {}
 
     if not IMAGES_DIR.exists():
         raise FileNotFoundError(
-            f"Images 目录不存在："
-            f"{IMAGES_DIR}"
+            f"Images 目录不存在：{IMAGES_DIR}"
         )
 
     for image_path in IMAGES_DIR.iterdir():
@@ -141,30 +144,11 @@ def build_image_mapping():
 
         stem = image_path.stem
 
+        # 同名不同扩展名时保留第一个
         if stem in image_mapping:
-            print(
-                f"[WARNING] 存在同名不同扩展名图片："
-                f"{stem}"
-            )
-
-            print(
-                f"          已存在："
-                f"{image_mapping[stem]}"
-            )
-
-            print(
-                f"          当前："
-                f"{image_path}"
-            )
-
             continue
 
         image_mapping[stem] = image_path
-
-    print(
-        f"[INFO] Images 数量："
-        f"{len(image_mapping)}"
-    )
 
     return image_mapping
 
@@ -173,16 +157,13 @@ def build_image_mapping():
 # 解析单个 YOLO Seg Label
 # ============================================================
 
-
 def parse_yolo_segmentation_line(
         line,
-        line_number,
-        label_path,
 ):
     """
     解析：
 
-        class_id x1 y1 x2 y2 ...
+        class_id x1 y1 x2 y2 x3 y3 ...
 
     返回：
 
@@ -197,54 +178,20 @@ def parse_yolo_segmentation_line(
             ...
         ]
 
-    坐标仍然保持为 0~1。
+    坐标保持为 0~1。
     """
 
     parts = line.strip().split()
 
-    # --------------------------------------------------------
-    # 至少：
-    #
-    # class_id
-    # x1 y1
-    # x2 y2
-    # x3 y3
-    #
-    # = 7 个字段
-    # --------------------------------------------------------
-
     if len(parts) < 7:
-        print(
-            f"[WARNING] Label 格式异常："
-            f"{label_path}"
-            f":{line_number}"
-        )
-
         return None
 
-    # --------------------------------------------------------
-    # class_id
-    # --------------------------------------------------------
-
     try:
-
         class_id = int(parts[0])
-
     except ValueError:
-
-        print(
-            f"[WARNING] class_id 无法解析："
-            f"{label_path}"
-            f":{line_number}"
-        )
-
         return None
 
     coordinate_values = []
-
-    # --------------------------------------------------------
-    # 解析坐标
-    # --------------------------------------------------------
 
     try:
 
@@ -255,43 +202,13 @@ def parse_yolo_segmentation_line(
 
     except ValueError:
 
-        print(
-            f"[WARNING] 坐标无法解析："
-            f"{label_path}"
-            f":{line_number}"
-        )
-
         return None
-
-    # --------------------------------------------------------
-    # x / y 必须成对
-    # --------------------------------------------------------
 
     if len(coordinate_values) % 2 != 0:
-        print(
-            f"[WARNING] Polygon 坐标数量不是偶数："
-            f"{label_path}"
-            f":{line_number}"
-        )
-
         return None
-
-    # --------------------------------------------------------
-    # 至少 3 个点
-    # --------------------------------------------------------
 
     if len(coordinate_values) < 6:
-        print(
-            f"[WARNING] Polygon 少于 3 个点："
-            f"{label_path}"
-            f":{line_number}"
-        )
-
         return None
-
-    # --------------------------------------------------------
-    # 生成 point
-    # --------------------------------------------------------
 
     points = []
 
@@ -314,7 +231,6 @@ def parse_yolo_segmentation_line(
 # 计算 Polygon BBox
 # ============================================================
 
-
 def calculate_polygon_bbox(
         points,
 ):
@@ -326,16 +242,7 @@ def calculate_polygon_bbox(
         x_max
         y_max
 
-    然后转换成实际像素。
-
-    返回：
-
-        x_min_px
-        y_min_px
-        x_max_px
-        y_max_px
-        width_px
-        height_px
+    并转换成实际像素。
     """
 
     x_values = [
@@ -348,29 +255,17 @@ def calculate_polygon_bbox(
         for point in points
     ]
 
-    # --------------------------------------------------------
-    # 归一化坐标 BBox
-    # --------------------------------------------------------
-
     x_min = min(x_values)
     x_max = max(x_values)
 
     y_min = min(y_values)
     y_max = max(y_values)
 
-    # --------------------------------------------------------
-    # 转换为实际像素
-    # --------------------------------------------------------
-
     x_min_px = x_min * IMAGE_WIDTH
     x_max_px = x_max * IMAGE_WIDTH
 
     y_min_px = y_min * IMAGE_HEIGHT
     y_max_px = y_max * IMAGE_HEIGHT
-
-    # --------------------------------------------------------
-    # 宽高
-    # --------------------------------------------------------
 
     width_px = (
             x_max_px
@@ -393,9 +288,383 @@ def calculate_polygon_bbox(
 
 
 # ============================================================
-# 判断 Label 是否满足筛选条件
+# 创建 Shapely Polygon
 # ============================================================
 
+def create_polygon(
+        points,
+):
+    """
+    将 YOLO 归一化 Polygon
+    转换成 Shapely Polygon。
+    """
+
+    try:
+
+        polygon = Polygon(points)
+
+        # 修复可能存在的自交 Polygon
+        if not polygon.is_valid:
+            polygon = polygon.buffer(0)
+
+        if polygon.is_empty:
+            return None
+
+        if polygon.area <= 0:
+            return None
+
+        return polygon
+
+    except Exception:
+        return None
+
+
+# ============================================================
+# 计算 Polygon 面积
+# ============================================================
+
+def calculate_polygon_area(
+        points,
+):
+    """
+    计算 Polygon 面积。
+
+    使用 Shapely。
+    """
+
+    polygon = create_polygon(points)
+
+    if polygon is None:
+        return 0.0
+
+    return polygon.area
+
+
+# ============================================================
+# Polygon NMS
+# ============================================================
+
+def polygon_nms(
+        mark_records,
+):
+    """
+    对同一个样本中的 MARK_CLASS_ID
+    执行 Polygon NMS。
+
+    规则：
+
+    1. 面积大的目标优先保留。
+
+    2. 如果两个目标：
+
+       IoU >= NMS_IOU_THRESHOLD
+
+       删除面积较小的目标。
+
+    3. 或者：
+
+       intersection_area / small_mark_area
+       >= SMALL_MARK_COVERAGE_THRESHOLD
+
+       删除面积较小的目标。
+
+    参数：
+
+        mark_records：
+
+            [
+                {
+                    "line_index": int,
+                    "line": str,
+                    "points": list,
+                    "polygon": Polygon,
+                    "area": float,
+                }
+            ]
+
+    返回：
+
+        保留下来的 records
+    """
+
+    if len(mark_records) <= 1:
+        return mark_records
+
+    # --------------------------------------------------------
+    # 按面积从大到小排序
+    # --------------------------------------------------------
+
+    sorted_records = sorted(
+        mark_records,
+        key=lambda item: item["area"],
+        reverse=True,
+    )
+
+    keep_records = []
+
+    for current in sorted_records:
+
+        current_polygon = current["polygon"]
+        current_area = current["area"]
+
+        should_remove = False
+
+        # ----------------------------------------------------
+        # 当前目标只与已经保留的“大目标”比较
+        # ----------------------------------------------------
+
+        for kept in keep_records:
+
+            kept_polygon = kept["polygon"]
+            kept_area = kept["area"]
+
+            try:
+
+                intersection_area = (
+                    current_polygon
+                    .intersection(kept_polygon)
+                    .area
+                )
+
+            except Exception:
+
+                continue
+
+            if intersection_area <= 0:
+                continue
+
+            # ------------------------------------------------
+            # IoU
+            # ------------------------------------------------
+
+            union_area = (
+                    current_area
+                    + kept_area
+                    - intersection_area
+            )
+
+            if union_area <= 0:
+                continue
+
+            iou = (
+                    intersection_area
+                    / union_area
+            )
+
+            # ------------------------------------------------
+            # 大 mark 对小 mark 的覆盖率
+            # ------------------------------------------------
+
+            small_mark_coverage = (
+                    intersection_area
+                    / current_area
+            )
+
+            # ------------------------------------------------
+            # NMS 判断
+            # ------------------------------------------------
+
+            if (
+                    iou >= NMS_IOU_THRESHOLD
+                    or
+                    small_mark_coverage
+                    >= SMALL_MARK_COVERAGE_THRESHOLD
+            ):
+                should_remove = True
+                break
+
+        # ----------------------------------------------------
+        # 保留当前目标
+        # ----------------------------------------------------
+
+        if not should_remove:
+            keep_records.append(
+                current
+            )
+
+    return keep_records
+
+
+# ============================================================
+# 对 Label 执行 NMS
+# ============================================================
+
+def nms_label(
+        label_path,
+):
+    """
+    对一个 Label 文件执行 NMS。
+
+    只对：
+
+        MARK_CLASS_ID
+
+    执行 NMS。
+
+    其他 class 的 Label 原样保留。
+
+    返回：
+
+        filtered_lines
+    """
+
+    try:
+
+        with label_path.open(
+                "r",
+                encoding="utf-8",
+        ) as f:
+
+            lines = f.readlines()
+
+    except Exception:
+
+        return None
+
+    mark_records = []
+
+    # --------------------------------------------------------
+    # 记录所有 Label
+    # --------------------------------------------------------
+
+    parsed_records = []
+
+    for line_index, line in enumerate(lines):
+
+        stripped_line = line.strip()
+
+        if not stripped_line:
+            continue
+
+        result = parse_yolo_segmentation_line(
+            stripped_line
+        )
+
+        if result is None:
+            # 无法解析的行原样保留
+            parsed_records.append({
+                "line_index": line_index,
+                "line": line,
+                "is_mark": False,
+            })
+
+            continue
+
+        class_id, points = result
+
+        # ----------------------------------------------------
+        # 非 MARK_CLASS_ID
+        # ----------------------------------------------------
+
+        if class_id != MARK_CLASS_ID:
+            parsed_records.append({
+                "line_index": line_index,
+                "line": line,
+                "is_mark": False,
+            })
+
+            continue
+
+        # ----------------------------------------------------
+        # MARK_CLASS_ID
+        # ----------------------------------------------------
+
+        polygon = create_polygon(
+            points
+        )
+
+        if polygon is None:
+            # Polygon 无效时原样保留
+            parsed_records.append({
+                "line_index": line_index,
+                "line": line,
+                "is_mark": False,
+            })
+
+            continue
+
+        area = polygon.area
+
+        record = {
+            "line_index": line_index,
+            "line": line,
+            "points": points,
+            "polygon": polygon,
+            "area": area,
+        }
+
+        mark_records.append(
+            record
+        )
+
+    # --------------------------------------------------------
+    # 执行 NMS
+    # --------------------------------------------------------
+
+    keep_mark_records = polygon_nms(
+        mark_records
+    )
+
+    keep_line_indices = {
+        record["line_index"]
+        for record in keep_mark_records
+    }
+
+    # --------------------------------------------------------
+    # 重新生成 Label
+    # --------------------------------------------------------
+
+    filtered_lines = []
+
+    for line_index, line in enumerate(lines):
+
+        stripped_line = line.strip()
+
+        if not stripped_line:
+            continue
+
+        result = parse_yolo_segmentation_line(
+            stripped_line
+        )
+
+        # 无法解析
+        if result is None:
+            filtered_lines.append(
+                line
+            )
+
+            continue
+
+        class_id, _ = result
+
+        # ----------------------------------------------------
+        # 非 MARK_CLASS_ID
+        # ----------------------------------------------------
+
+        if class_id != MARK_CLASS_ID:
+            filtered_lines.append(
+                line
+            )
+
+            continue
+
+        # ----------------------------------------------------
+        # MARK_CLASS_ID
+        #
+        # 只保留 NMS 后的目标
+        # ----------------------------------------------------
+
+        if line_index in keep_line_indices:
+            filtered_lines.append(
+                line
+            )
+
+    return filtered_lines
+
+
+# ============================================================
+# 判断 Label 是否满足筛选条件
+# ============================================================
 
 def check_label(
         label_path,
@@ -436,10 +705,7 @@ def check_label(
                 encoding="utf-8",
         ) as f:
 
-            for line_number, line in enumerate(
-                    f,
-                    start=1,
-            ):
+            for line in f:
 
                 line = line.strip()
 
@@ -447,9 +713,7 @@ def check_label(
                     continue
 
                 result = parse_yolo_segmentation_line(
-                    line=line,
-                    line_number=line_number,
-                    label_path=label_path,
+                    line
                 )
 
                 if result is None:
@@ -457,20 +721,16 @@ def check_label(
 
                 class_id, points = result
 
-                # ------------------------------------------------
-                # 只关注 MARK_CLASS_ID
-                # ------------------------------------------------
-
                 if class_id != MARK_CLASS_ID:
                     continue
 
                 mark_count += 1
 
                 (
-                    x_min_px,
-                    y_min_px,
-                    x_max_px,
-                    y_max_px,
+                    _,
+                    _,
+                    _,
+                    _,
                     width_px,
                     height_px,
                 ) = calculate_polygon_bbox(
@@ -487,35 +747,16 @@ def check_label(
                     height_px,
                 )
 
-                print(
-                    f"[MARK] "
-                    f"{label_path.name} | "
-                    f"width={width_px:.1f}px | "
-                    f"height={height_px:.1f}px"
-                )
-
                 # ------------------------------------------------
-                # 满足条件
+                # 原来的筛选条件完全保持不变
                 # ------------------------------------------------
 
                 if (
                         width_px > MIN_WIDTH
-                        and height_px > MIN_HEIGHT
+                        and
+                        height_px > MIN_HEIGHT
                 ):
                     matched = True
-
-                    print(
-                        f"[MATCH] "
-                        f"{label_path.name} | "
-                        f"width={width_px:.1f}px > "
-                        f"{MIN_WIDTH}px | "
-                        f"height={height_px:.1f}px > "
-                        f"{MIN_HEIGHT}px"
-                    )
-
-                    # ------------------------------------------------
-                    # 已经满足条件，可以提前结束
-                    # ------------------------------------------------
 
                     return (
                         True,
@@ -524,16 +765,7 @@ def check_label(
                         mark_count,
                     )
 
-    except Exception as e:
-
-        print(
-            f"[ERROR] 读取 Label 失败："
-            f"{label_path}"
-        )
-
-        print(
-            f"[ERROR] {type(e).__name__}: {e}"
-        )
+    except Exception:
 
         return (
             False,
@@ -553,7 +785,6 @@ def check_label(
 # ============================================================
 # 复制文件
 # ============================================================
-
 
 def copy_file(
         source,
@@ -577,16 +808,7 @@ def copy_file(
 
         return True
 
-    except Exception as e:
-
-        print(
-            f"[ERROR] 文件复制失败："
-            f"{source}"
-        )
-
-        print(
-            f"[ERROR] {type(e).__name__}: {e}"
-        )
+    except Exception:
 
         return False
 
@@ -595,64 +817,14 @@ def copy_file(
 # 主函数
 # ============================================================
 
-
 def main():
-    print("\n")
-
-    print("=" * 80)
-
-    print(
-        "YOLO-Segmentation "
-        "训练集样本筛选"
-    )
-
-    print("=" * 80)
-
-    print(
-        f"[CONFIG] Images："
-        f"{IMAGES_DIR}"
-    )
-
-    print(
-        f"[CONFIG] Labels："
-        f"{LABELS_DIR}"
-    )
-
-    print(
-        f"[CONFIG] Output："
-        f"{OUTPUT_DIR}"
-    )
-
-    print(
-        f"[CONFIG] Image Size："
-        f"{IMAGE_WIDTH} x {IMAGE_HEIGHT}"
-    )
-
-    print(
-        f"[CONFIG] MARK_CLASS_ID："
-        f"{MARK_CLASS_ID}"
-    )
-
-    print(
-        f"[CONFIG] MIN_WIDTH："
-        f"{MIN_WIDTH}px"
-    )
-
-    print(
-        f"[CONFIG] MIN_HEIGHT："
-        f"{MIN_HEIGHT}px"
-    )
-
-    print("=" * 80)
-
     # --------------------------------------------------------
     # 检查 Labels
     # --------------------------------------------------------
 
     if not LABELS_DIR.exists():
         raise FileNotFoundError(
-            f"Labels 目录不存在："
-            f"{LABELS_DIR}"
+            f"Labels 目录不存在：{LABELS_DIR}"
         )
 
     # --------------------------------------------------------
@@ -680,11 +852,6 @@ def main():
 
     total_labels = len(label_paths)
 
-    print(
-        f"[INFO] Labels 数量："
-        f"{total_labels}"
-    )
-
     # --------------------------------------------------------
     # 统计
     # --------------------------------------------------------
@@ -694,23 +861,25 @@ def main():
     missing_image_count = 0
     failed_count = 0
 
+    nms_removed_count = 0
+
     # --------------------------------------------------------
-    # 逐个 Label 处理
+    # tqdm
     # --------------------------------------------------------
 
-    for index, label_path in enumerate(
-            label_paths,
-            start=1,
-    ):
+    progress = tqdm(
+        label_paths,
+        total=total_labels,
+        desc="Processing",
+        unit="label",
+        dynamic_ncols=True,
+    )
 
-        print("\n")
+    # --------------------------------------------------------
+    # 逐个 Label
+    # --------------------------------------------------------
 
-        print("-" * 80)
-
-        print(
-            f"[{index}/{total_labels}] "
-            f"{label_path.name}"
-        )
+    for label_path in progress:
 
         # ----------------------------------------------------
         # 查找对应图片
@@ -721,12 +890,14 @@ def main():
         )
 
         if image_path is None:
-            print(
-                f"[WARNING] 找不到对应图片："
-                f"{label_path}"
-            )
-
             missing_image_count += 1
+
+            progress.set_postfix(
+                matched=matched_count,
+                nms_removed=nms_removed_count,
+                missing=missing_image_count,
+                failed=failed_count,
+            )
 
             continue
 
@@ -736,8 +907,8 @@ def main():
 
         (
             matched,
-            max_width,
-            max_height,
+            _,
+            _,
             mark_count,
         ) = check_label(
             label_path
@@ -748,13 +919,14 @@ def main():
         # ----------------------------------------------------
 
         if mark_count == 0:
-            print(
-                f"[SKIP] "
-                f"没有 class={MARK_CLASS_ID} "
-                f"目标"
-            )
-
             no_match_count += 1
+
+            progress.set_postfix(
+                matched=matched_count,
+                nms_removed=nms_removed_count,
+                missing=missing_image_count,
+                failed=failed_count,
+            )
 
             continue
 
@@ -763,19 +935,69 @@ def main():
         # ----------------------------------------------------
 
         if not matched:
-            print(
-                f"[SKIP] "
-                f"不满足尺寸条件 | "
-                f"max_width={max_width:.1f}px | "
-                f"max_height={max_height:.1f}px"
+            no_match_count += 1
+
+            progress.set_postfix(
+                matched=matched_count,
+                nms_removed=nms_removed_count,
+                missing=missing_image_count,
+                failed=failed_count,
             )
 
-            no_match_count += 1
+            continue
+
+        # ====================================================
+        # 满足筛选条件
+        # 开始生成 NMS 后的 Label
+        # ====================================================
+
+        filtered_lines = nms_label(
+            label_path
+        )
+
+        if filtered_lines is None:
+            failed_count += 1
+
+            progress.set_postfix(
+                matched=matched_count,
+                nms_removed=nms_removed_count,
+                missing=missing_image_count,
+                failed=failed_count,
+            )
 
             continue
 
         # ----------------------------------------------------
-        # 满足条件
+        # 计算 NMS 删除数量
+        # ----------------------------------------------------
+
+        try:
+
+            with label_path.open(
+                    "r",
+                    encoding="utf-8",
+            ) as f:
+
+                original_line_count = sum(
+                    1
+                    for line in f
+                    if line.strip()
+                )
+
+            filtered_line_count = len(
+                filtered_lines
+            )
+
+            nms_removed_count += (
+                    original_line_count
+                    - filtered_line_count
+            )
+
+        except Exception:
+            pass
+
+        # ----------------------------------------------------
+        # 输出路径
         # ----------------------------------------------------
 
         output_image_path = (
@@ -789,7 +1011,7 @@ def main():
         )
 
         # ----------------------------------------------------
-        # 复制图片
+        # 复制 Image
         # ----------------------------------------------------
 
         image_success = copy_file(
@@ -797,117 +1019,133 @@ def main():
             destination=output_image_path,
         )
 
+        if not image_success:
+            failed_count += 1
+
+            progress.set_postfix(
+                matched=matched_count,
+                nms_removed=nms_removed_count,
+                missing=missing_image_count,
+                failed=failed_count,
+            )
+
+            continue
+
         # ----------------------------------------------------
-        # 复制 Label
+        # 保存 NMS 后 Label
         # ----------------------------------------------------
 
-        label_success = copy_file(
-            source=label_path,
-            destination=output_label_path,
-        )
+        try:
+
+            if (
+                    output_label_path.exists()
+                    and not OVERWRITE_EXISTING
+            ):
+
+                label_success = True
+
+            else:
+
+                with output_label_path.open(
+                        "w",
+                        encoding="utf-8",
+                ) as f:
+
+                    f.writelines(
+                        filtered_lines
+                    )
+
+                label_success = True
+
+        except Exception:
+
+            label_success = False
 
         # ----------------------------------------------------
-        # 必须 image + label 同时成功
+        # Image + Label 必须同时成功
         # ----------------------------------------------------
 
         if image_success and label_success:
 
             matched_count += 1
 
-            print(
-                f"[SUCCESS] 已复制："
-                f"{image_path.name}"
-            )
-
         else:
 
             failed_count += 1
 
             # ------------------------------------------------
-            # 防止产生 image 无 label
+            # 防止 image 无 label
             # ------------------------------------------------
 
             if (
                     output_image_path.exists()
-                    and not output_label_path.exists()
+                    and
+                    not output_label_path.exists()
             ):
 
                 try:
-
                     output_image_path.unlink()
-
                 except Exception:
                     pass
 
             # ------------------------------------------------
-            # 防止产生 label 无 image
+            # 防止 label 无 image
             # ------------------------------------------------
 
             if (
                     output_label_path.exists()
-                    and not output_image_path.exists()
+                    and
+                    not output_image_path.exists()
             ):
 
                 try:
-
                     output_label_path.unlink()
-
                 except Exception:
                     pass
 
+        # ----------------------------------------------------
+        # 更新进度条
+        # ----------------------------------------------------
+
+        progress.set_postfix(
+            matched=matched_count,
+            nms_removed=nms_removed_count,
+            missing=missing_image_count,
+            failed=failed_count,
+        )
+
     # ========================================================
-    # 最终统计
+    # 最终结果
     # ========================================================
 
-    print("\n")
+    progress.close()
 
-    print("=" * 80)
-
-    print(
-        "YOLO-Segmentation "
-        "样本筛选完成"
+    tqdm.write("")
+    tqdm.write("处理完成")
+    tqdm.write(
+        f"Label 总数：{total_labels}"
     )
-
-    print("=" * 80)
-
-    print(
-        f"[RESULT] Label 总数："
-        f"{total_labels}"
+    tqdm.write(
+        f"满足条件：{matched_count}"
     )
-
-    print(
-        f"[RESULT] 满足条件："
-        f"{matched_count}"
+    tqdm.write(
+        f"不满足条件：{no_match_count}"
     )
-
-    print(
-        f"[RESULT] 不满足条件："
-        f"{no_match_count}"
+    tqdm.write(
+        f"找不到图片：{missing_image_count}"
     )
-
-    print(
-        f"[RESULT] 找不到图片："
-        f"{missing_image_count}"
+    tqdm.write(
+        f"处理失败：{failed_count}"
     )
-
-    print(
-        f"[RESULT] 处理失败："
-        f"{failed_count}"
+    tqdm.write(
+        f"NMS 删除标注：{nms_removed_count}"
     )
-
-    print("-" * 80)
-
-    print(
-        f"[RESULT] Images："
-        f"{output_images_dir}"
+    tqdm.write(
+        f"Images：{output_images_dir}"
     )
-
-    print(
-        f"[RESULT] Labels："
-        f"{output_labels_dir}"
+    tqdm.write(
+        f"Labels：{output_labels_dir}"
     )
-
-    print("=" * 80)
 
 
 # ============================================================
@@ -951,13 +1189,13 @@ IMAGE_HEIGHT = 720
 
 # 例如：
 #
-# 0 = carpet
-# 1 = wire
-# 2 = liquid
-# 3 = plasticbag
+# 0 = person
+# 1 = carpet
+# 2 = wire
+# 3 = liquid
+# 4 = plasticbag
 #
 # 根据你的实际 classes.txt 修改。
-# ============================================================
 
 MARK_CLASS_ID = 0
 
@@ -965,20 +1203,7 @@ MARK_CLASS_ID = 0
 # 筛选阈值
 # ============================================================
 
-# mark 目标实际像素宽度必须：
-#
-#     > MIN_WIDTH
-#
-# ============================================================
-
 MIN_WIDTH = 64
-
-# mark 目标实际像素高度必须：
-#
-#     > MIN_HEIGHT
-#
-# ============================================================
-
 MIN_HEIGHT = 128
 
 # ============================================================

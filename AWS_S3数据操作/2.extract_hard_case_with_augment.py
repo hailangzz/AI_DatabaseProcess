@@ -556,6 +556,7 @@ class YOLOSegAugmentor:
 
         # 同步缩放 polygon 像素坐标
         for obj in objects:
+            obj["poly"] = obj["poly"].astype(np.float32, copy=False)
             obj["poly"][:, 0] *= scale
             obj["poly"][:, 1] *= scale
 
@@ -887,7 +888,7 @@ class YOLOSegAugmentor:
                 if len(cnt) >= 3:
                     new_objects.append({
                         "cls": obj["cls"],
-                        "poly": cnt.reshape(-1, 2)
+                        "poly": cnt.reshape(-1, 2).astype(np.float32)
                     })
 
         return img, new_objects
@@ -2595,7 +2596,7 @@ def update_total_hard_cases(target_dataset: str):
 
 LOCAL_SAVE_DIR = (
     "/data/database/AITotal_SegmentDatabase/"
-    "cvat_dataset/carpet_detect/date_carpet_20260915"
+    "cvat_dataset/carpet_detect/date_carpet_20260928"
 )
 
 # ============================================================
@@ -2609,7 +2610,7 @@ HARD_CASE_INFO_JSON = os.path.join(LOCAL_SAVE_DIR, "hard_case_info.json")
 # ============================================================
 
 TARGET_DATASET = (
-    "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/date_20260915"
+    "/data/database/AITotal_SegmentDatabase/carpetDatabaseSegment/date_20260928"
 )
 
 # ============================================================
@@ -2682,9 +2683,9 @@ if __name__ == "__main__":
 
     update_total_hard_cases(TARGET_DATASET)
 
-    # # ========================================================
-    # # 第六步：增强 exist_target_dataset 中的 Hard Case 样本
-    # # ========================================================
+    # # # ========================================================
+    # # # 第六步：增强 exist_target_dataset 中的 Hard Case 样本
+    # # # ========================================================
     augment_exist_target_dataset(
         TARGET_DATASET,
         augment_ratio=AUGMENT_RATIO,

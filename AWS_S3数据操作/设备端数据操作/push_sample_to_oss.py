@@ -408,8 +408,8 @@ OSS_PREFIX = (
     "carpet_detection/"
     "source/images"
 )
-
-MAX_WORKERS = 32
+# MAX_WORKERS = 32
+MAX_WORKERS = 8
 
 MAX_RETRIES = 3
 
