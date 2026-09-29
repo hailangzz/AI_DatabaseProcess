@@ -396,14 +396,6 @@
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
     </task>
-    <task id="LOCAL-00073" summary="日常提交">
-      <option name="closed" value="true" />
-      <created>1782871438666</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1782871438667</updated>
-    </task>
     <task id="LOCAL-00074" summary="单张图像审核程序:V2新版本">
       <option name="closed" value="true" />
       <created>1782874589840</created>
@@ -788,7 +780,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790647770892</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1790650781740</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1790650781740</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
