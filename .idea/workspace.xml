@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="新增：筛选Sam3本地推理后，创建的选定类别训练集。使用目标像素值进行样本筛选">
-      <change afterPath="$PROJECT_DIR$/Sam3_local_infer_labels_create_training_dataset/1.sam3_create_training_dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/实用小命令/拷贝_删除样本图片到指定文件夹/读取路径下图像名称并创建图像路径记录文件.py" afterDir="false" />
+    <list default="true" id="e4f3f5cd-f931-435c-aead-7b0856ad0c40" name="Changes" comment="日常提交">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/1.download_extract_complit_aws_cvat_Annotation_file_to_local.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/1.download_extract_complit_aws_cvat_Annotation_file_to_local.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/2.extract_hard_case_with_augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/2.extract_hard_case_with_augment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/下载aws到本地.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/下载aws到本地.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/设备端数据操作/push_sample_to_oss.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/设备端数据操作/push_sample_to_oss.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sam3_local_infer_labels_create_training_dataset/2.check_target_piexl_tread_samples.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sam3_local_infer_labels_create_training_dataset/2.check_target_piexl_tread_samples.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/check_GPU_servers_is_exist_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AWS_S3数据操作/3.git_dataset_commit.py" beforeDir="false" afterPath="$PROJECT_DIR$/AWS_S3数据操作/3.git_dataset_commit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -266,7 +259,7 @@
       <recent name="$PROJECT_DIR$/地面分割模型应用/绘制地面分割图像demo/test_images" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.2.extract_hard_case_with_augment">
+  <component name="RunManager" selected="Python.push_local_sample_to_GPU_training">
     <configuration name="1.download_extract_complit_aws_cvat_Annotation_file_to_local" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AI_DatabaseProcess" />
       <option name="ENV_FILES" value="" />
@@ -281,28 +274,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AWS_S3数据操作/1.download_extract_complit_aws_cvat_Annotation_file_to_local.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="2.check_target_piexl_tread_samples" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="AI_DatabaseProcess" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Sam3_local_infer_labels_create_training_dataset" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Sam3_local_infer_labels_create_training_dataset/2.check_target_piexl_tread_samples.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -377,13 +348,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="push_local_sample_to_GPU_training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AI_DatabaseProcess" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/本地与GPU训练服务器样本传输" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/本地与GPU训练服务器样本传输/push_local_sample_to_GPU_training.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.2.extract_hard_case_with_augment" />
+        <item itemvalue="Python.push_local_sample_to_GPU_training" />
         <item itemvalue="Python.AnnotationBoxAnalysis_detect_and_mark" />
+        <item itemvalue="Python.2.extract_hard_case_with_augment" />
         <item itemvalue="Python.1.download_extract_complit_aws_cvat_Annotation_file_to_local" />
         <item itemvalue="Python.3.yolo_seg_to_xanylabeling_json" />
-        <item itemvalue="Python.2.check_target_piexl_tread_samples" />
       </list>
     </recent_temporary>
   </component>
@@ -402,14 +395,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763019682367</updated>
-    </task>
-    <task id="LOCAL-00072" summary="日常提交">
-      <option name="closed" value="true" />
-      <created>1782465722599</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1782465722599</updated>
     </task>
     <task id="LOCAL-00073" summary="日常提交">
       <option name="closed" value="true" />
@@ -795,7 +780,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790240688527</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="日常提交">
+      <option name="closed" value="true" />
+      <created>1790647770892</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1790647770892</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -863,7 +856,6 @@
     <MESSAGE value="aws上cvat标注数据解析后，删除zip原始样本文件。减少内存占用" />
     <MESSAGE value="新增：扫地机器人设备端，推送数采样本到aws仓库" />
     <MESSAGE value="健康小程序修改：背景配色：将原来的 #90EE90（亮绿）调整为 #000000（纯黑）。" />
-    <MESSAGE value="日常提交" />
     <MESSAGE value="模型性能评价脚本" />
     <MESSAGE value="删除远程GPU服务器上训练集中，不需要的样本" />
     <MESSAGE value="日常更新" />
@@ -877,7 +869,8 @@
     <MESSAGE value="优化：cavt hard case 样本的增强处理，空标注文件无法增强。解决样本增强后，图像存储体积过大的问题。等比缩放为720" />
     <MESSAGE value="新增：阿里云oss数据操作。将本地数据上传到远程云平台" />
     <MESSAGE value="新增：筛选Sam3本地推理后，创建的选定类别训练集。使用目标像素值进行样本筛选" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增：筛选Sam3本地推理后，创建的选定类别训练集。使用目标像素值进行样本筛选" />
+    <MESSAGE value="日常提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="日常提交" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
